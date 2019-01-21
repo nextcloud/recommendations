@@ -67,17 +67,17 @@ final class RecommendationType {
 	}
 
 	public static function edited(): RecommendationType {
-		return new static(self::COMMENTED);
+		return new static(self::EDITED);
 	}
 
 	public function __toString() {
 		switch ($this->type) {
 			case 0:
-				return "Commented File";
+				return "Commented file";
 			case 1:
-				return "Shared File";
+				return "Shared file";
 			case 2:
-				return "Edited File";
+				return "Edited file";
 		}
 	}
 

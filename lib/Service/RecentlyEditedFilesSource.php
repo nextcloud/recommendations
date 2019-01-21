@@ -46,15 +46,28 @@ declare(strict_types=1);
 namespace OCA\FilesRecommendation\Service;
 
 
+use OCP\Files\Node;
+use OCP\IServerContainer;
 use OCP\IUser;
 
 class RecentlyEditedFilesSource implements IRecommendationSource {
+
+	/** @var IServerContainer */
+	private $serverContainer;
+
+	public function __construct(IServerContainer $serverContainer) {
+		$this->serverContainer = $serverContainer;
+	}
 
 	/**
 	 * @return array
 	 */
 	public function getMostRecentRecommendation(IUser $user): array {
-		return [];
+		$userFolder = $this->serverContainer->getUserFolder($user->getUID());
+
+		return array_map(function (Node $node) {
+			return new RecommendedFile($node, RecommendationType::edited());
+		}, $userFolder->getRecent(3));
 	}
 
 }
