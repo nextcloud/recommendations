@@ -106,7 +106,11 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 			return [];
 		} else {
 			return [
-				new RecommendedFile($share->getNode(), RecommendationType::shared()),
+				new RecommendedFile(
+					$share->getNode(),
+					$share->getShareTime()->getTimestamp(),
+					RecommendationType::shared()
+				),
 			];
 		}
 	}

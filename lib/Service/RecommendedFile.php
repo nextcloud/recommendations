@@ -32,17 +32,22 @@ class RecommendedFile implements IRecommendation {
 	/** @var Node */
 	private $node;
 
+	/** @var int */
+	private $timestamp;
+
 	/** @var RecommendationType */
 	private $type;
 
 	public function __construct(Node $node,
+								int $timestamp,
 								RecommendationType $type) {
 		$this->node = $node;
 		$this->type = $type;
+		$this->timestamp = $timestamp;
 	}
 
 	public function getTimestamp(): int {
-		return $this->node->getMTime();
+		return $this->timestamp;
 	}
 
 	public function getNode(): Node {
@@ -52,5 +57,5 @@ class RecommendedFile implements IRecommendation {
 	public function getType(): RecommendationType {
 		return $this->type;
 	}
-	
+
 }
