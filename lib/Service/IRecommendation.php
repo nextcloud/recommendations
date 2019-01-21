@@ -29,6 +29,8 @@ use OCP\Files\Node;
 
 interface IRecommendation {
 
+	public function getTimestamp(): int;
+
 	public function getNode(): Node;
 
 	public function getType(): RecommendationType;
