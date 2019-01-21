@@ -10,7 +10,7 @@
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Jan-Christoph Borchardt</author>
-	<namespace>files_recommendation</namespace>
+	<namespace>FilesRecommendation</namespace>
 	<category>office</category>
 	<dependencies>
 		<php min-version="7.0" max-version="7.3"/>
