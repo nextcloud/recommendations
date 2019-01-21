@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+	<id>files_recommendation</id>
+	<name>Files Recommendation</name>
+	<summary>Shows recommended files</summary>
+	<description>Shows recommended files for quick access of files and folders with recent activity
+	</description>
+	<version>0.1.0</version>
+	<licence>agpl</licence>
+	<author>Christoph Wurst</author>
+	<author>Jan-Christoph Borchardt</author>
+	<namespace>files_recommendation</namespace>
+	<category>office</category>
+	<dependencies>
+		<php min-version="7.0" max-version="7.3"/>
+		<nextcloud min-version="15" max-version="16"/>
+	</dependencies>
+</info>
