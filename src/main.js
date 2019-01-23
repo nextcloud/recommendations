@@ -21,7 +21,10 @@
 
 import Vue from "vue";
 
+import Nextcloud from "./mixins/Nextcloud";
 import Recommendations from "./components/Recommendations";
+
+Vue.mixin(Nextcloud);
 
 OC.Plugins.register('OCA.Files.FileList', {
 

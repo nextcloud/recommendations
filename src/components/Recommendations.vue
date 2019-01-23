@@ -22,8 +22,52 @@
 <template>
 	<div v-if="hidden"></div>
 	<div v-else-if="loading"></div>
-	<div v-else>
-		<RecommendedFile v-for="f in recommendedFiles" :file="f" :key="f.id"/>
+	<div v-else-if="recommendedFiles.length === 0"
+		 class="apps-header">
+		<span id="recommendation-headline"
+			  class="extension">
+			{{ t('files_recommendation', 'Recommendations') }}
+			</span>
+		<div id="recommendation-content"
+			 class="section group">
+			<div class="col empty_recommendation_content">
+				{{ t('files_recommendation', 'no recommendations available') }}
+			</div>
+		</div>
+	</div>
+	<div v-else
+		 class="apps-header">
+		<span id="recommendation-headline"
+			  class="extension">
+			{{ t('files_recommendation', 'Recommendations') }}
+		</span>
+		<div id="recommendation-content"
+			 class="section group">
+			<div v-for="file in recommendedFiles"
+				 :key="file.id"
+				 class="col recommendation-columns">
+				<a :id="file.id" class="name"
+				   :href="file.url">
+					<div class="thumbnail-wrapper">
+						<div class="thumbnail"
+							 style="height: 32px; width: 32px; float: left">
+						</div>
+						<div class="nametext">
+							<span id="recommendation-content-file-name"
+								  class="innernametext">
+								{{ file.name }}
+							</span><span id="recommendation-content-extension"
+										 class="extension">.{{ file.extension }}</span>
+						</div>
+						<div style="clear: right;"></div>
+						<div class="nametext">
+							<span id="recommendation-transparency-extension"
+								  class="extension">{{ 'todo' }}</span>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -57,19 +101,124 @@
 					this.recommendedFiles = [
 						{
 							id: 1,
+							name: 'cats',
+							extension: 'jpg',
 							path: '/cats.jpg',
 						},
 						{
 							id: 2,
+							name: 'very important document with a long title',
+							extension: 'doc',
 							path: 'very important document with a long title.doc',
 						}
 					];
-				}, 2500);
+				}, 1200);
 			}
 		}
 	}
 </script>
 
 <style scoped>
+	.recommendation-columns {
+		width: 32.26%;
+	}
 
+	.empty_recommendation_content {
+		margin-left: 41px;
+	}
+
+	#recommendation-content.section {
+		clear: both;
+		margin-left: 32px;
+		margin-top: 16px;
+		display: flex;
+		flex-wrap: nowrap;
+		flex-flow: row wrap;
+		flex-grow: 1;
+		flex-shrink: 1;
+		min-width: 0;
+		padding-top: 0px;
+	}
+
+	#recommendation-content-file-name {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		display: block;
+		max-width: 200px;
+		float: left;
+		overflow: hidden;
+	}
+
+	#recommendation-headline.extension {
+		clear: both;
+		margin-left: 103px;
+	}
+
+	#recommendation-content-extension.extension {
+		overflow: hidden;
+		float: right;
+		display: block;
+	}
+
+	#recommendation-transparency-extension {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		display: block;
+		overflow: hidden;
+	}
+
+	.apps-header {
+		margin-top: 13px;
+	}
+
+	#recommendation-content .thumbnail {
+		margin-right: 10px;
+		width: 32px;
+		height: 32px;
+		background-size: contain;
+		flex-shrink: 0;
+	}
+
+	#recommendation-content .thumbnail-wrapper {
+		max-width: 280px;
+		/*white-space: nowrap;*/
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.col {
+		display: block;
+		float: left;
+		flex-grow: 1;
+		flex-shrink: 1;
+		flex-basis: 20%;
+	}
+
+	.name {
+		display: flex;
+	}
+
+	/* show 2 per line for screen sizes smaller that 1200px */
+	@media only screen and (max-width: 1200px) {
+		.col {
+			flex-basis: 50%;
+			max-width: calc(50% - 15px);
+		}
+
+		#recommendation-content .thumbnail-wrapper {
+			margin-bottom: 15px;
+		}
+	}
+
+	/*  GO FULL WIDTH BELOW 480 PIXELS */
+	@media only screen and (max-width: 480px) {
+		.col {
+			flex-basis: 100%;
+			min-width: 100%;
+		}
+
+		#recommendation-content .thumbnail-wrapper {
+			margin-bottom: 15px;
+		}
+	}
 </style>
