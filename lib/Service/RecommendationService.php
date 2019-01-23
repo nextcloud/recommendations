@@ -23,7 +23,7 @@ declare(strict_types=1);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\FilesRecommendation\Service;
+namespace OCA\Recommendations\Service;
 
 use function array_merge;
 use function array_reduce;

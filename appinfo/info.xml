@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
-	<id>files_recommendation</id>
-	<name>Files Recommendation</name>
+	<id>recommendation</id>
+	<name>Recommendations</name>
 	<summary>Shows recommended files</summary>
 	<description>Shows recommended files for quick access of files and folders with recent activity
 	</description>
@@ -10,13 +10,13 @@
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Jan-Christoph Borchardt</author>
-	<namespace>FilesRecommendation</namespace>
+	<namespace>Recommendations</namespace>
 	<category>office</category>
 	<dependencies>
 		<php min-version="7.0" max-version="7.3"/>
 		<nextcloud min-version="15" max-version="16"/>
 	</dependencies>
 	<commands>
-		<command>\OCA\FilesRecommendation\Command\GetRecommendations</command>
+		<command>\OCA\Recommendations\Command\GetRecommendations</command>
 	</commands>
 </info>

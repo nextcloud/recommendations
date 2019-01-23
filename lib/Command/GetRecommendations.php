@@ -23,9 +23,9 @@ declare(strict_types=1);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\FilesRecommendation\Command;
+namespace OCA\Recommendations\Command;
 
-use OCA\FilesRecommendation\Service\RecommendationService;
+use OCA\Recommendations\Service\RecommendationService;
 use OCP\IUserManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
