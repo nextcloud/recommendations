@@ -1,6 +1,6 @@
-# Nextcloud Recommendations
+# 🔮 Nextcloud Recommendations
 
-The app is in incubation stage, so it’s time for you to [get involved! 👩‍💻](https://github.com/nextcloud/social#development-setup)
+The app is in incubation stage, so it’s time for you to [get involved! 👩‍💻](https://github.com/ChristophWurst/recommendations#development-setup)
 
 ## Development setup
 
@@ -9,6 +9,3 @@ The app is in incubation stage, so it’s time for you to [get involved! 👩‍
 3. 🏗 To build the Javascript whenever you make changes, run `npm run dev`
 4. ☁ Enable the app through the app management of your Nextcloud or run `krankerl enable`
 5. 👍 Partytime! Help fix [some issues](https://github.com/ChristophWurst/recommendations/issues) and [review pull requests](https://github.com/ChristophWurst/recommendations/pulls)
-
-
-![](img/social-promo.png)
