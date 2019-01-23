@@ -30,7 +30,7 @@ use OCP\Util;
 
 class Application extends App {
 
-	const APP_ID = 'files_recommendation';
+	const APP_ID = 'recommendations';
 
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);
