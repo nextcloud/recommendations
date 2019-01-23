@@ -69,7 +69,7 @@ class GetRecommendations extends Command {
 
 		$recommendations = $this->recommendationService->getRecommendations($user);
 		foreach ($recommendations as $recommendation) {
-			$output->writeln($recommendation->getType() . ": " . $recommendation->getNode()->getPath());
+			$output->writeln($recommendation->getReason() . ": " . $recommendation->getNode()->getPath());
 		}
 
 		return 0;
