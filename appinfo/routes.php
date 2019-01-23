@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+
 /**
  * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -23,47 +24,8 @@ declare(strict_types=1);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\Recommendations\Service;
-
-use OCP\Files\Node;
-
-class RecommendedFile implements IRecommendation {
-
-	/** @var Node */
-	private $node;
-
-	/** @var int */
-	private $timestamp;
-
-	/** @var RecommendationType */
-	private $type;
-
-	public function __construct(Node $node,
-								int $timestamp,
-								RecommendationType $type) {
-		$this->node = $node;
-		$this->type = $type;
-		$this->timestamp = $timestamp;
-	}
-
-	public function getTimestamp(): int {
-		return $this->timestamp;
-	}
-
-	public function getNode(): Node {
-		return $this->node;
-	}
-
-	public function getType(): RecommendationType {
-		return $this->type;
-	}
-
-	public function jsonSerialize() {
-		return [
-			'timestamp' => $this->getTimestamp(),
-			'name' => $this->node->getName(),
-			'extension' => $this->node->getExtension(),
-			'type' => $this->getType()->getCode(),
-		];
-	}
-}
+return [
+	'resources' => [
+		'recommendation' => ['url' => 'api/recommendations'],
+	],
+];

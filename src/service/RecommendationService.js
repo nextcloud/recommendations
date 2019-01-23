@@ -1,8 +1,4 @@
-<?php
-
-declare(strict_types=1);
-
-/**
+/*
  * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -23,17 +19,12 @@ declare(strict_types=1);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\Recommendations\Service;
+import Axios from "nextcloud-axios";
+import {generateUrl} from "nextcloud-server/dist/router";
 
-use JsonSerializable;
-use OCP\Files\Node;
+export const fetchRecommendedFiles = () => {
+	const url = generateUrl('/apps/recommendations/api/recommendations');
 
-interface IRecommendation extends JsonSerializable {
-
-	public function getTimestamp(): int;
-
-	public function getNode(): Node;
-
-	public function getType(): RecommendationType;
-
+	return Axios.get(url)
+		.then(resp => resp.data);
 }

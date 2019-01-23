@@ -54,9 +54,7 @@
 						</div>
 						<div class="nametext">
 							<span id="recommendation-content-file-name"
-								  class="innernametext">
-								{{ file.name }}
-							</span><span id="recommendation-content-extension"
+								  class="innernametext">{{ file.name }}</span><span id="recommendation-content-extension"
 										 class="extension">.{{ file.extension }}</span>
 						</div>
 						<div style="clear: right;"></div>
@@ -72,11 +70,10 @@
 </template>
 
 <script>
-	import RecommendedFile from "./RecommendedFile";
+	import {fetchRecommendedFiles} from "../service/RecommendationService";
 
 	export default {
 		name: "Recommendations",
-		components: {RecommendedFile},
 		data () {
 			return {
 				hidden: true,
@@ -96,23 +93,12 @@
 			load () {
 				this.loading = true;
 
-				setTimeout(() => {
-					this.loading = false;
-					this.recommendedFiles = [
-						{
-							id: 1,
-							name: 'cats',
-							extension: 'jpg',
-							path: '/cats.jpg',
-						},
-						{
-							id: 2,
-							name: 'very important document with a long title',
-							extension: 'doc',
-							path: 'very important document with a long title.doc',
-						}
-					];
-				}, 1200);
+				fetchRecommendedFiles()
+					.then(files => {
+						this.loading = false;
+						this.recommendedFiles = files;
+					})
+					.catch(console.error.bind(this));
 			}
 		}
 	}

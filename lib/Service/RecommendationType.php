@@ -81,4 +81,8 @@ final class RecommendationType {
 		}
 	}
 
+	public function getCode(): int {
+		return $this->type;
+	}
+
 }
