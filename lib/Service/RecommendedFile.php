@@ -35,14 +35,14 @@ class RecommendedFile implements IRecommendation {
 	/** @var int */
 	private $timestamp;
 
-	/** @var RecommendationType */
-	private $type;
+	/** @var string */
+	private $reason;
 
 	public function __construct(Node $node,
 								int $timestamp,
-								RecommendationType $type) {
+								string $reason) {
 		$this->node = $node;
-		$this->type = $type;
+		$this->reason = $reason;
 		$this->timestamp = $timestamp;
 	}
 
@@ -54,8 +54,8 @@ class RecommendedFile implements IRecommendation {
 		return $this->node;
 	}
 
-	public function getType(): RecommendationType {
-		return $this->type;
+	public function getReason(): string {
+		return $this->reason;
 	}
 
 	public function jsonSerialize() {
@@ -63,7 +63,8 @@ class RecommendedFile implements IRecommendation {
 			'timestamp' => $this->getTimestamp(),
 			'name' => $this->node->getName(),
 			'extension' => $this->node->getExtension(),
-			'type' => $this->getType()->getCode(),
+			'mimeType' => $this->node->getMimetype(),
+			'reason' => $this->getReason(),
 		];
 	}
 }

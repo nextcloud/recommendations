@@ -43,24 +43,24 @@
 		</span>
 		<div id="recommendation-content"
 			 class="section group">
-			<div v-for="file in recommendedFiles"
-				 :key="file.id"
+			<div v-for="recommendation in recommendedFiles"
+				 :key="recommendation.id"
 				 class="col recommendation-columns">
-				<a :id="file.id" class="name"
-				   :href="file.url">
+				<a :id="recommendation.id" class="name"
+				   :href="recommendation.url">
 					<div class="thumbnail-wrapper">
 						<div class="thumbnail"
 							 style="height: 32px; width: 32px; float: left">
 						</div>
 						<div class="nametext">
 							<span id="recommendation-content-file-name"
-								  class="innernametext">{{ file.name }}</span><span id="recommendation-content-extension"
-										 class="extension">.{{ file.extension }}</span>
+								  class="innernametext">{{ recommendation.name }}</span><span id="recommendation-content-extension"
+										 class="extension">.{{ recommendation.extension }}</span>
 						</div>
 						<div style="clear: right;"></div>
 						<div class="nametext">
 							<span id="recommendation-transparency-extension"
-								  class="extension">{{ 'todo' }}</span>
+								  class="extension">{{ recommendation.reason }}</span>
 						</div>
 					</div>
 				</a>

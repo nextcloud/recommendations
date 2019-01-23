@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace OCA\Recommendations\Service;
 
 use OCP\Files\Node;
+use OCP\IL10N;
 use OCP\IServerContainer;
 use OCP\IUser;
 
@@ -34,8 +35,13 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 	/** @var IServerContainer */
 	private $serverContainer;
 
-	public function __construct(IServerContainer $serverContainer) {
+	/** @var IL10N */
+	private $l10n;
+
+	public function __construct(IServerContainer $serverContainer,
+								IL10N $l10n) {
 		$this->serverContainer = $serverContainer;
+		$this->l10n = $l10n;
 	}
 
 	/**
@@ -48,7 +54,7 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 			return new RecommendedFile(
 				$node,
 				$node->getMTime(),
-				RecommendationType::edited()
+				$this->l10n->t("Recently edited")
 			);
 		}, $userFolder->getRecent(3));
 	}

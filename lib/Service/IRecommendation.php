@@ -34,6 +34,6 @@ interface IRecommendation extends JsonSerializable {
 
 	public function getNode(): Node;
 
-	public function getType(): RecommendationType;
+	public function getReason(): string;
 
 }
