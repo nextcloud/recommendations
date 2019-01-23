@@ -50,7 +50,8 @@
 				   :href="recommendation.url">
 					<div class="thumbnail-wrapper">
 						<div class="thumbnail"
-							 style="height: 32px; width: 32px; float: left">
+							 style="height: 32px; width: 32px; float: left"
+							 :style="{ 'background-image': 'url(' + mimeUrl(recommendation.mimeType) + ')' }">
 						</div>
 						<div class="nametext">
 							<span id="recommendation-content-file-name"
@@ -99,6 +100,9 @@
 						this.recommendedFiles = files;
 					})
 					.catch(console.error.bind(this));
+			},
+			mimeUrl (mime) {
+				return OC.MimeType.getIconUrl(mime);
 			}
 		}
 	}
