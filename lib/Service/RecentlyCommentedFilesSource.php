@@ -23,9 +23,9 @@
 declare(strict_types=1);
 
 /**
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -45,15 +45,130 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Service;
 
+use function array_map;
+use function array_slice;
+use function iterator_to_array;
+use OCP\Files\Config\IMountProviderCollection;
+use OCP\Files\Folder;
+use OCP\Files\IRootFolder;
+use OCP\Files\Mount\IMountPoint;
+use OCP\IL10N;
+use function reset;
+use function usort;
+use Generator;
+use OCP\Comments\IComment;
+use OCP\Comments\ICommentsManager;
 use OCP\IUser;
 
 class RecentlyCommentedFilesSource implements IRecommendationSource {
 
+	/** @var ICommentsManager */
+	private $commentsManager;
+
+	/** @var IRootFolder */
+	private $rootFolder;
+
+	/** @var IL10N */
+	private $l10n;
+
+	public function __construct(ICommentsManager $commentsManager,
+								IRootFolder $rootFolder,
+								IL10N $l10n) {
+		$this->commentsManager = $commentsManager;
+		$this->rootFolder = $rootFolder;
+		$this->l10n = $l10n;
+	}
+
+	private function getCommentsPage(int $offset, int $pageSize): array {
+		return $this->commentsManager->search(
+			'',
+			'files',
+			'',
+			'',
+			$offset,
+			$pageSize
+		);
+	}
+
 	/**
-	 * @return array
+	 * @param IComment $comment
+	 * @param Folder $userFolder
+	 *
+	 * @return FileWithComments|null
+	 */
+	private function getCommentedFile(IComment $comment, Folder $userFolder) {
+		$nodes = $userFolder->getById((int)$comment->getObjectId());
+		$first = reset($nodes);
+		if ($first === false) {
+			return null;
+		}
+
+		return new FileWithComments(
+			$first,
+			$comment
+		);
+	}
+
+	/**
+	 * @param IUser $user
+	 *
+	 * @return Generator<FileWithComments>
+	 */
+	private function getAllCommentedFiles(IUser $user): Generator {
+		$offset = 0;
+		$pageSize = 100;
+
+		$userFolder = $this->rootFolder->getUserFolder($user->getUID());
+
+		while (count($page = $this->getCommentsPage($offset, $pageSize)) > 0) {
+			foreach ($page as $comment) {
+				$commentedFile = $this->getCommentedFile($comment, $userFolder);
+				if (!is_null($commentedFile)) {
+					yield $commentedFile;
+				}
+			}
+
+			$offset += $pageSize;
+		}
+	}
+
+	/**
+	 * @param IComment[] $original
+	 *
+	 * @return IComment[]
+	 */
+	private function sortCommentedFiles(array $original): array {
+		usort($original, function (FileWithComments $a, FileWithComments $b) {
+			return $b->getComment()->getCreationDateTime()->getTimestamp() - $a->getComment()->getCreationDateTime()->getTimestamp();
+		});
+		return $original;
+	}
+
+	/**
+	 * @param FileWithComments[] $comments
+	 * @param int $n
+	 *
+	 * @return FileWithComments[]
+	 */
+	private function getNMostRecentlyCommenedFiles(array $comments, int $n): array {
+		$sorted = $this->sortCommentedFiles($comments);
+
+		return array_slice($sorted, 0, $n);
+	}
+
+	/**
+	 * @return IRecommendation[]
 	 */
 	public function getMostRecentRecommendation(IUser $user): array {
-		return [];
+		$all = iterator_to_array($this->getAllCommentedFiles($user));
+
+		return array_map(function (FileWithComments $comment) {
+			return new RecommendedFile(
+				$comment->getNode(),
+				$comment->getComment()->getCreationDateTime()->getTimestamp(),
+				$this->l10n->t("Recently commented")
+			);
+		}, $this->getNMostRecentlyCommenedFiles($all, 3));
 	}
 
 }
