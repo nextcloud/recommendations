@@ -53,7 +53,7 @@ class RecommendationService {
 	 */
 	private function sortRecommendations(array $recommendations): array {
 		usort($recommendations, function (IRecommendation $a, IRecommendation $b) {
-			return $a->getTimestamp() - $b->getTimestamp();
+			return $b->getTimestamp() - $a->getTimestamp();
 		});
 
 		return $recommendations;
