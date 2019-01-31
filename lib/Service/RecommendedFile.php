@@ -46,6 +46,10 @@ class RecommendedFile implements IRecommendation {
 		$this->timestamp = $timestamp;
 	}
 
+	public function getId(): string {
+		return (string)$this->node->getId();
+	}
+
 	public function getTimestamp(): int {
 		return $this->timestamp;
 	}
@@ -60,6 +64,7 @@ class RecommendedFile implements IRecommendation {
 
 	public function jsonSerialize() {
 		return [
+			'id' => $this->getId(),
 			'timestamp' => $this->getTimestamp(),
 			'name' => $this->node->getName(),
 			'extension' => $this->node->getExtension(),
