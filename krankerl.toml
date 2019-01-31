@@ -1,0 +1,26 @@
+[package]
+before_cmds = [
+	"npm install",
+	"npm run build",
+]
+
+exclude = [
+    ".babelrc",
+	"build",
+	"composer.json",
+	"composer.lock",
+	"CONTRIBUTING.md",
+	".git",
+	".gitattributes",
+	".github",
+	".gitignore",
+	"krankerl.toml",
+	"Makefile",
+	"node_modules",
+	"package.json",
+	"package-lock.json",
+	"src",
+	"tests",
+	".travis.yml",
+	"vendor/bin",
+]
