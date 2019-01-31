@@ -96,7 +96,7 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 	private function getMostRecentShare(IUser $user) {
 		$shares = $this->sortShares(array_merge(
 			iterator_to_array($this->getAllShares($user, Constants::SHARE_TYPE_USER)),
-			iterator_to_array($this->getAllShares($user, Constants::SHARE_TYPE_GROUP)),
+			iterator_to_array($this->getAllShares($user, Constants::SHARE_TYPE_GROUP))
 		));
 
 		return $shares[0] ?? null;
