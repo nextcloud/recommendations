@@ -1,7 +1,7 @@
 <!--
-  - @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
-  - @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -22,59 +22,28 @@
 <template>
 	<div v-if="hidden"></div>
 	<div v-else-if="loading"></div>
-	<div v-else-if="recommendedFiles.length === 0"
-		 class="apps-header">
-		<span id="recommendation-headline"
-			  class="extension">
-			{{ t('files_recommendation', 'Recommendations') }}
-			</span>
-		<div id="recommendation-content"
+	<div v-else>
+		<div id="recommendations"
 			 class="section group">
-			<div class="col empty_recommendation_content">
-				{{ t('files_recommendation', 'no recommendations available') }}
-			</div>
-		</div>
-	</div>
-	<div v-else
-		 class="apps-header">
-		<span id="recommendation-headline"
-			  class="extension">
-			{{ t('files_recommendation', 'Recommendations') }}
-		</span>
-		<div id="recommendation-content"
-			 class="section group">
-			<div v-for="recommendation in recommendedFiles"
-				 :key="recommendation.id"
-				 class="col recommendation-columns">
-				<a :id="recommendation.id" class="name"
-				   :href="recommendation.url">
-					<div class="thumbnail-wrapper">
-						<div class="thumbnail"
-							 style="height: 32px; width: 32px; float: left"
-							 :style="{ 'background-image': 'url(' + mimeUrl(recommendation.mimeType) + ')' }">
-						</div>
-						<div class="nametext">
-							<span id="recommendation-content-file-name"
-								  class="innernametext">{{ recommendation.name }}</span><span id="recommendation-content-extension"
-										 class="extension">.{{ recommendation.extension }}</span>
-						</div>
-						<div style="clear: right;"></div>
-						<div class="nametext">
-							<span id="recommendation-transparency-extension"
-								  class="extension">{{ recommendation.reason }}</span>
-						</div>
-					</div>
-				</a>
-			</div>
+			<RecommendedFile v-for="file in recommendedFiles"
+							 :id="file.id"
+							 :extension="file.extension"
+							 :mime-type="file.mimeType"
+							 :name="file.name"
+							 :reason="file.reason"
+							 :url="''"
+							 :key="file.id"/>
 		</div>
 	</div>
 </template>
 
 <script>
 	import {fetchRecommendedFiles} from "../service/RecommendationService";
+	import RecommendedFile from "./RecommendedFile";
 
 	export default {
 		name: "Recommendations",
+		components: {RecommendedFile},
 		data () {
 			return {
 				hidden: true,
@@ -101,114 +70,18 @@
 					})
 					.catch(console.error.bind(this));
 			},
-			mimeUrl (mime) {
-				return OC.MimeType.getIconUrl(mime);
-			}
 		}
 	}
 </script>
 
 <style scoped>
-	.recommendation-columns {
-		width: 32.26%;
-	}
-
-	.empty_recommendation_content {
-		margin-left: 41px;
-	}
-
-	#recommendation-content.section {
-		clear: both;
+	#recommendations {
 		margin-left: 32px;
-		margin-top: 16px;
 		display: flex;
 		flex-wrap: nowrap;
 		flex-flow: row wrap;
 		flex-grow: 1;
 		flex-shrink: 1;
 		min-width: 0;
-		padding-top: 0px;
-	}
-
-	#recommendation-content-file-name {
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		display: block;
-		max-width: 200px;
-		float: left;
-		overflow: hidden;
-	}
-
-	#recommendation-headline.extension {
-		clear: both;
-		margin-left: 103px;
-	}
-
-	#recommendation-content-extension.extension {
-		overflow: hidden;
-		float: right;
-		display: block;
-	}
-
-	#recommendation-transparency-extension {
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		display: block;
-		overflow: hidden;
-	}
-
-	.apps-header {
-		margin-top: 13px;
-	}
-
-	#recommendation-content .thumbnail {
-		margin-right: 10px;
-		width: 32px;
-		height: 32px;
-		background-size: contain;
-		flex-shrink: 0;
-	}
-
-	#recommendation-content .thumbnail-wrapper {
-		max-width: 280px;
-		/*white-space: nowrap;*/
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
-	.col {
-		display: block;
-		float: left;
-		flex-grow: 1;
-		flex-shrink: 1;
-		flex-basis: 20%;
-	}
-
-	.name {
-		display: flex;
-	}
-
-	/* show 2 per line for screen sizes smaller that 1200px */
-	@media only screen and (max-width: 1200px) {
-		.col {
-			flex-basis: 50%;
-			max-width: calc(50% - 15px);
-		}
-
-		#recommendation-content .thumbnail-wrapper {
-			margin-bottom: 15px;
-		}
-	}
-
-	/*  GO FULL WIDTH BELOW 480 PIXELS */
-	@media only screen and (max-width: 480px) {
-		.col {
-			flex-basis: 100%;
-			min-width: 100%;
-		}
-
-		#recommendation-content .thumbnail-wrapper {
-			margin-bottom: 15px;
-		}
 	}
 </style>

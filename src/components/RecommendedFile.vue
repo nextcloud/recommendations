@@ -1,0 +1,144 @@
+<!--
+  - @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+  -
+  - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+  -
+  - @license GNU AGPL version 3 or any later version
+  -
+  - This program is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU Affero General Public License as
+  - published by the Free Software Foundation, either version 3 of the
+  - License, or (at your option) any later version.
+  -
+  - This program is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU Affero General Public License for more details.
+  -
+  - You should have received a copy of the GNU Affero General Public License
+  - along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<template>
+	<a class="recommendation"
+	   :href="url">
+		<div class="thumbnail"
+			 :style="{ 'background-image': 'url(' + mimeUrl(mimeType) + ')' }">
+		</div>
+		<div class="details">
+			<div class="file-name">
+				<span class="name">{{ nameWithoutExtension }}</span><!--
+				--><span class="extension">.{{ extension }}</span>
+			</div>
+			<div class="reason">
+				{{ reason }}
+			</div>
+		</div>
+	</a>
+</template>
+
+<script>
+	export default {
+		name: "RecommendedFile",
+		props: {
+			id: {
+				type: String,
+				required: true,
+			},
+			extension: {
+				type: String,
+				required: true,
+			},
+			mimeType: {
+				type: String,
+				required: true,
+			},
+			name: {
+				type: String,
+				required: true,
+			},
+			reason: {
+				type: String,
+				required: true,
+			},
+			url: {
+				type: String,
+				required: true,
+			},
+		},
+		computed: {
+			nameWithoutExtension () {
+				if (this.name.endsWith(this.extension)) {
+					return this.name.substring(0, this.name.length - this.extension.length - 1);
+				} else {
+					return this.name
+				}
+			},
+		},
+		methods: {
+			mimeUrl (mime) {
+				return OC.MimeType.getIconUrl(mime);
+			},
+		}
+	}
+</script>
+
+<style scoped lang="scss">
+	.recommendation {
+		flex-basis: 33%;
+		display: flex;
+		align-items: center;
+		flex-grow: 1;
+	}
+
+	.thumbnail {
+		margin-right: 10px;
+		width: 32px;
+		height: 32px;
+		background-size: contain;
+		flex-shrink: 0;
+	}
+
+	.details {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+
+		.file-name {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+
+			.name {
+				color: var(--color-main-text);
+			}
+
+			.extension {
+				color: var(--color-text-maxcontrast);
+			}
+		}
+
+		.reason {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			color: var(--color-text-maxcontrast);
+		}
+	}
+
+	/* show 2 per line for screen sizes smaller that 1200px */
+	@media only screen and (max-width: 1200px) {
+		.recommendation {
+			flex-basis: 50%;
+			max-width: calc(50% - 15px);
+		}
+	}
+
+	/*  GO FULL WIDTH BELOW 480 PIXELS */
+	@media only screen and (max-width: 480px) {
+		.recommendation {
+			flex-basis: 100%;
+			min-width: 100%;
+		}
+	}
+</style>

@@ -30,6 +30,8 @@ use OCP\Files\Node;
 
 interface IRecommendation extends JsonSerializable {
 
+	public function getId(): string;
+
 	public function getTimestamp(): int;
 
 	public function getNode(): Node;
