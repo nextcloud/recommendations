@@ -20,28 +20,21 @@
   -->
 
 <template>
-	<div class="col recommendation-columns">
-		<a :id="id" class="name"
-		   :href="url">
-			<div class="thumbnail-wrapper">
-				<div class="thumbnail"
-					 style="height: 32px; width: 32px; float: left"
-					 :style="{ 'background-image': 'url(' + mimeUrl(mimeType) + ')' }">
-				</div>
-				<div class="nametext">
-							<span id="recommendation-content-file-name"
-								  class="innernametext">{{ name }}</span><span
-						id="recommendation-content-extension"
-						class="extension">.{{ extension }}</span>
-				</div>
-				<div style="clear: right;"></div>
-				<div class="nametext">
-							<span id="recommendation-transparency-extension"
-								  class="extension">{{ reason }}</span>
-				</div>
+	<a class="recommendation"
+	   :href="url">
+		<div class="thumbnail"
+			 :style="{ 'background-image': 'url(' + mimeUrl(mimeType) + ')' }">
+		</div>
+		<div class="details">
+			<div class="file-name">
+				<span class="name">{{ nameWithoutExtension }}</span><!--
+				--><span class="extension">.{{ extension }}</span>
 			</div>
-		</a>
-	</div>
+			<div class="reason">
+				{{ reason }}
+			</div>
+		</div>
+	</a>
 </template>
 
 <script>
@@ -73,6 +66,15 @@
 				required: true,
 			},
 		},
+		computed: {
+			nameWithoutExtension () {
+				if (this.name.endsWith(this.extension)) {
+					return this.name.substring(0, this.name.length - this.extension.length - 1);
+				} else {
+					return this.name
+				}
+			},
+		},
 		methods: {
 			mimeUrl (mime) {
 				return OC.MimeType.getIconUrl(mime);
@@ -81,34 +83,15 @@
 	}
 </script>
 
-<style scoped>
-	.recommendation-columns {
-		width: 32.26%;
+<style scoped lang="scss">
+	.recommendation {
+		flex-basis: 33%;
+		display: flex;
+		align-items: center;
+		flex-grow: 1;
 	}
 
-	#recommendation-content-file-name {
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		display: block;
-		max-width: 200px;
-		float: left;
-		overflow: hidden;
-	}
-
-	#recommendation-content-extension.extension {
-		overflow: hidden;
-		float: right;
-		display: block;
-	}
-
-	#recommendation-transparency-extension {
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		display: block;
-		overflow: hidden;
-	}
-
-	#recommendation-content .thumbnail {
+	.thumbnail {
 		margin-right: 10px;
 		width: 32px;
 		height: 32px;
@@ -116,14 +99,46 @@
 		flex-shrink: 0;
 	}
 
-	#recommendation-content .thumbnail-wrapper {
-		max-width: 280px;
-		/*white-space: nowrap;*/
-		overflow: hidden;
+	.details {
+		white-space: nowrap;
 		text-overflow: ellipsis;
+		overflow: hidden;
+
+		.file-name {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+
+			.name {
+				color: var(--color-main-text);
+			}
+
+			.extension {
+				color: var(--color-text-maxcontrast);
+			}
+		}
+
+		.reason {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			color: var(--color-text-maxcontrast);
+		}
 	}
 
-	.name {
-		display: flex;
+	/* show 2 per line for screen sizes smaller that 1200px */
+	@media only screen and (max-width: 1200px) {
+		.recommendation {
+			flex-basis: 50%;
+			max-width: calc(50% - 15px);
+		}
+	}
+
+	/*  GO FULL WIDTH BELOW 480 PIXELS */
+	@media only screen and (max-width: 480px) {
+		.recommendation {
+			flex-basis: 100%;
+			min-width: 100%;
+		}
 	}
 </style>

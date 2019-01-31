@@ -1,7 +1,7 @@
 <!--
-  - @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
-  - @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -22,26 +22,8 @@
 <template>
 	<div v-if="hidden"></div>
 	<div v-else-if="loading"></div>
-	<div v-else-if="recommendedFiles.length === 0"
-		 class="apps-header">
-		<span id="recommendation-headline"
-			  class="extension">
-			{{ t('recommendation', 'Recommendations') }}
-			</span>
-		<div id="recommendation-content"
-			 class="section group">
-			<div class="col empty_recommendation_content">
-				{{ t('recommendation', 'no recommendations available') }}
-			</div>
-		</div>
-	</div>
-	<div v-else
-		 class="apps-header">
-		<span id="recommendation-headline"
-			  class="extension">
-			{{ t('recommendation', 'Recommendations') }}
-		</span>
-		<div id="recommendation-content"
+	<div v-else>
+		<div id="recommendations"
 			 class="section group">
 			<RecommendedFile v-for="file in recommendedFiles"
 							 :id="file.id"
@@ -50,7 +32,7 @@
 							 :name="file.name"
 							 :reason="file.reason"
 							 :url="''"
-							 :key="file.id" />
+							 :key="file.id"/>
 		</div>
 	</div>
 </template>
@@ -93,61 +75,13 @@
 </script>
 
 <style scoped>
-	.empty_recommendation_content {
-		margin-left: 41px;
-	}
-
-	#recommendation-content.section {
-		clear: both;
+	#recommendations {
 		margin-left: 32px;
-		margin-top: 16px;
 		display: flex;
 		flex-wrap: nowrap;
 		flex-flow: row wrap;
 		flex-grow: 1;
 		flex-shrink: 1;
 		min-width: 0;
-		padding-top: 0px;
-	}
-
-	#recommendation-headline.extension {
-		clear: both;
-		margin-left: 103px;
-	}
-
-	.apps-header {
-		margin-top: 13px;
-	}
-
-	.col {
-		display: block;
-		float: left;
-		flex-grow: 1;
-		flex-shrink: 1;
-		flex-basis: 20%;
-	}
-
-	/* show 2 per line for screen sizes smaller that 1200px */
-	@media only screen and (max-width: 1200px) {
-		.col {
-			flex-basis: 50%;
-			max-width: calc(50% - 15px);
-		}
-
-		#recommendation-content .thumbnail-wrapper {
-			margin-bottom: 15px;
-		}
-	}
-
-	/*  GO FULL WIDTH BELOW 480 PIXELS */
-	@media only screen and (max-width: 480px) {
-		.col {
-			flex-basis: 100%;
-			min-width: 100%;
-		}
-
-		#recommendation-content .thumbnail-wrapper {
-			margin-bottom: 15px;
-		}
 	}
 </style>
