@@ -71,7 +71,7 @@ class RecommendationService {
 
 		$sorted = $this->sortRecommendations($all);
 
-		return array_slice($sorted, 0, 3);
+		return array_slice($sorted, 0, 5);
 	}
 
 }

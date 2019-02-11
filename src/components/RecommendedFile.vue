@@ -85,10 +85,10 @@
 
 <style scoped lang="scss">
 	.recommendation {
-		flex-basis: 33%;
 		display: flex;
 		align-items: center;
 		flex-grow: 1;
+		min-width: 250px;
 	}
 
 	.thumbnail {
