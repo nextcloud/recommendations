@@ -30,8 +30,8 @@
 							 :extension="file.extension"
 							 :mime-type="file.mimeType"
 							 :name="file.name"
+							 :directory="file.directory"
 							 :reason="file.reason"
-							 :url="''"
 							 :key="file.id"/>
 		</div>
 	</div>

@@ -50,8 +50,9 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 	public function getMostRecentRecommendation(IUser $user): array {
 		$userFolder = $this->serverContainer->getUserFolder($user->getUID());
 
-		return array_map(function (Node $node) {
+		return array_map(function (Node $node) use ($userFolder) {
 			return new RecommendedFile(
+				$userFolder->getRelativePath($node->getParent()->getPath()),
 				$node,
 				$node->getMTime(),
 				$this->l10n->t("Recently edited")

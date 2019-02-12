@@ -29,6 +29,9 @@ use OCP\Files\Node;
 
 class RecommendedFile implements IRecommendation {
 
+	/** @var string */
+	private $directory;
+
 	/** @var Node */
 	private $node;
 
@@ -38,9 +41,12 @@ class RecommendedFile implements IRecommendation {
 	/** @var string */
 	private $reason;
 
-	public function __construct(Node $node,
+
+	public function __construct(string $directory,
+								Node $node,
 								int $timestamp,
 								string $reason) {
+		$this->directory = $directory;
 		$this->node = $node;
 		$this->reason = $reason;
 		$this->timestamp = $timestamp;
@@ -48,6 +54,10 @@ class RecommendedFile implements IRecommendation {
 
 	public function getId(): string {
 		return (string)$this->node->getId();
+	}
+
+	public function getDirectory(): string {
+		return $this->directory;
 	}
 
 	public function getTimestamp(): int {
@@ -67,9 +77,11 @@ class RecommendedFile implements IRecommendation {
 			'id' => $this->getId(),
 			'timestamp' => $this->getTimestamp(),
 			'name' => $this->node->getName(),
+			'directory' => $this->getDirectory(),
 			'extension' => $this->node->getExtension(),
 			'mimeType' => $this->node->getMimetype(),
 			'reason' => $this->getReason(),
 		];
 	}
+
 }

@@ -21,7 +21,7 @@
 
 <template>
 	<a class="recommendation"
-	   :href="url">
+	   @click.prevent="navigate">
 		<div class="thumbnail"
 			 :style="{ 'background-image': 'url(' + mimeUrl(mimeType) + ')' }">
 		</div>
@@ -57,11 +57,11 @@
 				type: String,
 				required: true,
 			},
-			reason: {
+			directory: {
 				type: String,
 				required: true,
 			},
-			url: {
+			reason: {
 				type: String,
 				required: true,
 			},
@@ -79,6 +79,19 @@
 			mimeUrl (mime) {
 				return OC.MimeType.getIconUrl(mime);
 			},
+			changeDirectory (directory) {
+				// This call does not always return a promise, so we
+				// wrap it
+				return Promise.resolve(OCA.Files.App.fileList.changeDirectory(directory));
+			},
+			scrollTo (name) {
+				OCA.Files.App.fileList.scrollTo(name)
+			},
+			navigate () {
+				this.changeDirectory(this.directory)
+					.then(() => this.scrollTo(this.name))
+					.catch(console.error.bind(this))
+			}
 		}
 	}
 </script>
