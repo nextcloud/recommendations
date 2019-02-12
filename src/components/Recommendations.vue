@@ -76,12 +76,18 @@
 
 <style scoped>
 	#recommendations {
-		margin-left: 32px;
+		margin: 0 32px 32px 0;
 		display: flex;
-		flex-wrap: nowrap;
-		flex-flow: row wrap;
-		flex-grow: 1;
-		flex-shrink: 1;
+		height: 72px;
+		overflow: hidden;
+		flex-wrap: wrap;
 		min-width: 0;
+	}
+
+	/* show 2 per line for screen sizes smaller that 1200px */
+	@media only screen and (max-width: 1200px) {
+		#recommendations {
+			height: initial;
+		}
 	}
 </style>
