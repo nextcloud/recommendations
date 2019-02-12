@@ -47,7 +47,7 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 	/**
 	 * @return array
 	 */
-	public function getMostRecentRecommendation(IUser $user): array {
+	public function getMostRecentRecommendation(IUser $user, int $max): array {
 		$userFolder = $this->serverContainer->getUserFolder($user->getUID());
 
 		return array_map(function (Node $node) use ($userFolder) {
@@ -57,7 +57,7 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 				$node->getMTime(),
 				$this->l10n->t("Recently edited")
 			);
-		}, $userFolder->getRecent(3));
+		}, $userFolder->getRecent($max));
 	}
 
 }

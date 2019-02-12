@@ -33,6 +33,8 @@ use function usort;
 
 class RecommendationService {
 
+	const MAX_RECOMMENDATIONS = 5;
+
 	/** @var IRecommendationSource */
 	private $sources;
 
@@ -66,12 +68,12 @@ class RecommendationService {
 	 */
 	public function getRecommendations(IUser $user): array {
 		$all = array_reduce($this->sources, function (array $carry, IRecommendationSource $source) use ($user) {
-			return array_merge($carry, $source->getMostRecentRecommendation($user));
+			return array_merge($carry, $source->getMostRecentRecommendation($user, self::MAX_RECOMMENDATIONS));
 		}, []);
 
 		$sorted = $this->sortRecommendations($all);
 
-		return array_slice($sorted, 0, 5);
+		return array_slice($sorted, 0, self::MAX_RECOMMENDATIONS);
 	}
 
 }
