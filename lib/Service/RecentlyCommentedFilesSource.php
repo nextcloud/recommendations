@@ -104,6 +104,7 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 		}
 
 		return new FileWithComments(
+			$userFolder->getRelativePath($first->getParent()->getPath()),
 			$first,
 			$comment
 		);
@@ -162,10 +163,11 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 	public function getMostRecentRecommendation(IUser $user): array {
 		$all = iterator_to_array($this->getAllCommentedFiles($user));
 
-		return array_map(function (FileWithComments $comment) {
+		return array_map(function (FileWithComments $file) {
 			return new RecommendedFile(
-				$comment->getNode(),
-				$comment->getComment()->getCreationDateTime()->getTimestamp(),
+				$file->getDirectory(),
+				$file->getNode(),
+				$file->getComment()->getCreationDateTime()->getTimestamp(),
 				$this->l10n->t("Recently commented")
 			);
 		}, $this->getNMostRecentlyCommenedFiles($all, 3));

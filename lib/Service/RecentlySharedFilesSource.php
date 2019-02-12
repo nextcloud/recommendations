@@ -27,10 +27,11 @@ namespace OCA\Recommendations\Service;
 
 use function array_merge;
 use function iterator_to_array;
-use OCP\IL10N;
 use function usort;
 use Generator;
 use OC\Share\Constants;
+use OCP\Files\IRootFolder;
+use OCP\IL10N;
 use OCP\IUser;
 use OCP\Share\IManager;
 use OCP\Share\IShare;
@@ -40,12 +41,17 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 	/** @var IManager */
 	private $shareManager;
 
+	/** @var IRootFolder */
+	private $rootFolder;
+
 	/** @var IL10N */
 	private $l10n;
 
 	public function __construct(IManager $shareManager,
+								IRootFolder $rootFolder,
 								IL10N $l10n) {
 		$this->shareManager = $shareManager;
+		$this->rootFolder = $rootFolder;
 		$this->l10n = $l10n;
 	}
 
@@ -107,12 +113,14 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 	 */
 	public function getMostRecentRecommendation(IUser $user): array {
 		$share = $this->getMostRecentShare($user);
+		$userFolder = $this->rootFolder->getUserFolder($user->getUID());
 
 		if (is_null($share)) {
 			return [];
 		} else {
 			return [
 				new RecommendedFile(
+					$userFolder->getRelativePath($userFolder->getFullPath($share->getTarget())),
 					$share->getNode(),
 					$share->getShareTime()->getTimestamp(),
 					$this->l10n->t("Recently shared")

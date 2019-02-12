@@ -30,15 +30,26 @@ use OCP\Files\Node;
 
 class FileWithComments {
 
+	/** @var string */
+	private $directory;
+
 	/** @var Node */
 	private $node;
 
 	/** @var IComment */
 	private $comment;
 
-	public function __construct(Node $node, IComment $comment) {
+	public function __construct(string $directory, Node $node, IComment $comment) {
+		$this->directory = $directory;
 		$this->node = $node;
 		$this->comment = $comment;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDirectory(): string {
+		return $this->directory;
 	}
 
 	/**
