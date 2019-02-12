@@ -6,7 +6,7 @@
 	<summary>Shows recommended files</summary>
 	<description>Shows recommended files for quick access of files and folders with recent activity
 	</description>
-	<version>0.1.1</version>
+	<version>0.2.0</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Jan-Christoph Borchardt</author>
