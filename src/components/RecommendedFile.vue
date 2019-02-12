@@ -27,8 +27,14 @@
 		</div>
 		<div class="details">
 			<div class="file-name">
-				<span class="name">{{ nameWithoutExtension }}</span><!--
-				--><span class="extension">.{{ extension }}</span>
+				<template v-if="extension">
+					<span class="name">{{ nameWithoutExtension }}</span><!--
+				 --><span class="extension" v-if="extension">.{{ extension }}</span>
+				</template>
+				<template v-else>
+					<span class="name">{{ name }}</span>
+				</template>
+
 			</div>
 			<div class="reason">
 				{{ reason }}
