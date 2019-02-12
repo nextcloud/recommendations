@@ -160,7 +160,7 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 	/**
 	 * @return IRecommendation[]
 	 */
-	public function getMostRecentRecommendation(IUser $user): array {
+	public function getMostRecentRecommendation(IUser $user, int $max): array {
 		$all = iterator_to_array($this->getAllCommentedFiles($user));
 
 		return array_map(function (FileWithComments $file) {
@@ -170,7 +170,7 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 				$file->getComment()->getCreationDateTime()->getTimestamp(),
 				$this->l10n->t("Recently commented")
 			);
-		}, $this->getNMostRecentlyCommenedFiles($all, 3));
+		}, $this->getNMostRecentlyCommenedFiles($all, $max));
 	}
 
 }

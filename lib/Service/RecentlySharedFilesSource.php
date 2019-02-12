@@ -25,7 +25,9 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Service;
 
+use function array_map;
 use function array_merge;
+use function array_slice;
 use function iterator_to_array;
 use function usort;
 use Generator;
@@ -97,36 +99,32 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 	 *
 	 * @todo load other share types as well
 	 *
-	 * @return mixed|IShare|null
+	 * @return IShare[]
 	 */
-	private function getMostRecentShare(IUser $user) {
+	private function getMostRecentShares(IUser $user, int $max) {
 		$shares = $this->sortShares(array_merge(
 			iterator_to_array($this->getAllShares($user, Constants::SHARE_TYPE_USER)),
 			iterator_to_array($this->getAllShares($user, Constants::SHARE_TYPE_GROUP))
 		));
 
-		return $shares[0] ?? null;
+		return array_slice($shares, 0, $max);
 	}
 
 	/**
 	 * @return IRecommendation[]
 	 */
-	public function getMostRecentRecommendation(IUser $user): array {
-		$share = $this->getMostRecentShare($user);
+	public function getMostRecentRecommendation(IUser $user, int $max): array {
+		$shares = $this->getMostRecentShares($user, $max);
 		$userFolder = $this->rootFolder->getUserFolder($user->getUID());
 
-		if (is_null($share)) {
-			return [];
-		} else {
-			return [
-				new RecommendedFile(
-					$userFolder->getRelativePath($userFolder->getFullPath($share->getTarget())),
-					$share->getNode(),
-					$share->getShareTime()->getTimestamp(),
-					$this->l10n->t("Recently shared")
-				),
-			];
-		}
+		return array_map(function (IShare $share) use ($userFolder) {
+			return new RecommendedFile(
+				$userFolder->getRelativePath($userFolder->getFullPath($share->getTarget())),
+				$share->getNode(),
+				$share->getShareTime()->getTimestamp(),
+				$this->l10n->t("Recently shared")
+			);
+		}, $shares);
 	}
 
 }
