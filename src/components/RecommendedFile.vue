@@ -107,7 +107,7 @@
 		display: flex;
 		align-items: center;
 		flex-grow: 1;
-		min-width: 250px;
+		min-width: 240px;
 	}
 
 	.thumbnail {
@@ -122,6 +122,7 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
+		padding-right: 10px;
 
 		.file-name {
 			white-space: nowrap;
