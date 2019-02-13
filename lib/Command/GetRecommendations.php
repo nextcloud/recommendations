@@ -55,6 +55,11 @@ class GetRecommendations extends Command {
 			InputArgument::REQUIRED,
 			'user id'
 		);
+		$this->addArgument(
+			'max',
+			InputArgument::OPTIONAL,
+			'maximum results'
+		);
 	}
 
 	public function execute(InputInterface $input, OutputInterface $output) {
@@ -67,9 +72,16 @@ class GetRecommendations extends Command {
 			return 1;
 		}
 
-		$recommendations = $this->recommendationService->getRecommendations($user);
+		if ($input->hasArgument('max')) {
+			$recommendations = $this->recommendationService->getRecommendations($user, (int) $input->getArgument('max'));
+		} else {
+			$recommendations = $this->recommendationService->getRecommendations($user);
+		}
 		foreach ($recommendations as $recommendation) {
-			$output->writeln($recommendation->getReason() . ": " . $recommendation->getNode()->getPath());
+			$reason = $recommendation->getReason();
+			$path = $recommendation->getNode()->getPath();
+			$ts = $recommendation->getTimestamp();
+			$output->writeln("$reason: $path ($ts)");
 		}
 
 		return 0;

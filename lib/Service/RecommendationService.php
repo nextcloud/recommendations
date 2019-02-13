@@ -66,14 +66,14 @@ class RecommendationService {
 	 *
 	 * @return IRecommendation[]
 	 */
-	public function getRecommendations(IUser $user): array {
+	public function getRecommendations(IUser $user, int $max = self::MAX_RECOMMENDATIONS): array {
 		$all = array_reduce($this->sources, function (array $carry, IRecommendationSource $source) use ($user) {
 			return array_merge($carry, $source->getMostRecentRecommendation($user, self::MAX_RECOMMENDATIONS));
 		}, []);
 
 		$sorted = $this->sortRecommendations($all);
 
-		return array_slice($sorted, 0, self::MAX_RECOMMENDATIONS);
+		return array_slice($sorted, 0, $max);
 	}
 
 }
