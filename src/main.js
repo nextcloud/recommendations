@@ -29,6 +29,9 @@ Vue.mixin(Nextcloud);
 OC.Plugins.register('OCA.Files.FileList', {
 
 	attach: fileList => {
+		if (fileList.id !== 'files') {
+			return;
+		}
 		const el = document.createElement('div');
 		const controls = document.getElementById('controls');
 		controls.parentNode.insertBefore(el, controls.nextSibling);
