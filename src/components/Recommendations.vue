@@ -76,7 +76,8 @@
 
 <style scoped>
 	#recommendations {
-		padding: 30px 30px 30px 59px;
+		padding: 30px 30px 0 59px;
+		margin-bottom: 30px;
 		display: flex;
 		height: 72px;
 		overflow: hidden;
