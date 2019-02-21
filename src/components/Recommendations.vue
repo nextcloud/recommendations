@@ -24,7 +24,7 @@
 	<div v-else-if="loading"></div>
 	<div v-else>
 		<div id="recommendations"
-			 class="section group">
+			 class="group">
 			<RecommendedFile v-for="file in recommendedFiles"
 							 :id="file.id"
 							 :extension="file.extension"
@@ -76,7 +76,7 @@
 
 <style scoped>
 	#recommendations {
-		margin: 0 32px 32px 0;
+		padding: 30px 30px 30px 59px;
 		display: flex;
 		height: 72px;
 		overflow: hidden;
