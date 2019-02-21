@@ -108,10 +108,11 @@
 		align-items: center;
 		flex-grow: 1;
 		min-width: 250px;
+		margin: 5px 0;
 	}
 
 	.thumbnail {
-		margin-right: 10px;
+		margin-right: 9px;
 		width: 32px;
 		height: 32px;
 		background-size: contain;
