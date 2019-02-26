@@ -28,6 +28,7 @@ namespace OCA\Recommendations\Service;
 use function array_merge;
 use function array_reduce;
 use function array_slice;
+use OCP\IPreview;
 use OCP\IUser;
 use function usort;
 
@@ -38,14 +39,19 @@ class RecommendationService {
 	/** @var IRecommendationSource */
 	private $sources;
 
+	/** @var IPreview */
+	private $previewManager;
+
 	public function __construct(RecentlyCommentedFilesSource $recentlyCommented,
 								RecentlyEditedFilesSource $recentlyEdited,
-								RecentlySharedFilesSource $recentlyShared) {
+								RecentlySharedFilesSource $recentlyShared,
+								IPreview $previewManager) {
 		$this->sources = [
 			$recentlyCommented,
 			$recentlyEdited,
 			$recentlyShared,
 		];
+		$this->previewManager = $previewManager;
 	}
 
 	/**
@@ -62,6 +68,20 @@ class RecommendationService {
 	}
 
 	/**
+	 * @param IRecommendation[] $recommendations
+	 *
+	 * @return IRecommendation[]
+	 */
+	private function addPreviews(array $recommendations): array {
+		foreach ($recommendations as $recommendation) {
+			if ($this->previewManager->isAvailable($recommendation->getNode())) {
+				$recommendation->setHasPreview(true);
+			}
+		}
+		return $recommendations;
+	}
+
+	/**
 	 * @param IUser $user
 	 *
 	 * @return IRecommendation[]
@@ -72,8 +92,9 @@ class RecommendationService {
 		}, []);
 
 		$sorted = $this->sortRecommendations($all);
+		$topX = array_slice($sorted, 0, $max);
 
-		return array_slice($sorted, 0, $max);
+		return $this->addPreviews($topX);
 	}
 
 }
