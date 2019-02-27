@@ -23,13 +23,14 @@
 	<a class="recommendation"
 	   @click.prevent="navigate">
 		<div class="thumbnail"
-			 :style="{ 'background-image': 'url(' + mimeUrl(mimeType) + ')' }">
+			 :style="{ 'background-image': 'url(' + previewUrl + ')' }">
 		</div>
 		<div class="details">
 			<div class="file-name">
 				<template v-if="extension">
 					<span class="name">{{ nameWithoutExtension }}</span><!--
-				 --><span class="extension" v-if="extension">.{{ extension }}</span>
+				 --><span class="extension"
+						  v-if="extension">.{{ extension }}</span>
 				</template>
 				<template v-else>
 					<span class="name">{{ name }}</span>
@@ -71,6 +72,30 @@
 				type: String,
 				required: true,
 			},
+			hasPreview: {
+				type: Boolean,
+				default: false,
+			}
+		},
+		data () {
+			return {
+				previewUrl: OC.MimeType.getIconUrl(this.mimeType),
+			}
+		},
+		mounted () {
+			if (this.hasPreview) {
+				const previewUrl = OC.generateUrl('/core/preview?fileId={fileId}&x=32&y=32', {
+					fileId: this.id,
+				});
+				const img = new Image();
+				img.onload = () => {
+					this.previewUrl = previewUrl;
+				};
+				img.onerror = err => {
+					console.error('could not load recommendation preview', err);
+				}
+				img.src = previewUrl;
+			}
 		},
 		computed: {
 			nameWithoutExtension () {
@@ -82,9 +107,6 @@
 			},
 		},
 		methods: {
-			mimeUrl (mime) {
-				return OC.MimeType.getIconUrl(mime);
-			},
 			changeDirectory (directory) {
 				// This call does not always return a promise, so we
 				// wrap it

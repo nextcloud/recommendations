@@ -41,6 +41,8 @@ class RecommendedFile implements IRecommendation {
 	/** @var string */
 	private $reason;
 
+	/** @var bool */
+	private $hasPreview;
 
 	public function __construct(string $directory,
 								Node $node,
@@ -50,6 +52,7 @@ class RecommendedFile implements IRecommendation {
 		$this->node = $node;
 		$this->reason = $reason;
 		$this->timestamp = $timestamp;
+		$this->hasPreview = false;
 	}
 
 	public function getId(): string {
@@ -72,6 +75,14 @@ class RecommendedFile implements IRecommendation {
 		return $this->reason;
 	}
 
+	public function hasPreview() {
+		return $this->hasPreview;
+	}
+
+	public function setHasPreview(bool $state) {
+		$this->hasPreview = $state;
+	}
+
 	public function jsonSerialize() {
 		return [
 			'id' => $this->getId(),
@@ -80,6 +91,7 @@ class RecommendedFile implements IRecommendation {
 			'directory' => $this->getDirectory(),
 			'extension' => $this->node->getExtension(),
 			'mimeType' => $this->node->getMimetype(),
+			'hasPreview' => $this->hasPreview(),
 			'reason' => $this->getReason(),
 		];
 	}

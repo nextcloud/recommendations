@@ -32,6 +32,7 @@
 							 :name="file.name"
 							 :directory="file.directory"
 							 :reason="file.reason"
+							 :hasPreview="file.hasPreview"
 							 :key="file.id"/>
 		</div>
 	</div>
