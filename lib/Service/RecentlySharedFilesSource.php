@@ -119,7 +119,7 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 
 		return array_map(function (IShare $share) use ($userFolder) {
 			return new RecommendedFile(
-				$userFolder->getRelativePath($userFolder->getFullPath($share->getTarget())),
+				$userFolder->getRelativePath($userFolder->get($share->getTarget())->getParent()->getPath()),
 				$share->getNode(),
 				$share->getShareTime()->getTimestamp(),
 				$this->l10n->t("Recently shared")
