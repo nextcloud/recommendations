@@ -57,7 +57,7 @@ before_script:
 
 script:
   # Run server's app code checker
-  - php ../../occ app:check-code recommendations
+  - php ../../occ app:check-code --skip-validate-info recommendations
 
   # Build JS
   - sh -c "if [ '$TEST_JS' = 'TRUE' ]; then npm run build; fi"
