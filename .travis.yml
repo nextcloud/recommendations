@@ -1,3 +1,5 @@
+sudo: required
+dist: trusty
 language: php
 php:
   - 7.1
@@ -26,7 +28,7 @@ matrix:
   include:
     - php: 7.1
       env: "DB=mysql TEST_JS=TRUE"
-    fast_finish: true
+  fast_finish: true
 
 branches:
   only:
