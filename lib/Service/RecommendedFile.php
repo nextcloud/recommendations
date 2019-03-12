@@ -75,7 +75,7 @@ class RecommendedFile implements IRecommendation {
 		return $this->reason;
 	}
 
-	public function hasPreview() {
+	public function hasPreview(): bool {
 		return $this->hasPreview;
 	}
 

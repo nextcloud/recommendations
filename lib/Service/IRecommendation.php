@@ -36,7 +36,7 @@ interface IRecommendation extends JsonSerializable {
 
 	public function getNode(): Node;
 
-	public function hasPreview();
+	public function hasPreview(): bool;
 
 	public function setHasPreview(bool $state);
 

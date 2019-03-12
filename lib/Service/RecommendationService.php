@@ -34,7 +34,7 @@ use function usort;
 
 class RecommendationService {
 
-	const MAX_RECOMMENDATIONS = 5;
+	private const MAX_RECOMMENDATIONS = 5;
 
 	/** @var IRecommendationSource */
 	private $sources;
