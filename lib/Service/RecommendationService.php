@@ -92,9 +92,33 @@ class RecommendationService {
 		}, []);
 
 		$sorted = $this->sortRecommendations($all);
-		$topX = array_slice($sorted, 0, $max);
+		$topX = $this->getDeduplicatedSlice($sorted, $max);
 
 		return $this->addPreviews($topX);
+	}
+
+	/**
+	 * Deduplicate the sorted recommendations and return the top $max picks
+	 *
+	 * The first (most recent) recommendation wins, hence eventually show its
+	 * recommendation reason
+	 *
+	 * @param IRecommendation[] $recommendations
+	 * @param int $max
+	 * @return IRecommendation[]
+	 */
+	private function getDeduplicatedSlice(array $recommendations, int $max) {
+		$picks = [];
+
+		foreach ($recommendations as $recommendation) {
+			if (empty(array_filter($picks, function (IRecommendation $rec) use ($recommendation) {
+				return $recommendation->getNode()->getId() === $rec->getNode()->getId();
+			}))) {
+				$picks[] = $recommendation;
+			}
+		}
+
+		return array_slice($picks, 0, $max);
 	}
 
 }
