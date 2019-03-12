@@ -56,6 +56,9 @@ before_script:
   - cd core/apps/recommendations
 
 script:
+  # Check PHP syntax errors
+  - composer run lint
+
   # Run server's app code checker
   - php ../../occ app:check-code --skip-validate-info recommendations
 

@@ -1,0 +1,16 @@
+{
+    "name": "nextcloud/recommendations",
+    "description": "Nextcloud Recommendations",
+    "type": "library",
+    "license": "AGPL-v3.0",
+    "authors": [
+        {
+            "name": "Christoph Wurst",
+            "email": "christoph@winzerhof-wurst.at"
+        }
+    ],
+    "scripts": {
+        "lint": "find . -name \\*.php -not -path './vendor/*' -exec php -l \"{}\" \\;"
+    },
+    "require": {}
+}
