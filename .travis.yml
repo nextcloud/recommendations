@@ -12,7 +12,6 @@ addons:
     - mysql-server-5.6
     - mysql-client-core-5.6
     - mysql-client-5.6
-    - libxml2-utils
 
 services:
   - postgresql
@@ -57,11 +56,6 @@ before_script:
   - cd core/apps/recommendations
 
 script:
-  # Check info.xml schema validity
-  - wget https://apps.nextcloud.com/schema/apps/info.xsd
-  - xmllint appinfo/info.xml --schema info.xsd --noout
-  - rm info.xsd
-
   # Run server's app code checker
   - php ../../occ app:check-code recommendations
 
