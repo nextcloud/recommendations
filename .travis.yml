@@ -1,3 +1,5 @@
+sudo: required
+dist: trusty
 language: php
 php:
   - 7.1
@@ -10,7 +12,6 @@ addons:
     - mysql-server-5.6
     - mysql-client-core-5.6
     - mysql-client-5.6
-    - libxml2-utils
 
 services:
   - postgresql
@@ -25,8 +26,8 @@ env:
 matrix:
   include:
     - php: 7.1
-      env: "DB=mysql TEST_JS=TRUE"
-    fast_finish: true
+      env: "DB=sqlite TEST_JS=TRUE"
+  fast_finish: true
 
 branches:
   only:
@@ -55,13 +56,11 @@ before_script:
   - cd core/apps/recommendations
 
 script:
-  # Check info.xml schema validity
-  - wget https://apps.nextcloud.com/schema/apps/info.xsd
-  - xmllint appinfo/info.xml --schema info.xsd --noout
-  - rm info.xsd
+  # Check PHP syntax errors
+  - composer run lint
 
   # Run server's app code checker
-  - php ../../occ app:check-code recommendations
+  - php ../../occ app:check-code --skip-validate-info recommendations
 
   # Build JS
   - sh -c "if [ '$TEST_JS' = 'TRUE' ]; then npm run build; fi"
