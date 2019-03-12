@@ -139,6 +139,7 @@
 		height: 32px;
 		background-size: contain;
 		flex-shrink: 0;
+		border-radius: var(--border-radius);
 	}
 
 	.details {
