@@ -90,6 +90,7 @@
 	@media only screen and (max-width: 1200px) {
 		#recommendations {
 			height: initial;
+			max-height: 178px;
 		}
 	}
 </style>
