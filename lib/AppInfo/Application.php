@@ -25,7 +25,11 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\AppInfo;
 
+use OC;
+use OCA\Recommendations\Service\RecommendationService;
 use OCP\AppFramework\App;
+use OCP\IInitialStateService;
+use OCP\IUserSession;
 use OCP\Util;
 
 class Application extends App {
@@ -38,7 +42,22 @@ class Application extends App {
 		$this->getContainer()->getServer()->getEventDispatcher()->addListener(
 			'OCA\Files::loadAdditionalScripts',
 			function () {
-				Util::addScript(self::APP_ID, 'main');
+				/** @var IInitialStateService $initialState */
+				$initialState = $this->getContainer()->query(IInitialStateService::class);
+				/** @var RecommendationService $recommendationsService */
+				$recommendationsService = $this->getContainer()->query(RecommendationService::class);
+				/** @var IUserSession $userSession */
+				$userSession = $this->getContainer()->query(IUserSession::class);
+				$user = $userSession->getUser();
+
+				if ($user !== null) {
+					$initialState->provideInitialState(
+						self::APP_ID,
+						'recommendations',
+						$recommendationsService->getRecommendations($user)
+					);
+					Util::addScript(self::APP_ID, 'main');
+				}
 			}
 		);
 	}
