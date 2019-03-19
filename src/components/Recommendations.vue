@@ -20,10 +20,9 @@
   -->
 
 <template>
-	<div v-if="hidden"></div>
-	<div v-else-if="loading"></div>
-	<div v-else>
+	<div v-if="!hidden && !loading">
 		<div id="recommendations"
+			 v-if="recommendedFiles.length > 0"
 			 class="group">
 			<RecommendedFile v-for="file in recommendedFiles"
 							 :id="file.id"
