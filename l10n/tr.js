@@ -1,6 +1,9 @@
 OC.L10N.register(
     "recommendations",
     {
+    "_" : "_",
+    "group" : "grup",
+    "_thumbnail_::_background-image_" : ["kucuk-gorsel","arka-plan-gorseli"],
     "Recently commented" : "Son Yorum Yapılanlar",
     "Recently edited" : "Son Düzenlenenler",
     "Recently shared" : "Son Paylaşılanlar",
