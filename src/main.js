@@ -50,9 +50,13 @@ OC.Plugins.register('OCA.Files.FileList', {
 			}
 		});
 
-		if (fileList.getCurrentDirectory() === '/') {
-			vm.show();
-		}
+		// Defer, so the filelist finishes loading before we read its current dir
+		setTimeout(() => {
+			if (fileList.getCurrentDirectory() === '/') {
+				vm.show();
+			}
+		}, 0);
+
 	}
 
 });
