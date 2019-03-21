@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "group" : "skupina",
     "Recently commented" : "Nedávno okomentováno",
     "Recently edited" : "Nedávno upravováno",
     "Recently shared" : "Nedávno sdíleno",
