@@ -2,6 +2,7 @@ OC.L10N.register(
     "recommendations",
     {
     "group" : "groep",
+    "_thumbnail_::_background-image_" : ["miniatuur","achtergrondafbeelding"],
     "Recently commented" : "Recent gereageerd",
     "Recently edited" : "Recent bewerkt",
     "Recently shared" : "Recent gedeeld",
