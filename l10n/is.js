@@ -1,6 +1,9 @@
 OC.L10N.register(
     "recommendations",
     {
+    "_" : "_",
+    "group" : "hópur",
+    "_thumbnail_::_background-image_" : ["smámynd","bakgrunnsmynd"],
     "Recently commented" : "Nýlega sett inn athugasemd",
     "Recently edited" : "Nýlega breytt",
     "Recently shared" : "Nýlega deilt",
