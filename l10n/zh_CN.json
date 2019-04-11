@@ -1,7 +1,4 @@
 { "translations": {
-    "_" : "_",
-    "group" : "分组",
-    "_thumbnail_::_background-image_" : ["背景图片"],
     "Recently commented" : "最新评论",
     "Recently edited" : "最新修改",
     "Recently shared" : "最近共享",

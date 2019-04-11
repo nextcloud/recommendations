@@ -1,9 +1,6 @@
 OC.L10N.register(
     "recommendations",
     {
-    "_" : "_",
-    "group" : "קבוצה",
-    "_thumbnail_::_background-image_" : ["תמונה ממוזערת","תמונה ממוזערת","תמונה ממוזערת","תמונת רקע"],
     "Recently commented" : "נוספה תגובה לאחרונה",
     "Recently edited" : "נערכו לאחרונה",
     "Recently shared" : "שותפו לאחרונה",

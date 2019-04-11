@@ -1,9 +1,6 @@
 OC.L10N.register(
     "recommendations",
     {
-    "_" : "_",
-    "group" : "Gruppe",
-    "_thumbnail_::_background-image_" : ["Vorschaubild","Hintergrundbild"],
     "Recently commented" : "Zuletzt kommentiert",
     "Recently edited" : "Zuletzt bearbeitet",
     "Recently shared" : "Zuletzt geteilt",

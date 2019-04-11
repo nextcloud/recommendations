@@ -1,8 +1,6 @@
 OC.L10N.register(
     "recommendations",
     {
-    "group" : "グループ",
-    "_thumbnail_::_background-image_" : ["背景画像"],
     "Recently commented" : "最近追加されたコメント",
     "Recently edited" : "最近された編集",
     "Recently shared" : "最近共有",

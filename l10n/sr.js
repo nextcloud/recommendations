@@ -1,7 +1,6 @@
 OC.L10N.register(
     "recommendations",
     {
-    "_" : "_",
     "Recently commented" : "Недавно коментарисано",
     "Recently edited" : "Недавно измењено",
     "Recently shared" : "Недавно подељено",

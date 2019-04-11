@@ -1,8 +1,6 @@
 OC.L10N.register(
     "recommendations",
     {
-    "_" : "_",
-    "group" : "grupė",
     "Recently commented" : "Paskiausiai komentuoti",
     "Recently edited" : "Paskiausiai taisyti",
     "Recently shared" : "Paskiausiai bendrinti",
