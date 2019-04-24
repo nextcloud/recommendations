@@ -25,10 +25,12 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Service;
 
+use function array_filter;
 use function array_map;
 use function array_merge;
 use function array_slice;
 use function iterator_to_array;
+use OCP\Files\NotFoundException;
 use function usort;
 use Generator;
 use OC\Share\Constants;
@@ -117,14 +119,18 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 		$shares = $this->getMostRecentShares($user, $max);
 		$userFolder = $this->rootFolder->getUserFolder($user->getUID());
 
-		return array_map(function (IShare $share) use ($userFolder) {
-			return new RecommendedFile(
-				$userFolder->getRelativePath($userFolder->get($share->getTarget())->getParent()->getPath()),
-				$share->getNode(),
-				$share->getShareTime()->getTimestamp(),
-				$this->l10n->t("Recently shared")
-			);
-		}, $shares);
+		return array_filter(array_map(function (IShare $share) use ($userFolder) {
+			try {
+				return new RecommendedFile(
+					$userFolder->getRelativePath($userFolder->get($share->getTarget())->getParent()->getPath()),
+					$share->getNode(),
+					$share->getShareTime()->getTimestamp(),
+					$this->l10n->t("Recently shared")
+				);
+			} catch (NotFoundException $ex) {
+				return null;
+			}
+		}, $shares));
 	}
 
 }
