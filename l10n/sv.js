@@ -2,7 +2,7 @@ OC.L10N.register(
     "recommendations",
     {
     "Recently commented" : "Nyligen kommenterade",
-    "Recently edited" : "Nyligen redigerade",
+    "Recently edited" : "Nyligen redigerad",
     "Recently shared" : "Nyligen delade",
     "Recommendations" : "Rekommendationer",
     "Shows recommended files" : "Visar rekommenderade filer",
