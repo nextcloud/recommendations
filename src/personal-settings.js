@@ -1,14 +1,7 @@
-<?php
-
-declare(strict_types=1);
-
-
 /**
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright Copyright (c) 2019 Gary Kim <gary@garykim.dev>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
- *
- * @license GNU AGPL version 3 or any later version
+ * @author Gary Kim <gary@garykim.dev>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,14 +15,24 @@ declare(strict_types=1);
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-return [
-	'resources' => [
-		'recommendation' => ['url' => 'api/recommendations'],
-	],
-	'routes' => [
-		['name' => 'settings#getSettings', 'url' => '/settings', 'verb' => 'GET'],
-		['name' => 'settings#setSetting', 'url' => '/settings/{key}', 'verb' => 'PUT'],
-	]
-];
+import Vue from "vue";
+import PersonalSettings from "./components/PersonalSettings";
+import Nextcloud from './mixins/Nextcloud';
+
+Vue.mixin(Nextcloud);
+
+const initalStateElement = document.getElementById('recommendations-enabled-initial-state');
+var initialState;
+if (initalStateElement) {
+	initialState = initalStateElement.value === 'true';
+}
+
+const View = Vue.extend(PersonalSettings);
+new View({
+	data: {
+		enabled: initialState
+	}
+}).$mount('#recommendations');

@@ -1,12 +1,8 @@
 <?php
-
-declare(strict_types=1);
-
-
 /**
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright Copyright (c) 2019 Gary Kim <gary@garykim.dev>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Gary Kim <gary@garykim.dev>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -21,15 +17,17 @@ declare(strict_types=1);
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-return [
-	'resources' => [
-		'recommendation' => ['url' => 'api/recommendations'],
-	],
-	'routes' => [
-		['name' => 'settings#getSettings', 'url' => '/settings', 'verb' => 'GET'],
-		['name' => 'settings#setSetting', 'url' => '/settings/{key}', 'verb' => 'PUT'],
-	]
-];
+/** @var $l \OCP\IL10N */
+/** @var $_ array */
+
+script('recommendations', 'personal-settings')
+
+?>
+
+<input type="hidden" id="recommendations-enabled-initial-state" value="<?php p($_['enabled']?'true':'false') ?>" >
+<div class="section" id="recommendations">
+</div>
