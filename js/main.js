@@ -1851,6 +1851,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RecommendedFile",
   props: {
@@ -1947,7 +1948,7 @@ __webpack_require__.r(__webpack_exports__);
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".recommendation[data-v-3d08d8f7] {\n  display: flex;\n  align-items: center;\n  flex-grow: 1;\n  min-width: 250px;\n  margin: 5px 0;\n}\n.thumbnail[data-v-3d08d8f7] {\n  margin-right: 9px;\n  width: 32px;\n  height: 32px;\n  background-size: contain;\n  flex-shrink: 0;\n  border-radius: var(--border-radius);\n}\n.details[data-v-3d08d8f7] {\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.details .file-name[data-v-3d08d8f7] {\n    white-space: nowrap;\n    margin-bottom: -8px;\n}\n.details .file-name .name[data-v-3d08d8f7] {\n      display: inline-block;\n      max-width: 170px;\n      color: var(--color-main-text);\n      text-overflow: ellipsis;\n      overflow-x: hidden;\n}\n.details .file-name .extension[data-v-3d08d8f7] {\n      color: var(--color-text-maxcontrast);\n}\n.details .reason[data-v-3d08d8f7] {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    color: var(--color-text-maxcontrast);\n}\n\n/* show 2 per line for screen sizes smaller that 1200px */\n@media only screen and (max-width: 1200px) {\n.recommendation[data-v-3d08d8f7] {\n    flex-basis: 50%;\n    max-width: calc(50% - 15px);\n}\n}\n\n/*  GO FULL WIDTH BELOW 480 PIXELS */\n@media only screen and (max-width: 480px) {\n.recommendation[data-v-3d08d8f7] {\n    flex-basis: 100%;\n    min-width: 100%;\n}\n}\n", ""]);
+exports.push([module.i, ".recommendation[data-v-3d08d8f7] {\n  display: flex;\n  align-items: center;\n  flex-grow: 1;\n  min-width: 250px;\n  margin: 5px 0;\n  margin-right: 10px;\n  border-radius: var(--border-radius);\n}\n.recommendation[data-v-3d08d8f7]:hover, .recommendation[data-v-3d08d8f7]:focus {\n    background: var(--color-background-dark);\n}\n.thumbnail[data-v-3d08d8f7] {\n  margin-right: 9px;\n  width: 32px;\n  height: 32px;\n  background-size: contain;\n  flex-shrink: 0;\n  border-radius: var(--border-radius);\n}\n.details[data-v-3d08d8f7] {\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.details .file-name[data-v-3d08d8f7] {\n    white-space: nowrap;\n    margin-bottom: -8px;\n}\n.details .file-name .name[data-v-3d08d8f7] {\n      display: inline-block;\n      max-width: 170px;\n      color: var(--color-main-text);\n      text-overflow: ellipsis;\n      overflow-x: hidden;\n}\n.details .file-name .extension[data-v-3d08d8f7] {\n      color: var(--color-text-maxcontrast);\n}\n.details .reason[data-v-3d08d8f7] {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    color: var(--color-text-maxcontrast);\n}\n\n/* show 2 per line for screen sizes smaller that 1200px */\n@media only screen and (max-width: 1200px) {\n.recommendation[data-v-3d08d8f7] {\n    flex-basis: 50%;\n    max-width: calc(50% - 15px);\n}\n}\n\n/*  GO FULL WIDTH BELOW 480 PIXELS */\n@media only screen and (max-width: 480px) {\n.recommendation[data-v-3d08d8f7] {\n    flex-basis: 100%;\n    min-width: 100%;\n}\n}\n", ""]);
 
 
 /***/ }),
@@ -2729,6 +2730,7 @@ var render = function() {
     "a",
     {
       staticClass: "recommendation",
+      attrs: { tabindex: "0" },
       on: {
         click: function($event) {
           $event.preventDefault()

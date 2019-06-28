@@ -21,7 +21,8 @@
 
 <template>
 	<a class="recommendation"
-	   @click.prevent="navigate">
+	   @click.prevent="navigate"
+	   tabindex="0">
 		<div class="thumbnail"
 			 :style="{ 'background-image': 'url(' + previewUrl + ')' }">
 		</div>
@@ -131,6 +132,13 @@
 		flex-grow: 1;
 		min-width: 250px;
 		margin: 5px 0;
+		margin-right: 10px;
+		border-radius: var(--border-radius);
+
+		&:hover,
+		&:focus {
+			background: var(--color-background-dark);
+		}
 	}
 
 	.thumbnail {
