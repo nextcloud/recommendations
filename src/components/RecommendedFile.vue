@@ -149,11 +149,14 @@
 
 		.file-name {
 			white-space: nowrap;
-			text-overflow: ellipsis;
-			overflow: hidden;
+			margin-bottom: -8px;
 
 			.name {
+				display: inline-block;
+				max-width: 170px;
 				color: var(--color-main-text);
+				text-overflow: ellipsis;
+				overflow-x: hidden;
 			}
 
 			.extension {
