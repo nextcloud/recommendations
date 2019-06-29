@@ -22,6 +22,7 @@
 <template>
 	<a class="recommendation"
 	   @click.prevent="navigate"
+	   @keyup.enter.prevent="navigate"
 	   tabindex="0">
 		<div class="thumbnail"
 			 :style="{ 'background-image': 'url(' + previewUrl + ')' }">
