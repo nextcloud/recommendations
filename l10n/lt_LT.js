@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Recommendations" : "Rekomendacijos",
     "Shows recommended files for quick access of files and folders with recent activity" : "Rodo rekomenduojamus failus sparčiai prieigai prie failų ar aplankų su paskiausia veikla",
+    "Enabled" : "Įjungta",
     "Recently commented" : "Paskiausiai komentuoti",
     "Recently edited" : "Paskiausiai taisyti",
     "Recently shared" : "Paskiausiai bendrinti",
