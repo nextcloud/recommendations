@@ -1,8 +1,12 @@
 OC.L10N.register(
     "recommendations",
     {
+    "__static__" : "__static__",
+    "__once__" : "__once__",
     "Recommendations" : "Рекомендации",
     "Shows recommended files for quick access of files and folders with recent activity" : "Показывает рекомендуемые файлы для быстрого доступа к файлам и папкам с недавней активностью",
+    "Enabled" : "Включено",
+    "_section_::_recommendations_" : ["раздел","рекомендации","рекомендации","рекомендации"],
     "Recently commented" : "Недавно прокомментировано",
     "Recently edited" : "Недавно отредактировано",
     "Recently shared" : "Недавно опубликовано",
