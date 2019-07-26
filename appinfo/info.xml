@@ -4,14 +4,14 @@
 	<id>recommendations</id>
 	<name>Recommendations</name>
 	<summary>Shows recommended files</summary>
-	<description>Shows recommended files for quick access of files and folders with recent activity
-	</description>
+	<description>Shows recommended files for quick access of files and folders with recent activity</description>
 	<version>0.5.0</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Jan-Christoph Borchardt</author>
 	<namespace>Recommendations</namespace>
 	<default_enable/>
+	<namespace>Recommendations</namespace>
 	<category>office</category>
 	<dependencies>
 		<php min-version="7.1" max-version="7.3"/>
@@ -20,8 +20,4 @@
 	<commands>
 		<command>OCA\Recommendations\Command\GetRecommendations</command>
 	</commands>
-	<settings>
-		<personal>OCA\Recommendations\Settings\Personal</personal>
-		<personal-section>OCA\Recommendations\Settings\PersonalSection</personal-section>
-	</settings>
 </info>

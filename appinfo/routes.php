@@ -28,8 +28,4 @@ return [
 	'resources' => [
 		'recommendation' => ['url' => 'api/recommendations'],
 	],
-	'routes' => [
-		['name' => 'settings#getSettings', 'url' => '/settings', 'verb' => 'GET'],
-		['name' => 'settings#setSetting', 'url' => '/settings/{key}', 'verb' => 'PUT'],
-	]
 ];
