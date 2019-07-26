@@ -9,7 +9,6 @@
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Jan-Christoph Borchardt</author>
-	<namespace>Recommendations</namespace>
 	<default_enable/>
 	<namespace>Recommendations</namespace>
 	<category>office</category>
