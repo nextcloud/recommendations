@@ -6,7 +6,6 @@ OC.L10N.register(
     "Recently shared" : "Nedávno sdíleno",
     "Recommendations" : "Doporučení",
     "Shows recommended files" : "Zobrazit doporučené soubory",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Zobrazovat doporučené soubory pro rychlý přístup k souborům a složkám, se kterými jste nedávno něco dělali",
-    "Enabled" : "Zapnuto"
+    "Shows recommended files for quick access of files and folders with recent activity" : "Zobrazovat doporučené soubory pro rychlý přístup k souborům a složkám, se kterými jste nedávno něco dělali"
 },
 "nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;");
