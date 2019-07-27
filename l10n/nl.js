@@ -6,7 +6,6 @@ OC.L10N.register(
     "Recently shared" : "Recent gedeeld",
     "Recommendations" : "Aanbevelingen",
     "Shows recommended files" : "Aangeraden bestanden tonen",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Laat de aangeraden bestanden zien voor snelle toegang tot bestanden en mappen",
-    "Enabled" : "Ingeschakeld"
+    "Shows recommended files for quick access of files and folders with recent activity" : "Laat de aangeraden bestanden zien voor snelle toegang tot bestanden en mappen"
 },
 "nplurals=2; plural=(n != 1);");
