@@ -31,5 +31,5 @@ e.exports=function(e){return null!=e&&null!=e.constructor&&"function"==typeof e.
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */r.a.mixin(o),OC.Plugins.register("OCA.Files.FileList",{attach:function(e){if("files"===e.id){var t=document.createElement("div"),n=document.getElementById("controls");n.parentNode.insertBefore(t,n.nextSibling),t.id="files-recommendation-wrapper";var o=new(r.a.extend(h))({propsData:{}}).$mount(t);e.$el.on("changeDirectory",(function(e){"/"===e.dir.toString()?o.show():o.hide()})),setTimeout((function(){"/"===e.getCurrentDirectory()&&o.show()}),0)}}})}]);
+ */r.a.mixin(o),OC.Plugins.register("OCA.Files.FileList",{el:null,attach:function(e){"files"===e.id&&(this.el=document.createElement("div"),this.el.id="files-recommendation-wrapper",e.registerHeader({id:"recommendations",el:this.el,render:this.render.bind(this),order:90}))},render:function(e){var t=new(r.a.extend(h))({propsData:{}}).$mount(this.el);return e.$el.on("changeDirectory",(function(e){"/"===e.dir.toString()?t.show():t.hide()})),"/"===e.getCurrentDirectory()&&t.show(),this.el}})}]);
 //# sourceMappingURL=main.js.map
