@@ -25,22 +25,31 @@ import Nextcloud from "./mixins/Nextcloud";
 import Recommendations from "./components/Recommendations";
 
 Vue.mixin(Nextcloud);
-
 OC.Plugins.register('OCA.Files.FileList', {
 
-	attach: fileList => {
+	el: null,
+
+	attach: function(fileList) {
 		if (fileList.id !== 'files') {
 			return;
 		}
-		const el = document.createElement('div');
-		const controls = document.getElementById('controls');
-		controls.parentNode.insertBefore(el, controls.nextSibling);
-		el.id = 'files-recommendation-wrapper';
+
+		this.el = document.createElement('div')
+		this.el.id = 'files-recommendation-wrapper';
+		fileList.registerHeader({
+			id: 'recommendations',
+			el: this.el,
+			render: this.render.bind(this),
+			order: 90
+		})
+	},
+
+	render: function(fileList) {
 
 		const View = Vue.extend(Recommendations);
 		const vm = new View({
 			propsData: {}
-		}).$mount(el);
+		}).$mount(this.el);
 
 		fileList.$el.on('changeDirectory', data => {
 			if (data.dir.toString() === '/') {
@@ -50,13 +59,11 @@ OC.Plugins.register('OCA.Files.FileList', {
 			}
 		});
 
-		// Defer, so the filelist finishes loading before we read its current dir
-		setTimeout(() => {
-			if (fileList.getCurrentDirectory() === '/') {
-				vm.show();
-			}
-		}, 0);
+		if (fileList.getCurrentDirectory() === '/') {
+			vm.show();
+		}
 
+		return this.el
 	}
 
-});
+})
