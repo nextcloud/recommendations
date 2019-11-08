@@ -23,4 +23,6 @@ declare(strict_types=1);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$app = new \OCA\Recommendations\AppInfo\Application();
+use OCA\Recommendations\AppInfo\Application;
+
+$app = \OC::$server->query(Application::class);
