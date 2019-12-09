@@ -132,8 +132,8 @@
 		align-items: center;
 		flex-grow: 1;
 		min-width: 250px;
-		margin: 5px 0;
-		margin-right: 10px;
+		padding: 5px 0;
+		margin-right: 12px;
 		border-radius: var(--border-radius);
 
 		&:hover,
@@ -144,6 +144,7 @@
 
 	.thumbnail {
 		margin-right: 9px;
+		margin-left: 10px;
 		width: 32px;
 		height: 32px;
 		background-size: contain;
