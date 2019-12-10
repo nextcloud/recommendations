@@ -76,10 +76,10 @@
 
 <style scoped>
 	#recommendations {
-		padding: 30px 30px 0 59px;
-		margin-bottom: 30px;
+		padding: 28px 30px 0 50px;
+		margin-bottom: 20px;
 		display: flex;
-		height: 72px;
+		height: 82px;
 		overflow: hidden;
 		flex-wrap: wrap;
 		min-width: 0;
@@ -89,7 +89,7 @@
 	@media only screen and (max-width: 1200px) {
 		#recommendations {
 			height: initial;
-			max-height: 178px;
+			max-height: 189px;
 		}
 	}
 </style>
