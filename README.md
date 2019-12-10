@@ -9,3 +9,5 @@ The app is in incubation stage, so it’s time for you to [get involved! 👩‍
 3. 🏗 To build the Javascript whenever you make changes, run `npm run dev`
 4. ☁ Enable the app through the app management of your Nextcloud or run `krankerl enable`
 5. 👍 Partytime! Help fix [some issues](https://github.com/nextcloud/recommendations/issues) and [review pull requests](https://github.com/nextcloud/recommendations/pulls)
+
+Whenever you commit changes to submit a pull request, make sure to build the Javascript using `npm run build` and commit the files `js/*.js` and `js/*.js.map` as well. This needs to be done because the app is shipped with the release as is.
