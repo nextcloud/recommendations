@@ -2,9 +2,9 @@ sudo: required
 dist: trusty
 language: php
 php:
-  - 7.1
   - 7.2
   - 7.3
+  - 7.4snapshot
 
 addons:
   apt:
@@ -25,7 +25,7 @@ env:
 
 matrix:
   include:
-    - php: 7.1
+    - php: 7.3
       env: "DB=sqlite TEST_JS=TRUE"
   fast_finish: true
 
