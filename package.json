@@ -29,7 +29,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.7.1",
     "babel-loader": "^8.0.6",
-    "css-loader": "^3.3.0",
+    "css-loader": "^3.3.2",
     "node-sass": "^4.13.0",
     "sass-loader": "^7.3.1",
     "vue-loader": "^15.7.2",
