@@ -20,7 +20,7 @@
   -->
 
 <template>
-	<div v-if="!hidden && !loading">
+	<div v-if="!hidden && !loading && enabled">
 		<div id="recommendations"
 			 v-if="recommendedFiles.length > 0"
 			 class="group">
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-	import {fetchRecommendedFiles} from "../service/RecommendationService";
 	import RecommendedFile from "./RecommendedFile";
 
 	export default {
@@ -47,28 +46,25 @@
 		data () {
 			return {
 				hidden: true,
-				loading: false,
-				recommendedFiles: [],
+			}
+		},
+		computed: {
+			enabled() {
+				return this.$store.state.enabled
+			},
+			loading() {
+				return this.$store.state.loading
+			},
+			recommendedFiles() {
+				return this.$store.state.recommendedFiles
 			}
 		},
 		methods: {
 			show () {
 				this.hidden = false;
-
-				this.load();
 			},
 			hide () {
 				this.hidden = true;
-			},
-			load () {
-				this.loading = true;
-
-				fetchRecommendedFiles()
-					.then(files => {
-						this.loading = false;
-						this.recommendedFiles = files;
-					})
-					.catch(console.error.bind(this));
 			},
 		}
 	}

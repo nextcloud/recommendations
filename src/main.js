@@ -1,6 +1,8 @@
 /*
  * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
+ * @copyright 2019-2020 Gary Kim <gary@garykim.dev>
+ *
  * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
@@ -23,6 +25,8 @@ import Vue from "vue";
 
 import Nextcloud from "./mixins/Nextcloud";
 import Recommendations from "./components/Recommendations";
+import Settings from './components/Settings';
+import store from "./store/store";
 
 Vue.mixin(Nextcloud);
 OC.Plugins.register('OCA.Files.FileList', {
@@ -46,10 +50,25 @@ OC.Plugins.register('OCA.Files.FileList', {
 
 	render: function(fileList) {
 
+		// Load recommendations
+		store.dispatch('fetchRecommendations');
+
 		const View = Vue.extend(Recommendations);
 		const vm = new View({
-			propsData: {}
+			propsData: {},
+			store,
 		}).$mount(this.el);
+
+		// register Files App Setting
+		const SettingsView = Vue.extend(Settings);
+		const settingsElement = new SettingsView({
+			store,
+		}).$mount().$el;
+		if (OCA.Files && OCA.Files.Settings) {
+			OCA.Files.Settings.register(new OCA.Files.Settings.Setting('recommendations', {
+				el: () => { return settingsElement },
+			}));
+		}
 
 		fileList.$el.on('changeDirectory', data => {
 			if (data.dir.toString() === '/') {

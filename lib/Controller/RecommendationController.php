@@ -30,6 +30,7 @@ use OCA\Recommendations\AppInfo\Application;
 use OCA\Recommendations\Service\RecommendationService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\IConfig;
 use OCP\IRequest;
 use OCP\IUserSession;
 
@@ -41,12 +42,17 @@ class RecommendationController extends Controller {
 	/** @var RecommendationService */
 	private $recommendationService;
 
+	/** @var IConfig */
+	private $config;
+
 	public function __construct(IRequest $request,
 								IUserSession $userSession,
-								RecommendationService $recommendationService) {
+								RecommendationService $recommendationService,
+								IConfig $config) {
 		parent::__construct(Application::APP_ID, $request);
 		$this->userSession = $userSession;
 		$this->recommendationService = $recommendationService;
+		$this->config = $config;
 	}
 
 	/**
@@ -58,9 +64,13 @@ class RecommendationController extends Controller {
 		if (is_null($user)) {
 			throw new Exception("Not logged in");
 		}
-
+		$response = [];
+		$response['enabled'] = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true';
+		if ($response['enabled']) {
+			$response['recommendations'] = $this->recommendationService->getRecommendations($user);
+		}
 		return new JSONResponse(
-			$this->recommendationService->getRecommendations($user)
+			$response
 		);
 	}
 
