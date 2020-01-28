@@ -1,0 +1,7 @@
+{ "translations": {
+    "Recently commented" : "Наскоро коментирани",
+    "Recently edited" : "Наскоро редактирани",
+    "Recently shared" : "Наскоро споделени",
+    "Recommendations" : "Препоръчани"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
