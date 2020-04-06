@@ -40,6 +40,6 @@
     "webpack-merge": "^4.2.2"
   },
   "browserslist": [
-	  "extends @nextcloud/browserslist-config"
+    "extends @nextcloud/browserslist-config"
   ]
 }
