@@ -6,6 +6,7 @@ OC.L10N.register(
     "Recently shared" : "Nemrég megosztva",
     "Recommendations" : "Ajánlások",
     "Shows recommended files" : "Megjeleníti az ajánlott fájlokat",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Megjeleníti az ajánlott fájlokat, hogy gyorsan elérje azokat a fájlokat és mappákat, ahol friss tevékenység volt"
+    "Shows recommended files for quick access of files and folders with recent activity" : "Megjeleníti az ajánlott fájlokat, hogy gyorsan elérje azokat a fájlokat és mappákat, ahol friss tevékenység volt",
+    "Show recommendations" : "Ajánlások megjelenítése"
 },
 "nplurals=2; plural=(n != 1);");
