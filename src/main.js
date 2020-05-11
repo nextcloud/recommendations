@@ -21,68 +21,68 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Vue from "vue";
+import Vue from 'vue'
 
-import Nextcloud from "./mixins/Nextcloud";
-import Recommendations from "./components/Recommendations";
-import Settings from './components/Settings';
-import store from "./store/store";
+import Nextcloud from './mixins/Nextcloud'
+import Recommendations from './components/Recommendations'
+import Settings from './components/Settings'
+import store from './store/store'
 
-Vue.mixin(Nextcloud);
+Vue.mixin(Nextcloud)
 OC.Plugins.register('OCA.Files.FileList', {
 
 	el: null,
 
 	attach: function(fileList) {
 		if (fileList.id !== 'files') {
-			return;
+			return
 		}
 
 		this.el = document.createElement('div')
-		this.el.id = 'files-recommendation-wrapper';
+		this.el.id = 'files-recommendation-wrapper'
 		fileList.registerHeader({
 			id: 'recommendations',
 			el: this.el,
 			render: this.render.bind(this),
-			order: 90
+			order: 90,
 		})
 	},
 
 	render: function(fileList) {
 
 		// Load recommendations
-		store.dispatch('fetchRecommendations');
+		store.dispatch('fetchRecommendations')
 
-		const View = Vue.extend(Recommendations);
+		const View = Vue.extend(Recommendations)
 		const vm = new View({
 			propsData: {},
 			store,
-		}).$mount(this.el);
+		}).$mount(this.el)
 
 		// register Files App Setting
-		const SettingsView = Vue.extend(Settings);
+		const SettingsView = Vue.extend(Settings)
 		const settingsElement = new SettingsView({
 			store,
-		}).$mount().$el;
+		}).$mount().$el
 		if (OCA.Files && OCA.Files.Settings) {
 			OCA.Files.Settings.register(new OCA.Files.Settings.Setting('recommendations', {
 				el: () => { return settingsElement },
-			}));
+			}))
 		}
 
 		fileList.$el.on('changeDirectory', data => {
 			if (data.dir.toString() === '/') {
-				vm.show();
+				vm.show()
 			} else {
-				vm.hide();
+				vm.hide()
 			}
-		});
+		})
 
 		if (fileList.getCurrentDirectory() === '/') {
-			vm.show();
+			vm.show()
 		}
 
 		return this.el
-	}
+	},
 
 })

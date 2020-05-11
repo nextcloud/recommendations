@@ -19,10 +19,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {translate as t} from "nextcloud-server/dist/l10n";
+import { translate as t } from 'nextcloud-server/dist/l10n'
 
 export default {
 	methods: {
 		t,
-	}
+	},
 }

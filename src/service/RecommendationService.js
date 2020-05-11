@@ -19,12 +19,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Axios from "@nextcloud/axios";
-import {generateUrl} from "nextcloud-server/dist/router";
+import Axios from '@nextcloud/axios'
+import { generateUrl } from 'nextcloud-server/dist/router'
 
 export const fetchRecommendedFiles = () => {
-	const url = generateUrl('/apps/recommendations/api/recommendations');
+	const url = generateUrl('/apps/recommendations/api/recommendations')
 
 	return Axios.get(url)
-		.then(resp => resp.data);
+		.then(resp => resp.data)
 }
