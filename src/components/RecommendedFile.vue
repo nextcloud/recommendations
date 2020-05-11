@@ -21,18 +21,17 @@
 
 <template>
 	<a class="recommendation"
-	   @click.prevent="navigate"
-	   @keyup.enter.prevent="navigate"
-	   tabindex="0">
+		tabindex="0"
+		@click.prevent="navigate"
+		@keyup.enter.prevent="navigate">
 		<div class="thumbnail"
-			 :style="{ 'background-image': 'url(' + previewUrl + ')' }">
-		</div>
+			:style="{ 'background-image': 'url(' + previewUrl + ')' }" />
 		<div class="details">
 			<div class="file-name">
 				<template v-if="extension">
 					<span class="name">{{ nameWithoutExtension }}</span><!--
-				 --><span class="extension"
-						  v-if="extension">.{{ extension }}</span>
+				 --><span v-if="extension"
+						  class="extension">.{{ extension }}</span>
 				</template>
 				<template v-else>
 					<span class="name">{{ name }}</span>
@@ -47,83 +46,85 @@
 </template>
 
 <script>
-	export default {
-		name: "RecommendedFile",
-		props: {
-			id: {
-				type: String,
-				required: true,
-			},
-			extension: {
-				type: String,
-				required: true,
-			},
-			mimeType: {
-				type: String,
-				required: true,
-			},
-			name: {
-				type: String,
-				required: true,
-			},
-			directory: {
-				type: String,
-				required: true,
-			},
-			reason: {
-				type: String,
-				required: true,
-			},
-			hasPreview: {
-				type: Boolean,
-				default: false,
-			}
+import { generateUrl } from '@nextcloud/router'
+
+export default {
+	name: 'RecommendedFile',
+	props: {
+		id: {
+			type: String,
+			required: true,
 		},
-		data () {
-			return {
-				previewUrl: OC.MimeType.getIconUrl(this.mimeType),
-			}
+		extension: {
+			type: String,
+			required: true,
 		},
-		mounted () {
-			if (this.hasPreview) {
-				const previewUrl = OC.generateUrl('/core/preview?fileId={fileId}&x=32&y=32', {
-					fileId: this.id,
-				});
-				const img = new Image();
-				img.onload = () => {
-					this.previewUrl = previewUrl;
-				};
-				img.onerror = err => {
-					console.error('could not load recommendation preview', err);
-				}
-				img.src = previewUrl;
-			}
+		mimeType: {
+			type: String,
+			required: true,
 		},
-		computed: {
-			nameWithoutExtension () {
-				if (this.name.endsWith(this.extension)) {
-					return this.name.substring(0, this.name.length - this.extension.length - 1);
-				} else {
-					return this.name
-				}
-			},
+		name: {
+			type: String,
+			required: true,
 		},
-		methods: {
-			changeDirectory (directory) {
-				// This call does not always return a promise, so we
-				// wrap it
-				return Promise.resolve(OCA.Files.App.fileList.changeDirectory(directory));
-			},
-			scrollTo (name) {
-				OCA.Files.App.fileList.scrollTo(name)
-			},
-			navigate () {
-				this.changeDirectory(this.directory)
-					.then(() => this.scrollTo(this.name))
-					.catch(console.error.bind(this))
-			}
+		directory: {
+			type: String,
+			required: true,
+		},
+		reason: {
+			type: String,
+			required: true,
+		},
+		hasPreview: {
+			type: Boolean,
+			default: false,
+		},
+	},
+	data() {
+		return {
+			previewUrl: OC.MimeType.getIconUrl(this.mimeType),
 		}
-	}
+	},
+	computed: {
+		nameWithoutExtension() {
+			if (this.name.endsWith(this.extension)) {
+				return this.name.substring(0, this.name.length - this.extension.length - 1)
+			} else {
+				return this.name
+			}
+		},
+	},
+	mounted() {
+		if (this.hasPreview) {
+			const previewUrl = generateUrl('/core/preview?fileId={fileId}&x=32&y=32', {
+				fileId: this.id,
+			})
+			const img = new Image()
+			img.onload = () => {
+				this.previewUrl = previewUrl
+			}
+			img.onerror = err => {
+				console.error('could not load recommendation preview', err)
+			}
+			img.src = previewUrl
+		}
+	},
+	methods: {
+		changeDirectory(directory) {
+			// This call does not always return a promise, so we
+			// wrap it
+			return Promise.resolve(OCA.Files.App.fileList.changeDirectory(directory))
+		},
+		scrollTo(name) {
+			OCA.Files.App.fileList.scrollTo(name)
+		},
+		navigate() {
+			this.changeDirectory(this.directory)
+				.then(() => this.scrollTo(this.name))
+				.catch(console.error.bind(this))
+		},
+	},
+}
 </script>
 
 <style scoped lang="scss">

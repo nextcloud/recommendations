@@ -19,13 +19,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Vue from 'vue';
-import Vuex from 'vuex';
-import axios from '@nextcloud/axios';
-import { generateUrl } from 'nextcloud-server/dist/router';
-import { fetchRecommendedFiles } from "../service/RecommendationService";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import axios from '@nextcloud/axios'
+import { generateUrl } from 'nextcloud-server/dist/router'
+import { fetchRecommendedFiles } from '../service/RecommendationService'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
@@ -36,17 +36,17 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		enabled(state, val) {
-			state.enabled = val;
+			state.enabled = val
 		},
 		loadedRecommendations(state, val) {
-			state.loadedRecommendations = val;
+			state.loadedRecommendations = val
 		},
 		loading(state, val) {
-			state.loading = val;
+			state.loading = val
 		},
 		recommendedFiles(state, val) {
-			state.recommendedFiles = val;
-		}
+			state.recommendedFiles = val
+		},
 	},
 	actions: {
 		/**
@@ -56,12 +56,12 @@ export default new Vuex.Store({
 		 * @param {boolean} enabled recommendations status
 		 */
 		async enabled(context, enabled) {
-			context.commit('enabled', enabled);
+			context.commit('enabled', enabled)
 			await axios.put(generateUrl('apps/recommendations/settings/enabled'), {
 				value: enabled.toString(),
-			});
+			})
 			if (enabled) {
-				context.dispatch('fetchRecommendations');
+				context.dispatch('fetchRecommendations')
 			}
 		},
 		/**
@@ -71,16 +71,16 @@ export default new Vuex.Store({
 		 */
 		async fetchRecommendations(context) {
 			if (context.state.loadedRecommendations || context.state.loading) {
-				return;
+				return
 			}
-			this.commit('loading', true);
-			const fetched = await fetchRecommendedFiles();
-			context.commit('enabled', fetched.enabled);
+			this.commit('loading', true)
+			const fetched = await fetchRecommendedFiles()
+			context.commit('enabled', fetched.enabled)
 			if (fetched.recommendations) {
-				context.commit('recommendedFiles', fetched.recommendations);
-				this.commit('loadedRecommendations', true);
+				context.commit('recommendedFiles', fetched.recommendations)
+				this.commit('loadedRecommendations', true)
 			}
-			this.commit('loading', false);
+			this.commit('loading', false)
 		},
 	},
 })

@@ -21,53 +21,53 @@
 
 <template>
 	<div v-if="!hidden && !loading && enabled">
-		<div id="recommendations"
-			 v-if="recommendedFiles.length > 0"
-			 class="group">
+		<div v-if="recommendedFiles.length > 0"
+			id="recommendations"
+			class="group">
 			<RecommendedFile v-for="file in recommendedFiles"
-							 :id="file.id"
-							 :extension="file.extension"
-							 :mime-type="file.mimeType"
-							 :name="file.name"
-							 :directory="file.directory"
-							 :reason="file.reason"
-							 :hasPreview="file.hasPreview"
-							 :key="file.id"/>
+				:id="file.id"
+				:key="file.id"
+				:extension="file.extension"
+				:mime-type="file.mimeType"
+				:name="file.name"
+				:directory="file.directory"
+				:reason="file.reason"
+				:has-preview="file.hasPreview" />
 		</div>
 	</div>
 </template>
 
 <script>
-	import RecommendedFile from "./RecommendedFile";
+import RecommendedFile from './RecommendedFile'
 
-	export default {
-		name: "Recommendations",
-		components: {RecommendedFile},
-		data () {
-			return {
-				hidden: true,
-			}
-		},
-		computed: {
-			enabled() {
-				return this.$store.state.enabled
-			},
-			loading() {
-				return this.$store.state.loading
-			},
-			recommendedFiles() {
-				return this.$store.state.recommendedFiles
-			}
-		},
-		methods: {
-			show () {
-				this.hidden = false;
-			},
-			hide () {
-				this.hidden = true;
-			},
+export default {
+	name: 'Recommendations',
+	components: { RecommendedFile },
+	data() {
+		return {
+			hidden: true,
 		}
-	}
+	},
+	computed: {
+		enabled() {
+			return this.$store.state.enabled
+		},
+		loading() {
+			return this.$store.state.loading
+		},
+		recommendedFiles() {
+			return this.$store.state.recommendedFiles
+		},
+	},
+	methods: {
+		show() {
+			this.hidden = false
+		},
+		hide() {
+			this.hidden = true
+		},
+	},
+}
 </script>
 
 <style scoped>
