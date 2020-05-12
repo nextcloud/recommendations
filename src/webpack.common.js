@@ -20,6 +20,9 @@ module.exports = {
 			{
 				test: /\.vue$/,
 				loader: 'vue-loader',
+				options: {
+					hotReload: false // disables Hot Reload. This adds an absolute path in the mapfile which causes issues.
+				}
 			},
 			{
 				test: /\.js$/,
