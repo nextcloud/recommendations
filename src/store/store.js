@@ -24,6 +24,7 @@ import Vuex from 'vuex'
 import axios from '@nextcloud/axios'
 import { generateUrl } from 'nextcloud-server/dist/router'
 import { fetchRecommendedFiles } from '../service/RecommendationService'
+import { loadState } from '@nextcloud/initial-state'
 
 Vue.use(Vuex)
 
@@ -74,7 +75,13 @@ export default new Vuex.Store({
 				return
 			}
 			this.commit('loading', true)
-			const fetched = await fetchRecommendedFiles()
+			let fetched
+			try {
+				fetched = loadState('recommendations', 'recommendations')
+			} catch (e) {
+				fetched = await fetchRecommendedFiles()
+			}
+
 			context.commit('enabled', fetched.enabled)
 			if (fetched.recommendations) {
 				context.commit('recommendedFiles', fetched.recommendations)
