@@ -119,9 +119,13 @@ export default {
 			OCA.Files.App.fileList.scrollTo(name)
 		},
 		navigate() {
-			this.changeDirectory(this.directory)
-				.then(() => this.scrollTo(this.name))
-				.catch(console.error.bind(this))
+			if (OCA.Files) {
+				this.changeDirectory(this.directory)
+					.then(() => this.scrollTo(this.name))
+					.catch(console.error.bind(this))
+			} else {
+				window.location = generateUrl('/f/' + this.id)
+			}
 		},
 	},
 }
@@ -171,6 +175,7 @@ export default {
 			}
 
 			.extension {
+				display: inline;
 				color: var(--color-text-maxcontrast);
 			}
 		}
