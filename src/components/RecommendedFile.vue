@@ -119,6 +119,10 @@ export default {
 			OCA.Files.App.fileList.scrollTo(name)
 		},
 		navigate() {
+			if (OCA.Viewer) {
+				OCA.Viewer.open(this.directory + '/' + this.name)
+				return
+			}
 			if (OCA.Files) {
 				this.changeDirectory(this.directory)
 					.then(() => this.scrollTo(this.name))
