@@ -71,6 +71,16 @@ export default {
 		overflow: hidden;
 		flex-wrap: wrap;
 		min-width: 0;
+
+		::v-deep .recommendation .details {
+			.file-name .extension {
+				vertical-align: top;
+			}
+
+			.reason {
+				display: none;
+			}
+		}
 	}
 
 	$placeholder-height: 40px;
