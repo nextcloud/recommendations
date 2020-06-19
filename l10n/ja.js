@@ -6,6 +6,7 @@ OC.L10N.register(
     "Recently shared" : "最近共有したもの",
     "Recommendations" : "おすすめ",
     "Shows recommended files" : "おすすめファイルの表示",
-    "Shows recommended files for quick access of files and folders with recent activity" : "最近の利用したファイルやフォルダにすばやくアクセスできるようにおすすめファイルを表示します"
+    "Shows recommended files for quick access of files and folders with recent activity" : "最近の利用したファイルやフォルダにすばやくアクセスできるようにおすすめファイルを表示します",
+    "Show recommendations" : "おすすめを表示"
 },
 "nplurals=1; plural=0;");
