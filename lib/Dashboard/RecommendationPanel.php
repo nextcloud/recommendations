@@ -58,7 +58,7 @@ class RecommendationPanel implements IPanel {
 			'enabled' => true,
 			'recommendations' => $recommendationService->getRecommendations($user)
 		]);
-
+		\OC_Util::addScript('recommendations', 'dashboard');
 	}
 
 	public function getId(): string {
@@ -66,7 +66,7 @@ class RecommendationPanel implements IPanel {
 	}
 
 	public function getTitle(): string {
-		return $this->l10n->t('Recommended files');
+		return $this->l10n->t('Files');
 	}
 
 	public function getOrder(): int {
