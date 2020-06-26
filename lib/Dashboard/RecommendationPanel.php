@@ -29,16 +29,19 @@ use OCP\IInitialStateService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUserSession;
+use OCP\Util;
 
 class RecommendationPanel implements IPanel {
 
-	/**
-	 * @var IL10N
-	 */
+	/** @var IInitialStateService */
+	private $initialStateService;
+	/** @var IUserSession */
+	private $userSession;
+	/** @var RecommendationService */
+	private $recommendationService;
+	/** @var IL10N */
 	private $l10n;
-	/**
-	 * @var IURLGenerator
-	 */
+	/** @var IURLGenerator */
 	private $urlGenerator;
 
 	public function __construct(
@@ -48,17 +51,11 @@ class RecommendationPanel implements IPanel {
 		IL10N $l10n,
 		IURLGenerator $urlGenerator
 	) {
+		$this->initialStateService = $initialStateService;
+		$this->userSession = $userSession;
+		$this->recommendationService = $recommendationService;
 		$this->l10n = $l10n;
 		$this->urlGenerator = $urlGenerator;
-		$user = $userSession->getUser();
-		if ($user === null) {
-			return;
-		}
-		$initialStateService->provideInitialState('recommendations', 'recommendations', [
-			'enabled' => true,
-			'recommendations' => $recommendationService->getRecommendations($user)
-		]);
-		\OC_Util::addScript('recommendations', 'dashboard');
 	}
 
 	public function getId(): string {
@@ -77,11 +74,19 @@ class RecommendationPanel implements IPanel {
 		return 'icon-folder';
 	}
 
-	public function getIconUrl(): string {
-		return '';
-	}
-
 	public function getUrl(): string {
 		return $this->urlGenerator->linkToRouteAbsolute('files.view.showFile');
+	}
+
+	public function load(): void {
+		$user = $this->userSession->getUser();
+		if ($user === null) {
+			return;
+		}
+		$this->initialStateService->provideInitialState('recommendations', 'recommendations', [
+			'enabled' => true,
+			'recommendations' => $this->recommendationService->getRecommendations($user)
+		]);
+		Util::addScript('recommendations', 'dashboard');
 	}
 }
