@@ -1,11 +1,10 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright Copyright (c) 2020 Morris Jobke <hey@morrisjobke.de>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Morris Jobke <hey@morrisjobke.de>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -20,9 +19,24 @@ declare(strict_types=1);
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-use OCA\Recommendations\AppInfo\Application;
+namespace OCA\Recommendations\Listeners;
 
-$app = \OC::$server->query(Application::class);
+use OCA\Files\Event\LoadAdditionalScriptsEvent;
+use OCA\Recommendations\AppInfo\Application;
+use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
+use OCP\Util;
+
+class FilesLoadAdditionalScriptsListener implements IEventListener {
+	public function handle(Event $event): void {
+		if (!$event instanceof LoadAdditionalScriptsEvent) {
+			return;
+		}
+
+		Util::addScript(Application::APP_ID, 'main');
+	}
+}
