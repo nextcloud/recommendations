@@ -25,22 +25,25 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\AppInfo;
 
+use OCA\Files\Event\LoadAdditionalScriptsEvent;
+use OCA\Recommendations\Listeners\FilesLoadAdditionalScriptsListener;
 use OCP\AppFramework\App;
-use OCP\Util;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
-class Application extends App {
+class Application extends App implements IBootstrap {
 
 	public const APP_ID = 'recommendations';
 
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);
-
-		$this->getContainer()->getServer()->getEventDispatcher()->addListener(
-			'OCA\Files::loadAdditionalScripts',
-			function () {
-				Util::addScript(self::APP_ID, 'main');
-			}
-		);
 	}
 
+	public function register(IRegistrationContext $context): void {
+		$context->registerEventListener(LoadAdditionalScriptsEvent::class, FilesLoadAdditionalScriptsListener::class);
+	}
+
+	public function boot(IBootContext $context): void {
+	}
 }
