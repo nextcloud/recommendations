@@ -63,7 +63,7 @@ class RecommendationPanel implements IPanel {
 	}
 
 	public function getTitle(): string {
-		return $this->l10n->t('Files');
+		return $this->l10n->t('Recommended files');
 	}
 
 	public function getOrder(): int {
