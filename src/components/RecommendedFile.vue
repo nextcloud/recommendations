@@ -147,7 +147,7 @@ export default {
 
 		&:hover,
 		&:focus {
-			background: var(--color-background-dark);
+			background: var(--color-background-hover);
 		}
 	}
 

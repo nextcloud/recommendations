@@ -72,13 +72,26 @@ export default {
 		flex-wrap: wrap;
 		min-width: 0;
 
-		::v-deep .recommendation .details {
-			.file-name .extension {
-				vertical-align: top;
+		::v-deep .recommendation {
+			max-width: 100%;
+			padding: 8px 0;
+			margin-right: 0;
+			border-radius: var(--border-radius-large);
+
+			.thumbnail {
+				margin-left: 8px;
+				width: 44px;
+				height: 44px;
 			}
 
-			.reason {
-				display: none;
+			.details {
+				.file-name .extension {
+					vertical-align: top;
+				}
+
+				.reason {
+					display: none;
+				}
 			}
 		}
 	}
