@@ -33,7 +33,7 @@ OC.Plugins.register('OCA.Files.FileList', {
 
 	el: null,
 
-	attach: function(fileList) {
+	attach(fileList) {
 		if (fileList.id !== 'files') {
 			return
 		}
@@ -48,7 +48,7 @@ OC.Plugins.register('OCA.Files.FileList', {
 		})
 	},
 
-	render: function(fileList) {
+	render(fileList) {
 
 		// Load recommendations
 		store.dispatch('fetchRecommendations')
