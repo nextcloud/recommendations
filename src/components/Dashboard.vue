@@ -20,36 +20,27 @@
   -->
 
 <template>
-	<div v-if="!loading">
-		<div v-if="recommendedFiles.length > 0"
-			id="recommendations"
-			class="group">
-			<RecommendedFile v-for="file in recommendedFiles"
-				:id="file.id"
-				:key="file.id"
-				:extension="file.extension"
-				:mime-type="file.mimeType"
-				:name="file.name"
-				:directory="file.directory"
-				:reason="file.reason"
-				:has-preview="file.hasPreview"
-			/>
-		</div>
-	</div>
-	<div v-else>
-		<div class="placeholder-line" v-for="index in 5" :key="index">
-			<div class="placeholder-icon"></div>
-			<div class="placeholder-text"></div>
-		</div>
-	</div>
+	<DashboardWidget id="recommendations" :items="recommendedFiles">
+		<template v-slot:default="{ item }">
+			<RecommendedFile :id="item.id"
+				:key="item.id"
+				:extension="item.extension"
+				:mime-type="item.mimeType"
+				:name="item.name"
+				:directory="item.directory"
+				:reason="item.reason"
+				:has-preview="item.hasPreview" />
+		</template>
+	</DashboardWidget>
 </template>
 
 <script>
+import { DashboardWidget } from '@nextcloud/vue-dashboard'
 import RecommendedFile from './RecommendedFile'
 
 export default {
 	name: 'Dashboard',
-	components: { RecommendedFile },
+	components: { RecommendedFile, DashboardWidget },
 	computed: {
 		enabled() {
 			return this.$store.state.enabled
@@ -58,7 +49,7 @@ export default {
 			return this.$store.state.loading
 		},
 		recommendedFiles() {
-			return this.$store.state.recommendedFiles
+			return this.$store.state.recommendedFiles.slice(0, 7)
 		},
 	},
 }
@@ -66,12 +57,6 @@ export default {
 
 <style lang="scss" scoped>
 	#recommendations {
-		display: flex;
-		flex-direction: row;
-		overflow: hidden;
-		flex-wrap: wrap;
-		min-width: 0;
-
 		::v-deep .recommendation {
 			max-width: 100%;
 			padding: 8px 0;
@@ -96,26 +81,4 @@ export default {
 		}
 	}
 
-	$placeholder-height: 40px;
-	.placeholder-line {
-		display: flex;
-		align-items: stretch;
-
-		.placeholder-icon {
-			margin: 5px;
-			width: $placeholder-height;
-			height: $placeholder-height;
-			display: block;
-			background-color: var(--color-background-dark);
-			border-radius: var(--border-radius);
-		}
-		.placeholder-text {
-			height: $placeholder-height;
-			margin: 5px;
-			flex-grow: 1;
-			display: block;
-			background-color: var(--color-background-dark);
-			border-radius: var(--border-radius);
-		}
-	}
 </style>

@@ -32,10 +32,11 @@ Vue.mixin(Nextcloud)
 // Load recommendations
 store.dispatch('fetchRecommendations')
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
 
 	OCA.Dashboard.register('recommendations', (el) => {
 		const View = Vue.extend(Dashboard)
+		// eslint-disable-next-line no-unused-vars
 		const vm = new View({
 			propsData: {},
 			store,
