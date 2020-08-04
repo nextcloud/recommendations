@@ -24,14 +24,14 @@
 namespace OCA\Recommendations\Dashboard;
 
 use OCA\Recommendations\Service\RecommendationService;
-use OCP\Dashboard\IPanel;
+use OCP\Dashboard\IWidget;
 use OCP\IInitialStateService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUserSession;
 use OCP\Util;
 
-class RecommendationPanel implements IPanel {
+class RecommendationWidget implements IWidget {
 
 	/** @var IInitialStateService */
 	private $initialStateService;
@@ -74,8 +74,8 @@ class RecommendationPanel implements IPanel {
 		return 'icon-folder';
 	}
 
-	public function getUrl(): string {
-		return $this->urlGenerator->linkToRouteAbsolute('files.view.showFile');
+	public function getUrl(): ?string {
+		return null;
 	}
 
 	public function load(): void {
