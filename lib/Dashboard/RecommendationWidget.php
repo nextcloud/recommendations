@@ -71,7 +71,7 @@ class RecommendationWidget implements IWidget {
 	}
 
 	public function getIconClass(): string {
-		return 'icon-folder';
+		return 'icon-files-dark';
 	}
 
 	public function getUrl(): ?string {
