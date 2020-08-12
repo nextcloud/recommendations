@@ -6,6 +6,7 @@ OC.L10N.register(
     "Recently shared" : "Äskettäin jaettu",
     "Recommendations" : "Suositukset",
     "Shows recommended files" : "Näyttää suositellut tiedostot",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Näyttää suositellut, äskettäin käytetyt tiedostot ja kansiot"
+    "Shows recommended files for quick access of files and folders with recent activity" : "Näyttää suositellut, äskettäin käytetyt tiedostot ja kansiot",
+    "Show recommendations" : "Näytä suosituksia"
 },
 "nplurals=2; plural=(n != 1);");
