@@ -31,6 +31,7 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCA\Recommendations\Dashboard\RecommendationWidget;
 
 class Application extends App implements IBootstrap {
 
@@ -42,6 +43,7 @@ class Application extends App implements IBootstrap {
 
 	public function register(IRegistrationContext $context): void {
 		$context->registerEventListener(LoadAdditionalScriptsEvent::class, FilesLoadAdditionalScriptsListener::class);
+		$context->registerDashboardWidget(RecommendationWidget::class);
 	}
 
 	public function boot(IBootContext $context): void {

@@ -119,9 +119,17 @@ export default {
 			OCA.Files.App.fileList.scrollTo(name)
 		},
 		navigate() {
-			this.changeDirectory(this.directory)
-				.then(() => this.scrollTo(this.name))
-				.catch(console.error.bind(this))
+			if (OCA.Viewer) {
+				OCA.Viewer.open(this.directory + '/' + this.name)
+				return
+			}
+			if (OCA.Files) {
+				this.changeDirectory(this.directory)
+					.then(() => this.scrollTo(this.name))
+					.catch(console.error.bind(this))
+			} else {
+				window.location = generateUrl('/f/' + this.id)
+			}
 		},
 	},
 }
@@ -139,7 +147,7 @@ export default {
 
 		&:hover,
 		&:focus {
-			background: var(--color-background-dark);
+			background: var(--color-background-hover);
 		}
 	}
 
@@ -171,6 +179,7 @@ export default {
 			}
 
 			.extension {
+				display: inline;
 				color: var(--color-text-maxcontrast);
 			}
 		}
