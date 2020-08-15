@@ -1,6 +1,8 @@
 OC.L10N.register(
     "recommendations",
     {
+    "values" : "Waarden",
+    "entries" : "regels",
     "Recently commented" : "Recent gereageerd",
     "Recently edited" : "Recent bewerkt",
     "Recently shared" : "Recent gedeeld",
