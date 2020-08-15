@@ -1,6 +1,8 @@
 OC.L10N.register(
     "recommendations",
     {
+    "values" : "hodnoty",
+    "entries" : "položky",
     "Recently commented" : "Nedávno okomentováno",
     "Recently edited" : "Nedávno upravováno",
     "Recently shared" : "Nedávno sdíleno",

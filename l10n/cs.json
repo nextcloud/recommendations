@@ -1,4 +1,6 @@
 { "translations": {
+    "values" : "hodnoty",
+    "entries" : "položky",
     "Recently commented" : "Nedávno okomentováno",
     "Recently edited" : "Nedávno upravováno",
     "Recently shared" : "Nedávno sdíleno",
