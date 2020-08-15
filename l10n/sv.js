@@ -1,6 +1,8 @@
 OC.L10N.register(
     "recommendations",
     {
+    "values" : "värden",
+    "recommendations" : "rekommendationer",
     "Recently commented" : "Nyligen kommenterade",
     "Recently edited" : "Nyligen redigerad",
     "Recently shared" : "Nyligen delade",
