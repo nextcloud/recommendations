@@ -1,4 +1,6 @@
 { "translations": {
+    "values" : "valores",
+    "entries" : "entradas",
     "Recently commented" : "Comentado recientemente",
     "Recently edited" : "Editado recientemente",
     "Recently shared" : "Compartido recientemente",

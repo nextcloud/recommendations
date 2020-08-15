@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "recommendations" : "recomanacions",
     "Recently commented" : "Comentat recentment",
     "Recently edited" : "Editat recentment",
     "Recently shared" : "Compartit recentment",
