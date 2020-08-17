@@ -1,9 +1,6 @@
 OC.L10N.register(
     "recommendations",
     {
-    "values" : "vaut",
-    "entries" : "éléments",
-    "recommendations" : "recommandations",
     "Recently commented" : "Commentés récemment",
     "Recently edited" : "Modifiés récemment",
     "Recently shared" : "Partagés récemment",

@@ -1,14 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
-    "values" : "Werte",
-    "entries" : "Einträge",
-    "_focusable_::_#_" : ["fukusierbar","#"],
-    "_#_::_M3.21 3.043H.494l.679-1.177.68-1.176.678 1.176z_" : ["#","M3.21 3.043H.494l.679-1.177.68-1.176.678 1.176z"],
-    "_search_::_multiselect__input_" : ["Suche","multiselect__input"],
-    "_v_::_%_" : ["v","%"],
-    "_vc-sketch-presets_::_group_" : ["Gruppe","Gruppe"],
-    "recommendations" : "Empfehlungen",
+    "Recommended files" : "Recommended files",
     "Recently commented" : "Zuletzt kommentiert",
     "Recently edited" : "Zuletzt bearbeitet",
     "Recently shared" : "Zuletzt geteilt",

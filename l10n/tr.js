@@ -1,7 +1,6 @@
 OC.L10N.register(
     "recommendations",
     {
-    "recommendations" : "öneri",
     "Recently commented" : "Son Yorum Yapılanlar",
     "Recently edited" : "Son Düzenlenenler",
     "Recently shared" : "Son Paylaşılanlar",

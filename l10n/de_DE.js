@@ -1,15 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
-    "values" : "Werte",
-    "entries" : "Einträge",
-    "_focusable_::_#_" : ["fukusierbar","#"],
-    "_#_::_M3.21 3.043H.494l.679-1.177.68-1.176.678 1.176z_" : ["#","M3.21 3.043H.494l.679-1.177.68-1.176.678 1.176z"],
-    "empty-content__icon" : "empty-content__icon",
-    "_search_::_multiselect__input_" : ["Suche","multiselect__input"],
-    "_v_::_%_" : ["v","%"],
-    "_wrap_::_-scrollbar-wrap_" : ["wrap","-scrollbar-wrap"],
-    "recommendations" : "Empfehlungen",
+    "Recommended files" : "Empfohlene Dateien",
     "Recently commented" : "Zuletzt kommentiert",
     "Recently edited" : "Zuletzt bearbeitet",
     "Recently shared" : "Zuletzt geteilt",
