@@ -1,7 +1,6 @@
 OC.L10N.register(
     "recommendations",
     {
-    "recommendations" : "推荐",
     "Recently commented" : "最新评论",
     "Recently edited" : "最新修改",
     "Recently shared" : "最近共享",
