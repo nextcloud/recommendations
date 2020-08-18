@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "Recommended files" : "Препорачани датотеки",
     "Recently commented" : "Неодамна коментирана",
     "Recently edited" : "Неодамна изменета",
     "Recently shared" : "Неодамна споделена",

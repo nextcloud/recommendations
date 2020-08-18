@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "Recommended files" : "Restroù kinniget",
     "Recently commented" : "Kiniget n'eus ket pell zo",
     "Recently edited" : "Embannet n'eus ket pell zo",
     "Recently shared" : "Rannet n'eus ket pell zo",
