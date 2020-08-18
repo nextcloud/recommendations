@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "Recommended files" : "Fichiers recommandés",
     "Recently commented" : "Commentés récemment",
     "Recently edited" : "Modifiés récemment",
     "Recently shared" : "Partagés récemment",
