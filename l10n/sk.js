@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "Recommended files" : "Odporúčané súbory",
     "Recently commented" : "Nedávno komentované",
     "Recently edited" : "Nedávno upravené",
     "Recently shared" : "Nedávno sprístupnené",
