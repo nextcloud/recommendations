@@ -175,7 +175,7 @@ export default {
 				max-width: 170px;
 				color: var(--color-main-text);
 				text-overflow: ellipsis;
-				overflow-x: hidden;
+				overflow: hidden;
 			}
 
 			.extension {
