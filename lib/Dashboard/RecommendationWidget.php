@@ -41,8 +41,6 @@ class RecommendationWidget implements IWidget {
 	private $recommendationService;
 	/** @var IL10N */
 	private $l10n;
-	/** @var IURLGenerator */
-	private $urlGenerator;
 
 	public function __construct(
 		IInitialStateService $initialStateService,
@@ -55,7 +53,6 @@ class RecommendationWidget implements IWidget {
 		$this->userSession = $userSession;
 		$this->recommendationService = $recommendationService;
 		$this->l10n = $l10n;
-		$this->urlGenerator = $urlGenerator;
 	}
 
 	public function getId(): string {

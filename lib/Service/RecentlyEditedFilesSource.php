@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace OCA\Recommendations\Service;
 
 use OCP\Files\Node;
+use OCP\Files\StorageNotAvailableException;
 use OCP\IL10N;
 use OCP\IServerContainer;
 use OCP\IUser;
@@ -50,14 +51,20 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 	public function getMostRecentRecommendation(IUser $user, int $max): array {
 		$userFolder = $this->serverContainer->getUserFolder($user->getUID());
 
-		return array_map(function (Node $node) use ($userFolder) {
-			return new RecommendedFile(
-				$userFolder->getRelativePath($node->getParent()->getPath()),
-				$node,
-				$node->getMTime(),
-				$this->l10n->t("Recently edited")
-			);
-		}, $userFolder->getRecent($max));
+		return array_filter(array_map(function (Node $node) use ($userFolder) {
+			try {
+				return new RecommendedFile(
+					$userFolder->getRelativePath($node->getParent()->getPath()),
+					$node,
+					$node->getMTime(),
+					$this->l10n->t("Recently edited")
+				);
+			} catch (StorageNotAvailableException $e) {
+				return null;
+			}
+		}, $userFolder->getRecent($max)), function ($entry) {
+			return $entry !== null;
+		});
 	}
 
 }
