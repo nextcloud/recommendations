@@ -31,16 +31,26 @@
 				:reason="item.reason"
 				:has-preview="item.hasPreview" />
 		</template>
+		<template #empty-content>
+			<EmptyContent
+				id="recommendations--empty-content"
+				icon="icon-files-dark">
+				<template #desc>
+					{{ t('recommendations', 'No recommendations yet') }}
+				</template>
+			</EmptyContent>
+		</template>
 	</DashboardWidget>
 </template>
 
 <script>
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
+import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
 import RecommendedFile from './RecommendedFile'
 
 export default {
 	name: 'Dashboard',
-	components: { RecommendedFile, DashboardWidget },
+	components: { RecommendedFile, DashboardWidget, EmptyContent },
 	computed: {
 		enabled() {
 			return this.$store.state.enabled
@@ -79,6 +89,10 @@ export default {
 				}
 			}
 		}
+	}
+	#recommendations--empty-content {
+		text-align: center;
+		margin-top: 5vh;
 	}
 
 </style>
