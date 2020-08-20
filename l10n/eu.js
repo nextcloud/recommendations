@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "Recommended files" : "Fitxategi gomendatuak",
     "Recently commented" : "Berriki iruzkindua",
     "Recently edited" : "Berriki editatua",
     "Recently shared" : "Berriki partekatua",
