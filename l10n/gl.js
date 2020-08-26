@@ -8,6 +8,7 @@ OC.L10N.register(
     "Recommendations" : "Recomendacións",
     "Shows recommended files" : "Amosa os ficheiros recomendados",
     "Shows recommended files for quick access of files and folders with recent activity" : "Amosa os ficheiros recomendados para acceder rapidamente a ficheiros e cartafoles con actividade recente",
+    "No recommendations yet" : "Aínda non hai recomendacións",
     "Show recommendations" : "Amosar as recomendacións"
 },
 "nplurals=2; plural=(n != 1);");
