@@ -162,10 +162,6 @@ export default {
 	}
 
 	.details {
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow: hidden;
-
 		.file-name {
 			white-space: nowrap;
 			margin-bottom: -8px;
