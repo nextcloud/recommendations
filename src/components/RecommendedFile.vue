@@ -93,6 +93,9 @@ export default {
 				return this.name
 			}
 		},
+		isFileListAvailable() {
+			return OCA.Files.App.fileList.changeDirectory && OCA.Files.App.fileList.scrollTo
+		},
 	},
 	mounted() {
 		if (this.hasPreview) {
@@ -119,11 +122,11 @@ export default {
 			OCA.Files.App.fileList.scrollTo(name)
 		},
 		navigate() {
-			if (OCA.Viewer) {
+			if (OCA.Viewer && OCA.Viewer.mimetypes.indexOf(this.mimeType) !== -1) {
 				OCA.Viewer.open(this.directory + '/' + this.name)
 				return
 			}
-			if (OCA.Files) {
+			if (this.isFileListAvailable) {
 				this.changeDirectory(this.directory)
 					.then(() => this.scrollTo(this.name))
 					.catch(console.error.bind(this))
