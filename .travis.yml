@@ -4,7 +4,7 @@ language: php
 php:
   - 7.2
   - 7.3
-  - 7.4snapshot
+  - 7.4
 
 addons:
   apt:
@@ -19,7 +19,7 @@ services:
 env:
   global:
   - TEST_JS=FALSE
-  - CORE_BRANCH=master
+  - CORE_BRANCH=stable20
   matrix:
   - DB=sqlite
 
