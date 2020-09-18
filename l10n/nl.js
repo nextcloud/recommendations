@@ -8,6 +8,7 @@ OC.L10N.register(
     "Recommendations" : "Aanbevelingen",
     "Shows recommended files" : "Aangeraden bestanden tonen",
     "Shows recommended files for quick access of files and folders with recent activity" : "Laat de aangeraden bestanden zien voor snelle toegang tot bestanden en mappen",
+    "No recommendations yet" : "Nog geen aanbevelingen",
     "Show recommendations" : "Toon aanbevelingen"
 },
 "nplurals=2; plural=(n != 1);");
