@@ -80,10 +80,6 @@ class RecommendationWidget implements IWidget {
 		if ($user === null) {
 			return;
 		}
-		$this->initialStateService->provideInitialState('recommendations', 'recommendations', [
-			'enabled' => true,
-			'recommendations' => $this->recommendationService->getRecommendations($user)
-		]);
 		Util::addScript('recommendations', 'dashboard');
 	}
 }
