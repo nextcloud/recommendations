@@ -1,9 +1,9 @@
 OC.L10N.register(
     "recommendations",
     {
-    "Recommended files" : "推荐的文件",
-    "Recently commented" : "最新评论",
-    "Recently edited" : "最新修改",
+    "Recommended files" : "推荐文件",
+    "Recently commented" : "最近评论",
+    "Recently edited" : "最近修改",
     "Recently shared" : "最近共享",
     "Recommendations" : "推荐",
     "Shows recommended files" : "显示推荐的文件",
