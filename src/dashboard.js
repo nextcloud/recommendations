@@ -30,7 +30,7 @@ import store from './store/store'
 Vue.mixin(Nextcloud)
 
 // Load recommendations
-store.dispatch('fetchRecommendations')
+store.dispatch('fetchRecommendations', true)
 
 document.addEventListener('DOMContentLoaded', function() {
 

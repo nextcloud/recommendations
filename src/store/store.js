@@ -68,13 +68,14 @@ export default new Vuex.Store({
 		 * Fetch recommendations and current enabled setting
 		 * @async
 		 * @param {Object} context the store context
+		 * @param {boolean} [always] set to true to always get recommendations regardless of enabled setting
 		 */
-		async fetchRecommendations(context) {
+		async fetchRecommendations(context, always) {
 			if (context.state.loadedRecommendations || context.state.loading) {
 				return
 			}
 			this.commit('loading', true)
-			const fetched = await fetchRecommendedFiles()
+			const fetched = await fetchRecommendedFiles(always)
 
 			context.commit('enabled', fetched.enabled)
 			if (fetched.recommendations) {
