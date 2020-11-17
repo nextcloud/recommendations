@@ -25,11 +25,10 @@ declare(strict_types=1);
  */
 
 return [
-	'resources' => [
-		'recommendation' => ['url' => 'api/recommendations'],
-	],
 	'routes' => [
 		['name' => 'settings#getSettings', 'url' => '/settings', 'verb' => 'GET'],
 		['name' => 'settings#setSetting', 'url' => '/settings/{key}', 'verb' => 'PUT'],
+		['name' => 'recommendation#index', 'url' => '/api/recommendations', 'verb' => 'GET'],
+		['name' => 'recommendation#always', 'url' => '/api/recommendations/always', 'verb' => 'GET'],
 	],
 ];

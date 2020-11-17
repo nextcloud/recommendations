@@ -74,4 +74,22 @@ class RecommendationController extends Controller {
 		);
 	}
 
+	/**
+	 * @NoAdminRequired
+	 * @return JSONResponse
+	 */
+	public function always(): JSONResponse {
+		$user = $this->userSession->getUser();
+		if (is_null($user)) {
+			throw new Exception("Not logged in");
+		}
+		$response = [
+			'enabled' => $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true',
+			'recommendations' =>  $this->recommendationService->getRecommendations($user),
+		];
+		return new JSONResponse(
+			$response
+		);
+	}
+
 }
