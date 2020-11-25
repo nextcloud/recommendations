@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "Recommended files" : "Ajánlott fájlok",
     "Recently commented" : "Nemrég hozzászólva",
     "Recently edited" : "Nemrég szerkesztve",
     "Recently shared" : "Nemrég megosztva",
