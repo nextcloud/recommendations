@@ -7,8 +7,8 @@ OC.L10N.register(
     "Recently shared" : "Compartit recentment",
     "Recommendations" : "Recomanacions",
     "Shows recommended files" : "Mostra fitxers recomanats",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Mostra fitxers recomanats per accedir ràpidament a les carpetes i els fitxers amb activitat recent",
+    "Shows recommended files for quick access of files and folders with recent activity" : "Mostra fitxers recomanats per a accedir ràpidament a les carpetes i els fitxers amb activitat recent",
     "No recommendations yet" : "Encara no hi ha recomanacions",
-    "Show recommendations" : "Mostrar recomanacions"
+    "Show recommendations" : "Mostra les recomanacions"
 },
 "nplurals=2; plural=(n != 1);");
