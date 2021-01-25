@@ -1,0 +1,65 @@
+name: Test
+on: pull_request
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: [7.3, 7.4, 8.0]
+        nextcloud-versions: ['master']
+        db: ['sqlite', 'mysql', 'pgsql']
+    name: Nextcloud ${{ matrix.nextcloud-versions }} and php${{ matrix.php-versions }} smoke test
+    services:
+      mysql-service:
+        image: mariadb:10
+        env:
+          MYSQL_ROOT_PASSWORD: my-secret-pw
+          MYSQL_DATABASE: nextcloud
+          MYSQL_USER: nextcloud
+          MYSQL_PASSWORD: nextcloud
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+      postgres-service:
+        image: postgres
+        env:
+          POSTGRES_USER: nextcloud
+          POSTGRES_DB: nextcloud
+          POSTGRES_PASSWORD: nextcloud
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - name: Set up php${{ matrix.php-versions }}
+      uses: shivammathur/setup-php@master
+      with:
+        php-version: ${{ matrix.php-versions }}
+        tools: composer:v1
+        extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip
+        coverage: xdebug
+    - name: Checkout Nextcloud
+      run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-versions }} nextcloud
+    - name: Install Nextcloud
+      run: php -f nextcloud/occ maintenance:install --database-host 127.0.0.1 --database-name nextcloud --database-user nextcloud --database-pass nextcloud --admin-user admin --admin-pass admin --database ${{ matrix.db }}
+    - name: Checkout app
+      uses: actions/checkout@master
+      with:
+        path: nextcloud/apps/recommendations
+    - name: Install dependencies
+      working-directory: nextcloud/apps/recommendations
+      run: composer install
+    - name: Install app
+      run: php -f nextcloud/occ app:enable recommendations
+    - name: Install app
+      run: php -f nextcloud/occ app:enable recommendations
+    - name: Run a smoke test
+      run: php -f nextcloud/occ files:recommendations:recommend admin
