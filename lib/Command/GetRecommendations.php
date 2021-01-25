@@ -72,7 +72,7 @@ class GetRecommendations extends Command {
 			return 1;
 		}
 
-		if ($input->hasArgument('max')) {
+		if ($input->getArgument('max')) {
 			$recommendations = $this->recommendationService->getRecommendations($user, (int) $input->getArgument('max'));
 		} else {
 			$recommendations = $this->recommendationService->getRecommendations($user);
