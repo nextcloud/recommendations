@@ -29,7 +29,6 @@ use JsonSerializable;
 use OCP\Files\Node;
 
 interface IRecommendation extends JsonSerializable {
-
 	public function getId(): string;
 
 	public function getTimestamp(): int;
@@ -41,5 +40,4 @@ interface IRecommendation extends JsonSerializable {
 	public function setHasPreview(bool $state);
 
 	public function getReason(): string;
-
 }

@@ -95,5 +95,4 @@ class RecommendedFile implements IRecommendation {
 			'reason' => $this->getReason(),
 		];
 	}
-
 }

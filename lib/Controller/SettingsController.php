@@ -24,6 +24,7 @@ declare(strict_types=1);
  */
 
 namespace OCA\Recommendations\Controller;
+
 use OCA\Recommendations\AppInfo\Application;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;

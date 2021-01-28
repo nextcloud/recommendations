@@ -132,5 +132,4 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 			}
 		}, $shares));
 	}
-
 }

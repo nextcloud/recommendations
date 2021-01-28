@@ -34,7 +34,6 @@ use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCA\Recommendations\Dashboard\RecommendationWidget;
 
 class Application extends App implements IBootstrap {
-
 	public const APP_ID = 'recommendations';
 
 	public function __construct(array $urlParams = []) {
