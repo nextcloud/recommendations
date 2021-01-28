@@ -86,5 +86,4 @@ class GetRecommendations extends Command {
 
 		return 0;
 	}
-
 }

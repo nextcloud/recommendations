@@ -48,10 +48,8 @@ namespace OCA\Recommendations\Service;
 use function array_map;
 use function array_slice;
 use function iterator_to_array;
-use OCP\Files\Config\IMountProviderCollection;
 use OCP\Files\Folder;
 use OCP\Files\IRootFolder;
-use OCP\Files\Mount\IMountPoint;
 use OCP\IL10N;
 use function reset;
 use function usort;
@@ -172,5 +170,4 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 			);
 		}, $this->getNMostRecentlyCommenedFiles($all, $max));
 	}
-
 }

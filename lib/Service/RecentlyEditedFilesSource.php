@@ -66,5 +66,4 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 			return $entry !== null;
 		});
 	}
-
 }

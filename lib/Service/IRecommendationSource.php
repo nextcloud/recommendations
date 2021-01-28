@@ -36,5 +36,4 @@ interface IRecommendationSource {
 	 * @return IRecommendation[]
 	 */
 	public function getMostRecentRecommendation(IUser $user, int $max): array ;
-
 }

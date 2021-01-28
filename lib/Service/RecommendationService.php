@@ -33,7 +33,6 @@ use OCP\IUser;
 use function usort;
 
 class RecommendationService {
-
 	private const MAX_RECOMMENDATIONS = 7;
 
 	/** @var IRecommendationSource */
@@ -120,5 +119,4 @@ class RecommendationService {
 
 		return array_slice($picks, 0, $max);
 	}
-
 }

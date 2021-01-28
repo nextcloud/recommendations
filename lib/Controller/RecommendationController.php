@@ -85,11 +85,10 @@ class RecommendationController extends Controller {
 		}
 		$response = [
 			'enabled' => $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true',
-			'recommendations' =>  $this->recommendationService->getRecommendations($user),
+			'recommendations' => $this->recommendationService->getRecommendations($user),
 		];
 		return new JSONResponse(
 			$response
 		);
 	}
-
 }

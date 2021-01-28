@@ -65,5 +65,4 @@ class FileWithComments {
 	public function getComment(): IComment {
 		return $this->comment;
 	}
-
 }
