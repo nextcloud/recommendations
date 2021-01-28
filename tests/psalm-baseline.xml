@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.3.1@2feba22a005a18bf31d4c7b9bdb9252c73897476">
+  <file src="lib/AppInfo/Application.php">
+    <UndefinedClass occurrences="1">
+      <code>LoadAdditionalScriptsEvent</code>
+    </UndefinedClass>
+  </file>
+  <file src="lib/Command/GetRecommendations.php">
+    <UndefinedClass occurrences="1">
+      <code>Command</code>
+    </UndefinedClass>
+  </file>
+  <file src="lib/Listeners/FilesLoadAdditionalScriptsListener.php">
+    <MissingDependency occurrences="1">
+      <code>FilesLoadAdditionalScriptsListener</code>
+    </MissingDependency>
+    <UndefinedClass occurrences="1">
+      <code>LoadAdditionalScriptsEvent</code>
+    </UndefinedClass>
+  </file>
+  <file src="lib/Service/RecentlyCommentedFilesSource.php">
+    <InvalidArgument occurrences="2">
+      <code>$comments</code>
+    </InvalidArgument>
+    <InvalidReturnStatement occurrences="1">
+      <code>array_slice($sorted, 0, $n)</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="1">
+      <code>FileWithComments[]</code>
+    </InvalidReturnType>
+    <MissingDependency occurrences="3">
+      <code>$this-&gt;rootFolder</code>
+      <code>IRootFolder</code>
+      <code>IRootFolder</code>
+    </MissingDependency>
+  </file>
+  <file src="lib/Service/RecentlyEditedFilesSource.php">
+    <LessSpecificImplementedReturnType occurrences="1">
+      <code>array</code>
+    </LessSpecificImplementedReturnType>
+    <MissingDependency occurrences="4">
+      <code>$this-&gt;serverContainer</code>
+      <code>IServerContainer</code>
+      <code>IServerContainer</code>
+      <code>StorageNotAvailableException</code>
+    </MissingDependency>
+  </file>
+  <file src="lib/Service/RecentlySharedFilesSource.php">
+    <MissingDependency occurrences="3">
+      <code>$this-&gt;rootFolder</code>
+      <code>IRootFolder</code>
+      <code>IRootFolder</code>
+    </MissingDependency>
+    <UndefinedClass occurrences="2">
+      <code>Constants</code>
+      <code>Constants</code>
+    </UndefinedClass>
+  </file>
+  <file src="lib/Service/RecommendationService.php">
+    <InvalidArgument occurrences="1">
+      <code>$this-&gt;sources</code>
+    </InvalidArgument>
+    <InvalidPropertyAssignmentValue occurrences="1"/>
+  </file>
+</files>
