@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "Recommended files" : "おすすめファイル",
     "Recently commented" : "最近追加されたコメント",
     "Recently edited" : "最近編集したもの",
     "Recently shared" : "最近共有したもの",
