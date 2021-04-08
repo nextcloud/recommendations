@@ -6,9 +6,9 @@ OC.L10N.register(
     "Recently edited" : "Modificados dae pagu",
     "Recently shared" : "Cumpartzidos dae pagu",
     "Recommendations" : "Cussìgios",
-    "Shows recommended files" : "Ammustrat is documentos cussigiados",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Ammustrat is documentos cussigiados pro s'atzessu lestru a is documentos e a is cartellas cun atividade reghente",
+    "Shows recommended files" : "Mustrat is documentos cussigiados",
+    "Shows recommended files for quick access of files and folders with recent activity" : "Mustrat is documentos cussigiados pro s'atzessu lestru a is documentos e a is cartellas cun atividade reghente",
     "No recommendations yet" : "Ancora perunu cussìgiu",
-    "Show recommendations" : "Ammustra cussìgios"
+    "Show recommendations" : "Mustra cussìgios"
 },
 "nplurals=2; plural=(n != 1);");
