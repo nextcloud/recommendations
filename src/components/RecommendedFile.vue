@@ -20,7 +20,8 @@
   -->
 
 <template>
-	<a class="recommendation"
+	<a v-tooltip="tooltip"
+		class="recommendation"
 		tabindex="0"
 		@click.prevent="navigate"
 		@keyup.enter.prevent="navigate">
@@ -47,9 +48,13 @@
 
 <script>
 import { generateUrl } from '@nextcloud/router'
+import { VTooltip } from 'v-tooltip'
 
 export default {
 	name: 'RecommendedFile',
+	directives: {
+		tooltip: VTooltip,
+	},
 	props: {
 		id: {
 			type: String,
@@ -96,6 +101,17 @@ export default {
 		isFileListAvailable() {
 			return OCA.Files.App.fileList.changeDirectory && OCA.Files.App.fileList.scrollTo
 		},
+		path() {
+			return (this.directory === '/' ? '' : this.directory) + '/' + this.name
+		},
+		tooltip() {
+			return {
+				content: this.path,
+				html: false,
+				placement: 'bottom',
+				delay: { show: 500, hide: 0 },
+			}
+		},
 	},
 	mounted() {
 		if (this.hasPreview) {
@@ -123,7 +139,7 @@ export default {
 		},
 		navigate() {
 			if (OCA.Viewer && OCA.Viewer.mimetypes.indexOf(this.mimeType) !== -1) {
-				OCA.Viewer.open(this.directory + '/' + this.name)
+				OCA.Viewer.open(this.path)
 				return
 			}
 			if (this.isFileListAvailable) {
