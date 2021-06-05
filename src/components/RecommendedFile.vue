@@ -139,7 +139,7 @@ export default {
 		},
 		navigate() {
 			if (OCA.Viewer && OCA.Viewer.mimetypes.indexOf(this.mimeType) !== -1) {
-				OCA.Viewer.open(this.path)
+				OCA.Viewer.open({ path: this.path })
 				return
 			}
 			if (this.isFileListAvailable) {
