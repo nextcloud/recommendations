@@ -2,7 +2,7 @@ OC.L10N.register(
     "recommendations",
     {
     "Recently commented" : "اخیراً اظهار نظر کرده است",
-    "Recently edited" : "اخیراً ویرایش کردن است",
+    "Recently edited" : "اخیراً ویرایش شده",
     "Recently shared" : "اخیراً به اشتراک گذاشته شده است",
     "Recommendations" : "توصیه ها",
     "Shows recommended files" : "پرونده های پیشنهادی را نشان می دهد",
