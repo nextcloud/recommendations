@@ -24,13 +24,13 @@ namespace OCA\Recommendations\Controller;
 
 use OCA\Recommendations\AppInfo\Application;
 use OCA\Recommendations\Service\RecommendationService;
-use OCP\AppFramework\ApiController;
+use OCP\AppFramework\OCSController;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\IUserManager;
 
-class RecommendationApiController extends ApiController {
+class RecommendationApiController extends OCSController {
 
 	/** @var IConfig */
 	private $config;
