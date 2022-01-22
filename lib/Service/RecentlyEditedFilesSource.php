@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace OCA\Recommendations\Service;
 
 use OCP\Files\Node;
+use OCP\Files\NotFoundException;
 use OCP\Files\StorageNotAvailableException;
 use OCP\IL10N;
 use OCP\IServerContainer;
@@ -46,24 +47,59 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 	}
 
 	/**
+	 * @return bool
+	 */
+	private function isNodeExcluded(Node $node, bool $showHidden): bool {
+		$next = $node;
+
+		while (!$showHidden) {
+			if ($next->getName()[0] == ".")
+				return true;
+
+			try {
+				$next = $next->getParent();
+			} catch (NotFoundException $e) {
+				break;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getMostRecentRecommendation(IUser $user, int $max): array {
+		$showHidden = (bool) $this->serverContainer->getConfig()->getUserValue($user->getUID(), 'files', 'show_hidden', false);
 		$userFolder = $this->serverContainer->getUserFolder($user->getUID());
 
-		return array_filter(array_map(function (Node $node) use ($userFolder) {
-			try {
-				return new RecommendedFile(
-					$userFolder->getRelativePath($node->getParent()->getPath()),
-					$node,
-					$node->getMTime(),
-					$this->l10n->t("Recently edited")
-				);
-			} catch (StorageNotAvailableException $e) {
-				return null;
+		$count = 0;
+		$limit = 2 * $max;
+		$offset = 0;
+		$results = [];
+
+		do {
+			$recentFiles = $userFolder->getRecent($limit, $offset);
+
+			foreach ($recentFiles as $node) {
+				if (!$this->isNodeExcluded($node, $showHidden)) {
+					try {
+						$results[] = new RecommendedFile(
+							$userFolder->getRelativePath($node->getParent()->getPath()),
+							$node,
+							$node->getMTime(),
+							$this->l10n->t("Recently edited")
+						);
+					} catch (StorageNotAvailableException $e) {
+						//pass
+					}
+				}
 			}
-		}, $userFolder->getRecent($max)), function ($entry) {
-			return $entry !== null;
-		});
+
+			$offset += $limit;
+			$count++;
+		} while ((count($results) < $max) && ($count < 5));
+
+		return array_slice($results, 0, $max);
 	}
 }
