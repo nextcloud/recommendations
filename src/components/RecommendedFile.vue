@@ -115,7 +115,7 @@ export default {
 	},
 	mounted() {
 		if (this.hasPreview) {
-			const previewUrl = generateUrl('/core/preview?fileId={fileId}&x=32&y=32', {
+			const previewUrl = generateUrl('/core/preview?fileId={fileId}&x=250&y=250', {
 				fileId: this.id,
 			})
 			const img = new Image()
