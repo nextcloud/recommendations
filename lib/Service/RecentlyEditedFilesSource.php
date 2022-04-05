@@ -53,8 +53,12 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 
 		return array_filter(array_map(function (Node $node) use ($userFolder) {
 			try {
+				$parentPath = dirname($node->getPath());
+				if ($parentPath === '' || $parentPath === '.' || $parentPath === '/') {
+					$parentPath = $node->getParent()->getPath();
+				}
 				return new RecommendedFile(
-					$userFolder->getRelativePath($node->getParent()->getPath()),
+					$userFolder->getRelativePath($parentPath),
 					$node,
 					$node->getMTime(),
 					$this->l10n->t("Recently edited")
