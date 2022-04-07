@@ -83,6 +83,7 @@ class RecommendedFile implements IRecommendation {
 		$this->hasPreview = $state;
 	}
 
+	#[\ReturnTypeWillChange]
 	public function jsonSerialize() {
 		return [
 			'id' => $this->getId(),
