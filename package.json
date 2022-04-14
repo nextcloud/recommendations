@@ -1,6 +1,6 @@
 {
 	"name": "files_recommendation",
-	"version": "1.3.0",
+	"version": "1.4.0",
 	"description": "Shows recommended files in Nextcloud",
 	"main": "index.js",
 	"scripts": {
