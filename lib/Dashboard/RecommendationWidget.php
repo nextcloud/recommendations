@@ -32,26 +32,14 @@ use OCP\IUserSession;
 use OCP\Util;
 
 class RecommendationWidget implements IWidget {
-
-	/** @var IInitialStateService */
-	private $initialStateService;
-	/** @var IUserSession */
-	private $userSession;
-	/** @var RecommendationService */
-	private $recommendationService;
-	/** @var IL10N */
-	private $l10n;
+	private IUserSession $userSession;
+	private IL10N $l10n;
 
 	public function __construct(
-		IInitialStateService $initialStateService,
 		IUserSession $userSession,
-		RecommendationService $recommendationService,
-		IL10N $l10n,
-		IURLGenerator $urlGenerator
+		IL10N $l10n
 	) {
-		$this->initialStateService = $initialStateService;
 		$this->userSession = $userSession;
-		$this->recommendationService = $recommendationService;
 		$this->l10n = $l10n;
 	}
 

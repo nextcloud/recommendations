@@ -35,15 +35,9 @@ use OCP\IRequest;
 use OCP\IUserSession;
 
 class RecommendationController extends Controller {
-
-	/** @var IUserSession */
-	private $userSession;
-
-	/** @var RecommendationService */
-	private $recommendationService;
-
-	/** @var IConfig */
-	private $config;
+	private IUserSession $userSession;
+	private RecommendationService $recommendationService;
+	private IConfig $config;
 
 	public function __construct(IRequest $request,
 								IUserSession $userSession,

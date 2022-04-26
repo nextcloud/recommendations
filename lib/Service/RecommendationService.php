@@ -35,11 +35,9 @@ use function usort;
 class RecommendationService {
 	private const MAX_RECOMMENDATIONS = 7;
 
-	/** @var IRecommendationSource */
-	private $sources;
-
-	/** @var IPreview */
-	private $previewManager;
+	/** @var IRecommendationSource[] */
+	private array $sources;
+	private IPreview $previewManager;
 
 	public function __construct(RecentlyCommentedFilesSource $recentlyCommented,
 								RecentlyEditedFilesSource $recentlyEdited,
@@ -106,7 +104,7 @@ class RecommendationService {
 	 * @param int $max
 	 * @return IRecommendation[]
 	 */
-	private function getDeduplicatedSlice(array $recommendations, int $max) {
+	private function getDeduplicatedSlice(array $recommendations, int $max): array {
 		$picks = [];
 
 		foreach ($recommendations as $recommendation) {

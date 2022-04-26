@@ -41,15 +41,9 @@ use OCP\Share\IManager;
 use OCP\Share\IShare;
 
 class RecentlySharedFilesSource implements IRecommendationSource {
-
-	/** @var IManager */
-	private $shareManager;
-
-	/** @var IRootFolder */
-	private $rootFolder;
-
-	/** @var IL10N */
-	private $l10n;
+	private IManager $shareManager;
+	private IRootFolder $rootFolder;
+	private IL10N $l10n;
 
 	public function __construct(IManager $shareManager,
 								IRootFolder $rootFolder,
@@ -60,9 +54,6 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 	}
 
 	/**
-	 * @param IUser $user
-	 * @param int $shareType
-	 *
 	 * @return Generator<IShare>
 	 */
 	private function getAllShares(IUser $user, int $shareType): Generator {
@@ -103,10 +94,10 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 	 *
 	 * @return IShare[]
 	 */
-	private function getMostRecentShares(IUser $user, int $max) {
+	private function getMostRecentShares(IUser $user, int $max): array {
 		$shares = $this->sortShares(array_merge(
-			iterator_to_array($this->getAllShares($user, Constants::SHARE_TYPE_USER)),
-			iterator_to_array($this->getAllShares($user, Constants::SHARE_TYPE_GROUP))
+			iterator_to_array($this->getAllShares($user, IShare::TYPE_USER)),
+			iterator_to_array($this->getAllShares($user, IShare::TYPE_GROUP))
 		));
 
 		return array_slice($shares, 0, $max);
@@ -119,7 +110,7 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 		$shares = $this->getMostRecentShares($user, $max);
 		$userFolder = $this->rootFolder->getUserFolder($user->getUID());
 
-		return array_filter(array_map(function (IShare $share) use ($userFolder) {
+		return array_filter(array_map(function (IShare $share) use ($userFolder): ?RecommendedFile {
 			try {
 				return new RecommendedFile(
 					$userFolder->getRelativePath($userFolder->get($share->getTarget())->getParent()->getPath()),
