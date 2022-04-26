@@ -33,7 +33,6 @@ use function iterator_to_array;
 use OCP\Files\NotFoundException;
 use function usort;
 use Generator;
-use OC\Share\Constants;
 use OCP\Files\IRootFolder;
 use OCP\IL10N;
 use OCP\IUser;

@@ -23,11 +23,8 @@
 
 namespace OCA\Recommendations\Dashboard;
 
-use OCA\Recommendations\Service\RecommendationService;
 use OCP\Dashboard\IWidget;
-use OCP\IInitialStateService;
 use OCP\IL10N;
-use OCP\IURLGenerator;
 use OCP\IUserSession;
 use OCP\Util;
 
