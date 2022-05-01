@@ -31,7 +31,7 @@
 		"nextcloud-server": "^0.15.10",
 		"sass": "^1.51.0",
 		"v-tooltip": "^2.1.3",
-		"vue": "^2.6.14",
+		"vue": "^3.2.33",
 		"vuex": "^3.6.2"
 	},
 	"devDependencies": {
