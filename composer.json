@@ -2,7 +2,14 @@
     "name": "nextcloud/recommendations",
     "description": "Nextcloud Recommendations",
     "type": "library",
-    "license": "AGPL-v3.0",
+    "license": "AGPL-3.0-only",
+	"config": {
+		"optimize-autoloader": true,
+		"classmap-authoritative": true,
+		"platform": {
+			"php": "7.4"
+		}
+	},
     "authors": [
         {
             "name": "Christoph Wurst",
