@@ -28,21 +28,11 @@ namespace OCA\Recommendations\Service;
 use OCP\Files\Node;
 
 class RecommendedFile implements IRecommendation {
-
-	/** @var string */
-	private $directory;
-
-	/** @var Node */
-	private $node;
-
-	/** @var int */
-	private $timestamp;
-
-	/** @var string */
-	private $reason;
-
-	/** @var bool */
-	private $hasPreview;
+	private string $directory;
+	private Node $node;
+	private int $timestamp;
+	private string $reason;
+	private bool $hasPreview;
 
 	public function __construct(string $directory,
 								Node $node,

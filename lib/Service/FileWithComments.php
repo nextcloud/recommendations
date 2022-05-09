@@ -29,15 +29,9 @@ use OCP\Comments\IComment;
 use OCP\Files\Node;
 
 class FileWithComments {
-
-	/** @var string */
-	private $directory;
-
-	/** @var Node */
-	private $node;
-
-	/** @var IComment */
-	private $comment;
+	private string $directory;
+	private Node $node;
+	private IComment $comment;
 
 	public function __construct(string $directory, Node $node, IComment $comment) {
 		$this->directory = $directory;
@@ -45,23 +39,14 @@ class FileWithComments {
 		$this->comment = $comment;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getDirectory(): string {
 		return $this->directory;
 	}
 
-	/**
-	 * @return Node
-	 */
 	public function getNode(): Node {
 		return $this->node;
 	}
 
-	/**
-	 * @return IComment
-	 */
 	public function getComment(): IComment {
 		return $this->comment;
 	}

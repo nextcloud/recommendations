@@ -33,12 +33,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GetRecommendations extends Command {
-
-	/** @var IUserManager */
-	private $userManager;
-
-	/** @var RecommendationService */
-	private $recommendationService;
+	private IUserManager $userManager;
+	private RecommendationService $recommendationService;
 
 	public function __construct(IUserManager $userManager,
 								RecommendationService $recommendationService) {

@@ -1,65 +1,268 @@
 name: Test
-on: pull_request
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - stable*
+
+env:
+  APP_NAME: recommendations
 
 jobs:
-  smoke-test:
+  sqlite:
     runs-on: ubuntu-latest
+
     strategy:
+      # do not stop on another job's failure
+      fail-fast: false
       matrix:
-        php-versions: ["7.4", "8.0", "8.1"]
-        nextcloud-versions: ['master']
-        db: ['sqlite', 'mysql', 'pgsql']
-    name: Nextcloud ${{ matrix.nextcloud-versions }} and php${{ matrix.php-versions }} smoke test
-    services:
-      mysql-service:
-        image: mariadb:10.5
-        env:
-          MYSQL_ROOT_PASSWORD: my-secret-pw
-          MYSQL_DATABASE: nextcloud
-          MYSQL_USER: nextcloud
-          MYSQL_PASSWORD: nextcloud
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-      postgres-service:
-        image: postgres
-        env:
-          POSTGRES_USER: nextcloud
-          POSTGRES_DB: nextcloud
-          POSTGRES_PASSWORD: nextcloud
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        php-versions: ['7.4']
+        databases: ['sqlite']
+        server-versions: ['master']
+
+    name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
+
     steps:
-    - name: Set up php${{ matrix.php-versions }}
-      uses: shivammathur/setup-php@master
-      with:
-        php-version: ${{ matrix.php-versions }}
-        tools: composer:v1
-        extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip
-        coverage: xdebug
-    - name: Checkout Nextcloud
-      run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-versions }} nextcloud
-    - name: Install Nextcloud
-      run: php -f nextcloud/occ maintenance:install --database-host 127.0.0.1 --database-name nextcloud --database-user nextcloud --database-pass nextcloud --admin-user admin --admin-pass admin --database ${{ matrix.db }}
-    - name: Checkout app
-      uses: actions/checkout@master
-      with:
-        path: nextcloud/apps/recommendations
-    - name: Install dependencies
-      working-directory: nextcloud/apps/recommendations
-      run: composer install
-    - name: Install app
-      run: php -f nextcloud/occ app:enable recommendations
-    - name: Install app
-      run: php -f nextcloud/occ app:enable recommendations
-    - name: Run a smoke test
-      run: php -f nextcloud/occ files:recommendations:recommend admin
+      - name: Checkout server
+        uses: actions/checkout@v2
+        with:
+          repository: nextcloud/server
+          ref: ${{ matrix.server-versions }}
+
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+          git submodule sync --recursive
+          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+
+      - name: Checkout app
+        uses: actions/checkout@v2
+        with:
+          path: apps/${{ env.APP_NAME }}
+
+      - name: Set up php ${{ matrix.php-versions }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, iconv, fileinfo, intl, sqlite, pdo_sqlite
+          coverage: none
+
+      - name: Set up PHPUnit
+        working-directory: apps/${{ env.APP_NAME }}
+        run: composer i
+
+      - name: Set up Nextcloud
+        env:
+          DB_PORT: 4444
+        run: |
+          mkdir data
+          ./occ maintenance:install --verbose --database=${{ matrix.databases }} --database-name=nextcloud --database-host=127.0.0.1 --database-port=$DB_PORT --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass password
+          ./occ app:enable --force ${{ env.APP_NAME }}
+          php -S localhost:8080 &
+
+      - name: Run a smoke test
+        run: php -f ./occ files:recommendations:recommend admin
+
+  mysql:
+    runs-on: ubuntu-latest
+
+    strategy:
+      # do not stop on another job's failure
+      fail-fast: false
+      matrix:
+        php-versions: ['7.4', '8.0', '8.1']
+        databases: ['mysql']
+        server-versions: ['master']
+
+    name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
+
+    services:
+      mysql:
+        image: mariadb:10.5
+        ports:
+          - 4444:3306/tcp
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+        options: --health-cmd="mysqladmin ping" --health-interval 5s --health-timeout 2s --health-retries 5
+
+    steps:
+      - name: Checkout server
+        uses: actions/checkout@v2
+        with:
+          repository: nextcloud/server
+          ref: ${{ matrix.server-versions }}
+
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+          git submodule sync --recursive
+          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+
+      - name: Checkout app
+        uses: actions/checkout@v2
+        with:
+          path: apps/${{ env.APP_NAME }}
+
+      - name: Set up php ${{ matrix.php-versions }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, iconv, fileinfo, intl, mysql, pdo_mysql
+          coverage: none
+
+      - name: Set up PHPUnit
+        working-directory: apps/${{ env.APP_NAME }}
+        run: composer i
+
+      - name: Set up Nextcloud
+        env:
+          DB_PORT: 4444
+        run: |
+          mkdir data
+          ./occ maintenance:install --verbose --database=${{ matrix.databases }} --database-name=nextcloud --database-host=127.0.0.1 --database-port=$DB_PORT --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass password
+          ./occ app:enable --force ${{ env.APP_NAME }}
+          php -S localhost:8080 &
+
+      - name: Run a smoke test
+        run: php -f ./occ files:recommendations:recommend admin
+
+  pgsql:
+    runs-on: ubuntu-latest
+
+    strategy:
+      # do not stop on another job's failure
+      fail-fast: false
+      matrix:
+        php-versions: ['7.4']
+        databases: ['pgsql']
+        server-versions: ['master']
+
+    name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
+
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 4444:5432/tcp
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: rootpassword
+          POSTGRES_DB: nextcloud
+        options: --health-cmd pg_isready --health-interval 5s --health-timeout 2s --health-retries 5
+
+    steps:
+      - name: Checkout server
+        uses: actions/checkout@v2
+        with:
+          repository: nextcloud/server
+          ref: ${{ matrix.server-versions }}
+
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+          git submodule sync --recursive
+          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+
+      - name: Checkout app
+        uses: actions/checkout@v2
+        with:
+          path: apps/${{ env.APP_NAME }}
+
+      - name: Set up php ${{ matrix.php-versions }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, iconv, fileinfo, intl, pgsql, pdo_pgsql
+          coverage: none
+
+      - name: Set up PHPUnit
+        working-directory: apps/${{ env.APP_NAME }}
+        run: composer i
+
+      - name: Set up Nextcloud
+        env:
+          DB_PORT: 4444
+        run: |
+          mkdir data
+          ./occ maintenance:install --verbose --database=${{ matrix.databases }} --database-name=nextcloud --database-host=127.0.0.1 --database-port=$DB_PORT --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass password
+          ./occ app:enable --force ${{ env.APP_NAME }}
+          php -S localhost:8080 &
+
+      - name: Run a smoke test
+        run: php -f ./occ files:recommendations:recommend admin
+
+  oci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      # do not stop on another job's failure
+      fail-fast: false
+      matrix:
+        php-versions: ['7.4']
+        databases: ['oci']
+        server-versions: ['master']
+
+    name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
+
+    services:
+      oracle:
+        image: deepdiver/docker-oracle-xe-11g # "wnameless/oracle-xe-11g-r2"
+        ports:
+          - "1521:1521"
+
+    steps:
+      - name: Checkout server
+        uses: actions/checkout@v2
+        with:
+          repository: nextcloud/server
+          ref: ${{ matrix.server-versions }}
+
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+          git submodule sync --recursive
+          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+
+      - name: Checkout app
+        uses: actions/checkout@v2
+        with:
+          path: apps/${{ env.APP_NAME }}
+
+      - name: Set up php ${{ matrix.php-versions }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, iconv, fileinfo, intl, oci8
+          coverage: none
+
+      - name: Set up PHPUnit
+        working-directory: apps/${{ env.APP_NAME }}
+        run: composer i
+
+      - name: Set up Nextcloud
+        run: |
+          mkdir data
+          ./occ maintenance:install --verbose --database=${{ matrix.databases }} --database-name=XE --database-host=127.0.0.1 --database-port=1521 --database-user=autotest --database-pass=owncloud --admin-user admin --admin-pass admin
+          ./occ app:enable --force ${{ env.APP_NAME }}
+          php -S localhost:8080 &
+
+      - name: Run a smoke test
+        run: php -f ./occ files:recommendations:recommend admin
+
+  summary:
+    runs-on: ubuntu-latest
+    needs: [oci, mysql, sqlite, pgsql]
+
+    if: always()
+
+    name: test-summary
+
+    steps:
+      - name: Summary status
+        run: if ${{ needs.oci.result != 'success' && needs.sqlite.result != 'success' && needs.mysql.result != 'success' && needs.pgsql.result != 'success'}}; then exit 1; fi

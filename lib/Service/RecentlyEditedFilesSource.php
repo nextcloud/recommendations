@@ -25,6 +25,7 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Service;
 
+use OCP\Files\IRootFolder;
 use OCP\Files\Node;
 use OCP\Files\StorageNotAvailableException;
 use OCP\IL10N;
@@ -32,12 +33,8 @@ use OCP\IServerContainer;
 use OCP\IUser;
 
 class RecentlyEditedFilesSource implements IRecommendationSource {
-
-	/** @var IServerContainer */
-	private $serverContainer;
-
-	/** @var IL10N */
-	private $l10n;
+	private IServerContainer $serverContainer;
+	private IL10N $l10n;
 
 	public function __construct(IServerContainer $serverContainer,
 								IL10N $l10n) {
@@ -46,12 +43,14 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 	}
 
 	/**
-	 * @return array
+	 * @return RecommendedFile[]
 	 */
 	public function getMostRecentRecommendation(IUser $user, int $max): array {
-		$userFolder = $this->serverContainer->getUserFolder($user->getUID());
+		/** @var IRootFolder $rootFolder */
+		$rootFolder = $this->serverContainer->get(IRootFolder::class);
+		$userFolder = $rootFolder->getUserFolder($user->getUID());
 
-		return array_filter(array_map(function (Node $node) use ($userFolder) {
+		return array_filter(array_map(function (Node $node) use ($userFolder): ?RecommendedFile {
 			try {
 				$parentPath = dirname($node->getPath());
 				if ($parentPath === '' || $parentPath === '.' || $parentPath === '/') {
@@ -66,7 +65,7 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 			} catch (StorageNotAvailableException $e) {
 				return null;
 			}
-		}, $userFolder->getRecent($max)), function ($entry) {
+		}, $userFolder->getRecent($max)), function (?RecommendedFile $entry): bool {
 			return $entry !== null;
 		});
 	}

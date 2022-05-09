@@ -2,7 +2,14 @@
     "name": "nextcloud/recommendations",
     "description": "Nextcloud Recommendations",
     "type": "library",
-    "license": "AGPL-v3.0",
+    "license": "AGPL-3.0-only",
+	"config": {
+		"optimize-autoloader": true,
+		"classmap-authoritative": true,
+		"platform": {
+			"php": "7.4"
+		}
+	},
     "authors": [
         {
             "name": "Christoph Wurst",
@@ -15,6 +22,6 @@
         "cs:fix": "php-cs-fixer fix"
     },
     "require-dev": {
-        "nextcloud/coding-standard": "^0.5.0"
+        "nextcloud/coding-standard": "^1"
     }
 }

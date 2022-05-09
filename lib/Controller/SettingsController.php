@@ -36,12 +36,8 @@ use OCP\IUserSession;
 use Exception;
 
 class SettingsController extends Controller {
-
-	/** @var IConfig */
-	private $config;
-
-	/** @var IUserSession */
-	private $userSession;
+	private IConfig $config;
+	private IUserSession $userSession;
 
 	public function __construct($appName,
 								IRequest $request,
@@ -55,7 +51,6 @@ class SettingsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 *
-	 * @return JSONResponse
 	 * @throws Exception
 	 */
 	public function getSettings(): JSONResponse {
@@ -71,9 +66,6 @@ class SettingsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 *
-	 * @param $key
-	 * @param $value
-	 * @return JSONResponse
 	 * @throws Exception
 	 */
 	public function setSetting(string $key, string $value): JSONResponse {

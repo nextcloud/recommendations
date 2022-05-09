@@ -59,15 +59,9 @@ use OCP\Comments\ICommentsManager;
 use OCP\IUser;
 
 class RecentlyCommentedFilesSource implements IRecommendationSource {
-
-	/** @var ICommentsManager */
-	private $commentsManager;
-
-	/** @var IRootFolder */
-	private $rootFolder;
-
-	/** @var IL10N */
-	private $l10n;
+	private ICommentsManager $commentsManager;
+	private IRootFolder $rootFolder;
+	private IL10N $l10n;
 
 	public function __construct(ICommentsManager $commentsManager,
 								IRootFolder $rootFolder,
@@ -88,13 +82,7 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 		);
 	}
 
-	/**
-	 * @param IComment $comment
-	 * @param Folder $userFolder
-	 *
-	 * @return FileWithComments|null
-	 */
-	private function getCommentedFile(IComment $comment, Folder $userFolder) {
+	private function getCommentedFile(IComment $comment, Folder $userFolder): ?FileWithComments {
 		$nodes = $userFolder->getById((int)$comment->getObjectId());
 		$first = reset($nodes);
 		if ($first === false) {
@@ -132,9 +120,8 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 	}
 
 	/**
-	 * @param IComment[] $original
-	 *
-	 * @return IComment[]
+	 * @param FileWithComments[] $original
+	 * @return FileWithComments[]
 	 */
 	private function sortCommentedFiles(array $original): array {
 		usort($original, function (FileWithComments $a, FileWithComments $b) {
@@ -145,8 +132,6 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 
 	/**
 	 * @param FileWithComments[] $comments
-	 * @param int $n
-	 *
 	 * @return FileWithComments[]
 	 */
 	private function getNMostRecentlyCommenedFiles(array $comments, int $n): array {
