@@ -70,18 +70,42 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	#recommendations {
 		padding: 28px 30px 0 50px;
 		margin-bottom: 20px;
 		display: flex;
+		justify-content: space-between;
 		height: 82px;
 		overflow: hidden;
 		flex-wrap: wrap;
 		min-width: 0;
+
+		::v-deep {
+			.recommendation-container {
+				flex-basis: 300px;
+			}
+
+			/* show 2 per line for screen sizes smaller that 1200px */
+			@media only screen and (max-width: 1200px) {
+				.recommendation-container {
+					flex-basis: 50%;
+					max-width: calc(50% - 15px);
+				}
+			}
+
+			/*  GO FULL WIDTH BELOW 480 PIXELS */
+			@media only screen and (max-width: 580px) {
+				.recommendation-container {
+					flex-basis: 100%;
+					min-width: 100%;
+				}
+			}
+
+		}
 	}
 
-	/* show 2 per line for screen sizes smaller that 1200px */
+	/* show 2 per line for screen sizes smaller than 1200px */
 	@media only screen and (max-width: 1200px) {
 		#recommendations {
 			height: initial;

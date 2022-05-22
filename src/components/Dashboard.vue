@@ -28,7 +28,6 @@
 				:mime-type="item.mimeType"
 				:name="item.name"
 				:directory="item.directory"
-				:reason="item.reason"
 				:has-preview="item.hasPreview" />
 		</template>
 		<template #empty-content>
@@ -67,32 +66,26 @@ export default {
 
 <style lang="scss" scoped>
 	#recommendations {
-		::v-deep .recommendation {
-			max-width: 100%;
-			padding: 8px 0;
-			margin-right: 0;
+		::v-deep .recommendation-container {
+			padding: 8px 0 8px 5px;
 			border-radius: var(--border-radius-large);
 
-			.thumbnail {
-				margin-left: 8px;
-				width: 44px;
-				height: 44px;
-			}
-
-			.details {
-				.file-name .extension {
-					vertical-align: top;
+			.recommendation {
+				.thumbnail {
+					width: 44px;
+					height: 44px;
 				}
 
-				.reason {
-					display: none;
+				.details {
+					// 68 = 44 (thumbnail) + 8 (8px right margin)
+					width: calc(100% - 52px);
 				}
 			}
 		}
 	}
+
 	#recommendations--empty-content {
 		text-align: center;
 		margin-top: 5vh;
 	}
-
 </style>
