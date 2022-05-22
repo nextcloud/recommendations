@@ -20,7 +20,9 @@
   -->
 
 <template>
-	<DashboardWidget id="recommendations" :items="recommendedFiles">
+	<DashboardWidget id="recommendations"
+		:items="recommendedFiles"
+		:show-more-url="filesUrl">
 		<template v-slot:default="{ item }">
 			<RecommendedFile :id="item.id"
 				:key="item.id"
@@ -47,6 +49,7 @@
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
 import RecommendedFile from './RecommendedFile'
+import { generateUrl } from '@nextcloud/router'
 
 export default {
 	name: 'Dashboard',
@@ -60,6 +63,9 @@ export default {
 		},
 		recommendedFiles() {
 			return this.$store.state.recommendedFiles.slice(0, 7)
+		},
+		filesUrl() {
+			return generateUrl('/apps/files/')
 		},
 	},
 }
