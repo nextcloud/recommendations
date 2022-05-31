@@ -55,17 +55,23 @@ export default {
 	},
 	data() {
 		return {
-			previewUrl: OC.MimeType.getIconUrl(this.mimeType),
 			loading: true,
 		}
 	},
-	mounted() {
-		if (this.hasPreview) {
-			this.previewUrl = generateUrl('/core/preview?fileId={fileId}&x=250&y=250', {
-				fileId: this.id,
-			})
-		}
+	computed: {
+		previewUrl() {
+			// if there is a dedicated preview, grab that
+			if (this.hasPreview) {
+				return generateUrl('/core/preview?fileId={fileId}&x=250&y=250', {
+					fileId: this.id,
+				})
+			}
 
+			// otherwise just grab the generic mime type icon
+			return OC.MimeType.getIconUrl(this.mimeType)
+		},
+	},
+	mounted() {
 		const img = new Image()
 		img.onload = () => {
 			this.loading = false

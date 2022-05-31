@@ -184,11 +184,14 @@ export default {
 				window.location = generateUrl('/f/' + this.id)
 			}
 		},
-		navigateToFile() {
+		async navigateToFile() {
 			if (this.isFileListAvailable) {
-				this.changeDirectory(this.directory)
-					.then(() => this.scrollTo(this.name))
-					.catch(console.error.bind(this))
+				try {
+					await this.changeDirectory(this.directory)
+					this.scrollTo(this.name)
+				} catch {
+					console.error.bind(this)
+				}
 			} else {
 				window.location.href = this.fileUrl
 			}
