@@ -77,7 +77,7 @@ export default {
 				}
 
 				.details {
-					// 68 = 44 (thumbnail) + 8 (8px right margin)
+					// 52 = 44 (thumbnail) + 8 (8px right margin)
 					width: calc(100% - 52px);
 				}
 			}
