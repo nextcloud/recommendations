@@ -75,7 +75,7 @@ export default {
 		padding: 28px 30px 0 50px;
 		margin-bottom: 20px;
 		display: flex;
-		height: 82px;
+		height: 86px;
 		overflow: hidden;
 		flex-wrap: wrap;
 		min-width: 0;
