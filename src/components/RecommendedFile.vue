@@ -168,6 +168,10 @@ export default {
 		&:focus {
 			background: var(--color-background-hover);
 		}
+
+		&:focus-visible {
+			box-shadow: 0 0 0 2px var(--color-primary-element);
+		}
 	}
 
 	.thumbnail {
