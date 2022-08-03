@@ -23,7 +23,7 @@
 	},
 	"homepage": "https://github.com/ChristophWurst/files_recommendation#readme",
 	"dependencies": {
-		"@nextcloud/axios": "^1.9.0",
+		"@nextcloud/axios": "^1.10.0",
 		"@nextcloud/router": "^2.0.0",
 		"@nextcloud/vue": "^5.2.1",
 		"@nextcloud/vue-dashboard": "^1.1.0",
