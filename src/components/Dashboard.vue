@@ -22,7 +22,8 @@
 <template>
 	<DashboardWidget id="recommendations" :items="recommendedFiles">
 		<template v-slot:default="{ item }">
-			<RecommendedFile :id="item.id"
+			<RecommendedFile
+				:id="item.id"
 				:key="item.id"
 				:extension="item.extension"
 				:mime-type="item.mimeType"
@@ -46,7 +47,7 @@
 <script>
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
-import RecommendedFile from './RecommendedFile'
+import RecommendedFile from './RecommendedFile.vue'
 
 export default {
 	name: 'Dashboard',

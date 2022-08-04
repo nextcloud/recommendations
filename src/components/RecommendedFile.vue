@@ -20,18 +20,21 @@
   -->
 
 <template>
-	<a v-tooltip="tooltip"
+	<a
+		v-tooltip="tooltip"
 		class="recommendation"
 		tabindex="0"
 		@click.prevent="navigate"
 		@keyup.enter.prevent="navigate">
-		<div class="thumbnail"
+		<div
+			class="thumbnail"
 			:style="{ 'background-image': 'url(' + previewUrl + ')' }" />
 		<div class="details">
 			<div class="file-name">
 				<template v-if="extension">
 					<span class="name">{{ nameWithoutExtension }}</span><!--
-				 --><span v-if="extension"
+				 --><span
+v-if="extension"
 						  class="extension">.{{ extension }}</span>
 				</template>
 				<template v-else>

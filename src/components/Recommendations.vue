@@ -18,13 +18,14 @@
   - You should have received a copy of the GNU Affero General Public License
   - along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
-
 <template>
 	<div v-if="!hidden && !loading && enabled">
-		<div v-if="recommendedFiles.length > 0"
+		<div
+			v-if="recommendedFiles.length > 0"
 			id="recommendations"
 			class="group">
-			<RecommendedFile v-for="file in recommendedFiles"
+			<RecommendedFile
+				v-for="file in recommendedFiles"
 				:id="file.id"
 				:key="file.id"
 				:extension="file.extension"
@@ -38,7 +39,7 @@
 </template>
 
 <script>
-import RecommendedFile from './RecommendedFile'
+import RecommendedFile from './RecommendedFile.vue'
 
 export default {
 	name: 'Recommendations',

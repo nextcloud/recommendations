@@ -1,6 +1,7 @@
 <template>
 	<div id="recommendations-setting-enabled">
-		<input id="recommendationsEnabledToggle"
+		<input
+			id="recommendationsEnabledToggle"
 			v-model="enabled"
 			class="checkbox"
 			checked="checked"
