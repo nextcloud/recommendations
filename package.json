@@ -28,6 +28,7 @@
 		"@nextcloud/vue": "^5.2.1",
 		"@nextcloud/vue-dashboard": "^1.1.0",
 		"babel-eslint": "^10.1.0",
+		"lodash": "^4.17.21",
 		"nextcloud-server": "^0.15.10",
 		"sass": "^1.51.0",
 		"v-tooltip": "^2.1.3",
