@@ -51,8 +51,9 @@ export default new Vuex.Store({
 	actions: {
 		/**
 		 * Toggle the recommendations and fetch recommended files if required
+		 *
 		 * @async
-		 * @param {Object} context the store context
+		 * @param {object} context the store context
 		 * @param {boolean} enabled recommendations status
 		 */
 		async enabled(context, enabled) {
@@ -66,8 +67,9 @@ export default new Vuex.Store({
 		},
 		/**
 		 * Fetch recommendations and current enabled setting
+		 *
 		 * @async
-		 * @param {Object} context the store context
+		 * @param {object} context the store context
 		 * @param {boolean} [always] set to true to always get recommendations regardless of enabled setting
 		 */
 		async fetchRecommendations(context, always) {

@@ -23,6 +23,7 @@
 
 namespace OCA\Recommendations\Dashboard;
 
+use OCA\Recommendations\AppInfo\Application;
 use OCP\Dashboard\IWidget;
 use OCP\IL10N;
 use OCP\IUserSession;
@@ -65,6 +66,6 @@ class RecommendationWidget implements IWidget {
 		if ($user === null) {
 			return;
 		}
-		Util::addScript('recommendations', 'dashboard');
+		Util::addScript(Application::APP_ID, 'files_recommendation-dashboard');
 	}
 }
