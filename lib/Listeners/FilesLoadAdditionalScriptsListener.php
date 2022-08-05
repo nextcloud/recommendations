@@ -37,6 +37,6 @@ class FilesLoadAdditionalScriptsListener implements IEventListener {
 			return;
 		}
 
-		Util::addScript(Application::APP_ID, 'main');
+		Util::addScript(Application::APP_ID, 'files_recommendation-main');
 	}
 }

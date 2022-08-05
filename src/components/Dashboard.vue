@@ -21,7 +21,7 @@
 
 <template>
 	<DashboardWidget id="recommendations" :items="recommendedFiles">
-		<template v-slot:default="{ item }">
+		<template #default="{ item }">
 			<RecommendedFile :id="item.id"
 				:key="item.id"
 				:extension="item.extension"
@@ -32,8 +32,7 @@
 				:has-preview="item.hasPreview" />
 		</template>
 		<template #empty-content>
-			<EmptyContent
-				id="recommendations--empty-content"
+			<EmptyContent id="recommendations--empty-content"
 				icon="icon-files-dark">
 				<template #desc>
 					{{ t('recommendations', 'No recommendations yet') }}
