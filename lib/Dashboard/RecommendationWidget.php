@@ -24,21 +24,37 @@
 namespace OCA\Recommendations\Dashboard;
 
 use OCA\Recommendations\AppInfo\Application;
+use OCA\Recommendations\Service\IRecommendation;
+use OCA\Recommendations\Service\RecommendationService;
+use OCP\Dashboard\IAPIWidget;
+use OCP\Dashboard\IIconWidget;
 use OCP\Dashboard\IWidget;
+use OCP\Dashboard\Model\WidgetItem;
 use OCP\IL10N;
+use OCP\IURLGenerator;
+use OCP\IUserManager;
 use OCP\IUserSession;
 use OCP\Util;
 
-class RecommendationWidget implements IWidget {
+class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget {
 	private IUserSession $userSession;
 	private IL10N $l10n;
+	private IURLGenerator $urlGenerator;
+	private RecommendationService $recommendationService;
+	private IUserManager $userManager;
 
 	public function __construct(
 		IUserSession $userSession,
-		IL10N $l10n
+		IL10N $l10n,
+		IURLGenerator $urlGenerator,
+		RecommendationService $recommendationService,
+		IUserManager $userManager
 	) {
 		$this->userSession = $userSession;
 		$this->l10n = $l10n;
+		$this->urlGenerator = $urlGenerator;
+		$this->recommendationService = $recommendationService;
+		$this->userManager = $userManager;
 	}
 
 	public function getId(): string {
@@ -57,6 +73,10 @@ class RecommendationWidget implements IWidget {
 		return 'icon-files-dark';
 	}
 
+	public function getIconUrl(): string {
+		return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('files', 'app.svg'));
+	}
+
 	public function getUrl(): ?string {
 		return null;
 	}
@@ -67,5 +87,24 @@ class RecommendationWidget implements IWidget {
 			return;
 		}
 		Util::addScript(Application::APP_ID, 'files_recommendation-dashboard');
+	}
+
+	public function getItems(string $userId, ?string $since = null, int $limit = 7): array {
+		$user = $this->userManager->get($userId);
+		if (!$user) {
+			return [];
+		}
+		$recommendations = $this->recommendationService->getRecommendations($user, $limit);
+
+		return array_map(function(IRecommendation $recommendation) {
+			$url = $this->urlGenerator->linkToRouteAbsolute('files.viewcontroller.showFile', ['fileid' => $recommendation->getNode()->getId()]);
+			$icon = $this->urlGenerator->linkToRouteAbsolute('core.Preview.getPreviewByFileId', [
+				'x' => 256,
+				'y' => 256,
+				'fileId' => $recommendation->getNode()->getId(),
+				'c' => $recommendation->getNode()->getEtag(),
+			]);
+			return new WidgetItem($recommendation->getNode()->getName(), '', $url, $icon, $recommendation->getTimestamp());
+		}, $recommendations);
 	}
 }
