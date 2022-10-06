@@ -7,7 +7,7 @@ OC.L10N.register(
     "Recently shared" : "Нещодавно поширено",
     "Recommendations" : "Рекомендації",
     "Shows recommended files" : "Показує рекомендовані файли",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Показує рекомендовані файли для швидкого доступу до файлів і тек з нещодавньою активністю",
+    "Shows recommended files for quick access of files and folders with recent activity" : "Показує рекомендовані файли для швидкого доступу до файлів та каталогів з нещодавньою активністю",
     "No recommendations yet" : "Рекомендацій ще немає",
     "Show recommendations" : "Показувати рекомендації"
 },
