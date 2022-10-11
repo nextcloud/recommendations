@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 13, 14, 15 ]
+        node-version: [ 14 ]
     name: Build front-end with Node ${{ matrix.node-version }}
     steps:
       - uses: actions/checkout@master
