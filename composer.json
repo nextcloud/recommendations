@@ -7,7 +7,7 @@
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "7.4"
+			"php": "8.0"
 		}
 	},
     "authors": [
@@ -19,7 +19,8 @@
     "scripts": {
         "lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
         "cs:check": "php-cs-fixer fix --dry-run --diff",
-        "cs:fix": "php-cs-fixer fix"
+        "cs:fix": "php-cs-fixer fix",
+        "test:unit": "echo 'Only testing installation of the app'"
     },
     "require-dev": {
         "nextcloud/coding-standard": "^1"
