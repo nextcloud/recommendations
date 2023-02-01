@@ -26,7 +26,7 @@
   "dependencies": {
     "@nextcloud/axios": "^2.3.0",
     "@nextcloud/router": "^2.0.0",
-    "@nextcloud/vue": "^5.4.0",
+    "@nextcloud/vue": "^7.5.0",
     "@nextcloud/vue-dashboard": "^2.0.1",
     "lodash": "^4.17.21",
     "nextcloud-server": "^0.15.10",
