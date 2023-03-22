@@ -69,7 +69,7 @@ class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget {
 	}
 
 	public function getTitle(): string {
-		return $this->l10n->t('Recommended files');
+		return $this->l10n->t('Recent files');
 	}
 
 	public function getOrder(): int {
