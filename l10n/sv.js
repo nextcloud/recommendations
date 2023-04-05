@@ -9,6 +9,7 @@ OC.L10N.register(
     "Shows recommended files" : "Visar rekommenderade filer",
     "Shows recommended files for quick access of files and folders with recent activity" : "Visar rekommenderade filer för snabb åtkomst av filer och mappar med senast aktivitet",
     "No recommendations yet" : "Inga rekommendationer än",
+    "Path name {path}" : "Sökvägsnamn {path}",
     "Show recommendations" : "Visa rekommendationer"
 },
 "nplurals=2; plural=(n != 1);");
