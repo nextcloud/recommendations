@@ -21,19 +21,21 @@
 
 <template>
 	<div v-if="!hidden && !loading && enabled">
-		<div v-if="recommendedFiles.length > 0"
+		<ul v-if="recommendedFiles.length > 0"
 			id="recommendations"
 			class="group">
-			<RecommendedFile v-for="file in recommendedFiles"
-				:id="file.id"
+			<li v-for="file in recommendedFiles"
 				:key="file.id"
-				:extension="file.extension"
-				:mime-type="file.mimeType"
-				:name="file.name"
-				:directory="file.directory"
-				:reason="file.reason"
-				:has-preview="file.hasPreview" />
-		</div>
+				class="recommendation-item">
+				<RecommendedFile :id="file.id"
+					:extension="file.extension"
+					:mime-type="file.mimeType"
+					:name="file.name"
+					:directory="file.directory"
+					:reason="file.reason"
+					:has-preview="file.hasPreview" />
+			</li>
+		</ul>
 	</div>
 </template>
 
@@ -81,11 +83,30 @@ export default {
 		min-width: 0;
 	}
 
+	.recommendation-item {
+		display: flex;
+		align-items: center;
+		flex-grow: 1;
+		min-width: 250px;
+	}
+
 	/* show 2 per line for screen sizes smaller that 1200px */
 	@media only screen and (max-width: 1200px) {
 		#recommendations {
 			height: initial;
 			max-height: 189px;
+		}
+		.recommendation-item {
+			flex-basis: 50%;
+			max-width: calc(50% - 15px);
+		}
+	}
+
+	/*  GO FULL WIDTH BELOW 480 PIXELS */
+	@media only screen and (max-width: 480px) {
+		.recommendation-item {
+			flex-basis: 100%;
+			min-width: 100%;
 		}
 	}
 </style>
