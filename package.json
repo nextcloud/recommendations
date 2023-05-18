@@ -1,8 +1,7 @@
 {
   "name": "files_recommendation",
-  "version": "1.6.0",
   "description": "Shows recommended files in Nextcloud",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "build": "webpack --node-env production --progress",
     "dev": "webpack --node-env development --progress",
