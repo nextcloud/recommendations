@@ -29,8 +29,8 @@
     "@nextcloud/vue-dashboard": "^2.0.1",
     "lodash": "^4.17.21",
     "nextcloud-server": "^0.15.10",
-    "vue": "^2.7.14",
-    "vuex": "^3.6.2"
+    "vue": "^3.3.4",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@nextcloud/babel-config": "^1.0.0",
