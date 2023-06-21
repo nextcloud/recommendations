@@ -40,8 +40,8 @@
     "@nextcloud/webpack-vue-config": "^5.4.0"
   },
   "engines": {
-    "node": "^16.0.0",
-    "npm": "^7.0.0 || ^8.0.0"
+    "node": "^20.0.0",
+    "npm": "^9.0.0"
   },
   "browserslist": [
     "extends @nextcloud/browserslist-config"
