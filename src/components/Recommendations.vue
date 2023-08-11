@@ -20,7 +20,7 @@
   -->
 
 <template>
-	<div v-if="!hidden && !loading && enabled">
+	<div v-if="!loading && enabled">
 		<ul v-if="recommendedFiles.length > 0"
 			id="recommendations"
 			class="group">
@@ -40,16 +40,11 @@
 </template>
 
 <script>
-import RecommendedFile from './RecommendedFile'
+import RecommendedFile from './RecommendedFile.vue'
 
 export default {
 	name: 'Recommendations',
 	components: { RecommendedFile },
-	data() {
-		return {
-			hidden: true,
-		}
-	},
 	computed: {
 		enabled() {
 			return this.$store.state.enabled
@@ -61,52 +56,44 @@ export default {
 			return this.$store.state.recommendedFiles
 		},
 	},
-	methods: {
-		show() {
-			this.hidden = false
-		},
-		hide() {
-			this.hidden = true
-		},
-	},
 }
 </script>
 
 <style scoped>
+#recommendations {
+	padding: 28px 30px 0 50px;
+	margin-bottom: 20px;
+	display: flex;
+	height: 86px;
+	overflow: hidden;
+	flex-wrap: wrap;
+	min-width: 0;
+}
+
+.recommendation-item {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+	min-width: 250px;
+}
+
+/* show 2 per line for screen sizes smaller that 1200px */
+@media only screen and (max-width: 1200px) {
 	#recommendations {
-		padding: 28px 30px 0 50px;
-		margin-bottom: 20px;
-		display: flex;
-		height: 86px;
-		overflow: hidden;
-		flex-wrap: wrap;
-		min-width: 0;
+		height: initial;
+		max-height: 189px;
 	}
-
 	.recommendation-item {
-		display: flex;
-		align-items: center;
-		flex-grow: 1;
-		min-width: 250px;
+		flex-basis: 50%;
+		max-width: calc(50% - 15px);
 	}
+}
 
-	/* show 2 per line for screen sizes smaller that 1200px */
-	@media only screen and (max-width: 1200px) {
-		#recommendations {
-			height: initial;
-			max-height: 189px;
-		}
-		.recommendation-item {
-			flex-basis: 50%;
-			max-width: calc(50% - 15px);
-		}
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.recommendation-item {
+		flex-basis: 100%;
+		min-width: 100%;
 	}
-
-	/*  GO FULL WIDTH BELOW 480 PIXELS */
-	@media only screen and (max-width: 480px) {
-		.recommendation-item {
-			flex-basis: 100%;
-			min-width: 100%;
-		}
-	}
+}
 </style>
