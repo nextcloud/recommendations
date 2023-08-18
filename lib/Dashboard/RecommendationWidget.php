@@ -93,7 +93,7 @@ class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget {
 		if ($user === null) {
 			return;
 		}
-		Util::addScript(Application::APP_ID, 'files_recommendation-dashboard');
+		Util::addScript(Application::APP_ID, 'recommendations-dashboard');
 	}
 
 	public function getItems(string $userId, ?string $since = null, int $limit = 7): array {

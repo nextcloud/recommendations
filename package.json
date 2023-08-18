@@ -1,5 +1,5 @@
 {
-  "name": "files_recommendation",
+  "name": "recommendations",
   "description": "Shows recommended files in Nextcloud",
   "private": true,
   "scripts": {

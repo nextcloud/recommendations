@@ -23,7 +23,8 @@
 
 import Vue from 'vue'
 
-import Nextcloud from './mixins/Nextcloud'
+import Nextcloud from './mixins/Nextcloud.js'
+
 import Dashboard from './components/Dashboard'
 import store from './store/store'
 
