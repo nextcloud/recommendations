@@ -2,13 +2,13 @@ OC.L10N.register(
     "recommendations",
     {
     "Recommended files" : "Priporočene datoteke",
+    "No recommendations yet" : "Ni še dodanih priporočil",
     "Recently commented" : "Nedavno dodane opombe",
     "Recently edited" : "Nedavno urejano",
     "Recently shared" : "Nedavno v souporabi",
     "Recommendations" : "Priporočila",
     "Shows recommended files" : "Pokaži priporočene datoteke",
     "Shows recommended files for quick access of files and folders with recent activity" : "Program omogoča prikaz priporočenih predmetov za hiter dostop do datotek in map z največ dejavnosti.",
-    "No recommendations yet" : "Ni še dodanih priporočil",
     "Path name {path}" : "Naziv poti {path}",
     "Show recommendations" : "Pokaži priporočila"
 },
