@@ -9,6 +9,7 @@ OC.L10N.register(
     "Recommendations" : "คำแนะนำ",
     "Shows recommended files" : "แสดงไฟล์แนะนำ",
     "Shows recommended files for quick access of files and folders with recent activity" : "แสดงไฟล์แนะนำสำหรับการเข้าถึงไฟล์และโฟลเดอร์ที่มีกิจกรรมล่าสุดอย่างรวดเร็ว",
+    "Path name {path}" : "ชื่อเส้นทาง {path}",
     "Show recommendations" : "แสดงคำแนะนำ"
 },
 "nplurals=1; plural=0;");
