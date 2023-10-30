@@ -6,7 +6,6 @@ declare(strict_types=1);
  * @copyright Copyright (c) 2020 Julius Härtl <jus@bitgrid.net>
  *
  * @author Julius Härtl <jus@bitgrid.net>
- * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -27,21 +26,21 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Dashboard;
 
+use OCA\Recommendations\AppInfo\Application;
 use OCA\Recommendations\Service\IRecommendation;
 use OCA\Recommendations\Service\RecommendationService;
 use OCP\Dashboard\IAPIWidget;
-use OCP\Dashboard\IAPIWidgetV2;
 use OCP\Dashboard\IIconWidget;
 use OCP\Dashboard\IWidget;
 use OCP\Dashboard\Model\WidgetItem;
-use OCP\Dashboard\Model\WidgetItems;
 use OCP\Files\IMimeTypeDetector;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUserManager;
 use OCP\IUserSession;
+use OCP\Util;
 
-class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget, IAPIWidgetV2 {
+class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget {
 	private IUserSession $userSession;
 	private IL10N $l10n;
 	private IURLGenerator $urlGenerator;
@@ -90,6 +89,11 @@ class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget, IAPIWidg
 	}
 
 	public function load(): void {
+		$user = $this->userSession->getUser();
+		if ($user === null) {
+			return;
+		}
+		Util::addScript(Application::APP_ID, 'recommendations-dashboard');
 	}
 
 	public function getItems(string $userId, ?string $since = null, int $limit = 7): array {
@@ -125,13 +129,5 @@ class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget, IAPIWidg
 				(string)$recommendation->getTimestamp()
 			);
 		}, $recommendations);
-	}
-
-	public function getItemsV2(string $userId, ?string $since = null, int $limit = 7): WidgetItems {
-		$items = $this->getItems($userId, $since, $limit);
-		return new WidgetItems(
-			$items,
-			empty($items) ? $this->l10n->t('No recommendations yet') : '',
-		);
 	}
 }
