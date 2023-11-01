@@ -30,7 +30,7 @@
     "@nextcloud/vue": "^5.4.0",
     "lodash": "^4.17.21",
     "nextcloud-server": "^0.15.10",
-    "vue": "^2.7.14",
+    "vue": "^2.7.15",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
