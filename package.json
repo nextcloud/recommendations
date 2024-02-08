@@ -1,6 +1,7 @@
 {
-  "name": "files_recommendation",
+  "name": "recommendations",
   "description": "Shows recommended files in Nextcloud",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "build": "webpack --node-env production --progress",
@@ -23,10 +24,10 @@
   },
   "homepage": "https://github.com/ChristophWurst/files_recommendation#readme",
   "dependencies": {
-    "@nextcloud/axios": "^2.3.0",
-    "@nextcloud/router": "^2.0.0",
+    "@nextcloud/axios": "^2.4.0",
+    "@nextcloud/files": "^3.0.0-beta.14",
+    "@nextcloud/router": "^2.2.1",
     "@nextcloud/vue": "^5.4.0",
-    "@nextcloud/vue-dashboard": "^2.0.1",
     "lodash": "^4.17.21",
     "nextcloud-server": "^0.15.10",
     "vue": "^2.7.14",
@@ -36,8 +37,8 @@
     "@nextcloud/babel-config": "^1.0.0",
     "@nextcloud/browserslist-config": "^2.3.0",
     "@nextcloud/eslint-config": "^8.0.0",
-    "@nextcloud/stylelint-config": "^2.3.0",
-    "@nextcloud/webpack-vue-config": "^5.4.0"
+    "@nextcloud/stylelint-config": "^2.4.0",
+    "@nextcloud/webpack-vue-config": "^6.0.1"
   },
   "engines": {
     "node": "^20.0.0",

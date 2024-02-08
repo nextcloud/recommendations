@@ -2,13 +2,13 @@ OC.L10N.register(
     "recommendations",
     {
     "Recommended files" : "Препоручени фајлови",
+    "No recommendations yet" : "Још увек нема препорука",
     "Recently commented" : "Недавно коментарисано",
     "Recently edited" : "Недавно уређивано",
     "Recently shared" : "Недавно подељено",
     "Recommendations" : "Препоруке",
     "Shows recommended files" : "Приказује препоручене фајлове",
     "Shows recommended files for quick access of files and folders with recent activity" : "Приказује препоруке за бржи приступ фајловима и фасциклама са недавним активностима.",
-    "No recommendations yet" : "Још увек нема препорука",
     "Path name {path}" : "Назив путање {path}",
     "Show recommendations" : "Прикажи препоруке"
 },
