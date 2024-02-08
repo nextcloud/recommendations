@@ -25,11 +25,11 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Service;
 
+use OCP\IPreview;
+use OCP\IUser;
 use function array_merge;
 use function array_reduce;
 use function array_slice;
-use OCP\IPreview;
-use OCP\IUser;
 use function usort;
 
 class RecommendationService {
@@ -40,9 +40,9 @@ class RecommendationService {
 	private IPreview $previewManager;
 
 	public function __construct(RecentlyCommentedFilesSource $recentlyCommented,
-								RecentlyEditedFilesSource $recentlyEdited,
-								RecentlySharedFilesSource $recentlyShared,
-								IPreview $previewManager) {
+		RecentlyEditedFilesSource $recentlyEdited,
+		RecentlySharedFilesSource $recentlyShared,
+		IPreview $previewManager) {
 		$this->sources = [
 			$recentlyCommented,
 			$recentlyEdited,

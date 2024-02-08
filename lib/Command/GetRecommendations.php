@@ -37,7 +37,7 @@ class GetRecommendations extends Command {
 	private RecommendationService $recommendationService;
 
 	public function __construct(IUserManager $userManager,
-								RecommendationService $recommendationService) {
+		RecommendationService $recommendationService) {
 		parent::__construct();
 
 		$this->userManager = $userManager;

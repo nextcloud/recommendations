@@ -40,9 +40,9 @@ class RecommendationController extends Controller {
 	private IConfig $config;
 
 	public function __construct(IRequest $request,
-								IUserSession $userSession,
-								RecommendationService $recommendationService,
-								IConfig $config) {
+		IUserSession $userSession,
+		RecommendationService $recommendationService,
+		IConfig $config) {
 		parent::__construct(Application::APP_ID, $request);
 		$this->userSession = $userSession;
 		$this->recommendationService = $recommendationService;

@@ -25,6 +25,7 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Controller;
 
+use Exception;
 use OCA\Recommendations\AppInfo\Application;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
@@ -33,16 +34,15 @@ use OCP\IConfig;
 use OCP\IRequest;
 use OCP\IUser;
 use OCP\IUserSession;
-use Exception;
 
 class SettingsController extends Controller {
 	private IConfig $config;
 	private IUserSession $userSession;
 
 	public function __construct($appName,
-								IRequest $request,
-								IConfig $config,
-								IUserSession $userSession) {
+		IRequest $request,
+		IConfig $config,
+		IUserSession $userSession) {
 		parent::__construct($appName, $request);
 		$this->config = $config;
 		$this->userSession = $userSession;
