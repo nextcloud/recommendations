@@ -45,18 +45,18 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Service;
 
-use function array_map;
-use function array_slice;
-use function iterator_to_array;
-use OCP\Files\Folder;
-use OCP\Files\IRootFolder;
-use OCP\IL10N;
-use function reset;
-use function usort;
 use Generator;
 use OCP\Comments\IComment;
 use OCP\Comments\ICommentsManager;
+use OCP\Files\Folder;
+use OCP\Files\IRootFolder;
+use OCP\IL10N;
 use OCP\IUser;
+use function array_map;
+use function array_slice;
+use function iterator_to_array;
+use function reset;
+use function usort;
 
 class RecentlyCommentedFilesSource implements IRecommendationSource {
 	private ICommentsManager $commentsManager;
@@ -64,8 +64,8 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 	private IL10N $l10n;
 
 	public function __construct(ICommentsManager $commentsManager,
-								IRootFolder $rootFolder,
-								IL10N $l10n) {
+		IRootFolder $rootFolder,
+		IL10N $l10n) {
 		$this->commentsManager = $commentsManager;
 		$this->rootFolder = $rootFolder;
 		$this->l10n = $l10n;

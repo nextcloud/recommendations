@@ -3,13 +3,16 @@
     "description": "Nextcloud Recommendations",
     "type": "library",
     "license": "AGPL-3.0-only",
-	"config": {
-		"optimize-autoloader": true,
-		"classmap-authoritative": true,
-		"platform": {
-			"php": "8.0"
-		}
-	},
+    "require": {
+        "php": "^8.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "classmap-authoritative": true,
+        "platform": {
+            "php": "8.0"
+        }
+    },
     "authors": [
         {
             "name": "Christoph Wurst",
@@ -23,6 +26,6 @@
         "test:unit": "echo 'Only testing installation of the app'"
     },
     "require-dev": {
-        "nextcloud/coding-standard": "^1"
+        "nextcloud/coding-standard": "^1.2.1"
     }
 }

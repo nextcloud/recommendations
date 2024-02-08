@@ -37,7 +37,7 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 	private IL10N $l10n;
 
 	public function __construct(IServerContainer $serverContainer,
-								IL10N $l10n) {
+		IL10N $l10n) {
 		$this->serverContainer = $serverContainer;
 		$this->l10n = $l10n;
 	}

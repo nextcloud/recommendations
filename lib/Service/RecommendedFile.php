@@ -35,9 +35,9 @@ class RecommendedFile implements IRecommendation {
 	private bool $hasPreview;
 
 	public function __construct(string $directory,
-								Node $node,
-								int $timestamp,
-								string $reason) {
+		Node $node,
+		int $timestamp,
+		string $reason) {
 		$this->directory = $directory;
 		$this->node = $node;
 		$this->reason = $reason;

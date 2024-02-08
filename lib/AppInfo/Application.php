@@ -26,12 +26,12 @@ declare(strict_types=1);
 namespace OCA\Recommendations\AppInfo;
 
 use OCA\Files\Event\LoadAdditionalScriptsEvent;
+use OCA\Recommendations\Dashboard\RecommendationWidget;
 use OCA\Recommendations\Listeners\FilesLoadAdditionalScriptsListener;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCA\Recommendations\Dashboard\RecommendationWidget;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'recommendations';
