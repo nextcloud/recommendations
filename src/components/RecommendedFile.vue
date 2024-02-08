@@ -20,9 +20,10 @@
   -->
 
 <template>
-	<a v-tooltip="tooltip"
-		class="recommendation"
+	<a class="recommendation"
 		tabindex="0"
+		:aria-describedby="`recommendation-description-${id}`"
+		:title="path"
 		@click.prevent="navigate"
 		@keyup.enter.prevent="navigate">
 		<div class="thumbnail"
@@ -42,19 +43,16 @@
 			<div class="reason">
 				{{ reason }}
 			</div>
+			<span :id="`recommendation-description-${id}`" class="hidden-visually">{{ t('recommendations', 'Path name {path}', {path: path}) }}</span>
 		</div>
 	</a>
 </template>
 
 <script>
 import { generateUrl } from '@nextcloud/router'
-import { VTooltip } from 'v-tooltip'
 
 export default {
 	name: 'RecommendedFile',
-	directives: {
-		tooltip: VTooltip,
-	},
 	props: {
 		id: {
 			type: String,
@@ -103,14 +101,6 @@ export default {
 		},
 		path() {
 			return (this.directory === '/' ? '' : this.directory) + '/' + this.name
-		},
-		tooltip() {
-			return {
-				content: this.path,
-				html: false,
-				placement: 'bottom',
-				delay: { show: 500, hide: 0 },
-			}
 		},
 	},
 	mounted() {
