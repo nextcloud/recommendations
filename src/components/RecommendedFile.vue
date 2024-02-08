@@ -97,7 +97,7 @@ export default {
 			}
 		},
 		isFileListAvailable() {
-			return OCA.Files.App.fileList.changeDirectory && OCA.Files.App.fileList.scrollTo
+			return OCA.Files?.App?.fileList?.changeDirectory && OCA.Files?.App?.fileList?.scrollTo
 		},
 		path() {
 			return (this.directory === '/' ? '' : this.directory) + '/' + this.name
