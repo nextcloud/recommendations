@@ -96,9 +96,6 @@ export default {
 				return this.name
 			}
 		},
-		isFileListAvailable() {
-			return OCA.Files.App.fileList.changeDirectory && OCA.Files.App.fileList.scrollTo
-		},
 		path() {
 			return (this.directory === '/' ? '' : this.directory) + '/' + this.name
 		},
@@ -119,26 +116,27 @@ export default {
 		}
 	},
 	methods: {
-		changeDirectory(directory) {
-			// This call does not always return a promise, so we
-			// wrap it
-			return Promise.resolve(OCA.Files.App.fileList.changeDirectory(directory))
-		},
-		scrollTo(name) {
-			OCA.Files.App.fileList.scrollTo(name)
-		},
 		navigate() {
-			if (OCA.Viewer && OCA.Viewer.mimetypes.indexOf(this.mimeType) !== -1) {
-				OCA.Viewer.open({ path: this.path })
+			// If Viewer is enabled and supports this file, open directly
+			if (window.OCA?.Viewer && window.OCA.Viewer.mimetypes.indexOf(this.mimeType) !== -1) {
+				window.OCA.Viewer.open({ path: this.path })
 				return
 			}
-			if (this.isFileListAvailable) {
-				this.changeDirectory(this.directory)
-					.then(() => this.scrollTo(this.name))
-					.catch(console.error.bind(this))
-			} else {
-				window.location = generateUrl('/f/' + this.id)
+
+			// Navigate to the file if the file router is available
+			if (window.OCP?.Files?.Router) {
+				window.OCP.Files.Router.goToRoute(
+					// use default route
+					null,
+					// recommendations is only enabled on files
+					{ view: 'files', fileid: this.id },
+					{ dir: this.directory },
+				)
+				return
 			}
+
+			// Fallback to the old way of navigating to the file
+			window.location = generateUrl('/f/' + this.id)
 		},
 	},
 }
