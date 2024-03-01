@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 
 export default {
@@ -116,6 +117,8 @@ export default {
 		}
 	},
 	methods: {
+		t,
+
 		navigate() {
 			// If Viewer is enabled and supports this file, open directly
 			if (window.OCA?.Viewer && window.OCA.Viewer.mimetypes.indexOf(this.mimeType) !== -1) {

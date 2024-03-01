@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { translate as t } from '@nextcloud/l10n'
 
 export default {
 	name: 'Settings',
@@ -23,6 +24,9 @@ export default {
 				this.$store.dispatch('enabled', val)
 			},
 		},
+	},
+	methods: {
+		t,
 	},
 }
 </script>
