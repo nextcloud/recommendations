@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { translate as t } from '@nextcloud/l10n'
 import RecommendedFile from './RecommendedFile.vue'
 
 export default {
@@ -55,6 +56,9 @@ export default {
 		recommendedFiles() {
 			return this.$store.state.recommendedFiles
 		},
+	},
+	methods: {
+		t,
 	},
 }
 </script>

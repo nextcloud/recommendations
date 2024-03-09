@@ -20,7 +20,7 @@
  */
 
 import Axios from '@nextcloud/axios'
-import { generateUrl } from 'nextcloud-server/dist/router'
+import { generateUrl } from '@nextcloud/router'
 
 export const fetchRecommendedFiles = (always) => {
 	const url = generateUrl('/apps/recommendations/api/recommendations' + (always ? '/always' : ''))

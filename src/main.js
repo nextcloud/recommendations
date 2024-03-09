@@ -24,12 +24,9 @@
 import Vue from 'vue'
 import { Header, registerFileListHeaders } from '@nextcloud/files'
 
-import Nextcloud from './mixins/Nextcloud.js'
 import Recommendations from './components/Recommendations.vue'
 import Settings from './components/Settings.vue'
 import store from './store/store.js'
-
-Vue.mixin(Nextcloud)
 
 const View = Vue.extend(Recommendations)
 
