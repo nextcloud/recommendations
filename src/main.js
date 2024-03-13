@@ -45,11 +45,10 @@ const header = new Header({
 		// Load recommendations
 		store.dispatch('fetchRecommendations')
 
-		const vm = new View({
-			propsData: {},
+		new View({
+			name: 'RecommendationsHeader',
 			store,
-		})
-		vm.$mount(el)
+		}).$mount(el)
 
 		// Create settings
 		const SettingsView = Vue.extend(Settings)
