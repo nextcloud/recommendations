@@ -2,13 +2,13 @@ OC.L10N.register(
     "recommendations",
     {
     "Recommended files" : "Рекомендуемые файлы",
-    "No recommendations yet" : "Пока нет рекомендаций",
     "Recently commented" : "Недавно прокомментировано",
     "Recently edited" : "Недавно изменено",
     "Recently shared" : "Недавно опубликовано",
     "Recommendations" : "Рекомендации",
     "Shows recommended files" : "Показывает рекомендуемые файлы",
     "Shows recommended files for quick access of files and folders with recent activity" : "Приложение позволяет просматривать и переходить к файлам и папкам, в отношении которых недавно были произведены какие-либо действия",
+    "No recommendations yet" : "Пока нет рекомендаций",
     "Path name {path}" : "Путь {path}",
     "Show recommendations" : "Показать рекомендации"
 },
