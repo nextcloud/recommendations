@@ -2,13 +2,13 @@ OC.L10N.register(
     "recommendations",
     {
     "Recommended files" : "الملفات الموصى بها",
-    "No recommendations yet" : "لا يوجد توصيات بعد",
     "Recently commented" : "نوقشت مؤخرا",
     "Recently edited" : "تغيرت مؤخرا",
     "Recently shared" : "شوركت مؤخرا",
     "Recommendations" : "التوصيات",
     "Shows recommended files" : "عرض الملفات الموصى بها",
     "Shows recommended files for quick access of files and folders with recent activity" : "عرض الملفات الموصى بها للوصول السريع للملفات والمجلدات ذات الأنشطة الحديثة",
+    "No recommendations yet" : "لا يوجد توصيات بعد",
     "Path name {path}" : "اسم المسار {path}",
     "Show recommendations" : "عرض الملفات الموصى بها"
 },
