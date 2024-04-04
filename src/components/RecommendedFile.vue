@@ -51,6 +51,7 @@
 <script>
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
+import { joinPaths } from '@nextcloud/paths'
 
 export default {
 	name: 'RecommendedFile',
@@ -100,6 +101,9 @@ export default {
 		path() {
 			return (this.directory === '/' ? '' : this.directory) + '/' + this.name
 		},
+		isFolder() {
+			return this.mimeType === 'httpd/unix-directory'
+		},
 	},
 	mounted() {
 		if (this.hasPreview) {
@@ -128,12 +132,14 @@ export default {
 
 			// Navigate to the file if the file router is available
 			if (window.OCP?.Files?.Router) {
+				const dir = this.isFolder ? joinPaths(this.directory, this.name) : this.directory
+				const fileid = this.isFolder ? null : this.id
 				window.OCP.Files.Router.goToRoute(
 					// use default route
 					null,
 					// recommendations is only enabled on files
-					{ view: 'files', fileid: this.id },
-					{ dir: this.directory },
+					{ view: 'files', fileid },
+					{ dir },
 				)
 				return
 			}
