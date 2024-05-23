@@ -2,8 +2,8 @@ OC.L10N.register(
     "recommendations",
     {
     "Recommended files" : "Ieteiktās datnes",
-    "Recently commented" : "Nesen komentēts",
-    "Recently edited" : "Nesen rediģēts",
+    "Recently commented" : "Nesen pievienota piebilde",
+    "Recently edited" : "Nesen labots",
     "Recently shared" : "Nesen kopīgots",
     "Recommendations" : "Ieteikumi",
     "Shows recommended files" : "Parāda ieteiktās datnes",
