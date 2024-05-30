@@ -10,8 +10,11 @@
 		:title="path"
 		@click.prevent="navigate"
 		@keyup.enter.prevent="navigate">
-		<div class="thumbnail"
-			:style="{ 'background-image': 'url(' + previewUrl + ')' }" />
+		<!-- Preview or mime icon -->
+		<FolderIcon v-if="isFolder" class="thumbnail" />
+		<div v-else class="thumbnail" :style="{ 'background-image': 'url(' + previewUrl + ')' }" />
+
+		<!-- Details -->
 		<div class="details">
 			<div class="file-name">
 				<template v-if="extension">
@@ -37,8 +40,15 @@ import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 import { joinPaths } from '@nextcloud/paths'
 
+import FolderIcon from 'vue-material-design-icons/Folder.vue'
+
 export default {
 	name: 'RecommendedFile',
+
+	components: {
+		FolderIcon,
+	},
+
 	props: {
 		id: {
 			type: String,
@@ -163,6 +173,15 @@ export default {
 		background-size: contain;
 		flex-shrink: 0;
 		border-radius: var(--border-radius);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		// For the folder icon
+		:deep(svg) {
+			color: var(--color-primary-element);
+			width: 100%;
+			height: 100%;
+		}
 	}
 
 	.details {
