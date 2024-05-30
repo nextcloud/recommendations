@@ -31,6 +31,7 @@
     "lodash": "^4.17.21",
     "nextcloud-server": "^0.15.10",
     "vue": "^2.7.14",
+    "vue-material-design-icons": "^5.3.0",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
