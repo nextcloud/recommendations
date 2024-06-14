@@ -119,6 +119,8 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 				);
 			} catch (NotFoundException $ex) {
 				return null;
+			} catch (StorageNotAvailableException $e) {
+				return null;
 			}
 		}, $shares));
 	}
