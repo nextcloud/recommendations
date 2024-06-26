@@ -28,6 +28,7 @@ namespace OCA\Recommendations\Service;
 use Generator;
 use OCP\Files\IRootFolder;
 use OCP\Files\NotFoundException;
+use OCP\Files\StorageNotAvailableException;
 use OCP\IL10N;
 use OCP\IUser;
 use OCP\Share\IManager;
@@ -118,6 +119,8 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 					$this->l10n->t("Recently shared")
 				);
 			} catch (NotFoundException $ex) {
+				return null;
+			} catch (StorageNotAvailableException $e) {
 				return null;
 			}
 		}, $shares));
