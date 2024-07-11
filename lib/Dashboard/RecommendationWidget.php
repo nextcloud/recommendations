@@ -82,7 +82,7 @@ class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget, IAPIWidg
 	}
 
 	public function getIconUrl(): string {
-		return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('files', 'app.svg'));
+		return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('files', 'app-dark.svg'));
 	}
 
 	public function getUrl(): ?string {
