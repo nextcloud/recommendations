@@ -1,11 +1,11 @@
 {
   "name": "recommendations",
   "description": "Shows recommended files in Nextcloud",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "build": "webpack --node-env production --progress",
-	"postbuild": "build-js/npm-post-build.sh",
+    "postbuild": "build-js/npm-post-build.sh",
     "dev": "webpack --node-env development --progress",
     "watch": "webpack --node-env development --progress --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
