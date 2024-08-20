@@ -33,7 +33,7 @@ SPDX-FileCopyrightText: Andris Reinman
 
 This file is generated from multiple sources. Included packages:
 - axios
-	- version: 1.6.8
+	- version: 1.7.4
 	- license: MIT
 - @nextcloud/capabilities
 	- version: 1.2.0
