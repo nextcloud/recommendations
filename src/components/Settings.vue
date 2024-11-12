@@ -5,21 +5,22 @@
 
 <template>
 	<div id="recommendations-setting-enabled">
-		<input id="recommendationsEnabledToggle"
-			v-model="enabled"
-			class="checkbox"
-			checked="checked"
-			type="checkbox"
-			name="enabled">
-		<label for="recommendationsEnabledToggle">{{ t('recommendations', 'Show recommendations') }}</label>
+		<NcCheckboxRadioSwitch id="recommendationsEnabledToggle" :checked.sync="enabled">
+			{{ t('recommendations', 'Show recommendations') }}
+		</NcCheckboxRadioSwitch>
 	</div>
 </template>
 
 <script>
+import { NcCheckboxRadioSwitch } from '@nextcloud/vue'
 import { translate as t } from '@nextcloud/l10n'
 
 export default {
 	name: 'Settings',
+	components: {
+		NcCheckboxRadioSwitch,
+	},
+
 	computed: {
 		enabled: {
 			get() {
@@ -30,6 +31,7 @@ export default {
 			},
 		},
 	},
+
 	methods: {
 		t,
 	},
