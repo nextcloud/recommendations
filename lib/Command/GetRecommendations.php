@@ -30,6 +30,7 @@ class GetRecommendations extends Command {
 
 	protected function configure() {
 		$this->setName('files:recommendations:recommend');
+		$this->setDescription('Shows recommended files for an account');
 		$this->addArgument(
 			'uid',
 			InputArgument::REQUIRED,
