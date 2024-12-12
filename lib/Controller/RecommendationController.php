@@ -10,15 +10,16 @@ declare(strict_types=1);
 namespace OCA\Recommendations\Controller;
 
 use Exception;
+use OCP\AppFramework\OCSController;
 use OCA\Recommendations\AppInfo\Application;
 use OCA\Recommendations\Service\RecommendationService;
-use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\IUserSession;
 
-class RecommendationController extends Controller {
+class RecommendationController extends OCSController {
 	private IUserSession $userSession;
 	private RecommendationService $recommendationService;
 	private IConfig $config;
@@ -35,9 +36,9 @@ class RecommendationController extends Controller {
 
 	/**
 	 * @NoAdminRequired
-	 * @return JSONResponse
+	 * @return DataResponse
 	 */
-	public function index(): JSONResponse {
+	public function index(): DataResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new Exception("Not logged in");
@@ -47,16 +48,16 @@ class RecommendationController extends Controller {
 		if ($response['enabled']) {
 			$response['recommendations'] = $this->recommendationService->getRecommendations($user);
 		}
-		return new JSONResponse(
+		return new DataResponse(
 			$response
 		);
 	}
 
 	/**
 	 * @NoAdminRequired
-	 * @return JSONResponse
+	 * @return DataResponse
 	 */
-	public function always(): JSONResponse {
+	public function always(): DataResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new Exception("Not logged in");
@@ -65,7 +66,7 @@ class RecommendationController extends Controller {
 			'enabled' => $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true',
 			'recommendations' => $this->recommendationService->getRecommendations($user),
 		];
-		return new JSONResponse(
+		return new DataResponse(
 			$response
 		);
 	}
