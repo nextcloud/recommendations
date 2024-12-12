@@ -1,88 +1,47 @@
 /*
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
- *
- * @copyright 2019-2020 Gary Kim <gary@garykim.dev>
- *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
- *
- * @license GNU AGPL version 3 or any later version
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
  */
-
 import Vue from 'vue'
+import { Header, registerFileListHeaders } from '@nextcloud/files'
 
-import Nextcloud from './mixins/Nextcloud'
-import Recommendations from './components/Recommendations'
-import Settings from './components/Settings'
-import store from './store/store'
+import Recommendations from './components/Recommendations.vue'
+import Settings from './components/Settings.vue'
+import store from './store/store.js'
 
-Vue.mixin(Nextcloud)
-OC.Plugins.register('OCA.Files.FileList', {
+const View = Vue.extend(Recommendations)
 
-	el: null,
+const header = new Header({
+	id: 'recommendations',
+	order: 90,
 
-	attach(fileList) {
-		if (fileList.id !== 'files') {
-			return
-		}
-
-		this.el = document.createElement('div')
-		this.el.id = 'files-recommendation-wrapper'
-		fileList.registerHeader({
-			id: 'recommendations',
-			el: this.el,
-			render: this.render.bind(this),
-			order: 90,
-		})
+	enabled(folder, view) {
+		return view.id === 'files' && folder.path === '/'
 	},
 
-	render(fileList) {
-
+	render(el, folder, view) {
 		// Load recommendations
 		store.dispatch('fetchRecommendations')
 
-		const View = Vue.extend(Recommendations)
-		const vm = new View({
-			propsData: {},
+		new View({
+			name: 'RecommendationsHeader',
 			store,
-		}).$mount(this.el)
+		}).$mount(el)
 
-		// register Files App Setting
+		// Create settings
 		const SettingsView = Vue.extend(Settings)
 		const settingsElement = new SettingsView({
 			store,
 		}).$mount().$el
+
+		// Register Files App Settings
 		if (OCA.Files && OCA.Files.Settings) {
 			OCA.Files.Settings.register(new OCA.Files.Settings.Setting('recommendations', {
 				el: () => { return settingsElement },
 			}))
 		}
-
-		fileList.$el.on('changeDirectory', data => {
-			if (data.dir.toString() === '/') {
-				vm.show()
-			} else {
-				vm.hide()
-			}
-		})
-
-		if (fileList.getCurrentDirectory() === '/') {
-			vm.show()
-		}
-
-		return this.el
 	},
-
+	updated(folder, view) {},
 })
+
+registerFileListHeaders(header)

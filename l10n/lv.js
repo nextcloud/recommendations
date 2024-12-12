@@ -1,13 +1,13 @@
 OC.L10N.register(
     "recommendations",
     {
-    "Recommended files" : "Ieteicamās datnes",
-    "Recently commented" : "Nesen komentēts",
-    "Recently edited" : "Nesen rediģēts",
+    "Recommended files" : "Ieteiktās datnes",
+    "Recently commented" : "Nesen pievienota piebilde",
+    "Recently edited" : "Nesen labots",
     "Recently shared" : "Nesen kopīgots",
     "Recommendations" : "Ieteikumi",
-    "Shows recommended files" : "Parāda ieteicamās datnes",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Parāda ieteicamās datnes ātrai piekļuvei datnēm un mapēm ar nesenām darbībām",
+    "Shows recommended files" : "Parāda ieteiktās datnes",
+    "Shows recommended files for quick access of files and folders with recent activity" : "Parāda ieteiktās datnes ātrai piekļuvei datnēm un mapēm ar nesenām darbībām",
     "No recommendations yet" : "Vēl nav ieteikumu",
     "Show recommendations" : "Rādīt ieteikumus"
 },

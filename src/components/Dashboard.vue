@@ -1,27 +1,11 @@
 <!--
-  - @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
-  -
-  - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
-  -
-  - @license GNU AGPL version 3 or any later version
-  -
-  - This program is free software: you can redistribute it and/or modify
-  - it under the terms of the GNU Affero General Public License as
-  - published by the Free Software Foundation, either version 3 of the
-  - License, or (at your option) any later version.
-  -
-  - This program is distributed in the hope that it will be useful,
-  - but WITHOUT ANY WARRANTY; without even the implied warranty of
-  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  - GNU Affero General Public License for more details.
-  -
-  - You should have received a copy of the GNU Affero General Public License
-  - along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  -->
+  - SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 
 <template>
 	<DashboardWidget id="recommendations" :items="recommendedFiles">
-		<template v-slot:default="{ item }">
+		<template #default="{ item }">
 			<RecommendedFile :id="item.id"
 				:key="item.id"
 				:extension="item.extension"
@@ -32,10 +16,9 @@
 				:has-preview="item.hasPreview" />
 		</template>
 		<template #empty-content>
-			<EmptyContent
-				id="recommendations--empty-content"
+			<EmptyContent id="recommendations--empty-content"
 				icon="icon-files-dark">
-				<template #desc>
+				<template #description>
 					{{ t('recommendations', 'No recommendations yet') }}
 				</template>
 			</EmptyContent>
@@ -44,9 +27,10 @@
 </template>
 
 <script>
+import { translate as t } from '@nextcloud/l10n'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
-import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
-import RecommendedFile from './RecommendedFile'
+import EmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
+import RecommendedFile from './RecommendedFile.vue'
 
 export default {
 	name: 'Dashboard',
@@ -61,6 +45,9 @@ export default {
 		recommendedFiles() {
 			return this.$store.state.recommendedFiles.slice(0, 7)
 		},
+	},
+	methods: {
+		t,
 	},
 }
 </script>

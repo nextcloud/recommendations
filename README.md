@@ -1,4 +1,10 @@
+<!--
+  - SPDX-FileCopyrightText: 2019-2024 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: CC0-1.0
+-->
 # 🔮 Nextcloud Recommendations
+
+[![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/recommendations)](https://api.reuse.software/info/github.com/nextcloud/recommendations)
 
 The app is in incubation stage, so it’s time for you to [get involved! 👩‍💻](https://github.com/nextcloud/recommendations#development-setup)
 

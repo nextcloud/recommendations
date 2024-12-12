@@ -3,66 +3,41 @@
 declare(strict_types=1);
 
 /**
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
- *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
- *
- * @license GNU AGPL version 3 or any later version
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
 namespace OCA\Recommendations\Service;
 
+use Generator;
+use OCP\Files\IRootFolder;
+use OCP\Files\NotFoundException;
+use OCP\Files\StorageNotAvailableException;
+use OCP\IL10N;
+use OCP\IUser;
+use OCP\Share\IManager;
+use OCP\Share\IShare;
 use function array_filter;
 use function array_map;
 use function array_merge;
 use function array_slice;
 use function iterator_to_array;
-use OCP\Files\NotFoundException;
 use function usort;
-use Generator;
-use OC\Share\Constants;
-use OCP\Files\IRootFolder;
-use OCP\IL10N;
-use OCP\IUser;
-use OCP\Share\IManager;
-use OCP\Share\IShare;
 
 class RecentlySharedFilesSource implements IRecommendationSource {
-
-	/** @var IManager */
-	private $shareManager;
-
-	/** @var IRootFolder */
-	private $rootFolder;
-
-	/** @var IL10N */
-	private $l10n;
+	private IManager $shareManager;
+	private IRootFolder $rootFolder;
+	private IL10N $l10n;
 
 	public function __construct(IManager $shareManager,
-								IRootFolder $rootFolder,
-								IL10N $l10n) {
+		IRootFolder $rootFolder,
+		IL10N $l10n) {
 		$this->shareManager = $shareManager;
 		$this->rootFolder = $rootFolder;
 		$this->l10n = $l10n;
 	}
 
 	/**
-	 * @param IUser $user
-	 * @param int $shareType
-	 *
 	 * @return Generator<IShare>
 	 */
 	private function getAllShares(IUser $user, int $shareType): Generator {
@@ -103,10 +78,10 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 	 *
 	 * @return IShare[]
 	 */
-	private function getMostRecentShares(IUser $user, int $max) {
+	private function getMostRecentShares(IUser $user, int $max): array {
 		$shares = $this->sortShares(array_merge(
-			iterator_to_array($this->getAllShares($user, Constants::SHARE_TYPE_USER)),
-			iterator_to_array($this->getAllShares($user, Constants::SHARE_TYPE_GROUP))
+			iterator_to_array($this->getAllShares($user, IShare::TYPE_USER)),
+			iterator_to_array($this->getAllShares($user, IShare::TYPE_GROUP))
 		));
 
 		return array_slice($shares, 0, $max);
@@ -119,7 +94,7 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 		$shares = $this->getMostRecentShares($user, $max);
 		$userFolder = $this->rootFolder->getUserFolder($user->getUID());
 
-		return array_filter(array_map(function (IShare $share) use ($userFolder) {
+		return array_filter(array_map(function (IShare $share) use ($userFolder): ?RecommendedFile {
 			try {
 				return new RecommendedFile(
 					$userFolder->getRelativePath($userFolder->get($share->getTarget())->getParent()->getPath()),
@@ -128,6 +103,8 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 					$this->l10n->t("Recently shared")
 				);
 			} catch (NotFoundException $ex) {
+				return null;
+			} catch (StorageNotAvailableException $e) {
 				return null;
 			}
 		}, $shares));

@@ -9,6 +9,7 @@ OC.L10N.register(
     "Shows recommended files" : "おすすめファイルの表示",
     "Shows recommended files for quick access of files and folders with recent activity" : "最近の利用したファイルやフォルダーにすばやくアクセスできるようにおすすめファイルを表示します",
     "No recommendations yet" : "おすすめはまだありません",
+    "Path name {path}" : "パス名 {path}",
     "Show recommendations" : "おすすめを表示"
 },
 "nplurals=1; plural=0;");

@@ -1,11 +1,15 @@
 <?xml version="1.0"?>
+<!--
+  - SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
 	<id>recommendations</id>
 	<name>Recommendations</name>
 	<summary>Shows recommended files</summary>
 	<description>Shows recommended files for quick access of files and folders with recent activity</description>
-	<version>1.2.0</version>
+	<version>4.0.0</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Jan-Christoph Borchardt</author>
@@ -13,7 +17,7 @@
 	<namespace>Recommendations</namespace>
 	<category>office</category>
 	<dependencies>
-		<nextcloud min-version="23" max-version="23" />
+		<nextcloud min-version="31" max-version="31" />
 	</dependencies>
 	<commands>
 		<command>OCA\Recommendations\Command\GetRecommendations</command>

@@ -1,32 +1,20 @@
 <!--
-  - @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
-  -
-  - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
-  -
-  - @license GNU AGPL version 3 or any later version
-  -
-  - This program is free software: you can redistribute it and/or modify
-  - it under the terms of the GNU Affero General Public License as
-  - published by the Free Software Foundation, either version 3 of the
-  - License, or (at your option) any later version.
-  -
-  - This program is distributed in the hope that it will be useful,
-  - but WITHOUT ANY WARRANTY; without even the implied warranty of
-  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  - GNU Affero General Public License for more details.
-  -
-  - You should have received a copy of the GNU Affero General Public License
-  - along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  -->
+  - SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 
 <template>
-	<a v-tooltip="tooltip"
-		class="recommendation"
+	<a class="recommendation"
 		tabindex="0"
+		:aria-describedby="`recommendation-description-${id}`"
+		:title="path"
 		@click.prevent="navigate"
 		@keyup.enter.prevent="navigate">
-		<div class="thumbnail"
-			:style="{ 'background-image': 'url(' + previewUrl + ')' }" />
+		<!-- Preview or mime icon -->
+		<FolderIcon v-if="isFolder" class="thumbnail" />
+		<div v-else class="thumbnail" :style="{ 'background-image': 'url(' + previewUrl + ')' }" />
+
+		<!-- Details -->
 		<div class="details">
 			<div class="file-name">
 				<template v-if="extension">
@@ -42,19 +30,25 @@
 			<div class="reason">
 				{{ reason }}
 			</div>
+			<span :id="`recommendation-description-${id}`" class="hidden-visually">{{ t('recommendations', 'Path name {path}', {path: path}) }}</span>
 		</div>
 	</a>
 </template>
 
 <script>
+import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
-import { VTooltip } from 'v-tooltip'
+import { joinPaths } from '@nextcloud/paths'
+
+import FolderIcon from 'vue-material-design-icons/Folder.vue'
 
 export default {
 	name: 'RecommendedFile',
-	directives: {
-		tooltip: VTooltip,
+
+	components: {
+		FolderIcon,
 	},
+
 	props: {
 		id: {
 			type: String,
@@ -98,24 +92,16 @@ export default {
 				return this.name
 			}
 		},
-		isFileListAvailable() {
-			return OCA.Files.App.fileList.changeDirectory && OCA.Files.App.fileList.scrollTo
-		},
 		path() {
 			return (this.directory === '/' ? '' : this.directory) + '/' + this.name
 		},
-		tooltip() {
-			return {
-				content: this.path,
-				html: false,
-				placement: 'bottom',
-				delay: { show: 500, hide: 0 },
-			}
+		isFolder() {
+			return this.mimeType === 'httpd/unix-directory'
 		},
 	},
 	mounted() {
 		if (this.hasPreview) {
-			const previewUrl = generateUrl('/core/preview?fileId={fileId}&x=32&y=32', {
+			const previewUrl = generateUrl('/core/preview?fileId={fileId}&x=250&y=250', {
 				fileId: this.id,
 			})
 			const img = new Image()
@@ -129,26 +115,31 @@ export default {
 		}
 	},
 	methods: {
-		changeDirectory(directory) {
-			// This call does not always return a promise, so we
-			// wrap it
-			return Promise.resolve(OCA.Files.App.fileList.changeDirectory(directory))
-		},
-		scrollTo(name) {
-			OCA.Files.App.fileList.scrollTo(name)
-		},
+		t,
+
 		navigate() {
-			if (OCA.Viewer && OCA.Viewer.mimetypes.indexOf(this.mimeType) !== -1) {
-				OCA.Viewer.open({ path: this.path })
+			// If Viewer is enabled and supports this file, open directly
+			if (window.OCA?.Viewer && window.OCA.Viewer.mimetypes.indexOf(this.mimeType) !== -1) {
+				window.OCA.Viewer.open({ path: this.path })
 				return
 			}
-			if (this.isFileListAvailable) {
-				this.changeDirectory(this.directory)
-					.then(() => this.scrollTo(this.name))
-					.catch(console.error.bind(this))
-			} else {
-				window.location = generateUrl('/f/' + this.id)
+
+			// Navigate to the file if the file router is available
+			if (window.OCP?.Files?.Router) {
+				const dir = this.isFolder ? joinPaths(this.directory, this.name) : this.directory
+				const fileid = this.isFolder ? null : this.id
+				window.OCP.Files.Router.goToRoute(
+					// use default route
+					null,
+					// recommendations is only enabled on files
+					{ view: 'files', fileid },
+					{ dir },
+				)
+				return
 			}
+
+			// Fallback to the old way of navigating to the file
+			window.location = generateUrl('/f/' + this.id)
 		},
 	},
 }
@@ -168,6 +159,10 @@ export default {
 		&:focus {
 			background: var(--color-background-hover);
 		}
+
+		&:focus-visible {
+			box-shadow: 0 0 0 2px var(--color-primary-element);
+		}
 	}
 
 	.thumbnail {
@@ -178,6 +173,15 @@ export default {
 		background-size: contain;
 		flex-shrink: 0;
 		border-radius: var(--border-radius);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		// For the folder icon
+		:deep(svg) {
+			color: var(--color-primary-element);
+			width: 100%;
+			height: 100%;
+		}
 	}
 
 	.details {
