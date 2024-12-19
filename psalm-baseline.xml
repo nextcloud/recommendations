@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+  <file src="lib/AppInfo/Application.php">
+    <UndefinedClass>
+      <code><![CDATA[LoadAdditionalScriptsEvent]]></code>
+    </UndefinedClass>
+  </file>
+  <file src="lib/Listeners/FilesLoadAdditionalScriptsListener.php">
+    <MissingTemplateParam>
+      <code><![CDATA[IEventListener]]></code>
+    </MissingTemplateParam>
+    <UndefinedClass>
+      <code><![CDATA[LoadAdditionalScriptsEvent]]></code>
+    </UndefinedClass>
+  </file>
+  <file src="lib/Service/RecentlyCommentedFilesSource.php">
+    <MissingDependency>
+      <code><![CDATA[$this->rootFolder]]></code>
+      <code><![CDATA[IRootFolder]]></code>
+      <code><![CDATA[IRootFolder]]></code>
+    </MissingDependency>
+  </file>
+  <file src="lib/Service/RecentlyEditedFilesSource.php">
+    <MissingDependency>
+      <code><![CDATA[$rootFolder]]></code>
+      <code><![CDATA[$rootFolder]]></code>
+      <code><![CDATA[IRootFolder]]></code>
+    </MissingDependency>
+  </file>
+  <file src="lib/Service/RecentlySharedFilesSource.php">
+    <MissingDependency>
+      <code><![CDATA[$this->rootFolder]]></code>
+      <code><![CDATA[IRootFolder]]></code>
+      <code><![CDATA[IRootFolder]]></code>
+    </MissingDependency>
+  </file>
+</files>

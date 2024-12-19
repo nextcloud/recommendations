@@ -33,7 +33,8 @@
 		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
 		"cs:check": "php-cs-fixer fix --dry-run --diff",
 		"cs:fix": "php-cs-fixer fix",
-		"test:unit": "echo 'Only testing installation of the app'"
+		"test:unit": "echo 'Only testing installation of the app'",
+		"psalm": "psalm --threads=$(nproc) --no-cache"
 	},
 	"require-dev": {
 		"nextcloud/coding-standard": "^1.2.1",
