@@ -34,7 +34,8 @@
 		"cs:check": "php-cs-fixer fix --dry-run --diff",
 		"cs:fix": "php-cs-fixer fix",
 		"test:unit": "echo 'Only testing installation of the app'",
-		"psalm": "psalm --threads=$(nproc) --no-cache"
+		"psalm": "psalm --threads=$(nproc) --no-cache",
+		"openapi": "generate-spec"
 	},
 	"require-dev": {
 		"nextcloud/coding-standard": "^1.2.1",
