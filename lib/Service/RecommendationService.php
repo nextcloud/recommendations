@@ -36,9 +36,9 @@ class RecommendationService {
 	}
 
 	/**
-	 * @param IRecommendation[] $recommendations
+	 * @param list<IRecommendation> $recommendations
 	 *
-	 * @return IRecommendation[]
+	 * @return list<IRecommendation>
 	 */
 	private function sortRecommendations(array $recommendations): array {
 		usort($recommendations, function (IRecommendation $a, IRecommendation $b) {
@@ -49,9 +49,9 @@ class RecommendationService {
 	}
 
 	/**
-	 * @param IRecommendation[] $recommendations
+	 * @param list<IRecommendation> $recommendations
 	 *
-	 * @return IRecommendation[]
+	 * @return list<IRecommendation>
 	 */
 	private function addPreviews(array $recommendations): array {
 		foreach ($recommendations as $recommendation) {
@@ -65,7 +65,7 @@ class RecommendationService {
 	/**
 	 * @param IUser $user
 	 *
-	 * @return IRecommendation[]
+	 * @return list<IRecommendation>
 	 */
 	public function getRecommendations(IUser $user, int $max = self::MAX_RECOMMENDATIONS): array {
 		$all = array_reduce($this->sources, function (array $carry, IRecommendationSource $source) use ($user) {
@@ -84,9 +84,9 @@ class RecommendationService {
 	 * The first (most recent) recommendation wins, hence eventually show its
 	 * recommendation reason
 	 *
-	 * @param IRecommendation[] $recommendations
+	 * @param list<IRecommendation> $recommendations
 	 * @param int $max
-	 * @return IRecommendation[]
+	 * @return list<IRecommendation>
 	 */
 	private function getDeduplicatedSlice(array $recommendations, int $max): array {
 		$picks = [];
