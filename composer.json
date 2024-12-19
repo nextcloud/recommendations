@@ -4,13 +4,13 @@
 	"type": "library",
 	"license": "AGPL-3.0-only",
 	"require": {
-		"php": "^8.0"
+		"php": "^8.1"
 	},
 	"config": {
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "8.0"
+			"php": "8.1"
 		}
 	},
 	"authors": [
@@ -26,6 +26,7 @@
 		"test:unit": "echo 'Only testing installation of the app'"
 	},
 	"require-dev": {
-		"nextcloud/coding-standard": "^1.2.1"
+		"nextcloud/coding-standard": "^1.2.1",
+		"nextcloud/ocp": "dev-master"
 	}
 }
