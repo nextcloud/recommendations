@@ -11,14 +11,20 @@ namespace OCA\Recommendations\Controller;
 
 use Exception;
 use OCA\Recommendations\AppInfo\Application;
+use OCA\Recommendations\Service\IRecommendation;
 use OCA\Recommendations\Service\RecommendationService;
-use OCP\AppFramework\Controller;
-use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\OCSController;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\IUserSession;
+use ResponseDefinitions;
 
-class RecommendationController extends Controller {
+/**
+ * @psalm-import-type RecommendationsRecommendedFile from ResponseDefinitions
+ */
+class RecommendationController extends OCSController {
 	private IUserSession $userSession;
 	private RecommendationService $recommendationService;
 	private IConfig $config;
@@ -34,10 +40,14 @@ class RecommendationController extends Controller {
 	}
 
 	/**
+	 * Get recommendations, but only if enabled
+	 *
 	 * @NoAdminRequired
-	 * @return JSONResponse
+	 * @return DataResponse<Http::STATUS_OK, array{enabled: bool, recommendations?: list<RecommendationsRecommendedFile>}, array{}>
+	 *
+	 * 200: Recommendations returned
 	 */
-	public function index(): JSONResponse {
+	public function index(): DataResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new Exception("Not logged in");
@@ -45,27 +55,31 @@ class RecommendationController extends Controller {
 		$response = [];
 		$response['enabled'] = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true';
 		if ($response['enabled']) {
-			$response['recommendations'] = $this->recommendationService->getRecommendations($user);
+			$response['recommendations'] = array_map(static fn (IRecommendation $recommendation) => $recommendation->jsonSerialize(), $this->recommendationService->getRecommendations($user));
 		}
-		return new JSONResponse(
+		return new DataResponse(
 			$response
 		);
 	}
 
 	/**
+	 * Get recommendations
+	 *
 	 * @NoAdminRequired
-	 * @return JSONResponse
+	 * @return DataResponse<Http::STATUS_OK, array{enabled: bool, recommendations: list<RecommendationsRecommendedFile>}, array{}>
+	 *
+	 * 200: Recommendations returned
 	 */
-	public function always(): JSONResponse {
+	public function always(): DataResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new Exception("Not logged in");
 		}
 		$response = [
 			'enabled' => $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true',
-			'recommendations' => $this->recommendationService->getRecommendations($user),
+			'recommendations' => array_map(static fn (IRecommendation $recommendation) => $recommendation->jsonSerialize(), $this->recommendationService->getRecommendations($user)),
 		];
-		return new JSONResponse(
+		return new DataResponse(
 			$response
 		);
 	}
