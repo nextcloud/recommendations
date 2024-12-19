@@ -3,6 +3,6 @@
 /.php_cs.cache
 /build
 /node_modules
-/vendor/
+vendor/
 .idea/
 .php-cs-fixer.cache
