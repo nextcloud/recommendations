@@ -10,7 +10,11 @@ declare(strict_types=1);
 namespace OCA\Recommendations\Service;
 
 use OCP\Files\Node;
+use ResponseDefinitions;
 
+/**
+ * @psalm-import-type RecommendationsRecommendedFile from ResponseDefinitions
+ */
 class RecommendedFile implements IRecommendation {
 	private string $directory;
 	private Node $node;
@@ -57,6 +61,9 @@ class RecommendedFile implements IRecommendation {
 		$this->hasPreview = $state;
 	}
 
+	/**
+	 * @return RecommendationsRecommendedFile
+	 */
 	#[\ReturnTypeWillChange]
 	public function jsonSerialize() {
 		return [

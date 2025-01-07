@@ -1,0 +1,259 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "recommendations",
+        "version": "0.0.1",
+        "description": "Shows recommended files",
+        "license": {
+            "name": "agpl"
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basic_auth": {
+                "type": "http",
+                "scheme": "basic"
+            },
+            "bearer_auth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        },
+        "schemas": {
+            "Capabilities": {
+                "type": "object",
+                "properties": {
+                    "recommendations": {
+                        "type": "object",
+                        "required": [
+                            "enabled"
+                        ],
+                        "properties": {
+                            "enabled": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            },
+            "OCSMeta": {
+                "type": "object",
+                "required": [
+                    "status",
+                    "statuscode"
+                ],
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "statuscode": {
+                        "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "totalitems": {
+                        "type": "string"
+                    },
+                    "itemsperpage": {
+                        "type": "string"
+                    }
+                }
+            },
+            "RecommendedFile": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "timestamp",
+                    "name",
+                    "directory",
+                    "extension",
+                    "mimeType",
+                    "hasPreview",
+                    "reason"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "directory": {
+                        "type": "string"
+                    },
+                    "extension": {
+                        "type": "string"
+                    },
+                    "mimeType": {
+                        "type": "string"
+                    },
+                    "hasPreview": {
+                        "type": "boolean"
+                    },
+                    "reason": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/ocs/v2.php/apps/recommendations/api/v1/recommendations/always": {
+            "get": {
+                "operationId": "recommendation-always",
+                "summary": "Get recommendations",
+                "tags": [
+                    "recommendation"
+                ],
+                "security": [
+                    {
+                        "bearer_auth": []
+                    },
+                    {
+                        "basic_auth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "OCS-APIRequest",
+                        "in": "header",
+                        "description": "Required to be true for the API request to pass",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recommendations returned",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "ocs"
+                                    ],
+                                    "properties": {
+                                        "ocs": {
+                                            "type": "object",
+                                            "required": [
+                                                "meta",
+                                                "data"
+                                            ],
+                                            "properties": {
+                                                "meta": {
+                                                    "$ref": "#/components/schemas/OCSMeta"
+                                                },
+                                                "data": {
+                                                    "type": "object",
+                                                    "required": [
+                                                        "enabled",
+                                                        "recommendations"
+                                                    ],
+                                                    "properties": {
+                                                        "enabled": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "recommendations": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/components/schemas/RecommendedFile"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ocs/v2.php/apps/recommendations/api/v1/recommendations": {
+            "get": {
+                "operationId": "recommendation-index",
+                "summary": "Get recommendations, but only if enabled",
+                "tags": [
+                    "recommendation"
+                ],
+                "security": [
+                    {
+                        "bearer_auth": []
+                    },
+                    {
+                        "basic_auth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "OCS-APIRequest",
+                        "in": "header",
+                        "description": "Required to be true for the API request to pass",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recommendations returned",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "ocs"
+                                    ],
+                                    "properties": {
+                                        "ocs": {
+                                            "type": "object",
+                                            "required": [
+                                                "meta",
+                                                "data"
+                                            ],
+                                            "properties": {
+                                                "meta": {
+                                                    "$ref": "#/components/schemas/OCSMeta"
+                                                },
+                                                "data": {
+                                                    "type": "object",
+                                                    "required": [
+                                                        "enabled"
+                                                    ],
+                                                    "properties": {
+                                                        "enabled": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "recommendations": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/components/schemas/RecommendedFile"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": []
+}
