@@ -1,7 +1,7 @@
 {
   "name": "recommendations",
   "description": "Shows recommended files in Nextcloud",
-  "version": "4.0.0",
+  "version": "5.0.0-dev.0",
   "private": true,
   "scripts": {
     "build": "webpack --node-env production --progress",
