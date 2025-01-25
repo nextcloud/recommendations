@@ -8,11 +8,10 @@ SPDX-License-Identifier: (MPL-2.0 OR Apache-2.0)
 SPDX-FileCopyrightText: xiaokai <kexiaokai@gmail.com>
 SPDX-FileCopyrightText: string_decoder developers
 SPDX-FileCopyrightText: rhysd <lin90162@yahoo.co.jp>
-SPDX-FileCopyrightText: nextcloud developers
 SPDX-FileCopyrightText: inline-style-parser developers
-SPDX-FileCopyrightText: inherits developers
 SPDX-FileCopyrightText: escape-html developers
 SPDX-FileCopyrightText: debounce developers
+SPDX-FileCopyrightText: atomiks
 SPDX-FileCopyrightText: Tobias Koppers @sokra
 SPDX-FileCopyrightText: Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)
 SPDX-FileCopyrightText: T. Jameson Little <t.jameson.little@gmail.com>
@@ -28,8 +27,8 @@ SPDX-FileCopyrightText: Max <max@nextcloud.com>
 SPDX-FileCopyrightText: Matt Zabriskie
 SPDX-FileCopyrightText: Mark <mark@remarkablemark.org>
 SPDX-FileCopyrightText: Mapbox
-SPDX-FileCopyrightText: Joyent
 SPDX-FileCopyrightText: Jeff Sagal <sagalbot@gmail.com>
+SPDX-FileCopyrightText: James Halliday
 SPDX-FileCopyrightText: Jacob Clevenger<https://github.com/wheatjs>
 SPDX-FileCopyrightText: Guillaume Chau <guillaume.b.chau@gmail.com>
 SPDX-FileCopyrightText: GitHub Inc.
@@ -44,6 +43,7 @@ SPDX-FileCopyrightText: Borys Serebrov
 SPDX-FileCopyrightText: Arnout Kazemier
 SPDX-FileCopyrightText: Antoni Andre <antoniandre.web@gmail.com>
 SPDX-FileCopyrightText: Anthony Fu <https://github.com/antfu>
+SPDX-FileCopyrightText: Anthony Fu <anthonyfu117@hotmail.com>
 SPDX-FileCopyrightText: Andrea Giammarchi
 SPDX-FileCopyrightText: Alkemics
 
@@ -65,7 +65,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 2.5.3
 	- license: GPL-3.0-or-later
 - axios
-	- version: 1.12.2
+	- version: 1.13.2
 	- license: MIT
 - @nextcloud/axios
 	- version: 2.5.2
@@ -100,11 +100,20 @@ This file is generated from multiple sources. Included packages:
 - @ungap/structured-clone
 	- version: 1.2.0
 	- license: ISC
+- vue-demi
+	- version: 0.14.10
+	- license: MIT
 - @vueuse/components
 	- version: 11.1.0
 	- license: MIT
+- vue-demi
+	- version: 0.14.10
+	- license: MIT
 - @vueuse/core
 	- version: 11.1.0
+	- license: MIT
+- vue-demi
+	- version: 0.14.10
 	- license: MIT
 - @vueuse/shared
 	- version: 11.1.0
@@ -156,6 +165,12 @@ This file is generated from multiple sources. Included packages:
 	- license: MIT
 - extend
 	- version: 3.0.2
+	- license: MIT
+- @floating-ui/core
+	- version: 0.3.1
+	- license: MIT
+- @floating-ui/dom
+	- version: 0.1.10
 	- license: MIT
 - floating-vue
 	- version: 1.0.0-beta.19
@@ -265,6 +280,9 @@ This file is generated from multiple sources. Included packages:
 - micromark
 	- version: 4.0.2
 	- license: MIT
+- path-browserify
+	- version: 1.0.1
+	- license: MIT
 - process
 	- version: 0.11.10
 	- license: MIT
@@ -367,15 +385,6 @@ This file is generated from multiple sources. Included packages:
 - webpack
 	- version: 5.95.0
 	- license: MIT
-- inherits
-	- version: 2.0.3
-	- license: ISC
-- util
-	- version: 0.10.4
-	- license: MIT
-- path
-	- version: 0.12.7
-	- license: MIT
-- nextcloud
-	- version: 1.0.0
+- recommendations
+	- version: 4.0.0
 	- license: AGPL-3.0-or-later
