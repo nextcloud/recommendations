@@ -5,11 +5,11 @@
 import Vue from 'vue'
 import { Header, registerFileListHeaders } from '@nextcloud/files'
 
-import Recommendations from './components/Recommendations.vue'
+import FilesRecommendations from './components/FilesRecommendations.vue'
 import Settings from './components/Settings.vue'
 import store from './store/store.js'
 
-const View = Vue.extend(Recommendations)
+const View = Vue.extend(FilesRecommendations)
 
 const header = new Header({
 	id: 'recommendations',

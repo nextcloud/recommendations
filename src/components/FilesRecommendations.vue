@@ -28,7 +28,7 @@ import { translate as t } from '@nextcloud/l10n'
 import RecommendedFile from './RecommendedFile.vue'
 
 export default {
-	name: 'Recommendations',
+	name: 'FilesRecommendations',
 	components: { RecommendedFile },
 	computed: {
 		enabled() {

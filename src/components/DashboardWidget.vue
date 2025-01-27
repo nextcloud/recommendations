@@ -4,7 +4,7 @@
 -->
 
 <template>
-	<DashboardWidget id="recommendations" :items="recommendedFiles">
+	<NcDashboardWidget id="recommendations" :items="recommendedFiles">
 		<template #default="{ item }">
 			<RecommendedFile :id="item.id"
 				:key="item.id"
@@ -16,25 +16,30 @@
 				:has-preview="item.hasPreview" />
 		</template>
 		<template #empty-content>
-			<EmptyContent id="recommendations--empty-content"
+			<NcEmptyContent id="recommendations--empty-content"
 				icon="icon-files-dark">
 				<template #description>
 					{{ t('recommendations', 'No recommendations yet') }}
 				</template>
-			</EmptyContent>
+			</NcEmptyContent>
 		</template>
-	</DashboardWidget>
+	</NcDashboardWidget>
 </template>
 
 <script>
-import { translate as t } from '@nextcloud/l10n'
-import { DashboardWidget } from '@nextcloud/vue-dashboard'
-import EmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
+import { t } from '@nextcloud/l10n'
+import NcDashboardWidget from '@nextcloud/vue/dist/Components/NcDashboardWidget.js'
+import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
 import RecommendedFile from './RecommendedFile.vue'
 
 export default {
-	name: 'Dashboard',
-	components: { RecommendedFile, DashboardWidget, EmptyContent },
+	name: 'DashboardWidget',
+
+	components: {
+		RecommendedFile,
+		NcDashboardWidget,
+		NcEmptyContent,
+	},
 	computed: {
 		enabled() {
 			return this.$store.state.enabled
