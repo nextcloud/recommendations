@@ -17,4 +17,8 @@ return [
 		['name' => 'recommendation#always', 'url' => '/api/v1/recommendations/always', 'verb' => 'GET'],
 		['name' => 'recommendation#index', 'url' => '/api/v1/recommendations', 'verb' => 'GET'],
 	],
+	'ocs' => [
+		['name' => 'recommendation_api#index', 'url' => '/api/v1/recommendations', 'verb' => 'GET'],
+		['name' => 'recommendation_api#always', 'url' => '/api/v1/recommendations/always', 'verb' => 'GET'],
+	],
 ];
