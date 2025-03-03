@@ -187,10 +187,8 @@ export default {
 	.details {
 		.file-name {
 			white-space: nowrap;
-			margin-bottom: -8px;
 
 			.name {
-				display: inline-block;
 				max-width: 170px;
 				color: var(--color-main-text);
 				text-overflow: ellipsis;
@@ -198,7 +196,6 @@ export default {
 			}
 
 			.extension {
-				display: inline;
 				color: var(--color-text-maxcontrast);
 			}
 		}
