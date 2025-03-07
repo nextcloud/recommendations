@@ -17,7 +17,8 @@
 					:name="file.name"
 					:directory="file.directory"
 					:reason="file.reason"
-					:has-preview="file.hasPreview" />
+					:has-preview="file.hasPreview"
+					:timestamp="file.timestamp" />
 			</li>
 		</ul>
 	</div>

@@ -27,8 +27,8 @@
 				</template>
 
 			</div>
-			<div class="reason">
-				{{ reason }}
+			<div v-if="description" class="description">
+				{{ description }}
 			</div>
 			<span :id="`recommendation-description-${id}`" class="hidden-visually">{{ t('recommendations', 'Path name {path}', {path: path}) }}</span>
 		</div>
@@ -36,9 +36,11 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 import { joinPaths } from '@nextcloud/paths'
+import { useFormatDateTime } from '@nextcloud/vue'
 
 import FolderIcon from 'vue-material-design-icons/Folder.vue'
 
@@ -78,6 +80,18 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		timestamp: {
+			type: Number,
+			required: true,
+		},
+	},
+	setup(props) {
+		const { formattedTime } = useFormatDateTime(computed(() => props.timestamp * 1000), {
+			ignoreSeconds: true,
+		})
+		return {
+			formattedTime,
+		}
 	},
 	data() {
 		return {
@@ -97,6 +111,18 @@ export default {
 		},
 		isFolder() {
 			return this.mimeType === 'httpd/unix-directory'
+		},
+		description() {
+			if (this.reason === 'recently-edited') {
+				return t('recommendations', 'Last updated {timeAgo}', { timeAgo: this.formattedTime })
+			}
+			if (this.reason === 'recently-shared') {
+				return t('recommendations', 'Shared with you {timeAgo}', { timeAgo: this.formattedTime })
+			}
+			if (this.reason === 'recently-commented') {
+				return t('recommendations', 'Last commented on {timeAgo}', { timeAgo: this.formattedTime })
+			}
+			return null
 		},
 	},
 	mounted() {
@@ -200,7 +226,7 @@ export default {
 			}
 		}
 
-		.reason {
+		.description {
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			overflow: hidden;

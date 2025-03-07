@@ -17,6 +17,9 @@ use OCP\IServerContainer;
 use OCP\IUser;
 
 class RecentlyEditedFilesSource implements IRecommendationSource {
+
+	public const REASON = 'recently-edited';
+
 	private IServerContainer $serverContainer;
 	private IL10N $l10n;
 
@@ -44,7 +47,7 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 					$userFolder->getRelativePath($parentPath),
 					$node,
 					$node->getMTime(),
-					$this->l10n->t("Recently edited")
+					self::REASON,
 				);
 			} catch (StorageNotAvailableException $e) {
 				return null;

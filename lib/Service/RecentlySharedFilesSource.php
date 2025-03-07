@@ -25,6 +25,9 @@ use function iterator_to_array;
 use function usort;
 
 class RecentlySharedFilesSource implements IRecommendationSource {
+
+	public const REASON = 'recently-shared';
+
 	private IManager $shareManager;
 	private IRootFolder $rootFolder;
 	private IL10N $l10n;
@@ -100,7 +103,7 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 					$userFolder->getRelativePath($userFolder->get($share->getTarget())->getParent()->getPath()),
 					$share->getNode(),
 					$share->getShareTime()->getTimestamp(),
-					$this->l10n->t("Recently shared")
+					self::REASON,
 				);
 			} catch (NotFoundException $ex) {
 				return null;
