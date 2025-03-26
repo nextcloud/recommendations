@@ -1,6 +1,7 @@
 OC.L10N.register(
     "recommendations",
     {
+    "Recommended files" : "추천 파일",
     "Recently commented" : "최근에 댓글 달림",
     "Recently edited" : "최근에 편집됨",
     "Recently shared" : "최근에 공유됨",
