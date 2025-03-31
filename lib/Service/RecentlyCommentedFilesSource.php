@@ -43,6 +43,9 @@ use function reset;
 use function usort;
 
 class RecentlyCommentedFilesSource implements IRecommendationSource {
+
+	public const REASON = 'recently-commented';
+
 	private ICommentsManager $commentsManager;
 	private IRootFolder $rootFolder;
 	private IL10N $l10n;
@@ -135,7 +138,7 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 				$file->getDirectory(),
 				$file->getNode(),
 				$file->getComment()->getCreationDateTime()->getTimestamp(),
-				$this->l10n->t("Recently commented")
+				self::REASON,
 			);
 		}, $this->getNMostRecentlyCommenedFiles($all, $max));
 	}
