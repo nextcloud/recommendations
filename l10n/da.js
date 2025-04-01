@@ -2,14 +2,14 @@ OC.L10N.register(
     "recommendations",
     {
     "Recommended files" : "Anbefalede filer",
-    "Recently commented" : "Nyligt kommenteret",
-    "Recently edited" : "Nyligt redigeret",
-    "Recently shared" : "Nyligt delt",
     "Recommendations" : "Anbefalinger",
     "Shows recommended files" : "Vis anbefalede filer",
     "Shows recommended files for quick access of files and folders with recent activity" : "Vis anbefalede filer for hurtig adgang til filer og mapper med nylig aktivitet",
     "No recommendations yet" : "Ingen anbefalinger endnu",
     "Path name {path}" : "Stinavn {path}",
-    "Show recommendations" : "Vis anbefalinger"
+    "Show recommendations" : "Vis anbefalinger",
+    "Recently commented" : "Nyligt kommenteret",
+    "Recently edited" : "Nyligt redigeret",
+    "Recently shared" : "Nyligt delt"
 },
 "nplurals=2; plural=(n != 1);");
