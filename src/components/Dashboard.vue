@@ -13,7 +13,8 @@
 				:name="item.name"
 				:directory="item.directory"
 				:reason="item.reason"
-				:has-preview="item.hasPreview" />
+				:has-preview="item.hasPreview"
+				:timestamp="item.timestamp" />
 		</template>
 		<template #empty-content>
 			<EmptyContent id="recommendations--empty-content"
