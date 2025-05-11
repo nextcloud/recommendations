@@ -180,6 +180,7 @@ export default {
 		padding: 5px 0;
 		margin-right: 12px;
 		border-radius: var(--border-radius);
+		overflow: hidden;
 
 		&:hover,
 		&:focus {
