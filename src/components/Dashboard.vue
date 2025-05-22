@@ -56,12 +56,11 @@ export default {
 	#recommendations {
 		::v-deep .recommendation {
 			max-width: 100%;
-			padding: 8px 0;
+			padding: 8px;
 			margin-right: 0;
 			border-radius: var(--border-radius-large);
 
 			.thumbnail {
-				margin-left: 8px;
 				width: 44px;
 				height: 44px;
 			}
