@@ -18,6 +18,7 @@ SPDX-FileCopyrightText: Roman Shtylman <shtylman@gmail.com>
 SPDX-FileCopyrightText: Rob Cresswell <robcresswell@pm.me>
 SPDX-FileCopyrightText: Paul Vorbach <paul@vorba.ch> (http://paul.vorba.ch)
 SPDX-FileCopyrightText: Paul Vorbach <paul@vorb.de> (http://vorb.de)
+SPDX-FileCopyrightText: Nextcloud GmbH and Nextcloud contributors
 SPDX-FileCopyrightText: Matt Zabriskie
 SPDX-FileCopyrightText: Mark <mark@remarkablemark.org>
 SPDX-FileCopyrightText: Mapbox
@@ -294,6 +295,6 @@ This file is generated from multiple sources. Included packages:
 - webpack
 	- version: 5.95.0
 	- license: MIT
-- recommendations
-	- version: 5.0.0-dev.0
+- nextcloud
+	- version: 1.0.0
 	- license: AGPL-3.0-or-later
