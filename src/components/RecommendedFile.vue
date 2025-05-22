@@ -177,7 +177,7 @@ export default {
 		align-items: center;
 		flex-grow: 1;
 		min-width: 250px;
-		padding: 5px 0;
+		padding: 5px;
 		margin-right: 12px;
 		border-radius: var(--border-radius);
 
@@ -193,7 +193,6 @@ export default {
 
 	.thumbnail {
 		margin-right: 9px;
-		margin-left: 10px;
 		width: 32px;
 		height: 32px;
 		background-size: contain;
@@ -211,14 +210,17 @@ export default {
 	}
 
 	.details {
+		min-width: 0;
+
 		.file-name {
 			white-space: nowrap;
+			min-width: 0;
+			text-overflow: ellipsis;
+			overflow: hidden;
 
 			.name {
 				max-width: 170px;
 				color: var(--color-main-text);
-				text-overflow: ellipsis;
-				overflow: hidden;
 			}
 
 			.extension {
