@@ -75,6 +75,9 @@ class RecommendedFile implements IRecommendation {
 			'mimeType' => $this->node->getMimetype(),
 			'hasPreview' => $this->hasPreview(),
 			'reason' => $this->getReason(),
+			'owner' => $this->node->getOwner()?->getUID() ?: null,
+			'permissions' => $this->node->getPermissions(),
+			'size' => $this->node->getSize(),
 		];
 	}
 }

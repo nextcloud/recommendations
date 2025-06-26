@@ -70,7 +70,10 @@
                     "extension",
                     "mimeType",
                     "hasPreview",
-                    "reason"
+                    "reason",
+                    "owner",
+                    "permissions",
+                    "size"
                 ],
                 "properties": {
                     "id": {
@@ -97,6 +100,18 @@
                     },
                     "reason": {
                         "type": "string"
+                    },
+                    "owner": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "permissions": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int64"
                     }
                 }
             }
