@@ -104,6 +104,7 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 					$share->getNode(),
 					$share->getShareTime()->getTimestamp(),
 					self::REASON,
+					$this->l10n->t('Recently shared'),
 				);
 			} catch (NotFoundException $ex) {
 				return null;

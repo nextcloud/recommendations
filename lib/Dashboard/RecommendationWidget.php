@@ -37,7 +37,7 @@ class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget {
 		IURLGenerator $urlGenerator,
 		IMimeTypeDetector $mimeTypeDetector,
 		RecommendationService $recommendationService,
-		IUserManager $userManager
+		IUserManager $userManager,
 	) {
 		$this->userSession = $userSession;
 		$this->l10n = $l10n;

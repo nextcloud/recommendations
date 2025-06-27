@@ -49,12 +49,12 @@ class GetRecommendations extends Command {
 		);
 
 		if (is_null($user)) {
-			$output->writeln("user does not exist");
+			$output->writeln('user does not exist');
 			return 1;
 		}
 
 		if ($input->getArgument('max')) {
-			$recommendations = $this->recommendationService->getRecommendations($user, (int) $input->getArgument('max'));
+			$recommendations = $this->recommendationService->getRecommendations($user, (int)$input->getArgument('max'));
 		} else {
 			$recommendations = $this->recommendationService->getRecommendations($user);
 		}
