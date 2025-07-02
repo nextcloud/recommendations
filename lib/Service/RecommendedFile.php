@@ -16,21 +16,14 @@ use ResponseDefinitions;
  * @psalm-import-type RecommendationsRecommendedFile from ResponseDefinitions
  */
 class RecommendedFile implements IRecommendation {
-	private string $directory;
-	private Node $node;
-	private int $timestamp;
-	private string $reason;
-	private bool $hasPreview;
-
-	public function __construct(string $directory,
-		Node $node,
-		int $timestamp,
-		string $reason) {
-		$this->directory = $directory;
-		$this->node = $node;
-		$this->reason = $reason;
-		$this->timestamp = $timestamp;
-		$this->hasPreview = false;
+	public function __construct(
+		private string $directory,
+		private Node $node,
+		private int $timestamp,
+		private string $reason,
+		private string $reasonLabel,
+		private bool $hasPreview = false,
+	) {
 	}
 
 	public function getId(): string {
@@ -61,6 +54,10 @@ class RecommendedFile implements IRecommendation {
 		$this->hasPreview = $state;
 	}
 
+	public function getReasonLabel(): string {
+		return $this->reasonLabel;
+	}
+
 	/**
 	 * @return RecommendationsRecommendedFile
 	 */
@@ -75,6 +72,7 @@ class RecommendedFile implements IRecommendation {
 			'mimeType' => $this->node->getMimetype(),
 			'hasPreview' => $this->hasPreview(),
 			'reason' => $this->getReason(),
+			'reasonLabel' => $this->getReasonLabel(),
 		];
 	}
 }

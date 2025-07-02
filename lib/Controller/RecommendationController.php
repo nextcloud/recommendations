@@ -50,7 +50,7 @@ class RecommendationController extends OCSController {
 	public function index(): DataResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
-			throw new Exception("Not logged in");
+			throw new Exception('Not logged in');
 		}
 		$response = [];
 		$response['enabled'] = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true';
@@ -73,7 +73,7 @@ class RecommendationController extends OCSController {
 	public function always(): DataResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
-			throw new Exception("Not logged in");
+			throw new Exception('Not logged in');
 		}
 		$response = [
 			'enabled' => $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true',

@@ -17,6 +17,7 @@ declare(strict_types=1);
  *     mimeType: string,
  *     hasPreview: bool,
  *     reason: string,
+ *     reasonLabel: string,
  * }
  *
  * @psalm-suppress UnusedClass

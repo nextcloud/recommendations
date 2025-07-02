@@ -48,6 +48,7 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 					$node,
 					$node->getMTime(),
 					self::REASON,
+					$this->l10n->t('Recently edited'),
 				);
 			} catch (StorageNotAvailableException $e) {
 				return null;

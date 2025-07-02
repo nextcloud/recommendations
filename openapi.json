@@ -70,7 +70,8 @@
                     "extension",
                     "mimeType",
                     "hasPreview",
-                    "reason"
+                    "reason",
+                    "reasonLabel"
                 ],
                 "properties": {
                     "id": {
@@ -96,6 +97,9 @@
                         "type": "boolean"
                     },
                     "reason": {
+                        "type": "string"
+                    },
+                    "reasonLabel": {
                         "type": "string"
                     }
                 }
