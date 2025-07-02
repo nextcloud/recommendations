@@ -3,7 +3,6 @@ SPDX-License-Identifier: ISC
 SPDX-License-Identifier: GPL-3.0-or-later
 SPDX-License-Identifier: BSD-3-Clause
 SPDX-License-Identifier: AGPL-3.0-or-later
-SPDX-License-Identifier: (MPL-2.0 OR Apache-2.0)
 SPDX-FileCopyrightText: ndelvalle <nicolas.delvalle@gmail.com>
 SPDX-FileCopyrightText: escape-html developers
 SPDX-FileCopyrightText: core-js developers
@@ -24,7 +23,6 @@ SPDX-FileCopyrightText: GitHub Inc.
 SPDX-FileCopyrightText: Feross Aboukhadijeh
 SPDX-FileCopyrightText: Evan You
 SPDX-FileCopyrightText: Eric Norris (https://github.com/ericnorris)
-SPDX-FileCopyrightText: Dr.-Ing. Mario Heiderich, Cure53 <mario@cure53.de> (https://cure53.de/)
 SPDX-FileCopyrightText: Denis Pushkarev
 SPDX-FileCopyrightText: Christoph Wurst
 SPDX-FileCopyrightText: Ben Newman <bn@cs.stanford.edu>
@@ -33,7 +31,7 @@ SPDX-FileCopyrightText: Andris Reinman
 
 This file is generated from multiple sources. Included packages:
 - axios
-	- version: 1.7.4
+	- version: 1.10.0
 	- license: MIT
 - @nextcloud/browser-storage
 	- version: 0.4.0
@@ -43,9 +41,6 @@ This file is generated from multiple sources. Included packages:
 	- license: GPL-3.0-or-later
 - @nextcloud/initial-state
 	- version: 2.2.0
-	- license: GPL-3.0-or-later
-- @nextcloud/l10n
-	- version: 3.1.0
 	- license: GPL-3.0-or-later
 - @nextcloud/auth
 	- version: 1.3.0
@@ -78,7 +73,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 0.13.11
 	- license: MIT
 - @nextcloud/vue
-	- version: 8.22.0
+	- version: 8.27.0
 	- license: AGPL-3.0-or-later
 - axios
 	- version: 0.24.0
@@ -101,9 +96,6 @@ This file is generated from multiple sources. Included packages:
 - css-loader
 	- version: 7.1.2
 	- license: MIT
-- dompurify
-	- version: 3.1.7
-	- license: (MPL-2.0 OR Apache-2.0)
 - escape-html
 	- version: 1.0.3
 	- license: MIT
