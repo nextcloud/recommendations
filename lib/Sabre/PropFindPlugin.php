@@ -19,6 +19,7 @@ class PropFindPlugin extends ServerPlugin {
 
 	public const RECOMMENDATION_REASON = '{http://nextcloud.org/ns}recommendation-reason';
 	public const RECOMMENDATION_REASON_LABEL = '{http://nextcloud.org/ns}recommendation-reason-label';
+	public const RECOMMENDATION_ORIGINAL_LOCATION = '{http://nextcloud.org/ns}recommendation-original-location';
 
 	public function getPluginName(): string {
 		return 'recommendationsPropFindPlugin';
@@ -39,6 +40,11 @@ class PropFindPlugin extends ServerPlugin {
 				self::RECOMMENDATION_REASON_LABEL,
 				/** @psalm-suppress PossiblyNullReference Null already checked above */
 				fn () => $node->getRecommendationReasonLabel(),
+			);
+			$propFind->handle(
+				self::RECOMMENDATION_ORIGINAL_LOCATION,
+				/** @psalm-suppress PossiblyNullReference Null already checked above */
+				fn () => $node->getPath(),
 			);
 		}
 	}
