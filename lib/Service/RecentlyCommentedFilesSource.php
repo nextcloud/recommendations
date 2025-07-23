@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
@@ -139,6 +140,7 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 				$file->getNode(),
 				$file->getComment()->getCreationDateTime()->getTimestamp(),
 				self::REASON,
+				$this->l10n->t('Recently commented')
 			);
 		}, $this->getNMostRecentlyCommenedFiles($all, $max));
 	}

@@ -9,7 +9,7 @@
 	<name>Recommendations</name>
 	<summary>Shows recommended files</summary>
 	<description>Shows recommended files for quick access of files and folders with recent activity</description>
-	<version>5.0.0-dev.0</version>
+	<version>5.0.0-dev.1</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Jan-Christoph Borchardt</author>
@@ -19,7 +19,19 @@
 	<dependencies>
 		<nextcloud min-version="32" max-version="32" />
 	</dependencies>
+	<types>
+		<filesystem/>
+		<dav/>
+	</types>
 	<commands>
 		<command>OCA\Recommendations\Command\GetRecommendations</command>
 	</commands>
+	<sabre>
+		<collections>
+			<collection>OCA\Recommendations\Sabre\RootCollection</collection>
+		</collections>
+		<plugins>
+			<plugin>OCA\Recommendations\Sabre\PropFindPlugin</plugin>
+		</plugins>
+	</sabre>
 </info>
