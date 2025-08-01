@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\AppInfo;
 
+use OCA\DAV\Connector\Sabre\Principal;
 use OCA\Files\Event\LoadAdditionalScriptsEvent;
 use OCA\Recommendations\Capabilities;
 use OCA\Recommendations\Dashboard\RecommendationWidget;
@@ -29,6 +30,7 @@ class Application extends App implements IBootstrap {
 		$context->registerEventListener(LoadAdditionalScriptsEvent::class, FilesLoadAdditionalScriptsListener::class);
 		$context->registerDashboardWidget(RecommendationWidget::class);
 		$context->registerCapability(Capabilities::class);
+		$context->registerServiceAlias('principalBackend', Principal::class);
 	}
 
 	public function boot(IBootContext $context): void {

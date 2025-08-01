@@ -99,11 +99,13 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 
 		return array_filter(array_map(function (IShare $share) use ($userFolder): ?RecommendedFile {
 			try {
+				$node = $userFolder->get($share->getTarget());
 				return new RecommendedFile(
-					$userFolder->getRelativePath($userFolder->get($share->getTarget())->getParent()->getPath()),
-					$share->getNode(),
+					$userFolder->getRelativePath($node->getParent()->getPath()),
+					$node,
 					$share->getShareTime()->getTimestamp(),
 					self::REASON,
+					$this->l10n->t('Recently shared'),
 				);
 			} catch (NotFoundException $ex) {
 				return null;
