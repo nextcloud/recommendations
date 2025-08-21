@@ -24,4 +24,6 @@ interface IRecommendation extends JsonSerializable {
 	public function setHasPreview(bool $state);
 
 	public function getReason(): string;
+
+	public function getEtag(): string;
 }
