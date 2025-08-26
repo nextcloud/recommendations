@@ -21,6 +21,7 @@ class RecommendedFile implements IRecommendation {
 	private int $timestamp;
 	private string $reason;
 	private bool $hasPreview;
+	private string $etag;
 
 	public function __construct(string $directory,
 		Node $node,
@@ -31,6 +32,7 @@ class RecommendedFile implements IRecommendation {
 		$this->reason = $reason;
 		$this->timestamp = $timestamp;
 		$this->hasPreview = false;
+		$this->etag = $node->getEtag();
 	}
 
 	public function getId(): string {
@@ -51,6 +53,10 @@ class RecommendedFile implements IRecommendation {
 
 	public function getReason(): string {
 		return $this->reason;
+	}
+
+	public function getEtag(): string {
+		return $this->etag;
 	}
 
 	public function hasPreview(): bool {
@@ -75,6 +81,7 @@ class RecommendedFile implements IRecommendation {
 			'mimeType' => $this->node->getMimetype(),
 			'hasPreview' => $this->hasPreview(),
 			'reason' => $this->getReason(),
+			'etag' => $this->getEtag(),
 		];
 	}
 }
