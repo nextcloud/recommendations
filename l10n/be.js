@@ -10,7 +10,7 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Абагулена з вамі {timeAgo}",
     "Last commented on {timeAgo}" : "Апошні каментарый {timeAgo}",
     "Path name {path}" : "Шлях {path}",
-    "Show recommendations" : "Паказаць рэкамендацыі",
+    "Show recommendations" : "Паказваць рэкамендацыі",
     "Recently commented" : "Нядаўна пракаментаваныя",
     "Recently edited" : "Нядаўна адрэдагаваныя",
     "Recently shared" : "Нядаўна абагуленыя"
