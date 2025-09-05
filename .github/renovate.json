@@ -24,6 +24,7 @@
 	"ignoreUnstable": false,
 	"baseBranchPatterns": [
 		"master",
+		"stable32",
 		"stable31",
 		"stable30"
 	],
