@@ -38,7 +38,7 @@
 		"openapi": "generate-spec"
 	},
 	"require-dev": {
-		"nextcloud/coding-standard": "^1.2.1",
+		"nextcloud/coding-standard": "^1.4.0",
 		"nextcloud/ocp": "dev-master"
 	}
 }
