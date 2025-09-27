@@ -12,7 +12,7 @@ OC.L10N.register(
     "Path name {path}" : "Sökvägsnamn {path}",
     "Show recommendations" : "Visa rekommendationer",
     "Recently commented" : "Nyligen kommenterade",
-    "Recently edited" : "Nyligen redigerade",
+    "Recently edited" : "Nyligen redigerad",
     "Recently shared" : "Nyligen delade"
 },
 "nplurals=2; plural=(n != 1);");
