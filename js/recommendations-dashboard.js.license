@@ -32,7 +32,7 @@ SPDX-FileCopyrightText: Andris Reinman
 
 This file is generated from multiple sources. Included packages:
 - axios
-	- version: 1.10.0
+	- version: 1.12.2
 	- license: MIT
 - @nextcloud/browser-storage
 	- version: 0.4.0
@@ -74,7 +74,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 0.13.11
 	- license: MIT
 - @nextcloud/vue
-	- version: 8.29.1
+	- version: 8.31.0
 	- license: AGPL-3.0-or-later
 - axios
 	- version: 0.24.0
