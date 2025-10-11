@@ -1,0 +1,18 @@
+OC.L10N.register(
+    "recommendations",
+    {
+    "Recommended files" : "Tavsiya etilgan fayllar",
+    "Recommendations" : "Tavsiyalar",
+    "Shows recommended files" : "Tavsiya etilgan fayllarni ko'rsatadi",
+    "Shows recommended files for quick access of files and folders with recent activity" : "Oxirgi faolligi bo'lgan fayl va papkalarga tezkor kirish uchun tavsiya etilgan fayllarni ko'rsatadi",
+    "No recommendations yet" : "Hali tavsiyalar yo'q",
+    "Last updated {timeAgo}" : "Oxirgi yangilangan: {timeAgo}",
+    "Shared with you {timeAgo}" : "Sizga {timeAgo} ulashildi",
+    "Last commented on {timeAgo}" : "Oxirgi fikr bildirilgan sana: {timeAgo}",
+    "Path name {path}" : "Yo'l nomi {path}",
+    "Show recommendations" : "Tavsiyalarni ko'rsatish",
+    "Recently commented" : "Yaqinda sharhlangan",
+    "Recently edited" : "Yaqinda tahrirlangan",
+    "Recently shared" : "Yaqinda ulashilgan"
+},
+"nplurals=1; plural=0;");
