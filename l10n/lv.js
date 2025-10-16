@@ -8,7 +8,7 @@ OC.L10N.register(
     "No recommendations yet" : "Vēl nav ieteikumu",
     "Show recommendations" : "Rādīt ieteikumus",
     "Recently commented" : "Nesen pievienota piebilde",
-    "Recently edited" : "Nesen labots",
+    "Recently edited" : "Nesen labota",
     "Recently shared" : "Nesen kopīgots"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);");
