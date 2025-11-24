@@ -15,6 +15,7 @@ use OCP\EventDispatcher\IEventListener;
 use OCP\Util;
 
 class FilesLoadAdditionalScriptsListener implements IEventListener {
+	#[\Override]
 	public function handle(Event $event): void {
 		if (!$event instanceof LoadAdditionalScriptsEvent) {
 			return;

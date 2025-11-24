@@ -33,6 +33,7 @@ class RecommendedFile implements IRecommendation {
 		$this->hasPreview = false;
 	}
 
+	#[\Override]
 	public function getId(): string {
 		return (string)$this->node->getId();
 	}
@@ -41,22 +42,27 @@ class RecommendedFile implements IRecommendation {
 		return $this->directory;
 	}
 
+	#[\Override]
 	public function getTimestamp(): int {
 		return $this->timestamp;
 	}
 
+	#[\Override]
 	public function getNode(): Node {
 		return $this->node;
 	}
 
+	#[\Override]
 	public function getReason(): string {
 		return $this->reason;
 	}
 
+	#[\Override]
 	public function hasPreview(): bool {
 		return $this->hasPreview;
 	}
 
+	#[\Override]
 	public function setHasPreview(bool $state) {
 		$this->hasPreview = $state;
 	}
@@ -65,6 +71,7 @@ class RecommendedFile implements IRecommendation {
 	 * @return RecommendationsRecommendedFile
 	 */
 	#[\ReturnTypeWillChange]
+	#[\Override]
 	public function jsonSerialize() {
 		return [
 			'id' => $this->getId(),

@@ -47,30 +47,37 @@ class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget {
 		$this->userManager = $userManager;
 	}
 
+	#[\Override]
 	public function getId(): string {
 		return 'recommendations';
 	}
 
+	#[\Override]
 	public function getTitle(): string {
 		return $this->l10n->t('Recommended files');
 	}
 
+	#[\Override]
 	public function getOrder(): int {
 		return 0;
 	}
 
+	#[\Override]
 	public function getIconClass(): string {
 		return 'icon-files-dark';
 	}
 
+	#[\Override]
 	public function getIconUrl(): string {
 		return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('files', 'app-dark.svg'));
 	}
 
+	#[\Override]
 	public function getUrl(): ?string {
 		return null;
 	}
 
+	#[\Override]
 	public function load(): void {
 		$user = $this->userSession->getUser();
 		if ($user === null) {
@@ -79,6 +86,7 @@ class RecommendationWidget implements IWidget, IIconWidget, IAPIWidget {
 		Util::addScript(Application::APP_ID, 'recommendations-dashboard');
 	}
 
+	#[\Override]
 	public function getItems(string $userId, ?string $since = null, int $limit = 7): array {
 		$user = $this->userManager->get($userId);
 		if (!$user) {

@@ -28,6 +28,7 @@ class GetRecommendations extends Command {
 		$this->recommendationService = $recommendationService;
 	}
 
+	#[\Override]
 	protected function configure() {
 		$this->setName('files:recommendations:recommend');
 		$this->setDescription('Shows recommended files for an account');
@@ -43,7 +44,8 @@ class GetRecommendations extends Command {
 		);
 	}
 
-	public function execute(InputInterface $input, OutputInterface $output) {
+	#[\Override]
+	public function execute(InputInterface $input, OutputInterface $output): int {
 		$user = $this->userManager->get(
 			$input->getArgument('uid')
 		);
