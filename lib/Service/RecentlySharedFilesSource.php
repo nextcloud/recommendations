@@ -93,6 +93,7 @@ class RecentlySharedFilesSource implements IRecommendationSource {
 	/**
 	 * @return IRecommendation[]
 	 */
+	#[\Override]
 	public function getMostRecentRecommendation(IUser $user, int $max): array {
 		$shares = $this->getMostRecentShares($user, $max);
 		$userFolder = $this->rootFolder->getUserFolder($user->getUID());

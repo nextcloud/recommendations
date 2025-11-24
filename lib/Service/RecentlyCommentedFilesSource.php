@@ -131,6 +131,7 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 	/**
 	 * @return IRecommendation[]
 	 */
+	#[\Override]
 	public function getMostRecentRecommendation(IUser $user, int $max): array {
 		$all = iterator_to_array($this->getAllCommentedFiles($user));
 

@@ -32,6 +32,7 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 	/**
 	 * @return RecommendedFile[]
 	 */
+	#[\Override]
 	public function getMostRecentRecommendation(IUser $user, int $max): array {
 		/** @var IRootFolder $rootFolder */
 		$rootFolder = $this->serverContainer->get(IRootFolder::class);
