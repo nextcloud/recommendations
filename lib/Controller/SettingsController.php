@@ -40,7 +40,7 @@ class SettingsController extends Controller {
 	public function getSettings(): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (!$user instanceof IUser) {
-			throw new Exception("Not logged in");
+			throw new Exception('Not logged in');
 		}
 		return new JSONResponse([
 			'enabled' => $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true',
@@ -55,7 +55,7 @@ class SettingsController extends Controller {
 	public function setSetting(string $key, string $value): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (!$user instanceof IUser) {
-			throw new Exception("Not logged in");
+			throw new Exception('Not logged in');
 		}
 		$availableSettings = ['enabled'];
 		if (!in_array($key, $availableSettings)) {
