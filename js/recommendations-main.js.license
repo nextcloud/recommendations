@@ -8,7 +8,9 @@ SPDX-License-Identifier: (MPL-2.0 OR Apache-2.0)
 SPDX-FileCopyrightText: xiaokai <kexiaokai@gmail.com>
 SPDX-FileCopyrightText: string_decoder developers
 SPDX-FileCopyrightText: rhysd <lin90162@yahoo.co.jp>
+SPDX-FileCopyrightText: nextcloud developers
 SPDX-FileCopyrightText: inline-style-parser developers
+SPDX-FileCopyrightText: inherits developers
 SPDX-FileCopyrightText: escape-html developers
 SPDX-FileCopyrightText: debounce developers
 SPDX-FileCopyrightText: Tobias Koppers @sokra
@@ -26,8 +28,8 @@ SPDX-FileCopyrightText: Max <max@nextcloud.com>
 SPDX-FileCopyrightText: Matt Zabriskie
 SPDX-FileCopyrightText: Mark <mark@remarkablemark.org>
 SPDX-FileCopyrightText: Mapbox
+SPDX-FileCopyrightText: Joyent
 SPDX-FileCopyrightText: Jeff Sagal <sagalbot@gmail.com>
-SPDX-FileCopyrightText: James Halliday
 SPDX-FileCopyrightText: Jacob Clevenger<https://github.com/wheatjs>
 SPDX-FileCopyrightText: Guillaume Chau <guillaume.b.chau@gmail.com>
 SPDX-FileCopyrightText: GitHub Inc.
@@ -60,16 +62,16 @@ This file is generated from multiple sources. Included packages:
 	- version: 0.2.1
 	- license: BSD-2-Clause
 - @nextcloud/auth
-	- version: 2.5.2
+	- version: 2.5.3
 	- license: GPL-3.0-or-later
 - axios
 	- version: 1.12.2
 	- license: MIT
 - @nextcloud/axios
-	- version: 2.5.1
+	- version: 2.5.2
 	- license: GPL-3.0-or-later
 - @nextcloud/browser-storage
-	- version: 0.4.0
+	- version: 0.5.0
 	- license: GPL-3.0-or-later
 - @nextcloud/capabilities
 	- version: 1.2.0
@@ -93,7 +95,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 3.26.0
 	- license: MIT
 - @nextcloud/vue
-	- version: 8.31.0
+	- version: 8.34.0
 	- license: AGPL-3.0-or-later
 - @ungap/structured-clone
 	- version: 1.2.0
@@ -141,7 +143,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 1.1.0
 	- license: MIT
 - dompurify
-	- version: 3.2.6
+	- version: 3.3.0
 	- license: (MPL-2.0 OR Apache-2.0)
 - emoji-mart-vue-fast
 	- version: 15.0.5
@@ -159,7 +161,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 1.0.0-beta.19
 	- license: MIT
 - focus-trap
-	- version: 7.5.4
+	- version: 7.6.6
 	- license: MIT
 - hast-to-hyperscript
 	- version: 10.0.3
@@ -201,7 +203,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 2.0.0
 	- license: MIT
 - mdast-util-to-hast
-	- version: 13.1.0
+	- version: 13.2.1
 	- license: MIT
 - mdast-util-to-string
 	- version: 4.0.0
@@ -263,9 +265,6 @@ This file is generated from multiple sources. Included packages:
 - micromark
 	- version: 4.0.2
 	- license: MIT
-- path-browserify
-	- version: 1.0.1
-	- license: MIT
 - process
 	- version: 0.11.10
 	- license: MIT
@@ -315,7 +314,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 0.4.4
 	- license: MIT
 - tabbable
-	- version: 6.2.0
+	- version: 6.3.0
 	- license: MIT
 - trim-lines
 	- version: 3.0.1
@@ -368,6 +367,15 @@ This file is generated from multiple sources. Included packages:
 - webpack
 	- version: 5.95.0
 	- license: MIT
-- recommendations
-	- version: 4.0.0
+- inherits
+	- version: 2.0.3
+	- license: ISC
+- util
+	- version: 0.10.4
+	- license: MIT
+- path
+	- version: 0.12.7
+	- license: MIT
+- nextcloud
+	- version: 1.0.0
 	- license: AGPL-3.0-or-later
