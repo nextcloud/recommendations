@@ -3,6 +3,7 @@ SPDX-License-Identifier: ISC
 SPDX-License-Identifier: GPL-3.0-or-later
 SPDX-License-Identifier: BSD-3-Clause
 SPDX-License-Identifier: AGPL-3.0-or-later
+SPDX-FileCopyrightText: nextcloud developers
 SPDX-FileCopyrightText: ndelvalle <nicolas.delvalle@gmail.com>
 SPDX-FileCopyrightText: escape-html developers
 SPDX-FileCopyrightText: core-js developers
@@ -31,12 +32,6 @@ SPDX-FileCopyrightText: Andris Reinman
 
 
 This file is generated from multiple sources. Included packages:
-- axios
-	- version: 1.12.2
-	- license: MIT
-- @nextcloud/browser-storage
-	- version: 0.4.0
-	- license: GPL-3.0-or-later
 - @nextcloud/capabilities
 	- version: 1.2.0
 	- license: GPL-3.0-or-later
@@ -74,7 +69,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 0.13.11
 	- license: MIT
 - @nextcloud/vue
-	- version: 8.31.0
+	- version: 8.34.0
 	- license: AGPL-3.0-or-later
 - axios
 	- version: 0.24.0
@@ -145,6 +140,6 @@ This file is generated from multiple sources. Included packages:
 - webpack
 	- version: 5.95.0
 	- license: MIT
-- recommendations
-	- version: 4.0.0
+- nextcloud
+	- version: 1.0.0
 	- license: AGPL-3.0-or-later
