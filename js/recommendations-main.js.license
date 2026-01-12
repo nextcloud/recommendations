@@ -25,7 +25,6 @@ SPDX-FileCopyrightText: Max <max@nextcloud.com>
 SPDX-FileCopyrightText: Mark <mark@remarkablemark.org>
 SPDX-FileCopyrightText: Mapbox
 SPDX-FileCopyrightText: Jeff Sagal <sagalbot@gmail.com>
-SPDX-FileCopyrightText: James Halliday
 SPDX-FileCopyrightText: Jacob Clevenger<https://github.com/wheatjs>
 SPDX-FileCopyrightText: Guillaume Chau <guillaume.b.chau@gmail.com>
 SPDX-FileCopyrightText: GitHub Inc.
@@ -254,9 +253,6 @@ This file is generated from multiple sources. Included packages:
 	- license: MIT
 - eventemitter3
 	- version: 5.0.1
-	- license: MIT
-- path-browserify
-	- version: 1.0.1
 	- license: MIT
 - process
 	- version: 0.11.10
