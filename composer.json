@@ -38,6 +38,6 @@
 	},
 	"require-dev": {
 		"nextcloud/coding-standard": "^v1.4.0",
-		"nextcloud/ocp": "dev-master"
+		"nextcloud/ocp": "dev-stable33"
 	}
 }
