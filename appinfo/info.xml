@@ -9,7 +9,7 @@
 	<name>Recommendations</name>
 	<summary>Shows recommended files</summary>
 	<description>Shows recommended files for quick access of files and folders with recent activity</description>
-	<version>5.0.0-dev.0</version>
+	<version>5.0.0</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Jan-Christoph Borchardt</author>
