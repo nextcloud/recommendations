@@ -17,6 +17,12 @@
 			<directory name="vendor-bin" />
 		</ignoreFiles>
 	</projectFiles>
+	<stubs>
+		<file name="tests/stubs/oc_hooks_basicemitter.php" />
+		<file name="tests/stubs/oc_hooks_emitter.php" />
+		<file name="tests/stubs/oc_hooks_emittertrait.php" />
+		<file name="tests/stubs/oc_hooks_publicemitter.php" />
+	</stubs>
 	<extraFiles>
 		<directory name="vendor" />
 		<directory name="vendor-bin" />

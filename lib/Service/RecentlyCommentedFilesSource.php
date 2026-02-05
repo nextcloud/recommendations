@@ -49,7 +49,7 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 	public function __construct(
 		private readonly ICommentsManager $commentsManager,
 		private readonly IRootFolder $rootFolder,
-		private readonly IL10N $l10n
+		private readonly IL10N $l10n,
 	) {
 	}
 
