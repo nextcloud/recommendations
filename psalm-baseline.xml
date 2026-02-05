@@ -13,25 +13,4 @@
       <code><![CDATA[LoadAdditionalScriptsEvent]]></code>
     </UndefinedClass>
   </file>
-  <file src="lib/Service/RecentlyCommentedFilesSource.php">
-    <MissingDependency>
-      <code><![CDATA[$this->rootFolder]]></code>
-      <code><![CDATA[IRootFolder]]></code>
-      <code><![CDATA[IRootFolder]]></code>
-    </MissingDependency>
-  </file>
-  <file src="lib/Service/RecentlyEditedFilesSource.php">
-    <MissingDependency>
-      <code><![CDATA[$rootFolder]]></code>
-      <code><![CDATA[$rootFolder]]></code>
-      <code><![CDATA[IRootFolder]]></code>
-    </MissingDependency>
-  </file>
-  <file src="lib/Service/RecentlySharedFilesSource.php">
-    <MissingDependency>
-      <code><![CDATA[$this->rootFolder]]></code>
-      <code><![CDATA[IRootFolder]]></code>
-      <code><![CDATA[IRootFolder]]></code>
-    </MissingDependency>
-  </file>
 </files>

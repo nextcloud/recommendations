@@ -40,23 +40,17 @@ use OCP\IUser;
 use function array_map;
 use function array_slice;
 use function iterator_to_array;
-use function reset;
 use function usort;
 
 class RecentlyCommentedFilesSource implements IRecommendationSource {
 
 	public const REASON = 'recently-commented';
 
-	private ICommentsManager $commentsManager;
-	private IRootFolder $rootFolder;
-	private IL10N $l10n;
-
-	public function __construct(ICommentsManager $commentsManager,
-		IRootFolder $rootFolder,
-		IL10N $l10n) {
-		$this->commentsManager = $commentsManager;
-		$this->rootFolder = $rootFolder;
-		$this->l10n = $l10n;
+	public function __construct(
+		private readonly ICommentsManager $commentsManager,
+		private readonly IRootFolder $rootFolder,
+		private readonly IL10N $l10n,
+	) {
 	}
 
 	private function getCommentsPage(int $offset, int $pageSize): array {
@@ -71,15 +65,14 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 	}
 
 	private function getCommentedFile(IComment $comment, Folder $userFolder): ?FileWithComments {
-		$nodes = $userFolder->getById((int)$comment->getObjectId());
-		$first = reset($nodes);
-		if ($first === false) {
+		$node = $userFolder->getFirstNodeById((int)$comment->getObjectId());
+		if ($node === null) {
 			return null;
 		}
 
 		return new FileWithComments(
-			$userFolder->getRelativePath($first->getParent()->getPath()),
-			$first,
+			$userFolder->getRelativePath($node->getParent()->getPath()),
+			$node,
 			$comment
 		);
 	}
