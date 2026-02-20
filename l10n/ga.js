@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Roinnte leat {timeAgo}",
     "Last commented on {timeAgo}" : "Ar deireadh trácht ar {timeAgo}",
     "Path name {path}" : "Ainm conair {path}",
-    "Show recommendations" : "Taispeáin moltaí",
-    "Recently commented" : "Trácht le déanaí",
-    "Recently edited" : "Curtha in eagar le déanaí",
-    "Recently shared" : "Roinnte le déanaí"
+    "Show recommendations" : "Taispeáin moltaí"
 },
 "nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);");

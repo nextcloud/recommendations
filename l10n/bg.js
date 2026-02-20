@@ -7,9 +7,6 @@ OC.L10N.register(
     "Shows recommended files for quick access of files and folders with recent activity" : "Показва препоръчани файлове за бърз достъп до файлове и папки със скорошна активност",
     "No recommendations yet" : "Все още няма препоръки",
     "Path name {path}" : "Име на пътя {path}",
-    "Show recommendations" : "Показва препоръки",
-    "Recently commented" : "Наскоро коментирани",
-    "Recently edited" : "Наскоро редактирани",
-    "Recently shared" : "Наскоро споделени"
+    "Show recommendations" : "Показва препоръки"
 },
 "nplurals=2; plural=(n != 1);");

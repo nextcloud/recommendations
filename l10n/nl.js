@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Gedeeld met jou {timeAgo}",
     "Last commented on {timeAgo}" : "Laatst becommentarieerd {timeAgo}",
     "Path name {path}" : "Padnaam {path}",
-    "Show recommendations" : "Toon aanbevelingen",
-    "Recently commented" : "Recent gereageerd",
-    "Recently edited" : "Recent bewerkt",
-    "Recently shared" : "Recent gedeeld"
+    "Show recommendations" : "Toon aanbevelingen"
 },
 "nplurals=2; plural=(n != 1);");

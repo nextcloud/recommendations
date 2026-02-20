@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Sinuga jagatud {timeAgo}",
     "Last commented on {timeAgo}" : "Viimati kommenteeritud {timeAgo}",
     "Path name {path}" : "Asukoha nimi {path}",
-    "Show recommendations" : "Näita soovitusi",
-    "Recently commented" : "Hiljuti kommenteeritud",
-    "Recently edited" : "Hiljuti muudetud",
-    "Recently shared" : "Hiljuti jagatud"
+    "Show recommendations" : "Näita soovitusi"
 },
 "nplurals=2; plural=(n != 1);");

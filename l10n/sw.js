@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Imeshirikiwa na wewe {timeAgo}",
     "Last commented on {timeAgo}" : "Mwisho alitoa maoni {timeAgo}",
     "Path name {path}" : "Jina la njia {path}",
-    "Show recommendations" : "Onesha mapendekezo",
-    "Recently commented" : "Hivi karibuni alitoa maoni",
-    "Recently edited" : "Imehaririwa hivi karibuni",
-    "Recently shared" : "Hivi karibuni imeshirikiwa"
+    "Show recommendations" : "Onesha mapendekezo"
 },
 "nplurals=2; plural=(n != 1);");

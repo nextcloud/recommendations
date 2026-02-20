@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "{timeAgo} 나와 공유됨",
     "Last commented on {timeAgo}" : "{timeAgo} 마지막으로 댓글 달림",
     "Path name {path}" : "경로명 {path}",
-    "Show recommendations" : "추천 항목 표시",
-    "Recently commented" : "최근에 댓글 달림",
-    "Recently edited" : "최근에 편집됨",
-    "Recently shared" : "최근에 공유됨"
+    "Show recommendations" : "추천 항목 표시"
 },
 "nplurals=1; plural=0;");
