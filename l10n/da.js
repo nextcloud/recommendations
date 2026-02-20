@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Delt med dig {timeAgo}",
     "Last commented on {timeAgo}" : "Sidst kommenteret {timeAgo}",
     "Path name {path}" : "Stinavn {path}",
-    "Show recommendations" : "Vis anbefalinger",
-    "Recently commented" : "Nyligt kommenteret",
-    "Recently edited" : "Nyligt redigeret",
-    "Recently shared" : "Nyligt delt"
+    "Show recommendations" : "Vis anbefalinger"
 },
 "nplurals=2; plural=(n != 1);");

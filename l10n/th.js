@@ -8,9 +8,6 @@ OC.L10N.register(
     "No recommendations yet" : "ยังไม่มีคำแนะนำ",
     "Last updated {timeAgo}" : "เปลี่ยนแปลงครั้งล่าสุด {timeAgo}",
     "Path name {path}" : "ชื่อเส้นทาง {path}",
-    "Show recommendations" : "แสดงคำแนะนำ",
-    "Recently commented" : "การแสดงความคิดเห็นล่าสุด",
-    "Recently edited" : "แก้ไขล่าสุด",
-    "Recently shared" : "แชร์ล่าสุด"
+    "Show recommendations" : "แสดงคำแนะนำ"
 },
 "nplurals=1; plural=0;");

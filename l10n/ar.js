@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "مُشَارَكٌ معك {timeAgo}",
     "Last commented on {timeAgo}" : "آخر تعليق {timeAgo}",
     "Path name {path}" : "اسم المسار {path}",
-    "Show recommendations" : "عرض الملفات الموصى بها",
-    "Recently commented" : "نوقشت مؤخرا",
-    "Recently edited" : "تغيرت مؤخرا",
-    "Recently shared" : "شوركت مؤخرا"
+    "Show recommendations" : "عرض الملفات الموصى بها"
 },
 "nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;");

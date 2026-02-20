@@ -8,9 +8,6 @@
     "Shared with you {timeAgo}" : "與您分享於 {timeAgo}",
     "Last commented on {timeAgo}" : "上次留言於 {timeAgo}",
     "Path name {path}" : "途徑名稱 {path}",
-    "Show recommendations" : "顯示推薦",
-    "Recently commented" : "最近留言",
-    "Recently edited" : "最近編輯",
-    "Recently shared" : "最近分享"
+    "Show recommendations" : "顯示推薦"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

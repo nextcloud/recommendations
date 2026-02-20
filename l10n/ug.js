@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "{timeAgo} دە سىز بىلەن ئورتاقلاشتى",
     "Last commented on {timeAgo}" : "ئاخىرقى قېتىم {timeAgo} ئىنكاس بەردى",
     "Path name {path}" : "يول ئىسمى {path}",
-    "Show recommendations" : "تەۋسىيە كۆرسەت",
-    "Recently commented" : "يېقىندا باھا بەردى",
-    "Recently edited" : "يېقىندا تەھرىرلەندى",
-    "Recently shared" : "يېقىندا ھەمبەھىرلەندى"
+    "Show recommendations" : "تەۋسىيە كۆرسەت"
 },
 "nplurals=2; plural=(n != 1);");

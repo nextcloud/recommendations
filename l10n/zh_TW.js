@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "與您分享於 {timeAgo}",
     "Last commented on {timeAgo}" : "上次留言於 {timeAgo}",
     "Path name {path}" : "路徑名稱 {path}",
-    "Show recommendations" : "顯示建議",
-    "Recently commented" : "最近留言",
-    "Recently edited" : "最近編輯",
-    "Recently shared" : "最近分享"
+    "Show recommendations" : "顯示建議"
 },
 "nplurals=1; plural=0;");

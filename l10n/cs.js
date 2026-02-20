@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Nasdíleno vám {timeAgo}",
     "Last commented on {timeAgo}" : "Naposledy okomentováno {timeAgo}",
     "Path name {path}" : "Název popisu umístění {path}",
-    "Show recommendations" : "Zobrazovat doporučení",
-    "Recently commented" : "Nedávno okomentováno",
-    "Recently edited" : "Nedávno upravováno",
-    "Recently shared" : "Nedávno nasdíleno"
+    "Show recommendations" : "Zobrazovat doporučení"
 },
 "nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;");

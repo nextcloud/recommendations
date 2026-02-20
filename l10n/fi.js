@@ -7,9 +7,6 @@ OC.L10N.register(
     "Shows recommended files for quick access of files and folders with recent activity" : "Näyttää suositellut, äskettäin käytetyt tiedostot ja kansiot",
     "No recommendations yet" : "Ei suosituksia vielä",
     "Path name {path}" : "Polun nimi {path}",
-    "Show recommendations" : "Näytä suosituksia",
-    "Recently commented" : "Äskettäin kommentoitu",
-    "Recently edited" : "Äskettäin muokattu",
-    "Recently shared" : "Äskettäin jaettu"
+    "Show recommendations" : "Näytä suosituksia"
 },
 "nplurals=2; plural=(n != 1);");
