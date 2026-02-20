@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Sizga {timeAgo} ulashildi",
     "Last commented on {timeAgo}" : "Oxirgi fikr bildirilgan sana: {timeAgo}",
     "Path name {path}" : "Yo'l nomi {path}",
-    "Show recommendations" : "Tavsiyalarni ko'rsatish",
-    "Recently commented" : "Yaqinda sharhlangan",
-    "Recently edited" : "Yaqinda tahrirlangan",
-    "Recently shared" : "Yaqinda ulashilgan"
+    "Show recommendations" : "Tavsiyalarni ko'rsatish"
 },
 "nplurals=1; plural=0;");

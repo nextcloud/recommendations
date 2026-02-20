@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Κοινοποιήθηκε μαζί σας {timeAgo}",
     "Last commented on {timeAgo}" : "Τελευταίο σχόλιο {timeAgo}",
     "Path name {path}" : "Ονομασία διαδρομής {path}",
-    "Show recommendations" : "Εμφάνιση προτεινόμενων",
-    "Recently commented" : "Σχολιάστηκε πρόσφατα",
-    "Recently edited" : "Επεξεργάστηκε πρόσφατα",
-    "Recently shared" : "Διαμοιράστηκε πρόσφατα"
+    "Show recommendations" : "Εμφάνιση προτεινόμενων"
 },
 "nplurals=2; plural=(n != 1);");

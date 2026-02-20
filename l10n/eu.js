@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Zurekin partekatuta {timeAgo}",
     "Last commented on {timeAgo}" : "Azken iruzkindua {timeAgo}",
     "Path name {path}" : "Bide-izena {path}",
-    "Show recommendations" : "Erakutsi aholkuak",
-    "Recently commented" : "Berriki iruzkindua",
-    "Recently edited" : "Berriki editatua",
-    "Recently shared" : "Berriki partekatua"
+    "Show recommendations" : "Erakutsi aholkuak"
 },
 "nplurals=2; plural=(n != 1);");

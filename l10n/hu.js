@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Megosztva Önnel: {timeAgo}",
     "Last commented on {timeAgo}" : "Legutóbb hozzászólva: {timeAgo}",
     "Path name {path}" : "Útvonal neve: {path}",
-    "Show recommendations" : "Ajánlások megjelenítése",
-    "Recently commented" : "Nemrég hozzászólva",
-    "Recently edited" : "Nemrég szerkesztve",
-    "Recently shared" : "Nemrég megosztva"
+    "Show recommendations" : "Ajánlások megjelenítése"
 },
 "nplurals=2; plural=(n != 1);");

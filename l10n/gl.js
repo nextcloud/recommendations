@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Compartido con Vde. hai {timeAgo}",
     "Last commented on {timeAgo}" : "Último comentario hai {timeAgo}",
     "Path name {path}" : "Nome da ruta {path}",
-    "Show recommendations" : "Amosar as recomendacións",
-    "Recently commented" : "Comentado recentemente",
-    "Recently edited" : "Editado recentemente",
-    "Recently shared" : "Compartido recentemente"
+    "Show recommendations" : "Amosar as recomendacións"
 },
 "nplurals=2; plural=(n != 1);");

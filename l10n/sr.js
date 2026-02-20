@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Подељено са вама {timeAgo}",
     "Last commented on {timeAgo}" : "Последњи пут коментарисано {timeAgo}",
     "Path name {path}" : "Назив путање {path}",
-    "Show recommendations" : "Прикажи препоруке",
-    "Recently commented" : "Недавно коментарисано",
-    "Recently edited" : "Недавно уређивано",
-    "Recently shared" : "Недавно подељено"
+    "Show recommendations" : "Прикажи препоруке"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);");

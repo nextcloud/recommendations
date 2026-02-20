@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "あなたと共有 {timeAgo}",
     "Last commented on {timeAgo}" : "{timeAgo}に最新コメント",
     "Path name {path}" : "パス名 {path}",
-    "Show recommendations" : "おすすめを表示",
-    "Recently commented" : "最近追加されたコメント",
-    "Recently edited" : "最近編集したもの",
-    "Recently shared" : "最近共有したもの"
+    "Show recommendations" : "おすすめを表示"
 },
 "nplurals=1; plural=0;");

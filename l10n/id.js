@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Dibagikan kepada Anda {timeAgo}",
     "Last commented on {timeAgo}" : "Terakhir dikomentari pada {timeAgo}",
     "Path name {path}" : "Nama path {path}",
-    "Show recommendations" : "Tampilkan rekomendasi",
-    "Recently commented" : "Baru-baru ini dikomentari",
-    "Recently edited" : "Baru-baru ini diedit",
-    "Recently shared" : "Baru-baru ini dibagikan"
+    "Show recommendations" : "Tampilkan rekomendasi"
 },
 "nplurals=1; plural=0;");

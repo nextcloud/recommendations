@@ -10,9 +10,6 @@ OC.L10N.register(
     "Shared with you {timeAgo}" : "Sizinle paylaşılma {timeAgo}",
     "Last commented on {timeAgo}" : "Son yorum {timeAgo}",
     "Path name {path}" : "Yol adı {path}",
-    "Show recommendations" : "Önerilenleri görüntüle",
-    "Recently commented" : "Son yorum yapılanlar",
-    "Recently edited" : "Son düzenlenenler",
-    "Recently shared" : "Son paylaşılanlar"
+    "Show recommendations" : "Önerilenleri görüntüle"
 },
 "nplurals=2; plural=(n > 1);");
