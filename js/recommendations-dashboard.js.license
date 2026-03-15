@@ -82,7 +82,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 3.26.0
 	- license: MIT
 - @nextcloud/vue
-	- version: 8.35.2
+	- version: 8.36.0
 	- license: AGPL-3.0-or-later
 - @ungap/structured-clone
 	- version: 1.2.0
@@ -127,7 +127,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 1.1.0
 	- license: MIT
 - dompurify
-	- version: 3.3.1
+	- version: 3.3.3
 	- license: (MPL-2.0 OR Apache-2.0)
 - emoji-mart-vue-fast
 	- version: 15.0.5
@@ -142,7 +142,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 1.0.0-beta.19
 	- license: MIT
 - focus-trap
-	- version: 7.6.6
+	- version: 7.8.0
 	- license: MIT
 - hast-to-hyperscript
 	- version: 10.0.3
@@ -322,7 +322,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 6.0.1
 	- license: MIT
 - unist-util-visit
-	- version: 5.0.0
+	- version: 5.1.0
 	- license: MIT
 - vfile-message
 	- version: 4.0.2
@@ -343,7 +343,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 2.0.1
 	- license: MIT
 - webpack
-	- version: 5.95.0
+	- version: 5.105.4
 	- license: MIT
 - recommendations
 	- version: 6.0.0-dev.0
