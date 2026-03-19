@@ -21,13 +21,6 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 
 	public const REASON = 'recently-edited';
 
-	/**
-	 * Multiplier for the candidate pool when filtering hidden files.
-	 * Fetching more candidates than requested ensures we can fill the result
-	 * set even if a significant portion of recent files are hidden.
-	 */
-	private const HIDDEN_FILTER_CANDIDATE_MULTIPLIER = 10;
-
 	private IServerContainer $serverContainer;
 	private IL10N $l10n;
 	private IConfig $config;
@@ -65,33 +58,40 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 
 		$showHidden = $this->config->getUserValue($user->getUID(), 'files', 'show_hidden', '0') === '1';
 
-		$candidates = $showHidden
-			? $userFolder->getRecent($max)
-			: $userFolder->getRecent(self::HIDDEN_FILTER_CANDIDATE_MULTIPLIER * $max);
-
 		$results = [];
-		foreach ($candidates as $node) {
-			if (!$showHidden && $this->isNodeHidden($node)) {
-				continue;
-			}
-			try {
-				$parentPath = dirname($node->getPath());
-				if ($parentPath === '' || $parentPath === '.' || $parentPath === '/') {
-					$parentPath = $node->getParent()->getPath();
-				}
-				$results[] = new RecommendedFile(
-					$userFolder->getRelativePath($parentPath),
-					$node,
-					$node->getMTime(),
-					self::REASON,
-				);
-			} catch (StorageNotAvailableException $e) {
-				// skip unavailable files
-			}
-			if (count($results) >= $max) {
+		$offset = 0;
+
+		do {
+			$batch = $userFolder->getRecent($max, $offset);
+			if (empty($batch)) {
 				break;
 			}
-		}
+
+			foreach ($batch as $node) {
+				if (!$showHidden && $this->isNodeHidden($node)) {
+					continue;
+				}
+				try {
+					$parentPath = dirname($node->getPath());
+					if ($parentPath === '' || $parentPath === '.' || $parentPath === '/') {
+						$parentPath = $node->getParent()->getPath();
+					}
+					$results[] = new RecommendedFile(
+						$userFolder->getRelativePath($parentPath),
+						$node,
+						$node->getMTime(),
+						self::REASON,
+					);
+				} catch (StorageNotAvailableException $e) {
+					// skip unavailable files
+				}
+				if (count($results) >= $max) {
+					break;
+				}
+			}
+
+			$offset += $max;
+		} while (count($results) < $max);
 
 		return $results;
 	}
