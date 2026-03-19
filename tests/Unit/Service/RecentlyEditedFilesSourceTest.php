@@ -244,10 +244,13 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 		$this->userFolder->method('getRecent')
 			->willReturnCallback(function (int $limit, int $offset) use (&$observedOffsets): array {
 				$observedOffsets[] = $offset;
-				// Return empty after first hidden-only batch to end the loop
 				if ($offset === 0) {
-					$hiddenNode = $this->createNodeMock('/testuser/files/.hidden/file.txt', 1000);
-					return [$hiddenNode];
+					// Return a full batch of hidden nodes (equal to $limit) so the loop
+					// advances the offset and fetches the next page.
+					return array_map(
+						fn (int $i) => $this->createNodeMock('/testuser/files/.hidden/file' . $i . '.txt', 1000 + $i),
+						range(0, $limit - 1),
+					);
 				}
 				return [];
 			});
@@ -255,6 +258,31 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 		$this->source->getMostRecentRecommendation($this->user, 5);
 
 		$this->assertSame([0, 5], $observedOffsets);
+	}
+
+	public function testLoopStopsWhenFewerItemsThanMaxAreAvailable(): void {
+		$this->setShowHidden(false);
+
+		// Only 2 visible files exist, but max is 5.
+		// The batch is smaller than max, so the loop must not keep fetching.
+		$node1 = $this->createNodeMock('/testuser/files/file1.pdf', 1000);
+		$node2 = $this->createNodeMock('/testuser/files/file2.pdf', 2000);
+
+		$callCount = 0;
+		$this->userFolder->method('getRecent')
+			->willReturnCallback(function (int $limit, int $offset) use ($node1, $node2, &$callCount): array {
+				$callCount++;
+				// Only the first call (offset=0) returns items; a second call would
+				// indicate an infinite loop — the batch size < max should have stopped it.
+				return $offset === 0 ? [$node1, $node2] : [];
+			});
+		$this->userFolder->method('getRelativePath')
+			->willReturnCallback(fn (string $path) => str_replace('/testuser/files', '', $path));
+
+		$results = $this->source->getMostRecentRecommendation($this->user, 5);
+
+		$this->assertCount(2, $results);
+		$this->assertSame(1, $callCount, 'getRecent should only be called once when the batch is smaller than max');
 	}
 
 	/**

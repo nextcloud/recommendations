@@ -90,6 +90,11 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 				}
 			}
 
+			// If the batch was smaller than requested, there are no more items to fetch
+			if (count($batch) < $max) {
+				break;
+			}
+
 			$offset += $max;
 		} while (count($results) < $max);
 
