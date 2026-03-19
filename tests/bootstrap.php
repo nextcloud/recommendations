@@ -19,10 +19,4 @@ if (file_exists($serverBase)) {
 	require_once $serverBase;
 }
 
-// Standalone unit-test run: define minimal OC\Hooks stubs required by the
-// OCP interfaces loaded via the nextcloud/ocp dev-dependency.
-if (!interface_exists('OC\Hooks\Emitter', false)) {
-	require_once __DIR__ . '/OcHooksStubs.php';
-}
-
 require_once __DIR__ . '/../vendor/autoload.php';

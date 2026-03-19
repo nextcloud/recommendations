@@ -36,7 +36,6 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 	private IServerContainer&MockObject $serverContainer;
 	private IL10N&MockObject $l10n;
 	private IConfig&MockObject $config;
-	private IRootFolder&MockObject $rootFolder;
 	private Folder&MockObject $userFolder;
 	private IUser&MockObject $user;
 	private RecentlyEditedFilesSource $source;
@@ -47,19 +46,29 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 		$this->serverContainer = $this->createMock(IServerContainer::class);
 		$this->l10n = $this->createMock(IL10N::class);
 		$this->config = $this->createMock(IConfig::class);
-		$this->rootFolder = $this->createMock(IRootFolder::class);
 		$this->userFolder = $this->createMock(Folder::class);
 		$this->user = $this->createMock(IUser::class);
 
 		$this->user->method('getUID')->willReturn('testuser');
 
+		// Use an anonymous proxy instead of createMock(IRootFolder::class) so
+		// that PHP never loads IRootFolder at runtime.  IRootFolder extends
+		// OC\Hooks\Emitter (a server-internal interface), which would otherwise
+		// require OC\Hooks stubs to be defined.
+		$userFolder = $this->userFolder;
+		$rootFolderProxy = new class($userFolder) {
+			public function __construct(
+				private Folder $folder,
+			) {
+			}
+			public function getUserFolder(string $uid): Folder {
+				return $this->folder;
+			}
+		};
+
 		$this->serverContainer->method('get')
 			->with(IRootFolder::class)
-			->willReturn($this->rootFolder);
-
-		$this->rootFolder->method('getUserFolder')
-			->with('testuser')
-			->willReturn($this->userFolder);
+			->willReturn($rootFolderProxy);
 
 		$this->source = new RecentlyEditedFilesSource(
 			$this->serverContainer,
