@@ -32,9 +32,20 @@
 		"lint": "find . -name \\*.php -not -path './vendor/*' -not -path './tests/stubs/*' -not -path './vendor-bin/*' -print0 | xargs -0 -n1 php -l",
 		"cs:check": "php-cs-fixer fix --dry-run --diff",
 		"cs:fix": "php-cs-fixer fix",
-		"test:unit": "echo 'Only testing installation of the app'",
+		"test:unit": "vendor/bin/phpunit --configuration phpunit.xml.dist",
 		"psalm": "psalm --threads=$(nproc) --no-cache",
 		"openapi": "generate-spec"
+	},
+	"autoload": {
+		"psr-4": {
+			"OCA\\Recommendations\\": "lib/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"OCA\\Recommendations\\Tests\\": "tests/",
+			"OCP\\": "vendor/nextcloud/ocp/OCP/"
+		}
 	},
 	"require-dev": {
 		"nextcloud/coding-standard": "^v1.4.0",
