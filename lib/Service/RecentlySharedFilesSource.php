@@ -9,108 +9,145 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Service;
 
-use Generator;
 use OCP\Files\IRootFolder;
 use OCP\Files\NotFoundException;
 use OCP\Files\StorageNotAvailableException;
-use OCP\IL10N;
 use OCP\IUser;
 use OCP\Share\IManager;
 use OCP\Share\IShare;
-use function array_filter;
-use function array_map;
-use function array_merge;
 use function array_slice;
-use function iterator_to_array;
 use function usort;
 
 class RecentlySharedFilesSource implements IRecommendationSource {
 
 	public const REASON = 'recently-shared';
 
-	private IManager $shareManager;
-	private IRootFolder $rootFolder;
-	private IL10N $l10n;
-
-	public function __construct(IManager $shareManager,
-		IRootFolder $rootFolder,
-		IL10N $l10n) {
-		$this->shareManager = $shareManager;
-		$this->rootFolder = $rootFolder;
-		$this->l10n = $l10n;
+	public function __construct(
+		private IManager $shareManager,
+		private IRootFolder $rootFolder,
+	) {
 	}
 
 	/**
-	 * @return Generator<IShare>
+	 * @return IShare[]
 	 */
-	private function getAllShares(IUser $user, int $shareType): Generator {
-		$offset = 0;
-		$pageSize = 50;
-
-		while (count($page = $this->shareManager->getSharedWith(
+	private function getSharesPage(IUser $user, int $shareType, int $offset, int $pageSize): array {
+		return $this->shareManager->getSharedWith(
 			$user->getUID(),
 			$shareType,
 			null,
 			$pageSize,
 			$offset
-		))) {
-			foreach ($page as $share) {
-				yield $share;
-			}
-
-			$offset += $pageSize;
-		}
+		);
 	}
 
 	/**
-	 * @param IShare[] $shares
-	 *
-	 * @return IShare[]
+	 * @param list<IShare> $shares
+	 * @return list<IShare>
 	 */
-	private function sortShares(array $shares): array {
-		usort($shares, function (IShare $a, IShare $b) {
-			return $b->getShareTime()->getTimestamp() - $a->getShareTime()->getTimestamp();
+	private function sortSharesByMostRecent(array $shares): array {
+		usort($shares, static function (IShare $a, IShare $b): int {
+			return $b->getShareTime()->getTimestamp() <=> $a->getShareTime()->getTimestamp();
 		});
+
 		return $shares;
 	}
 
 	/**
-	 * @param IUser $user
+	 * Merge a new batch of shares into the current top-N list.
 	 *
-	 * @todo load other share types as well
+	 * We intentionally do not assume that getSharedWith() is ordered by
+	 * share time, so every fetched page must still be considered.
 	 *
-	 * @return IShare[]
+	 * @param list<IShare> $topShares
+	 * @param list<IShare> $page
+	 * @return list<IShare>
 	 */
-	private function getMostRecentShares(IUser $user, int $max): array {
-		$shares = $this->sortShares(array_merge(
-			iterator_to_array($this->getAllShares($user, IShare::TYPE_USER)),
-			iterator_to_array($this->getAllShares($user, IShare::TYPE_GROUP))
-		));
+	private function mergeTopShares(array $topShares, array $page, int $max): array {
+		if ($page === []) {
+			return $topShares;
+		}
 
-		return array_slice($shares, 0, $max);
+		$merged = [...$topShares, ...$page];
+		$merged = $this->sortSharesByMostRecent($merged);
+
+		if (count($merged) > $max) {
+			$merged = array_slice($merged, 0, $max);
+		}
+
+		return $merged;
 	}
 
 	/**
-	 * @return IRecommendation[]
+	 * Return the globally most recent shares across the supported share types.
+	 *
+	 * This preserves the existing behavior of considering all shares before
+	 * choosing the top results, while avoiding materializing the complete
+	 * merged share list in memory.
+	 *
+	 * @return list<IShare>
+	 */
+	private function getMostRecentShares(IUser $user, int $max): array {
+		if ($max <= 0) {
+			return [];
+		}
+
+		$pageSize = 50;
+		$topShares = [];
+
+		// @todo load other share types as well
+		foreach ([IShare::TYPE_USER, IShare::TYPE_GROUP] as $shareType) {
+			$offset = 0;
+
+			while (true) {
+				$page = $this->getSharesPage($user, $shareType, $offset, $pageSize);
+				if ($page === []) {
+					break;
+				}
+
+				$topShares = $this->mergeTopShares($topShares, $page, $max);
+
+				// Short page means pagination for this share type is exhausted.
+				// This is only an end-of-results check; it does not assume any
+				// recency ordering from getSharedWith().
+				if (count($page) < $pageSize) {
+					break;
+				}
+
+				$offset += $pageSize;
+			}
+		}
+
+		return $topShares;
+	}
+
+	/**
+	 * @return list<IRecommendation>
 	 */
 	#[\Override]
 	public function getMostRecentRecommendation(IUser $user, int $max): array {
-		$shares = $this->getMostRecentShares($user, $max);
-		$userFolder = $this->rootFolder->getUserFolder($user->getUID());
+		if ($max <= 0) {
+			return [];
+		}
 
-		return array_filter(array_map(function (IShare $share) use ($userFolder): ?RecommendedFile {
+		$userFolder = $this->rootFolder->getUserFolder($user->getUID());
+		$recommendations = [];
+
+		foreach ($this->getMostRecentShares($user, $max) as $share) {
 			try {
-				return new RecommendedFile(
+				$recommendations[] = new RecommendedFile(
 					$userFolder->getRelativePath($userFolder->get($share->getTarget())->getParent()->getPath()),
 					$share->getNode(),
 					$share->getShareTime()->getTimestamp(),
 					self::REASON,
 				);
-			} catch (NotFoundException $ex) {
-				return null;
+			} catch (NotFoundException $e) {
+				continue;
 			} catch (StorageNotAvailableException $e) {
-				return null;
+				continue;
 			}
-		}, $shares));
+		}
+
+		return $recommendations;
 	}
 }
