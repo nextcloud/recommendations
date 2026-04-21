@@ -14,7 +14,6 @@ use OCP\Comments\IComment;
 use OCP\Comments\ICommentsManager;
 use OCP\Files\Folder;
 use OCP\Files\IRootFolder;
-use OCP\IL10N;
 use OCP\IUser;
 
 class RecentlyCommentedFilesSource implements IRecommendationSource {
