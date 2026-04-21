@@ -11,9 +11,7 @@ namespace OCA\Recommendations\Service;
 
 use OCP\IPreview;
 use OCP\IUser;
-use function array_merge;
-use function array_reduce;
-use function array_slice;
+use function array_push;
 use function usort;
 
 class RecommendationService {
@@ -42,7 +40,7 @@ class RecommendationService {
 	 */
 	private function sortRecommendations(array $recommendations): array {
 		usort($recommendations, function (IRecommendation $a, IRecommendation $b) {
-			return $b->getTimestamp() - $a->getTimestamp();
+			return $b->getTimestamp() <=> $a->getTimestamp();
 		});
 
 		return $recommendations;
@@ -68,9 +66,11 @@ class RecommendationService {
 	 * @return list<IRecommendation>
 	 */
 	public function getRecommendations(IUser $user, int $max = self::MAX_RECOMMENDATIONS): array {
-		$all = array_reduce($this->sources, function (array $carry, IRecommendationSource $source) use ($user) {
-			return array_merge($carry, $source->getMostRecentRecommendation($user, self::MAX_RECOMMENDATIONS));
-		}, []);
+		$all = [];
+
+		foreach ($this->sources as $source) {
+			array_push($all, ...$source->getMostRecentRecommendation($user, self::MAX_RECOMMENDATIONS));
+		}
 
 		$sorted = $this->sortRecommendations($all);
 		$topX = $this->getDeduplicatedSlice($sorted, $max);
@@ -89,16 +89,28 @@ class RecommendationService {
 	 * @return list<IRecommendation>
 	 */
 	private function getDeduplicatedSlice(array $recommendations, int $max): array {
+		if ($max <= 0) {
+			return [];
+		}
+
 		$picks = [];
+		$seen = [];
 
 		foreach ($recommendations as $recommendation) {
-			if (empty(array_filter($picks, function (IRecommendation $rec) use ($recommendation) {
-				return $recommendation->getNode()->getId() === $rec->getNode()->getId();
-			}))) {
-				$picks[] = $recommendation;
+			$id = $recommendation->getNode()->getId();
+
+			if (isset($seen[$id])) {
+				continue;
+			}
+
+			$seen[$id] = true;
+			$picks[] = $recommendation;
+
+			if (count($picks) >= $max) {
+				break;
 			}
 		}
 
-		return array_slice($picks, 0, $max);
+		return $picks;
 	}
 }
