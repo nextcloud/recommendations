@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 import Vue from 'vue'
-import { Header, registerFileListHeaders } from '@nextcloud/files'
+import { registerFileListHeader } from '@nextcloud/files'
 
 import FilesRecommendations from './components/FilesRecommendations.vue'
 import Settings from './components/Settings.vue'
@@ -11,7 +11,7 @@ import store from './store/store.js'
 
 const View = Vue.extend(FilesRecommendations)
 
-const header = new Header({
+const header = {
 	id: 'recommendations',
 	order: 90,
 
@@ -42,6 +42,6 @@ const header = new Header({
 		}
 	},
 	updated(folder, view) {},
-})
+}
 
-registerFileListHeaders(header)
+registerFileListHeader(header)
