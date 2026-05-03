@@ -25,7 +25,6 @@ SPDX-FileCopyrightText: Max <max@nextcloud.com>
 SPDX-FileCopyrightText: Mark <mark@remarkablemark.org>
 SPDX-FileCopyrightText: Mapbox
 SPDX-FileCopyrightText: Jeff Sagal <sagalbot@gmail.com>
-SPDX-FileCopyrightText: James Halliday
 SPDX-FileCopyrightText: Jacob Clevenger<https://github.com/wheatjs>
 SPDX-FileCopyrightText: Guillaume Chau <guillaume.b.chau@gmail.com>
 SPDX-FileCopyrightText: GitHub Inc.
@@ -58,7 +57,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 0.2.1
 	- license: BSD-2-Clause
 - @nextcloud/auth
-	- version: 2.5.3
+	- version: 2.6.0
 	- license: GPL-3.0-or-later
 - @nextcloud/axios
 	- version: 2.5.2
@@ -85,7 +84,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 3.26.0
 	- license: MIT
 - @nextcloud/vue
-	- version: 8.35.2
+	- version: 8.38.0
 	- license: AGPL-3.0-or-later
 - @ungap/structured-clone
 	- version: 1.2.0
@@ -133,7 +132,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 1.1.0
 	- license: MIT
 - dompurify
-	- version: 3.3.1
+	- version: 3.4.2
 	- license: (MPL-2.0 OR Apache-2.0)
 - emoji-mart-vue-fast
 	- version: 15.0.5
@@ -148,7 +147,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 1.0.0-beta.19
 	- license: MIT
 - focus-trap
-	- version: 7.6.6
+	- version: 7.8.0
 	- license: MIT
 - hast-to-hyperscript
 	- version: 10.0.3
@@ -255,9 +254,6 @@ This file is generated from multiple sources. Included packages:
 - eventemitter3
 	- version: 5.0.1
 	- license: MIT
-- path-browserify
-	- version: 1.0.1
-	- license: MIT
 - process
 	- version: 0.11.10
 	- license: MIT
@@ -334,7 +330,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 4.0.0
 	- license: MIT
 - unist-util-visit-parents
-	- version: 6.0.1
+	- version: 6.0.2
 	- license: MIT
 - unist-util-visit
 	- version: 5.0.0
@@ -358,7 +354,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 2.0.1
 	- license: MIT
 - webpack
-	- version: 5.95.0
+	- version: 5.106.2
 	- license: MIT
 - recommendations
 	- version: 5.0.0-dev.0
