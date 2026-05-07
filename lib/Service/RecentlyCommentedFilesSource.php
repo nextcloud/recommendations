@@ -83,12 +83,13 @@ class RecentlyCommentedFilesSource implements IRecommendationSource {
 					continue;
 				}
 
+				$seenFileIds[$fileId] = true;
+
 				$commentedFile = $this->getCommentedFile($comment, $userFolder);
 				if ($commentedFile === null) {
 					continue;
 				}
 
-				$seenFileIds[$fileId] = true;
 				$results[] = new RecommendedFile(
 					$commentedFile->getDirectory(),
 					$commentedFile->getNode(),
