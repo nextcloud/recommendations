@@ -25,25 +25,21 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { translate as t } from '@nextcloud/l10n'
 import RecommendedFile from './RecommendedFile.vue'
+import store from '../store/store.js'
 
 export default {
 	name: 'FilesRecommendations',
 	components: { RecommendedFile },
-	computed: {
-		enabled() {
-			return this.$store.state.enabled
-		},
-		loading() {
-			return this.$store.state.loading
-		},
-		recommendedFiles() {
-			return this.$store.state.recommendedFiles
-		},
-	},
-	methods: {
-		t,
+
+	setup() {
+		const enabled = computed(() => store.state.enabled)
+		const loading = computed(() => store.state.loading)
+		const recommendedFiles = computed(() => store.state.recommendedFiles)
+
+		return { enabled, loading, recommendedFiles, t }
 	},
 }
 </script>

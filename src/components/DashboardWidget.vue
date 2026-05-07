@@ -28,10 +28,12 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { t } from '@nextcloud/l10n'
 import NcDashboardWidget from '@nextcloud/vue/dist/Components/NcDashboardWidget.js'
 import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
 import RecommendedFile from './RecommendedFile.vue'
+import store from '../store/store.js'
 
 export default {
 	name: 'DashboardWidget',
@@ -41,26 +43,20 @@ export default {
 		NcDashboardWidget,
 		NcEmptyContent,
 	},
-	computed: {
-		enabled() {
-			return this.$store.state.enabled
-		},
-		loading() {
-			return this.$store.state.loading
-		},
-		recommendedFiles() {
-			return this.$store.state.recommendedFiles.slice(0, 7)
-		},
-	},
-	methods: {
-		t,
+
+	setup() {
+		const enabled = computed(() => store.state.enabled)
+		const loading = computed(() => store.state.loading)
+		const recommendedFiles = computed(() => store.state.recommendedFiles.slice(0, 7))
+
+		return { enabled, loading, recommendedFiles, t }
 	},
 }
 </script>
 
 <style lang="scss" scoped>
 	#recommendations {
-		::v-deep .recommendation {
+		:deep(.recommendation) {
 			max-width: 100%;
 			padding: 8px;
 			margin-right: 0;

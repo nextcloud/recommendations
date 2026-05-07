@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
-import { joinPaths } from '@nextcloud/paths'
+import { join } from '@nextcloud/paths'
 import { useFormatDateTime } from '@nextcloud/vue'
 
 import FolderIcon from 'vue-material-design-icons/Folder.vue'
@@ -85,75 +85,67 @@ export default {
 			required: true,
 		},
 	},
+
 	setup(props) {
 		const { formattedTime } = useFormatDateTime(computed(() => props.timestamp * 1000), {
 			ignoreSeconds: true,
 		})
-		return {
-			formattedTime,
-		}
-	},
-	data() {
-		return {
-			previewUrl: OC.MimeType.getIconUrl(this.mimeType),
-		}
-	},
-	computed: {
-		nameWithoutExtension() {
-			if (this.name.endsWith(this.extension)) {
-				return this.name.substring(0, this.name.length - this.extension.length - 1)
-			} else {
-				return this.name
+
+		const previewUrl = ref(OC.MimeType.getIconUrl(props.mimeType))
+
+		const nameWithoutExtension = computed(() => {
+			if (props.name.endsWith(props.extension)) {
+				return props.name.substring(0, props.name.length - props.extension.length - 1)
 			}
-		},
-		path() {
-			return (this.directory === '/' ? '' : this.directory) + '/' + this.name
-		},
-		isFolder() {
-			return this.mimeType === 'httpd/unix-directory'
-		},
-		description() {
-			if (this.reason === 'recently-edited') {
-				return t('recommendations', 'Last updated {timeAgo}', { timeAgo: this.formattedTime })
+			return props.name
+		})
+
+		const path = computed(() =>
+			(props.directory === '/' ? '' : props.directory) + '/' + props.name,
+		)
+
+		const isFolder = computed(() => props.mimeType === 'httpd/unix-directory')
+
+		const description = computed(() => {
+			if (props.reason === 'recently-edited') {
+				return t('recommendations', 'Last updated {timeAgo}', { timeAgo: formattedTime.value })
 			}
-			if (this.reason === 'recently-shared') {
-				return t('recommendations', 'Shared with you {timeAgo}', { timeAgo: this.formattedTime })
+			if (props.reason === 'recently-shared') {
+				return t('recommendations', 'Shared with you {timeAgo}', { timeAgo: formattedTime.value })
 			}
-			if (this.reason === 'recently-commented') {
-				return t('recommendations', 'Last commented on {timeAgo}', { timeAgo: this.formattedTime })
+			if (props.reason === 'recently-commented') {
+				return t('recommendations', 'Last commented on {timeAgo}', { timeAgo: formattedTime.value })
 			}
 			return null
-		},
-	},
-	mounted() {
-		if (this.hasPreview) {
-			const previewUrl = generateUrl('/core/preview?fileId={fileId}&x=250&y=250', {
-				fileId: this.id,
-			})
-			const img = new Image()
-			img.onload = () => {
-				this.previewUrl = previewUrl
-			}
-			img.onerror = err => {
-				console.error('could not load recommendation preview', err)
-			}
-			img.src = previewUrl
-		}
-	},
-	methods: {
-		t,
+		})
 
-		navigate() {
+		onMounted(() => {
+			if (props.hasPreview) {
+				const url = generateUrl('/core/preview?fileId={fileId}&x=250&y=250', {
+					fileId: props.id,
+				})
+				const img = new Image()
+				img.onload = () => {
+					previewUrl.value = url
+				}
+				img.onerror = err => {
+					console.error('could not load recommendation preview', err)
+				}
+				img.src = url
+			}
+		})
+
+		function navigate() {
 			// If Viewer is enabled and supports this file, open directly
-			if (window.OCA?.Viewer && window.OCA.Viewer.mimetypes.indexOf(this.mimeType) !== -1) {
-				window.OCA.Viewer.open({ path: this.path })
+			if (window.OCA?.Viewer && window.OCA.Viewer.mimetypes.indexOf(props.mimeType) !== -1) {
+				window.OCA.Viewer.open({ path: path.value })
 				return
 			}
 
 			// Navigate to the file if the file router is available
 			if (window.OCP?.Files?.Router) {
-				const dir = this.isFolder ? joinPaths(this.directory, this.name) : this.directory
-				const fileid = this.isFolder ? null : this.id
+				const dir = isFolder.value ? join(props.directory, props.name) : props.directory
+				const fileid = isFolder.value ? null : props.id
 				window.OCP.Files.Router.goToRoute(
 					// use default route
 					null,
@@ -165,8 +157,10 @@ export default {
 			}
 
 			// Fallback to the old way of navigating to the file
-			window.location = generateUrl('/f/' + this.id)
-		},
+			window.location = generateUrl('/f/' + props.id)
+		}
+
+		return { previewUrl, nameWithoutExtension, path, isFolder, description, navigate, t }
 	},
 }
 </script>
