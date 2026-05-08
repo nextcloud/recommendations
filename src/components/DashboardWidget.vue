@@ -27,7 +27,7 @@
 	</NcDashboardWidget>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { t } from '@nextcloud/l10n'
 import NcDashboardWidget from '@nextcloud/vue/dist/Components/NcDashboardWidget.js'
@@ -35,23 +35,7 @@ import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
 import RecommendedFile from './RecommendedFile.vue'
 import store from '../store/store.js'
 
-export default {
-	name: 'DashboardWidget',
-
-	components: {
-		RecommendedFile,
-		NcDashboardWidget,
-		NcEmptyContent,
-	},
-
-	setup() {
-		const enabled = computed(() => store.state.enabled)
-		const loading = computed(() => store.state.loading)
-		const recommendedFiles = computed(() => store.state.recommendedFiles.slice(0, 7))
-
-		return { enabled, loading, recommendedFiles, t }
-	},
-}
+const recommendedFiles = computed(() => store.state.recommendedFiles.slice(0, 7))
 </script>
 
 <style lang="scss" scoped>

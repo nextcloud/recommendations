@@ -35,7 +35,7 @@
 	</a>
 </template>
 
-<script>
+<script setup>
 import { computed, ref, onMounted } from 'vue'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
@@ -44,124 +44,115 @@ import { useFormatDateTime } from '@nextcloud/vue'
 
 import FolderIcon from 'vue-material-design-icons/Folder.vue'
 
-export default {
-	name: 'RecommendedFile',
-
-	components: {
-		FolderIcon,
+const props = defineProps({
+	id: {
+		type: String,
+		required: true,
 	},
-
-	props: {
-		id: {
-			type: String,
-			required: true,
-		},
-		extension: {
-			type: String,
-			required: true,
-		},
-		mimeType: {
-			type: String,
-			required: true,
-		},
-		name: {
-			type: String,
-			required: true,
-		},
-		directory: {
-			type: String,
-			required: true,
-		},
-		reason: {
-			type: String,
-			required: true,
-		},
-		hasPreview: {
-			type: Boolean,
-			default: false,
-		},
-		timestamp: {
-			type: Number,
-			required: true,
-		},
+	extension: {
+		type: String,
+		required: true,
 	},
+	mimeType: {
+		type: String,
+		required: true,
+	},
+	name: {
+		type: String,
+		required: true,
+	},
+	directory: {
+		type: String,
+		required: true,
+	},
+	reason: {
+		type: String,
+		required: true,
+	},
+	hasPreview: {
+		type: Boolean,
+		default: false,
+	},
+	timestamp: {
+		type: Number,
+		required: true,
+	},
+})
 
-	setup(props) {
-		const { formattedTime } = useFormatDateTime(computed(() => props.timestamp * 1000), {
-			ignoreSeconds: true,
+const { formattedTime } = useFormatDateTime(computed(() => props.timestamp * 1000), {
+	ignoreSeconds: true,
+})
+
+const previewUrl = ref(OC.MimeType.getIconUrl(props.mimeType))
+
+const nameWithoutExtension = computed(() => {
+	if (props.name.endsWith(props.extension)) {
+		return props.name.substring(0, props.name.length - props.extension.length - 1)
+	}
+	return props.name
+})
+
+const path = computed(() =>
+	(props.directory === '/' ? '' : props.directory) + '/' + props.name,
+)
+
+const isFolder = computed(() => props.mimeType === 'httpd/unix-directory')
+
+const description = computed(() => {
+	if (props.reason === 'recently-edited') {
+		return t('recommendations', 'Last updated {timeAgo}', { timeAgo: formattedTime.value })
+	}
+	if (props.reason === 'recently-shared') {
+		return t('recommendations', 'Shared with you {timeAgo}', { timeAgo: formattedTime.value })
+	}
+	if (props.reason === 'recently-commented') {
+		return t('recommendations', 'Last commented on {timeAgo}', { timeAgo: formattedTime.value })
+	}
+	return null
+})
+
+onMounted(() => {
+	if (props.hasPreview) {
+		const url = generateUrl('/core/preview?fileId={fileId}&x=250&y=250', {
+			fileId: props.id,
 		})
-
-		const previewUrl = ref(OC.MimeType.getIconUrl(props.mimeType))
-
-		const nameWithoutExtension = computed(() => {
-			if (props.name.endsWith(props.extension)) {
-				return props.name.substring(0, props.name.length - props.extension.length - 1)
-			}
-			return props.name
-		})
-
-		const path = computed(() =>
-			(props.directory === '/' ? '' : props.directory) + '/' + props.name,
-		)
-
-		const isFolder = computed(() => props.mimeType === 'httpd/unix-directory')
-
-		const description = computed(() => {
-			if (props.reason === 'recently-edited') {
-				return t('recommendations', 'Last updated {timeAgo}', { timeAgo: formattedTime.value })
-			}
-			if (props.reason === 'recently-shared') {
-				return t('recommendations', 'Shared with you {timeAgo}', { timeAgo: formattedTime.value })
-			}
-			if (props.reason === 'recently-commented') {
-				return t('recommendations', 'Last commented on {timeAgo}', { timeAgo: formattedTime.value })
-			}
-			return null
-		})
-
-		onMounted(() => {
-			if (props.hasPreview) {
-				const url = generateUrl('/core/preview?fileId={fileId}&x=250&y=250', {
-					fileId: props.id,
-				})
-				const img = new Image()
-				img.onload = () => {
-					previewUrl.value = url
-				}
-				img.onerror = err => {
-					console.error('could not load recommendation preview', err)
-				}
-				img.src = url
-			}
-		})
-
-		function navigate() {
-			// If Viewer is enabled and supports this file, open directly
-			if (window.OCA?.Viewer && window.OCA.Viewer.mimetypes.indexOf(props.mimeType) !== -1) {
-				window.OCA.Viewer.open({ path: path.value })
-				return
-			}
-
-			// Navigate to the file if the file router is available
-			if (window.OCP?.Files?.Router) {
-				const dir = isFolder.value ? join(props.directory, props.name) : props.directory
-				const fileid = isFolder.value ? null : props.id
-				window.OCP.Files.Router.goToRoute(
-					// use default route
-					null,
-					// recommendations is only enabled on files
-					{ view: 'files', fileid },
-					{ dir },
-				)
-				return
-			}
-
-			// Fallback to the old way of navigating to the file
-			window.location = generateUrl('/f/' + props.id)
+		const img = new Image()
+		img.onload = () => {
+			previewUrl.value = url
 		}
+		img.onerror = err => {
+			console.error('could not load recommendation preview', err)
+		}
+		img.src = url
+	}
+})
 
-		return { previewUrl, nameWithoutExtension, path, isFolder, description, navigate, t }
-	},
+/**
+ * Navigate to the recommended file using the best available method.
+ */
+function navigate() {
+	// If Viewer is enabled and supports this file, open directly
+	if (window.OCA?.Viewer && window.OCA.Viewer.mimetypes.indexOf(props.mimeType) !== -1) {
+		window.OCA.Viewer.open({ path: path.value })
+		return
+	}
+
+	// Navigate to the file if the file router is available
+	if (window.OCP?.Files?.Router) {
+		const dir = isFolder.value ? join(props.directory, props.name) : props.directory
+		const fileid = isFolder.value ? null : props.id
+		window.OCP.Files.Router.goToRoute(
+			// use default route
+			null,
+			// recommendations is only enabled on files
+			{ view: 'files', fileid },
+			{ dir },
+		)
+		return
+	}
+
+	// Fallback to the old way of navigating to the file
+	window.location = generateUrl('/f/' + props.id)
 }
 </script>
 

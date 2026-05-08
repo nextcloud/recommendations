@@ -11,25 +11,14 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { NcCheckboxRadioSwitch } from '@nextcloud/vue'
 import { translate as t } from '@nextcloud/l10n'
 import store from '../store/store.js'
 
-export default {
-	name: 'Settings',
-	components: {
-		NcCheckboxRadioSwitch,
-	},
-
-	setup() {
-		const enabled = computed({
-			get: () => store.state.enabled,
-			set: (val) => store.dispatch('enabled', val),
-		})
-
-		return { enabled, t }
-	},
-}
+const enabled = computed({
+	get: () => store.state.enabled,
+	set: (val) => store.dispatch('enabled', val),
+})
 </script>
