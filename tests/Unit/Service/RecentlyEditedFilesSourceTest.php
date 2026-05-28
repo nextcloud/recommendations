@@ -11,16 +11,15 @@ namespace OCA\Recommendations\Tests\Unit\Service;
 
 use OCA\Recommendations\Service\RecentlyEditedFilesSource;
 use OCA\Recommendations\Service\RecommendedFile;
+use OCP\Config\IUserConfig;
 use OCP\Files\Folder;
 use OCP\Files\IRootFolder;
 use OCP\Files\Node;
 use OCP\Files\StorageNotAvailableException;
-use OCP\IConfig;
-use OCP\IL10N;
-use OCP\IServerContainer;
 use OCP\IUser;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 /**
  * Test double that bypasses StorageNotAvailableException's constructor, which
@@ -33,9 +32,8 @@ class TestStorageNotAvailableException extends StorageNotAvailableException {
 }
 
 class RecentlyEditedFilesSourceTest extends TestCase {
-	private IServerContainer&MockObject $serverContainer;
-	private IL10N&MockObject $l10n;
-	private IConfig&MockObject $config;
+	private ContainerInterface&MockObject $serverContainer;
+	private IUserConfig&MockObject $config;
 	private Folder&MockObject $userFolder;
 	private IUser&MockObject $user;
 	private RecentlyEditedFilesSource $source;
@@ -43,9 +41,8 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->serverContainer = $this->createMock(IServerContainer::class);
-		$this->l10n = $this->createMock(IL10N::class);
-		$this->config = $this->createMock(IConfig::class);
+		$this->serverContainer = $this->createMock(ContainerInterface::class);
+		$this->config = $this->createMock(IUserConfig::class);
 		$this->userFolder = $this->createMock(Folder::class);
 		$this->user = $this->createMock(IUser::class);
 
@@ -72,7 +69,6 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 
 		$this->source = new RecentlyEditedFilesSource(
 			$this->serverContainer,
-			$this->l10n,
 			$this->config,
 		);
 	}
@@ -97,9 +93,9 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 	 * Enable or disable show_hidden preference for the test user.
 	 */
 	private function setShowHidden(bool $show): void {
-		$this->config->method('getUserValue')
-			->with('testuser', 'files', 'show_hidden', '0')
-			->willReturn($show ? '1' : '0');
+		$this->config->method('getValueBool')
+			->with('testuser', 'files', 'show_hidden', false)
+			->willReturn($show);
 	}
 
 	public function testNormalFilesAreIncluded(): void {

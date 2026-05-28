@@ -13,45 +13,41 @@ use Exception;
 use OCA\Recommendations\AppInfo\Application;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\IConfig;
+use OCP\Config\IUserConfig;
 use OCP\IRequest;
 use OCP\IUser;
 use OCP\IUserSession;
 
 class SettingsController extends Controller {
-	private IConfig $config;
-	private IUserSession $userSession;
-
-	public function __construct($appName,
+	public function __construct(
+		$appName,
 		IRequest $request,
-		IConfig $config,
-		IUserSession $userSession) {
+		private readonly IUserConfig $config,
+		private readonly IUserSession $userSession,
+	) {
 		parent::__construct($appName, $request);
-		$this->config = $config;
-		$this->userSession = $userSession;
 	}
 
 	/**
-	 * @NoAdminRequired
-	 *
 	 * @throws Exception
 	 */
+	#[NoAdminRequired]
 	public function getSettings(): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (!$user instanceof IUser) {
 			throw new Exception('Not logged in');
 		}
 		return new JSONResponse([
-			'enabled' => $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true',
+			'enabled' => $this->config->getValueBool($user->getUID(), Application::APP_ID, 'enabled', true),
 		]);
 	}
 
 	/**
-	 * @NoAdminRequired
-	 *
 	 * @throws Exception
 	 */
+	#[NoAdminRequired]
 	public function setSetting(string $key, string $value): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (!$user instanceof IUser) {
@@ -63,7 +59,11 @@ class SettingsController extends Controller {
 				'message' => 'parameter does not exist',
 			], Http::STATUS_UNPROCESSABLE_ENTITY);
 		}
-		$this->config->setUserValue($user->getUID(), Application::APP_ID, $key, $value);
+		if ($key === 'enabled') {
+			$this->config->setValueBool($user->getUID(), Application::APP_ID, $key, $value === 'true' ? true : false);
+		} else {
+			$this->config->setValueString($user->getUID(), Application::APP_ID, $key, $value);
+		}
 		return new JSONResponse([
 			'key' => $key,
 			'value' => $value,

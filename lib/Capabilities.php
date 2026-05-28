@@ -11,14 +11,14 @@ namespace OCA\Recommendations;
 
 use OCA\Recommendations\AppInfo\Application;
 use OCP\Capabilities\ICapability;
-use OCP\IConfig;
+use OCP\Config\IUserConfig;
 use OCP\IUserSession;
 
 class Capabilities implements ICapability {
 	/** @psalm-suppress PossiblyUnusedMethod */
 	public function __construct(
 		private IUserSession $userSession,
-		private IConfig $config,
+		private IUserConfig $config,
 	) {
 	}
 
@@ -36,7 +36,7 @@ class Capabilities implements ICapability {
 			return [];
 		}
 
-		$enabled = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'enabled', 'true') === 'true';
+		$enabled = $this->config->getValueBool($user->getUID(), Application::APP_ID, 'enabled', true);
 		return [
 			'recommendations' => [
 				'enabled' => $enabled,

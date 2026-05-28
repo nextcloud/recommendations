@@ -9,28 +9,21 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Service;
 
+use OCP\Config\IUserConfig;
 use OCP\Files\IRootFolder;
 use OCP\Files\Node;
 use OCP\Files\StorageNotAvailableException;
-use OCP\IConfig;
-use OCP\IL10N;
-use OCP\IServerContainer;
 use OCP\IUser;
+use Psr\Container\ContainerInterface;
 
 class RecentlyEditedFilesSource implements IRecommendationSource {
 
 	public const REASON = 'recently-edited';
 
-	private IServerContainer $serverContainer;
-	private IL10N $l10n;
-	private IConfig $config;
-
-	public function __construct(IServerContainer $serverContainer,
-		IL10N $l10n,
-		IConfig $config) {
-		$this->serverContainer = $serverContainer;
-		$this->l10n = $l10n;
-		$this->config = $config;
+	public function __construct(
+		private readonly ContainerInterface $serverContainer,
+		private readonly IUserConfig $config,
+	) {
 	}
 
 	/**
@@ -56,7 +49,7 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 		$rootFolder = $this->serverContainer->get(IRootFolder::class);
 		$userFolder = $rootFolder->getUserFolder($user->getUID());
 
-		$showHidden = $this->config->getUserValue($user->getUID(), 'files', 'show_hidden', '0') === '1';
+		$showHidden = $this->config->getValueBool($user->getUID(), 'files', 'show_hidden');
 
 		$results = [];
 		$offset = 0;
