@@ -1,15 +1,15 @@
 OC.L10N.register(
     "recommendations",
     {
-    "Recommended files" : "Recommended files",
+    "Recommended files" : "پرونده‌های پیشنهادی",
     "Recommendations" : "توصیه ها",
     "Shows recommended files" : "پرونده های پیشنهادی را نشان می دهد",
     "Shows recommended files for quick access of files and folders with recent activity" : "پرونده های توصیه شده را برای دسترسی سریع به پرونده ها و پوشه ها با فعالیت اخیر نشان می دهد",
-    "No recommendations yet" : "No recommendations yet",
+    "No recommendations yet" : "هنوز پیشنهادی وجود ندارد",
     "Last updated {timeAgo}" : "آخرین به‌روزرسانی {timeAgo}",
     "Shared with you {timeAgo}" : "{timeAgo} با شما هم‌رسانی شد",
     "Last commented on {timeAgo}" : "آخرین دیدگاه {timeAgo}",
-    "Path name {path}" : "Path name {path}",
-    "Show recommendations" : "Show recommendations"
+    "Path name {path}" : "نام مسیر {path}",
+    "Show recommendations" : "نمایش پیشنهادها"
 },
 "nplurals=2; plural=(n > 1);");
