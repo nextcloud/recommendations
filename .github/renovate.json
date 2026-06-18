@@ -24,9 +24,9 @@
 	"ignoreUnstable": false,
 	"baseBranchPatterns": [
 		"master",
-		"stable32",
-		"stable31",
-		"stable30"
+		"stable34",
+		"stable33",
+		"stable32"
 	],
 	"enabledManagers": [
 		"composer",
