@@ -8,6 +8,7 @@ OC.L10N.register(
     "No recommendations yet" : "Ainda sem recomendações",
     "Last updated {timeAgo}" : "Última atualização em {timeAgo}",
     "Last commented on {timeAgo}" : "Último comentário em {timeAgo}",
+    "Path name {path}" : "Nome do caminho {path}",
     "Show recommendations" : "Mostrar recomendações"
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
