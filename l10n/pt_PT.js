@@ -7,6 +7,7 @@ OC.L10N.register(
     "Shows recommended files for quick access of files and folders with recent activity" : "Mostra arquivos recomendados para acesso rápido a arquivos e pastas com atividades recentes",
     "No recommendations yet" : "Ainda sem recomendações",
     "Last updated {timeAgo}" : "Última atualização em {timeAgo}",
+    "Shared with you {timeAgo}" : "Compartilhado com você em {timeAgo}",
     "Last commented on {timeAgo}" : "Último comentário em {timeAgo}",
     "Path name {path}" : "Nome do caminho {path}",
     "Show recommendations" : "Mostrar recomendações"
