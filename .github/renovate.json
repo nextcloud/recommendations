@@ -24,9 +24,9 @@
 	"ignoreUnstable": false,
 	"baseBranchPatterns": [
 		"master",
-		"stable32",
-		"stable31",
-		"stable30"
+		"stable34",
+		"stable33",
+		"stable32"
 	],
 	"enabledManagers": [
 		"composer",
@@ -139,8 +139,10 @@
 			]
 		},
 		{
+			"description": "Only allow patch-level updates on stable branches",
 			"enabled": false,
-			"matchBaseBranches": "/^stable(.)+/"
+			"matchBaseBranches": "/^stable(.)+/",
+			"matchUpdateTypes": ["major", "minor"]
 		},
 		{
 			"matchBaseBranches": [
