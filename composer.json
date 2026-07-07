@@ -4,7 +4,7 @@
 	"type": "library",
 	"license": "AGPL-3.0-only",
 	"require": {
-		"bamarni/composer-bin-plugin": "^1.8.3"
+		"bamarni/composer-bin-plugin": "^1.9.1"
 	},
 	"config": {
 		"optimize-autoloader": true,
