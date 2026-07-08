@@ -39,6 +39,27 @@
 		"php",
 		"postcss-loader"
 	],
+	"ignorePaths": [
+		".github/workflows/block-merge-freeze.yml",
+		".github/workflows/command-compile.yml",
+		".github/workflows/command-openapi.yml",
+		".github/workflows/dependabot-approve-merge.yml",
+		".github/workflows/lint-eslint.yml",
+		".github/workflows/lint-php.yml",
+		".github/workflows/lint-php-cs.yml",
+		".github/workflows/npm-audit-fix.yml",
+		".github/workflows/npm-build.yml",
+		".github/workflows/openapi.yml",
+		".github/workflows/phpunit-mariadb.yml",
+		".github/workflows/phpunit-mysql.yml",
+		".github/workflows/phpunit-oci.yml",
+		".github/workflows/phpunit-pgsql.yml",
+		".github/workflows/phpunit-sqlite.yml",
+		".github/workflows/pr-feedback.yml",
+		".github/workflows/psalm-matrix.yml",
+		".github/workflows/reuse.yml",
+		".github/workflows/sync-workflow-templates.yml"
+	],
 	"packageRules": [
 		{
 			"description": "Request JavaScript reviews",
