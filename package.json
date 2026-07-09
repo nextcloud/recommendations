@@ -4,10 +4,10 @@
   "version": "8.0.0-dev.0",
   "private": true,
   "scripts": {
-    "build": "webpack --node-env production --progress",
+    "build": "vite build --mode production",
     "postbuild": "build-js/npm-post-build.sh",
-    "dev": "webpack --node-env development --progress",
-    "watch": "webpack --node-env development --progress --watch",
+    "dev": "vite build --mode development",
+    "watch": "vite build --mode development --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --ext .js,.vue src --fix",
@@ -37,12 +37,12 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@nextcloud/babel-config": "^1.3.0",
     "@nextcloud/browserslist-config": "^3.1.2",
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/stylelint-config": "^3.2.2",
-    "@nextcloud/webpack-vue-config": "^7.0.2",
-    "vue-loader": "^15.11.1"
+    "@nextcloud/vite-config": "^1.7.2",
+    "sass": "^1.101.0",
+    "vite": "^7.3.6"
   },
   "engines": {
     "node": "^24.0.0",

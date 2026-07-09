@@ -13,7 +13,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { NcCheckboxRadioSwitch } from '@nextcloud/vue'
+import NcCheckboxRadioSwitch from '@nextcloud/vue/components/NcCheckboxRadioSwitch'
 import { translate as t } from '@nextcloud/l10n'
 import store from '../store/store.js'
 

@@ -40,7 +40,7 @@ import { computed, ref, onMounted } from 'vue'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 import { join } from '@nextcloud/paths'
-import { useFormatDateTime } from '@nextcloud/vue'
+import { useFormatDateTime } from '@nextcloud/vue/composables/useFormatDateTime'
 
 import FolderIcon from 'vue-material-design-icons/Folder.vue'
 

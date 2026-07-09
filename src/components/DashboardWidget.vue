@@ -30,8 +30,8 @@
 <script setup>
 import { computed } from 'vue'
 import { t } from '@nextcloud/l10n'
-import NcDashboardWidget from '@nextcloud/vue/dist/Components/NcDashboardWidget.js'
-import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
+import NcDashboardWidget from '@nextcloud/vue/components/NcDashboardWidget'
+import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
 import RecommendedFile from './RecommendedFile.vue'
 import store from '../store/store.js'
 
