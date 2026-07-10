@@ -1,0 +1,69 @@
+SPDX-License-Identifier: AGPL-3.0-or-later
+SPDX-License-Identifier: BSD-3-Clause
+SPDX-License-Identifier: GPL-3.0-or-later
+SPDX-License-Identifier: MIT
+SPDX-FileCopyrightText: Anthony Fu <anthonyfu117@hotmail.com>
+SPDX-FileCopyrightText: Anthony Fu <https://github.com/antfu>
+SPDX-FileCopyrightText: Christoph Wurst
+SPDX-FileCopyrightText: David Clark
+SPDX-FileCopyrightText: Eric Norris (https://github.com/ericnorris)
+SPDX-FileCopyrightText: Feross Aboukhadijeh
+SPDX-FileCopyrightText: Guillaume Chau <guillaume.b.chau@gmail.com>
+SPDX-FileCopyrightText: Jacob Clevenger<https://github.com/wheatjs>
+SPDX-FileCopyrightText: Nextcloud GmbH and Nextcloud contributors
+SPDX-FileCopyrightText: Paul Vorbach <paul@vorb.de> (http://vorb.de)
+SPDX-FileCopyrightText: Paul Vorbach <paul@vorba.ch> (http://paul.vorba.ch)
+SPDX-FileCopyrightText: atomiks
+
+This file is generated from multiple sources. Included packages:
+- @floating-ui/core
+	- version: 0.3.1
+	- license: MIT
+- @floating-ui/dom
+	- version: 0.1.10
+	- license: MIT
+- @nextcloud/capabilities
+	- version: 1.2.1
+	- license: GPL-3.0-or-later
+- @nextcloud/initial-state
+	- version: 3.0.0
+	- license: GPL-3.0-or-later
+- @nextcloud/vue
+	- version: 8.39.0
+	- license: AGPL-3.0-or-later
+- @vueuse/components
+	- version: 11.1.0
+	- license: MIT
+- @vueuse/core
+	- version: 11.1.0
+	- license: MIT
+- charenc
+	- version: 0.0.2
+	- license: BSD-3-Clause
+- crypt
+	- version: 0.0.2
+	- license: BSD-3-Clause
+- floating-vue
+	- version: 1.0.0-beta.19
+	- license: MIT
+- focus-trap
+	- version: 7.8.0
+	- license: MIT
+- is-buffer
+	- version: 1.1.6
+	- license: MIT
+- md5
+	- version: 2.3.0
+	- license: BSD-3-Clause
+- recommendations
+	- version: 8.0.0-dev.0
+	- license: AGPL-3.0-or-later
+- striptags
+	- version: 3.2.0
+	- license: MIT
+- tabbable
+	- version: 6.4.0
+	- license: MIT
+- vue-demi
+	- version: 0.14.10
+	- license: MIT

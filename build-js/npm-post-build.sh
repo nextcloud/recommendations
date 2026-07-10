@@ -7,7 +7,7 @@ set -e
 
 # Add licenses for source maps
 if [ -d "js" ]; then
-	for f in js/*.js; do
+	for f in js/*.js js/*.mjs; do
 		# If license file and source map exists copy license for the source map
 		if [ -f "$f.license" ] && [ -f "$f.map" ]; then
 			# Remove existing link
