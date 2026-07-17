@@ -7,7 +7,7 @@ import { registerFileListHeader } from '@nextcloud/files'
 
 import FilesRecommendations from './components/FilesRecommendations.vue'
 import Settings from './components/Settings.vue'
-import store from './store/store.js'
+import { useRecommendationsStore } from './store/store.js'
 
 const View = Vue.extend(FilesRecommendations)
 
@@ -21,18 +21,15 @@ const header = {
 
 	render(el, folder, view) {
 		// Load recommendations
-		store.dispatch('fetchRecommendations')
+		useRecommendationsStore().fetchRecommendations()
 
 		new View({
 			name: 'RecommendationsHeader',
-			store,
 		}).$mount(el)
 
 		// Create settings
 		const SettingsView = Vue.extend(Settings)
-		const settingsElement = new SettingsView({
-			store,
-		}).$mount().$el
+		const settingsElement = new SettingsView().$mount().$el
 
 		// Register Files App Settings
 		if (OCA.Files && OCA.Files.Settings) {

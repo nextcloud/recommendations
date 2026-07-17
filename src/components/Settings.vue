@@ -15,10 +15,11 @@
 import { computed } from 'vue'
 import NcCheckboxRadioSwitch from '@nextcloud/vue/components/NcCheckboxRadioSwitch'
 import { translate as t } from '@nextcloud/l10n'
-import store from '../store/store.js'
+import { useRecommendationsStore } from '../store/store.js'
 
+const store = useRecommendationsStore()
 const enabled = computed({
-	get: () => store.state.enabled,
-	set: (val) => store.dispatch('enabled', val),
+	get: () => store.enabled,
+	set: (val) => store.setEnabled(val),
 })
 </script>

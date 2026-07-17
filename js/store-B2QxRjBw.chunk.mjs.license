@@ -8,8 +8,10 @@ SPDX-FileCopyrightText: Anthony Fu <https://github.com/antfu>
 SPDX-FileCopyrightText: Christoph Wurst
 SPDX-FileCopyrightText: David Myers <hello@davidmyers.dev>
 SPDX-FileCopyrightText: Dr.-Ing. Mario Heiderich, Cure53 <mario@cure53.de> (https://cure53.de/)
+SPDX-FileCopyrightText: Eduardo San Martin Morote
 SPDX-FileCopyrightText: Evan You
 SPDX-FileCopyrightText: GitHub Inc.
+SPDX-FileCopyrightText: Guillaume Chau
 SPDX-FileCopyrightText: Matt Zabriskie
 SPDX-FileCopyrightText: Nextcloud GmbH and Nextcloud contributors
 SPDX-FileCopyrightText: Rob Cresswell <robcresswell@pm.me>
@@ -46,6 +48,9 @@ This file is generated from multiple sources. Included packages:
 - @vitejs/plugin-vue2
 	- version: 2.3.4
 	- license: MIT
+- @vue/devtools-api
+	- version: 6.6.4
+	- license: MIT
 - @vueuse/shared
 	- version: 11.1.0
 	- license: MIT
@@ -57,6 +62,9 @@ This file is generated from multiple sources. Included packages:
 	- license: (MPL-2.0 OR Apache-2.0)
 - escape-html
 	- version: 1.0.3
+	- license: MIT
+- pinia
+	- version: 2.3.1
 	- license: MIT
 - recommendations
 	- version: 8.0.0-dev.0
@@ -78,7 +86,4 @@ This file is generated from multiple sources. Included packages:
 	- license: MIT
 - vue-material-design-icons
 	- version: 5.3.1
-	- license: MIT
-- vuex
-	- version: 3.6.2
 	- license: MIT

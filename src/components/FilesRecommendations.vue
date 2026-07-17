@@ -25,13 +25,11 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 import RecommendedFile from './RecommendedFile.vue'
-import store from '../store/store.js'
+import { useRecommendationsStore } from '../store/store.js'
 
-const enabled = computed(() => store.state.enabled)
-const loading = computed(() => store.state.loading)
-const recommendedFiles = computed(() => store.state.recommendedFiles)
+const { enabled, loading, recommendedFiles } = storeToRefs(useRecommendationsStore())
 </script>
 
 <style scoped>

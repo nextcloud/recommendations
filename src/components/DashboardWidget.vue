@@ -33,9 +33,10 @@ import { t } from '@nextcloud/l10n'
 import NcDashboardWidget from '@nextcloud/vue/components/NcDashboardWidget'
 import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
 import RecommendedFile from './RecommendedFile.vue'
-import store from '../store/store.js'
+import { useRecommendationsStore } from '../store/store.js'
 
-const recommendedFiles = computed(() => store.state.recommendedFiles.slice(0, 7))
+const store = useRecommendationsStore()
+const recommendedFiles = computed(() => store.recommendedFiles.slice(0, 7))
 </script>
 
 <style lang="scss" scoped>

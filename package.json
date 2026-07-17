@@ -32,9 +32,9 @@
     "@nextcloud/router": "^3.1.0",
     "@nextcloud/vue": "^8.39.0",
     "lodash": "^4.18.1",
+    "pinia": "^2.3.1",
     "vue": "^2.7.16",
-    "vue-material-design-icons": "^5.3.1",
-    "vuex": "^3.6.2"
+    "vue-material-design-icons": "^5.3.1"
   },
   "devDependencies": {
     "@nextcloud/browserslist-config": "^3.1.2",
