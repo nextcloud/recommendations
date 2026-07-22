@@ -9,7 +9,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 4.0.0
 	- license: AGPL-3.0-or-later
 - @nextcloud/vue
-	- version: 8.39.0
+	- version: 9.9.0
 	- license: AGPL-3.0-or-later
 - recommendations
 	- version: 8.0.0-dev.0

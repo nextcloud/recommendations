@@ -5,7 +5,7 @@
 
 <template>
 	<div id="recommendations-setting-enabled">
-		<NcCheckboxRadioSwitch id="recommendationsEnabledToggle" :checked.sync="enabled">
+		<NcCheckboxRadioSwitch id="recommendationsEnabledToggle" v-model="enabled">
 			{{ t('recommendations', 'Show recommendations') }}
 		</NcCheckboxRadioSwitch>
 	</div>

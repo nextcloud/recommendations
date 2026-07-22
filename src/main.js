@@ -2,14 +2,12 @@
  * SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
-import Vue from 'vue'
+import { createApp } from 'vue'
 import { registerFileListHeader } from '@nextcloud/files'
 
 import FilesRecommendations from './components/FilesRecommendations.vue'
 import Settings from './components/Settings.vue'
 import { useRecommendationsStore } from './store/store.js'
-
-const View = Vue.extend(FilesRecommendations)
 
 const header = {
 	id: 'recommendations',
@@ -23,13 +21,11 @@ const header = {
 		// Load recommendations
 		useRecommendationsStore().fetchRecommendations()
 
-		new View({
-			name: 'RecommendationsHeader',
-		}).$mount(el)
+		createApp(FilesRecommendations).mount(el)
 
 		// Create settings
-		const SettingsView = Vue.extend(Settings)
-		const settingsElement = new SettingsView().$mount().$el
+		const settingsElement = document.createElement('div')
+		createApp(Settings).mount(settingsElement)
 
 		// Register Files App Settings
 		if (OCA.Files && OCA.Files.Settings) {

@@ -30,17 +30,17 @@
     "@nextcloud/l10n": "^3.4.1",
     "@nextcloud/paths": "^3.1.0",
     "@nextcloud/router": "^3.1.0",
-    "@nextcloud/vue": "^8.39.0",
+    "@nextcloud/vue": "^9.8.2",
     "lodash": "^4.18.1",
-    "pinia": "^2.3.1",
-    "vue": "^2.7.16",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.18",
     "vue-material-design-icons": "^5.3.1"
   },
   "devDependencies": {
     "@nextcloud/browserslist-config": "^3.1.2",
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/stylelint-config": "^3.2.2",
-    "@nextcloud/vite-config": "^1.7.2",
+    "@nextcloud/vite-config": "^2.5.4",
     "sass": "^1.101.0",
     "vite": "^7.3.6"
   },
