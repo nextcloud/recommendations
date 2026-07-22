@@ -40,7 +40,7 @@ import { computed, ref, onMounted } from 'vue'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 import { join } from '@nextcloud/paths'
-import { useFormatDateTime } from '@nextcloud/vue/composables/useFormatDateTime'
+import { useFormatRelativeTime } from '@nextcloud/vue/composables/useFormatDateTime'
 
 import FolderIcon from 'vue-material-design-icons/Folder.vue'
 
@@ -79,7 +79,7 @@ const props = defineProps({
 	},
 })
 
-const { formattedTime } = useFormatDateTime(computed(() => props.timestamp * 1000), {
+const formattedTime = useFormatRelativeTime(computed(() => props.timestamp * 1000), {
 	ignoreSeconds: true,
 })
 

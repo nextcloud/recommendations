@@ -3,15 +3,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 SPDX-License-Identifier: GPL-3.0-or-later
 SPDX-License-Identifier: ISC
 SPDX-License-Identifier: MIT
-SPDX-FileCopyrightText: Anthony Fu <anthonyfu117@hotmail.com>
-SPDX-FileCopyrightText: Anthony Fu <https://github.com/antfu>
 SPDX-FileCopyrightText: Christoph Wurst
 SPDX-FileCopyrightText: David Myers <hello@davidmyers.dev>
 SPDX-FileCopyrightText: Dr.-Ing. Mario Heiderich, Cure53 <mario@cure53.de> (https://cure53.de/)
 SPDX-FileCopyrightText: Eduardo San Martin Morote
 SPDX-FileCopyrightText: Evan You
 SPDX-FileCopyrightText: GitHub Inc.
-SPDX-FileCopyrightText: Guillaume Chau
 SPDX-FileCopyrightText: Matt Zabriskie
 SPDX-FileCopyrightText: Nextcloud GmbH and Nextcloud contributors
 SPDX-FileCopyrightText: Rob Cresswell <robcresswell@pm.me>
@@ -43,46 +40,46 @@ This file is generated from multiple sources. Included packages:
 	- version: 3.1.0
 	- license: GPL-3.0-or-later
 - @nextcloud/vue
-	- version: 8.39.0
+	- version: 9.9.0
 	- license: AGPL-3.0-or-later
-- @vitejs/plugin-vue2
-	- version: 2.3.4
+- @vitejs/plugin-vue
+	- version: 6.0.8
 	- license: MIT
-- @vue/devtools-api
-	- version: 6.6.4
+- @vue/reactivity
+	- version: 3.5.40
 	- license: MIT
-- @vueuse/shared
-	- version: 11.1.0
+- @vue/runtime-core
+	- version: 3.5.40
+	- license: MIT
+- @vue/runtime-dom
+	- version: 3.5.40
+	- license: MIT
+- @vue/shared
+	- version: 3.5.40
 	- license: MIT
 - axios
-	- version: 1.18.0
+	- version: 1.18.1
 	- license: MIT
 - dompurify
-	- version: 3.4.11
+	- version: 3.4.12
 	- license: (MPL-2.0 OR Apache-2.0)
 - escape-html
 	- version: 1.0.3
 	- license: MIT
 - pinia
-	- version: 2.3.1
+	- version: 3.0.4
 	- license: MIT
 - recommendations
 	- version: 8.0.0-dev.0
 	- license: AGPL-3.0-or-later
 - semver
-	- version: 7.7.4
+	- version: 7.8.5
 	- license: ISC
 - vite
 	- version: 7.3.6
 	- license: MIT
 - vite-plugin-node-polyfills
-	- version: 0.24.0
-	- license: MIT
-- vue
-	- version: 2.7.16
-	- license: MIT
-- vue-demi
-	- version: 0.14.10
+	- version: 0.28.0
 	- license: MIT
 - vue-material-design-icons
 	- version: 5.3.1
