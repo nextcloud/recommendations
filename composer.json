@@ -10,7 +10,7 @@
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "8.2"
+			"php": "8.3"
 		},
 		"allow-plugins": {
 			"bamarni/composer-bin-plugin": true
@@ -25,9 +25,6 @@
 	"scripts": {
 		"post-install-cmd": [
 			"@composer bin all install --ansi"
-		],
-		"post-update-cmd": [
-			"@composer bin all update --ansi"
 		],
 		"lint": "find . -name \\*.php -not -path './vendor/*' -not -path './tests/stubs/*' -not -path './vendor-bin/*' -print0 | xargs -0 -n1 php -l",
 		"cs:check": "php-cs-fixer fix --dry-run --diff",
