@@ -12,7 +12,6 @@ SPDX-FileCopyrightText: escape-html developers
 SPDX-FileCopyrightText: debounce developers
 SPDX-FileCopyrightText: Tobias Koppers @sokra
 SPDX-FileCopyrightText: Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)
-SPDX-FileCopyrightText: T. Jameson Little <t.jameson.little@gmail.com>
 SPDX-FileCopyrightText: Stefan Thomas <justmoon@members.fsf.org> (http://www.justmoon.net)
 SPDX-FileCopyrightText: Sindre Sorhus
 SPDX-FileCopyrightText: Roman Shtylman <shtylman@gmail.com>
@@ -82,7 +81,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 3.26.0
 	- license: MIT
 - @nextcloud/vue
-	- version: 8.39.0
+	- version: 8.40.0
 	- license: AGPL-3.0-or-later
 - @ungap/structured-clone
 	- version: 1.2.0
@@ -98,12 +97,6 @@ This file is generated from multiple sources. Included packages:
 	- license: MIT
 - bail
 	- version: 2.0.2
-	- license: MIT
-- base64-js
-	- version: 1.5.1
-	- license: MIT
-- buffer
-	- version: 6.0.3
 	- license: MIT
 - charenc
 	- version: 0.0.2
@@ -127,7 +120,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 1.1.0
 	- license: MIT
 - dompurify
-	- version: 3.4.11
+	- version: 3.4.12
 	- license: (MPL-2.0 OR Apache-2.0)
 - emoji-mart-vue-fast
 	- version: 15.0.5
@@ -153,9 +146,6 @@ This file is generated from multiple sources. Included packages:
 - hast-util-whitespace
 	- version: 2.0.1
 	- license: MIT
-- ieee754
-	- version: 1.2.1
-	- license: BSD-3-Clause
 - inline-style-parser
 	- version: 0.1.1
 	- license: MIT
@@ -292,7 +282,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 0.4.4
 	- license: MIT
 - tabbable
-	- version: 6.4.0
+	- version: 6.5.0
 	- license: MIT
 - trim-lines
 	- version: 3.0.1
