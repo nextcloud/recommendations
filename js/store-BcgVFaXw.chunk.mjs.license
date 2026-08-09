@@ -67,7 +67,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 1.0.3
 	- license: MIT
 - pinia
-	- version: 3.0.4
+	- version: 4.0.2
 	- license: MIT
 - recommendations
 	- version: 8.0.0-dev.0
