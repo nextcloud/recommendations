@@ -42,7 +42,7 @@
     "@nextcloud/stylelint-config": "^3.2.2",
     "@nextcloud/vite-config": "^2.5.4",
     "sass": "^1.101.0",
-    "vite": "^7.3.6"
+    "vite": "^8.2.1"
   },
   "engines": {
     "node": "^24.0.0",
