@@ -9,7 +9,7 @@
 	<name>Recommendations</name>
 	<summary>Shows recommended files</summary>
 	<description>Shows recommended files for quick access of files and folders with recent activity</description>
-	<version>8.0.0-dev.0</version>
+	<version>9.0.0-dev.0</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Jan-Christoph Borchardt</author>
@@ -17,7 +17,7 @@
 	<namespace>Recommendations</namespace>
 	<category>office</category>
 	<dependencies>
-		<nextcloud min-version="35" max-version="35" />
+		<nextcloud min-version="36" max-version="36" />
 	</dependencies>
 	<commands>
 		<command>OCA\Recommendations\Command\GetRecommendations</command>
