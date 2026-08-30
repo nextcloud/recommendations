@@ -81,7 +81,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 3.26.0
 	- license: MIT
 - @nextcloud/vue
-	- version: 8.40.0
+	- version: 8.41.0
 	- license: AGPL-3.0-or-later
 - @ungap/structured-clone
 	- version: 1.2.0
@@ -154,6 +154,9 @@ This file is generated from multiple sources. Included packages:
 	- license: MIT
 - is-buffer
 	- version: 1.1.6
+	- license: MIT
+- is-plain-obj
+	- version: 4.1.0
 	- license: MIT
 - md5
 	- version: 2.3.0
@@ -290,9 +293,6 @@ This file is generated from multiple sources. Included packages:
 - trough
 	- version: 2.2.0
 	- license: MIT
-- is-plain-obj
-	- version: 4.1.0
-	- license: MIT
 - unified
 	- version: 11.0.4
 	- license: MIT
@@ -325,6 +325,9 @@ This file is generated from multiple sources. Included packages:
 	- license: MIT
 - vue-material-design-icons
 	- version: 5.3.1
+	- license: MIT
+- vue-router
+	- version: 3.6.5
 	- license: MIT
 - vue
 	- version: 2.7.16
