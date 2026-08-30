@@ -81,7 +81,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 3.26.0
 	- license: MIT
 - @nextcloud/vue
-	- version: 8.40.0
+	- version: 8.41.0
 	- license: AGPL-3.0-or-later
 - @ungap/structured-clone
 	- version: 1.2.0
@@ -325,6 +325,9 @@ This file is generated from multiple sources. Included packages:
 	- license: MIT
 - vue-material-design-icons
 	- version: 5.3.1
+	- license: MIT
+- vue-router
+	- version: 3.6.5
 	- license: MIT
 - vue
 	- version: 2.7.16
