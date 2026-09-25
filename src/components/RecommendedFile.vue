@@ -39,7 +39,7 @@
 import { computed } from 'vue'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
-import { joinPaths } from '@nextcloud/paths'
+import { join } from '@nextcloud/paths'
 import { useFormatDateTime } from '@nextcloud/vue'
 
 import FolderIcon from 'vue-material-design-icons/Folder.vue'
@@ -152,7 +152,7 @@ export default {
 
 			// Navigate to the file if the file router is available
 			if (window.OCP?.Files?.Router) {
-				const dir = this.isFolder ? joinPaths(this.directory, this.name) : this.directory
+				const dir = this.isFolder ? join(this.directory, this.name) : this.directory
 				const fileid = this.isFolder ? null : this.id
 				window.OCP.Files.Router.goToRoute(
 					// use default route
