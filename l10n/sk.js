@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Recommended files" : "Odporúčané súbory",
     "Recommendations" : "Odporúčania",
-    "Shows recommended files" : "Zobraziť odporúčané súbory",
+    "Shows recommended files" : "Zobrazuje odporúčané súbory",
     "Shows recommended files for quick access of files and folders with recent activity" : "Zobrazí odporúčané súbory pre rýchly prístup k súborom a priečinkom s ktorými ste nedávno niečo robili",
     "No recommendations yet" : "Zatiaľ žiadne odporúčania",
     "Last updated {timeAgo}" : "Posledná aktualizácia {timeAgo}",
