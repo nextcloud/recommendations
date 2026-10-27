@@ -163,7 +163,7 @@ function navigate() {
 		flex-grow: 1;
 		min-width: 250px;
 		padding: 5px;
-		margin-right: 12px;
+		margin-inline-end: 12px;
 		border-radius: var(--border-radius);
 
 		&:hover,
@@ -177,7 +177,7 @@ function navigate() {
 	}
 
 	.thumbnail {
-		margin-right: 9px;
+		margin-inline-end: 9px;
 		width: 32px;
 		height: 32px;
 		background-size: contain;

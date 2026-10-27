@@ -17,6 +17,7 @@ use OCP\Files\IRootFolder;
 use OCP\Files\Node;
 use OCP\Files\StorageNotAvailableException;
 use OCP\IUser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -290,9 +291,7 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 		$this->assertSame(1, $callCount, 'getRecent should only be called once when the batch is smaller than max');
 	}
 
-	/**
-	 * @dataProvider hiddenPathProvider
-	 */
+	#[DataProvider('hiddenPathProvider')]
 	public function testIsNodeHiddenDetectsHiddenComponents(string $path, bool $expectedHidden): void {
 		$this->setShowHidden(false);
 
