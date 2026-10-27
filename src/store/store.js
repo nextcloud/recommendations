@@ -1,10 +1,10 @@
+import axios from '@nextcloud/axios'
 /*
  * SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 import { generateUrl } from '@nextcloud/router'
 import { createPinia, defineStore, setActivePinia } from 'pinia'
-import axios from '@nextcloud/axios'
 import { fetchRecommendedFiles } from '../service/RecommendationService.js'
 
 setActivePinia(createPinia())
