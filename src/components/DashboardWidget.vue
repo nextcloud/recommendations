@@ -46,7 +46,7 @@ const recommendedFiles = computed(() => store.recommendedFiles.slice(0, 7))
 		:deep(.recommendation) {
 			max-width: 100%;
 			padding: 8px;
-			margin-right: 0;
+			margin-inline-end: 0;
 			border-radius: var(--border-radius-large);
 
 			.thumbnail {
@@ -65,6 +65,7 @@ const recommendedFiles = computed(() => store.recommendedFiles.slice(0, 7))
 			}
 		}
 	}
+
 	#recommendations--empty-content {
 		text-align: center;
 		margin-top: 5vh;
