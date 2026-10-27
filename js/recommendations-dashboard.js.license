@@ -128,6 +128,9 @@ This file is generated from multiple sources. Included packages:
 - escape-html
 	- version: 1.0.3
 	- license: MIT
+- eventemitter3
+	- version: 5.0.4
+	- license: MIT
 - extend
 	- version: 3.0.2
 	- license: MIT
@@ -239,9 +242,6 @@ This file is generated from multiple sources. Included packages:
 - micromark
 	- version: 4.0.2
 	- license: MIT
-- eventemitter3
-	- version: 5.0.1
-	- license: MIT
 - process
 	- version: 0.11.10
 	- license: MIT
@@ -324,7 +324,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 2.8.1
 	- license: MIT
 - vue-material-design-icons
-	- version: 5.3.1
+	- version: 5.4.0
 	- license: MIT
 - vue-router
 	- version: 3.6.5
