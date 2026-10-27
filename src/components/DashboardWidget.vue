@@ -60,10 +60,10 @@ export default {
 
 <style lang="scss" scoped>
 	#recommendations {
-		::v-deep .recommendation {
+		:deep(.recommendation) {
 			max-width: 100%;
 			padding: 8px;
-			margin-right: 0;
+			margin-inline-end: 0;
 			border-radius: var(--border-radius-large);
 
 			.thumbnail {
@@ -82,6 +82,7 @@ export default {
 			}
 		}
 	}
+
 	#recommendations--empty-content {
 		text-align: center;
 		margin-top: 5vh;
