@@ -6,18 +6,20 @@
 <template>
 	<NcDashboardWidget id="recommendations" :items="recommendedFiles">
 		<template #default="{ item }">
-			<RecommendedFile :id="item.id"
+			<RecommendedFile
+				:id="item.id"
 				:key="item.id"
 				:extension="item.extension"
-				:mime-type="item.mimeType"
+				:mimeType="item.mimeType"
 				:name="item.name"
 				:directory="item.directory"
 				:reason="item.reason"
-				:has-preview="item.hasPreview"
+				:hasPreview="item.hasPreview"
 				:timestamp="item.timestamp" />
 		</template>
 		<template #empty-content>
-			<NcEmptyContent id="recommendations--empty-content"
+			<NcEmptyContent
+				id="recommendations--empty-content"
 				icon="icon-files-dark">
 				<template #description>
 					{{ t('recommendations', 'No recommendations yet') }}
@@ -28,8 +30,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import { t } from '@nextcloud/l10n'
+import { computed } from 'vue'
 import NcDashboardWidget from '@nextcloud/vue/components/NcDashboardWidget'
 import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
 import RecommendedFile from './RecommendedFile.vue'

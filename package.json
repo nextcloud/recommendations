@@ -9,8 +9,8 @@
     "dev": "vite build --mode development",
     "watch": "vite build --mode development --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --ext .js,.vue src",
-    "lint:fix": "eslint --ext .js,.vue src --fix",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "stylelint": "stylelint src",
     "stylelint:fix": "stylelint src --fix"
   },

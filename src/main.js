@@ -1,12 +1,11 @@
+import { registerFileListHeader } from '@nextcloud/files'
 /*
  * SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 import { createApp } from 'vue'
-import { registerFileListHeader } from '@nextcloud/files'
-
 import FilesRecommendations from './components/FilesRecommendations.vue'
-import Settings from './components/Settings.vue'
+import RecommendationsSettings from './components/RecommendationsSettings.vue'
 import { useRecommendationsStore } from './store/store.js'
 
 const header = {
@@ -17,7 +16,7 @@ const header = {
 		return view.id === 'files' && folder.path === '/'
 	},
 
-	render(el, folder, view) {
+	render(el) {
 		// Load recommendations
 		useRecommendationsStore().fetchRecommendations()
 
@@ -25,7 +24,7 @@ const header = {
 
 		// Create settings
 		const settingsElement = document.createElement('div')
-		createApp(Settings).mount(settingsElement)
+		createApp(RecommendationsSettings).mount(settingsElement)
 
 		// Register Files App Settings
 		if (OCA.Files && OCA.Files.Settings) {
@@ -34,7 +33,7 @@ const header = {
 			}))
 		}
 	},
-	updated(folder, view) {},
+	updated() {},
 }
 
 registerFileListHeader(header)

@@ -4,7 +4,8 @@
 -->
 
 <template>
-	<a class="recommendation"
+	<a
+		class="recommendation"
 		tabindex="0"
 		:aria-describedby="`recommendation-description-${id}`"
 		:title="path"
@@ -19,7 +20,8 @@
 			<div class="file-name">
 				<template v-if="extension">
 					<span class="name">{{ nameWithoutExtension }}</span><!--
-				 --><span v-if="extension"
+				 --><span
+v-if="extension"
 						  class="extension">.{{ extension }}</span>
 				</template>
 				<template v-else>
@@ -36,12 +38,11 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from 'vue'
 import { translate as t } from '@nextcloud/l10n'
-import { generateUrl } from '@nextcloud/router'
 import { join } from '@nextcloud/paths'
+import { generateUrl } from '@nextcloud/router'
 import { useFormatRelativeTime } from '@nextcloud/vue/composables/useFormatDateTime'
-
+import { computed, onMounted, ref } from 'vue'
 import FolderIcon from 'vue-material-design-icons/Folder.vue'
 
 const props = defineProps({
@@ -92,9 +93,7 @@ const nameWithoutExtension = computed(() => {
 	return props.name
 })
 
-const path = computed(() =>
-	(props.directory === '/' ? '' : props.directory) + '/' + props.name,
-)
+const path = computed(() => (props.directory === '/' ? '' : props.directory) + '/' + props.name)
 
 const isFolder = computed(() => props.mimeType === 'httpd/unix-directory')
 
@@ -120,7 +119,8 @@ onMounted(() => {
 		img.onload = () => {
 			previewUrl.value = url
 		}
-		img.onerror = err => {
+		img.onerror = (err) => {
+			// eslint-disable-next-line no-console
 			console.error('could not load recommendation preview', err)
 		}
 		img.src = url

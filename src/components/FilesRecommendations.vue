@@ -5,19 +5,22 @@
 
 <template>
 	<div v-if="!loading && enabled">
-		<ul v-if="recommendedFiles.length > 0"
+		<ul
+			v-if="recommendedFiles.length > 0"
 			id="recommendations"
 			class="group">
-			<li v-for="file in recommendedFiles"
+			<li
+				v-for="file in recommendedFiles"
 				:key="file.id"
 				class="recommendation-item">
-				<RecommendedFile :id="file.id"
+				<RecommendedFile
+					:id="file.id"
 					:extension="file.extension"
-					:mime-type="file.mimeType"
+					:mimeType="file.mimeType"
 					:name="file.name"
 					:directory="file.directory"
 					:reason="file.reason"
-					:has-preview="file.hasPreview"
+					:hasPreview="file.hasPreview"
 					:timestamp="file.timestamp" />
 			</li>
 		</ul>

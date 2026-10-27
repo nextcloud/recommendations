@@ -12,9 +12,9 @@
 </template>
 
 <script setup>
+import { translate as t } from '@nextcloud/l10n'
 import { computed } from 'vue'
 import NcCheckboxRadioSwitch from '@nextcloud/vue/components/NcCheckboxRadioSwitch'
-import { translate as t } from '@nextcloud/l10n'
 import { useRecommendationsStore } from '../store/store.js'
 
 const store = useRecommendationsStore()
