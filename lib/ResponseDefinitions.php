@@ -17,6 +17,13 @@ declare(strict_types=1);
  *     mimeType: string,
  *     hasPreview: bool,
  *     reason: string,
+ *     etag: string,
+ *     mtime: int,
+ *     size: int|float,
+ *     permissions: int,
+ *     ownerId: ?string,
+ *     ownerDisplayName: ?string,
+ *     shareAttributes: list<array{scope: string, key: string, value: mixed}>,
  * }
  *
  * @psalm-suppress UnusedClass

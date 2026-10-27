@@ -10,6 +10,9 @@ declare(strict_types=1);
 namespace OCA\Recommendations\Service;
 
 use OCP\Files\Node;
+use OCP\Files\NotFoundException;
+use OCP\Files\Storage\ISharedStorage;
+use OCP\Share\IAttributes;
 use ResponseDefinitions;
 
 /**
@@ -82,6 +85,36 @@ class RecommendedFile implements IRecommendation {
 			'mimeType' => $this->node->getMimetype(),
 			'hasPreview' => $this->hasPreview(),
 			'reason' => $this->getReason(),
+			'etag' => $this->node->getEtag(),
+			'mtime' => $this->node->getMTime(),
+			'size' => $this->node->getSize(),
+			'permissions' => $this->node->getPermissions(),
+			'ownerId' => $this->node->getOwner()?->getUID(),
+			'ownerDisplayName' => $this->node->getOwner()?->getDisplayName(),
+			'shareAttributes' => $this->getShareAttributes(),
 		];
+	}
+
+	/**
+	 * What the share the file was received through allows, as WebDAV gives it
+	 * in `share-attributes`: a share can forbid downloading it, for one.
+	 *
+	 * @return list<array{scope: string, key: string, value: mixed}>
+	 */
+	private function getShareAttributes(): array {
+		try {
+			$storage = $this->node->getStorage();
+		} catch (NotFoundException) {
+			return [];
+		}
+		if (!$storage->instanceOfStorage(ISharedStorage::class)) {
+			return [];
+		}
+		/** @var ISharedStorage $storage */
+		$attributes = $storage->getShare()->getAttributes();
+		if (!$attributes instanceof IAttributes) {
+			return [];
+		}
+		return array_values($attributes->toArray());
 	}
 }

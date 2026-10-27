@@ -70,7 +70,14 @@
                     "extension",
                     "mimeType",
                     "hasPreview",
-                    "reason"
+                    "reason",
+                    "etag",
+                    "mtime",
+                    "size",
+                    "permissions",
+                    "ownerId",
+                    "ownerDisplayName",
+                    "shareAttributes"
                 ],
                 "properties": {
                     "id": {
@@ -97,6 +104,59 @@
                     },
                     "reason": {
                         "type": "string"
+                    },
+                    "etag": {
+                        "type": "string"
+                    },
+                    "mtime": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "size": {
+                        "anyOf": [
+                            {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            {
+                                "type": "number",
+                                "format": "double"
+                            }
+                        ]
+                    },
+                    "permissions": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "ownerId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "ownerDisplayName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "shareAttributes": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "scope",
+                                "key",
+                                "value"
+                            ],
+                            "properties": {
+                                "scope": {
+                                    "type": "string"
+                                },
+                                "key": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
