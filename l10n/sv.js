@@ -6,10 +6,10 @@ OC.L10N.register(
     "Shows recommended files" : "Visar rekommenderade filer",
     "Shows recommended files for quick access of files and folders with recent activity" : "Visar rekommenderade filer för snabb åtkomst till filer och mappar med aktuell aktivitet",
     "No recommendations yet" : "Inga rekommendationer än",
+    "Show recommendations" : "Visa rekommendationer",
     "Last updated {timeAgo}" : "Senast uppdaterad {timeAgo}",
     "Shared with you {timeAgo}" : "Delades med dig {timeAgo}",
     "Last commented on {timeAgo}" : "Kommenterades senast {timeAgo}",
-    "Path name {path}" : "Sökväg {path}",
-    "Show recommendations" : "Visa rekommendationer"
+    "Path name {path}" : "Sökväg {path}"
 },
 "nplurals=2; plural=(n != 1);");
