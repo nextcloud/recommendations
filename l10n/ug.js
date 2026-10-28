@@ -6,10 +6,10 @@ OC.L10N.register(
     "Shows recommended files" : "تەۋسىيە قىلىنغان ھۆججەتلەرنى كۆرسىتىدۇ",
     "Shows recommended files for quick access of files and folders with recent activity" : "يېقىنقى پائالىيەتلەر بىلەن ھۆججەت ۋە ھۆججەت قىسقۇچلارنى تېز زىيارەت قىلىش ئۈچۈن تەۋسىيە قىلىنغان ھۆججەتلەرنى كۆرسىتىدۇ",
     "No recommendations yet" : "تېخى تەۋسىيە يوق",
+    "Show recommendations" : "تەۋسىيە كۆرسەت",
     "Last updated {timeAgo}" : "ئاخىرقى يېڭىلاش {timeAgo}",
     "Shared with you {timeAgo}" : "{timeAgo} دە سىز بىلەن ئورتاقلاشتى",
     "Last commented on {timeAgo}" : "ئاخىرقى قېتىم {timeAgo} ئىنكاس بەردى",
-    "Path name {path}" : "يول ئىسمى {path}",
-    "Show recommendations" : "تەۋسىيە كۆرسەت"
+    "Path name {path}" : "يول ئىسمى {path}"
 },
 "nplurals=2; plural=(n != 1);");

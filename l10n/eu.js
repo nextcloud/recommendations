@@ -6,10 +6,10 @@ OC.L10N.register(
     "Shows recommended files" : "Erakutsi aholkatutako fitxategiak",
     "Shows recommended files for quick access of files and folders with recent activity" : "Erakutsi aholkatutako fitxategiak berriki jarduera izan duten fitxategi eta karpetetara sarbide azkarra izateko",
     "No recommendations yet" : "Gomendiorik ez oraindik",
+    "Show recommendations" : "Erakutsi aholkuak",
     "Last updated {timeAgo}" : "Azken eguneraketa {timeAgo}",
     "Shared with you {timeAgo}" : "Zurekin partekatuta {timeAgo}",
     "Last commented on {timeAgo}" : "Azken iruzkindua {timeAgo}",
-    "Path name {path}" : "Bide-izena {path}",
-    "Show recommendations" : "Erakutsi aholkuak"
+    "Path name {path}" : "Bide-izena {path}"
 },
 "nplurals=2; plural=(n != 1);");

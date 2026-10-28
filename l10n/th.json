@@ -4,8 +4,8 @@
     "Shows recommended files" : "แสดงไฟล์แนะนำ",
     "Shows recommended files for quick access of files and folders with recent activity" : "แสดงไฟล์แนะนำสำหรับการเข้าถึงไฟล์และโฟลเดอร์ที่มีกิจกรรมล่าสุดอย่างรวดเร็ว",
     "No recommendations yet" : "ยังไม่มีคำแนะนำ",
+    "Show recommendations" : "แสดงคำแนะนำ",
     "Last updated {timeAgo}" : "เปลี่ยนแปลงครั้งล่าสุด {timeAgo}",
-    "Path name {path}" : "ชื่อเส้นทาง {path}",
-    "Show recommendations" : "แสดงคำแนะนำ"
+    "Path name {path}" : "ชื่อเส้นทาง {path}"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
