@@ -6,10 +6,10 @@ OC.L10N.register(
     "Shows recommended files" : "Shows recommended files",
     "Shows recommended files for quick access of files and folders with recent activity" : "Shows recommended files for quick access of files and folders with recent activity",
     "No recommendations yet" : "No recommendations yet",
+    "Show recommendations" : "Show recommendations",
     "Last updated {timeAgo}" : "Last updated {timeAgo}",
     "Shared with you {timeAgo}" : "Shared with you {timeAgo}",
     "Last commented on {timeAgo}" : "Last commented on {timeAgo}",
-    "Path name {path}" : "Path name {path}",
-    "Show recommendations" : "Show recommendations"
+    "Path name {path}" : "Path name {path}"
 },
 "nplurals=2; plural=(n != 1);");
