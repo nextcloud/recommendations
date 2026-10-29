@@ -38,9 +38,12 @@ v-if="extension"
 </template>
 
 <script setup>
+import { File, Permission } from '@nextcloud/files'
+import { getRemoteURL, getRootPath } from '@nextcloud/files/dav'
 import { translate as t } from '@nextcloud/l10n'
 import { join } from '@nextcloud/paths'
 import { generateUrl } from '@nextcloud/router'
+import { canView, getViewer } from '@nextcloud/viewer'
 import { useFormatRelativeTime } from '@nextcloud/vue/composables/useFormatDateTime'
 import { computed, onMounted, ref } from 'vue'
 import FolderIcon from 'vue-material-design-icons/Folder.vue'
@@ -97,6 +100,20 @@ const path = computed(() => (props.directory === '/' ? '' : props.directory) + '
 
 const isFolder = computed(() => props.mimeType === 'httpd/unix-directory')
 
+// The file as the viewer takes it. The recommendation says nothing of the
+// permissions, so read only: the viewer then offers no edit it cannot save
+const node = computed(() => isFolder.value
+	? null
+	: new File({
+			id: Number(props.id),
+			source: getRemoteURL() + getRootPath() + path.value,
+			root: getRootPath(),
+			mime: props.mimeType,
+			owner: null,
+			permissions: Permission.READ,
+			attributes: { hasPreview: props.hasPreview },
+		}))
+
 const description = computed(() => {
 	if (props.reason === 'recently-edited') {
 		return t('recommendations', 'Last updated {timeAgo}', { timeAgo: formattedTime.value })
@@ -131,9 +148,10 @@ onMounted(() => {
  * Navigate to the recommended file using the best available method.
  */
 function navigate() {
-	// If Viewer is enabled and supports this file, open directly
-	if (window.OCA?.Viewer && window.OCA.Viewer.mimetypes.indexOf(props.mimeType) !== -1) {
-		window.OCA.Viewer.open({ path: path.value })
+	// Open it in the viewer when it shows this file, alone: its folder's other
+	// files are not what was recommended
+	if (node.value && canView(node.value)) {
+		getViewer().open([node.value], node.value)
 		return
 	}
 
