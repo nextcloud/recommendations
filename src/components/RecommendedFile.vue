@@ -124,6 +124,9 @@ const description = computed(() => {
 	if (props.reason === 'recently-opened') {
 		return t('recommendations', 'Opened {timeAgo}', { timeAgo: formattedTime.value })
 	}
+	if (props.reason === 'favorite') {
+		return t('recommendations', 'In your favorites, updated {timeAgo}', { timeAgo: formattedTime.value })
+	}
 	if (props.reason === 'recently-commented') {
 		return t('recommendations', 'Last commented on {timeAgo}', { timeAgo: formattedTime.value })
 	}

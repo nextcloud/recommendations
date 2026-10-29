@@ -25,12 +25,14 @@ class RecommendationService {
 		RecentlyEditedFilesSource $recentlyEdited,
 		RecentlySharedFilesSource $recentlyShared,
 		RecentlyOpenedFilesSource $recentlyOpened,
+		FavoriteFilesSource $favorites,
 		IPreview $previewManager) {
 		$this->sources = [
 			$recentlyCommented,
 			$recentlyEdited,
 			$recentlyShared,
 			$recentlyOpened,
+			$favorites,
 		];
 		$this->previewManager = $previewManager;
 	}
