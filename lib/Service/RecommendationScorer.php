@@ -37,6 +37,7 @@ class RecommendationScorer {
 		FrequentlyOpenedFilesSource::REASON => 0.2,
 		FavoriteFilesSource::REASON => 0.2,
 		RecentlyEditedFilesSource::REASON => 0.1,
+		RecentlyEditedFilesSource::REASON_UPLOADED => 0.1,
 		RecentlySharedFilesSource::REASON => 0.1,
 		RecentlyCommentedFilesSource::REASON => 0.1,
 	];

@@ -77,10 +77,11 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 	/**
 	 * Helper to create a mock Node with a specific path and mtime.
 	 */
-	private function createNodeMock(string $path, int $mtime = 1000): Node&MockObject {
+	private function createNodeMock(string $path, int $mtime = 1000, int $uploadTime = 0): Node&MockObject {
 		$node = $this->createMock(Node::class);
 		$node->method('getPath')->willReturn($path);
 		$node->method('getMTime')->willReturn($mtime);
+		$node->method('getUploadTime')->willReturn($uploadTime);
 
 		// dirname of e.g. "/testuser/files/doc.pdf" → "/testuser/files"
 		$parent = $this->createMock(Folder::class);
@@ -115,6 +116,24 @@ class RecentlyEditedFilesSourceTest extends TestCase {
 		$this->assertCount(1, $results);
 		$this->assertInstanceOf(RecommendedFile::class, $results[0]);
 		$this->assertSame(RecentlyEditedFilesSource::REASON, $results[0]->getReason());
+	}
+
+	public function testUploadsNewerThanTheirMtimeAreUploaded(): void {
+		$this->setShowHidden(false);
+
+		$uploaded = $this->createNodeMock('/testuser/files/photo.jpg', 1000, 5000);
+		$edited = $this->createNodeMock('/testuser/files/notes.md', 3000, 2000);
+		$this->userFolder->method('getRecent')
+			->willReturnCallback(fn (int $limit, int $offset): array => $offset === 0 ? [$uploaded, $edited] : []);
+		$this->userFolder->method('getRelativePath')
+			->willReturnCallback(fn (string $path) => str_replace('/testuser/files', '', $path));
+
+		$results = $this->source->getMostRecentRecommendation($this->user, 5);
+
+		$this->assertSame(
+			[[RecentlyEditedFilesSource::REASON_UPLOADED, 5000], [RecentlyEditedFilesSource::REASON, 3000]],
+			array_map(fn (RecommendedFile $r): array => [$r->getReason(), $r->getTimestamp()], $results),
+		);
 	}
 
 	public function testHiddenFilesAreExcludedWhenShowHiddenIsFalse(): void {
