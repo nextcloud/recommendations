@@ -75,9 +75,14 @@ class OpenedFileMapperTest extends TestCase {
 		$this->mapper->add(self::USER, 2);
 		$this->mapper->add(self::OTHER_USER, 1);
 
+		$lastIds = array_column($this->mapper->findRecent(self::USER, 10), 'lastId', 'fileId');
+
 		$counts = $this->mapper->countOpens(self::USER, [1, 2, 3]);
 		ksort($counts);
-		$this->assertSame([1 => 2, 2 => 1], $counts);
+		$this->assertSame([
+			1 => ['opens' => 2, 'lastId' => $lastIds[1]],
+			2 => ['opens' => 1, 'lastId' => $lastIds[2]],
+		], $counts);
 	}
 
 	public function testDeleteBefore(): void {

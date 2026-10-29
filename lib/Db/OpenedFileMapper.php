@@ -87,10 +87,10 @@ class OpenedFileMapper extends Repository {
 	}
 
 	/**
-	 * How many times a user opened each of these files
+	 * How many times a user opened each of these files, and when last
 	 *
 	 * @param list<int> $fileIds
-	 * @return array<int, int> opens by file id, only for files opened at all
+	 * @return array<int, array{opens: int, lastId: string}> by file id, only for files opened at all
 	 */
 	public function countOpens(string $userId, array $fileIds): array {
 		$counts = [];
@@ -98,6 +98,7 @@ class OpenedFileMapper extends Repository {
 			$qb = $this->connection->getQueryBuilder();
 			$qb->select('file_id')
 				->selectAlias($qb->func()->count('id'), 'opens')
+				->selectAlias($qb->func()->max('id'), 'last_id')
 				->from($this->getTableName())
 				->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)))
 				->andWhere($qb->expr()->in('file_id', $qb->createNamedParameter($chunk, IQueryBuilder::PARAM_INT_ARRAY)))
@@ -105,7 +106,10 @@ class OpenedFileMapper extends Repository {
 
 			$result = $qb->executeQuery();
 			while ($row = $result->fetchAssociative()) {
-				$counts[(int)$row['file_id']] = (int)$row['opens'];
+				$counts[(int)$row['file_id']] = [
+					'opens' => (int)$row['opens'],
+					'lastId' => (string)$row['last_id'],
+				];
 			}
 			$result->closeCursor();
 		}
