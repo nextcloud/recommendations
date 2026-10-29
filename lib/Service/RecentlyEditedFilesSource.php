@@ -19,6 +19,7 @@ use Psr\Container\ContainerInterface;
 class RecentlyEditedFilesSource implements IRecommendationSource {
 
 	public const REASON = 'recently-edited';
+	public const REASON_UPLOADED = 'recently-uploaded';
 
 	public function __construct(
 		private readonly ContainerInterface $serverContainer,
@@ -69,11 +70,13 @@ class RecentlyEditedFilesSource implements IRecommendationSource {
 					if ($parentPath === '' || $parentPath === '.' || $parentPath === '/') {
 						$parentPath = $node->getParent()->getPath();
 					}
+					// An upload keeps the mtime it had on the uploader's device
+					$uploaded = $node->getUploadTime() > $node->getMTime();
 					$results[] = new RecommendedFile(
 						$userFolder->getRelativePath($parentPath),
 						$node,
-						$node->getMTime(),
-						self::REASON,
+						$uploaded ? $node->getUploadTime() : $node->getMTime(),
+						$uploaded ? self::REASON_UPLOADED : self::REASON,
 					);
 				} catch (StorageNotAvailableException $e) {
 					// skip unavailable files
