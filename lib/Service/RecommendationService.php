@@ -24,11 +24,13 @@ class RecommendationService {
 	public function __construct(RecentlyCommentedFilesSource $recentlyCommented,
 		RecentlyEditedFilesSource $recentlyEdited,
 		RecentlySharedFilesSource $recentlyShared,
+		RecentlyOpenedFilesSource $recentlyOpened,
 		IPreview $previewManager) {
 		$this->sources = [
 			$recentlyCommented,
 			$recentlyEdited,
 			$recentlyShared,
+			$recentlyOpened,
 		];
 		$this->previewManager = $previewManager;
 	}
