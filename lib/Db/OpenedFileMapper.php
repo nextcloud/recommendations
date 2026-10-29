@@ -9,45 +9,36 @@ declare(strict_types=1);
 
 namespace OCA\Recommendations\Db;
 
+use OCP\AppFramework\ORM\Repository;
 use OCP\DB\QueryBuilder\IQueryBuilder;
-use OCP\IDBConnection;
 
 /**
- * Every time a user opened a file, as clients report it
+ * @template-extends Repository<OpenedFile>
+ * @psalm-suppress ClassMustBeFinal For unit tests
  */
-class OpenedFileMapper {
-	public const TABLE_NAME = 'recommendations_opened';
+class OpenedFileMapper extends Repository {
+	public const string entityClass = OpenedFile::class;
 
-	public function __construct(
-		private readonly IDBConnection $db,
-	) {
-	}
-
-	public function insert(string $userId, int $fileId, int $openedAt): void {
-		$qb = $this->db->getQueryBuilder();
-		$qb->insert(self::TABLE_NAME)
-			->values([
-				'user_id' => $qb->createNamedParameter($userId),
-				'file_id' => $qb->createNamedParameter($fileId, IQueryBuilder::PARAM_INT),
-				'opened_at' => $qb->createNamedParameter($openedAt, IQueryBuilder::PARAM_INT),
-			])
-			->executeStatement();
+	public function add(string $userId, int $fileId): void {
+		$openedFile = new OpenedFile();
+		$openedFile->userId = $userId;
+		$openedFile->fileId = $fileId;
+		$this->insert($openedFile);
 	}
 
 	/**
 	 * The files a user opened, the most recently opened first, once each
 	 *
-	 * @return list<array{fileId: int, openedAt: int}>
+	 * @return list<array{fileId: int, lastId: string}> with the id of the last time each was opened
 	 */
 	public function findRecent(string $userId, int $limit, int $offset = 0): array {
-		$qb = $this->db->getQueryBuilder();
+		$qb = $this->connection->getQueryBuilder();
 		$qb->select('file_id')
-			->selectAlias($qb->func()->max('opened_at'), 'last_opened')
-			->from(self::TABLE_NAME)
+			->selectAlias($qb->func()->max('id'), 'last_id')
+			->from($this->getTableName())
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)))
 			->groupBy('file_id')
-			->orderBy('last_opened', 'DESC')
-			->addOrderBy('file_id', 'DESC')
+			->orderBy('last_id', 'DESC')
 			->setMaxResults($limit)
 			->setFirstResult($offset);
 
@@ -56,7 +47,7 @@ class OpenedFileMapper {
 		while ($row = $result->fetchAssociative()) {
 			$recent[] = [
 				'fileId' => (int)$row['file_id'],
-				'openedAt' => (int)$row['last_opened'],
+				'lastId' => (string)$row['last_id'],
 			];
 		}
 		$result->closeCursor();
@@ -64,17 +55,17 @@ class OpenedFileMapper {
 		return $recent;
 	}
 
-	public function deleteOlderThan(int $timestamp): int {
-		$qb = $this->db->getQueryBuilder();
-		return $qb->delete(self::TABLE_NAME)
-			->where($qb->expr()->lt('opened_at', $qb->createNamedParameter($timestamp, IQueryBuilder::PARAM_INT)))
+	/**
+	 * Forget what was opened before this snowflake id
+	 */
+	public function deleteBefore(string $id): void {
+		$qb = $this->connection->getQueryBuilder();
+		$qb->delete($this->getTableName())
+			->where($qb->expr()->lt('id', $qb->createNamedParameter($id, IQueryBuilder::PARAM_INT)))
 			->executeStatement();
 	}
 
 	public function deleteByUser(string $userId): void {
-		$qb = $this->db->getQueryBuilder();
-		$qb->delete(self::TABLE_NAME)
-			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)))
-			->executeStatement();
+		$this->deleteBy(['userId' => $userId]);
 	}
 }

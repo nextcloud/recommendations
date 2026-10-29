@@ -11,7 +11,6 @@ namespace OCA\Recommendations\Tests\Unit\Listeners;
 
 use OCA\Recommendations\Db\OpenedFileMapper;
 use OCA\Recommendations\Listeners\NodeOpenedListener;
-use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\Files\Events\Node\NodeOpenedEvent;
 use OCP\Files\File;
 use OCP\IUser;
@@ -23,12 +22,10 @@ class NodeOpenedListenerTest extends TestCase {
 		$user->method('getUID')->willReturn('alice');
 		$file = $this->createMock(File::class);
 		$file->method('getId')->willReturn(42);
-		$timeFactory = $this->createMock(ITimeFactory::class);
-		$timeFactory->method('getTime')->willReturn(1000);
 
 		$mapper = $this->createMock(OpenedFileMapper::class);
-		$mapper->expects($this->once())->method('insert')->with('alice', 42, 1000);
+		$mapper->expects($this->once())->method('add')->with('alice', 42);
 
-		(new NodeOpenedListener($mapper, $timeFactory))->handle(new NodeOpenedEvent($file, $user));
+		(new NodeOpenedListener($mapper))->handle(new NodeOpenedEvent($file, $user));
 	}
 }

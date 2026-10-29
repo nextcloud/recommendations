@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace OCA\Recommendations\Listeners;
 
 use OCA\Recommendations\Db\OpenedFileMapper;
-use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\Files\Events\Node\NodeOpenedEvent;
@@ -19,7 +18,6 @@ use OCP\Files\Events\Node\NodeOpenedEvent;
 class NodeOpenedListener implements IEventListener {
 	public function __construct(
 		private readonly OpenedFileMapper $mapper,
-		private readonly ITimeFactory $timeFactory,
 	) {
 	}
 
@@ -29,10 +27,6 @@ class NodeOpenedListener implements IEventListener {
 			return;
 		}
 
-		$this->mapper->insert(
-			$event->getUser()->getUID(),
-			$event->getNode()->getId(),
-			$this->timeFactory->getTime(),
-		);
+		$this->mapper->add($event->getUser()->getUID(), $event->getNode()->getId());
 	}
 }

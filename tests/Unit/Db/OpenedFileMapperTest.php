@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace OCA\Recommendations\Tests\Unit\Db;
 
 use OCA\Recommendations\Db\OpenedFileMapper;
-use OCP\IDBConnection;
 use OCP\Server;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
@@ -25,7 +24,7 @@ class OpenedFileMapperTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->mapper = new OpenedFileMapper(Server::get(IDBConnection::class));
+		$this->mapper = Server::get(OpenedFileMapper::class);
 		$this->mapper->deleteByUser(self::USER);
 		$this->mapper->deleteByUser(self::OTHER_USER);
 	}
@@ -37,42 +36,47 @@ class OpenedFileMapperTest extends TestCase {
 		parent::tearDown();
 	}
 
-	public function testFindRecentListsEachFileOnceByLastOpen(): void {
-		$this->mapper->insert(self::USER, 1, 100);
-		$this->mapper->insert(self::USER, 2, 200);
-		$this->mapper->insert(self::USER, 1, 300);
-		$this->mapper->insert(self::OTHER_USER, 3, 400);
+	/**
+	 * @return list<int>
+	 */
+	private function recentFileIds(string $userId, int $limit = 10, int $offset = 0): array {
+		return array_column($this->mapper->findRecent($userId, $limit, $offset), 'fileId');
+	}
 
-		$this->assertSame([
-			['fileId' => 1, 'openedAt' => 300],
-			['fileId' => 2, 'openedAt' => 200],
-		], $this->mapper->findRecent(self::USER, 10));
+	public function testFindRecentListsEachFileOnceByLastOpen(): void {
+		$this->mapper->add(self::USER, 1);
+		$this->mapper->add(self::USER, 2);
+		$this->mapper->add(self::USER, 1);
+		$this->mapper->add(self::OTHER_USER, 3);
+
+		$this->assertSame([1, 2], $this->recentFileIds(self::USER));
 	}
 
 	public function testFindRecentPages(): void {
-		$this->mapper->insert(self::USER, 1, 100);
-		$this->mapper->insert(self::USER, 2, 200);
-		$this->mapper->insert(self::USER, 3, 300);
+		$this->mapper->add(self::USER, 1);
+		$this->mapper->add(self::USER, 2);
+		$this->mapper->add(self::USER, 3);
 
-		$this->assertSame([['fileId' => 2, 'openedAt' => 200]], $this->mapper->findRecent(self::USER, 1, 1));
+		$this->assertSame([2], $this->recentFileIds(self::USER, 1, 1));
 	}
 
-	public function testDeleteOlderThan(): void {
-		$this->mapper->insert(self::USER, 1, 100);
-		$this->mapper->insert(self::USER, 2, 200);
+	public function testDeleteBefore(): void {
+		$this->mapper->add(self::USER, 1);
+		$this->mapper->add(self::USER, 2);
+		$second = $this->mapper->findRecent(self::USER, 1)[0]['lastId'];
 
-		$this->mapper->deleteOlderThan(150);
+		$this->mapper->deleteBefore($second);
 
-		$this->assertSame([['fileId' => 2, 'openedAt' => 200]], $this->mapper->findRecent(self::USER, 10));
+		$this->assertSame([2], $this->recentFileIds(self::USER));
 	}
 
 	public function testDeleteByUserKeepsOthers(): void {
-		$this->mapper->insert(self::USER, 1, 100);
-		$this->mapper->insert(self::OTHER_USER, 2, 200);
+		$this->mapper->add(self::USER, 1);
+		$this->mapper->add(self::OTHER_USER, 2);
 
 		$this->mapper->deleteByUser(self::USER);
 
-		$this->assertSame([], $this->mapper->findRecent(self::USER, 10));
-		$this->assertSame([['fileId' => 2, 'openedAt' => 200]], $this->mapper->findRecent(self::OTHER_USER, 10));
+		$this->assertSame([], $this->recentFileIds(self::USER));
+		$this->assertSame([2], $this->recentFileIds(self::OTHER_USER));
 	}
 }
