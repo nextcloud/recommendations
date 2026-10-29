@@ -18,7 +18,7 @@ use OCP\BackgroundJob\TimedJob;
  * works with now, and the table would only grow
  */
 class CleanUpOpenedFiles extends TimedJob {
-	public const RETENTION = 90 * 24 * 60 * 60; // 90 days
+	public const RETENTION = 30 * 24 * 60 * 60; // 30 days
 
 	public function __construct(
 		ITimeFactory $time,
