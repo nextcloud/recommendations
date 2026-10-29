@@ -13,6 +13,7 @@ use OCA\Recommendations\Db\OpenedFileMapper;
 use OCP\Files\IRootFolder;
 use OCP\Files\StorageNotAvailableException;
 use OCP\IUser;
+use OCP\Snowflake\ISnowflakeDecoder;
 
 class RecentlyOpenedFilesSource implements IRecommendationSource {
 	public const REASON = 'recently-opened';
@@ -20,6 +21,7 @@ class RecentlyOpenedFilesSource implements IRecommendationSource {
 	public function __construct(
 		private readonly OpenedFileMapper $mapper,
 		private readonly IRootFolder $rootFolder,
+		private readonly ISnowflakeDecoder $snowflakeDecoder,
 	) {
 	}
 
@@ -36,7 +38,7 @@ class RecentlyOpenedFilesSource implements IRecommendationSource {
 		do {
 			$batch = $this->mapper->findRecent($user->getUID(), $max, $offset);
 
-			foreach ($batch as ['fileId' => $fileId, 'openedAt' => $openedAt]) {
+			foreach ($batch as ['fileId' => $fileId, 'lastId' => $lastId]) {
 				// Deleted since, or no longer shared with the user
 				$node = $userFolder->getFirstNodeById($fileId);
 				if ($node === null) {
@@ -46,7 +48,7 @@ class RecentlyOpenedFilesSource implements IRecommendationSource {
 					$results[] = new RecommendedFile(
 						$userFolder->getRelativePath($node->getParent()->getPath()) ?? '/',
 						$node,
-						$openedAt,
+						$this->snowflakeDecoder->decode($lastId)->getCreatedAt()->getTimestamp(),
 						self::REASON,
 					);
 				} catch (StorageNotAvailableException) {

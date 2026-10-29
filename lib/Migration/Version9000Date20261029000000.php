@@ -10,13 +10,20 @@ declare(strict_types=1);
 namespace OCA\Recommendations\Migration;
 
 use Closure;
-use OCA\Recommendations\Db\OpenedFileMapper;
 use OCP\DB\ISchemaWrapper;
 use OCP\DB\Types;
+use OCP\Migration\Attributes\CreateTable;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
+#[CreateTable(
+	table: self::TABLE_NAME,
+	columns: ['id', 'user_id', 'file_id'],
+	description: 'Files users opened, to recommend the ones they work with',
+)]
 class Version9000Date20261029000000 extends SimpleMigrationStep {
+	private const TABLE_NAME = 'recommendations_opened';
+
 	/**
 	 * @param Closure(): ISchemaWrapper $schemaClosure
 	 */
@@ -24,13 +31,12 @@ class Version9000Date20261029000000 extends SimpleMigrationStep {
 	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options): ?ISchemaWrapper {
 		$schema = $schemaClosure();
 
-		if ($schema->hasTable(OpenedFileMapper::TABLE_NAME)) {
+		if ($schema->hasTable(self::TABLE_NAME)) {
 			return null;
 		}
 
-		$table = $schema->createTable(OpenedFileMapper::TABLE_NAME);
+		$table = $schema->createTable(self::TABLE_NAME);
 		$table->addColumn('id', Types::BIGINT, [
-			'autoincrement' => true,
 			'notnull' => true,
 			'length' => 20,
 			'unsigned' => true,
@@ -44,14 +50,8 @@ class Version9000Date20261029000000 extends SimpleMigrationStep {
 			'length' => 20,
 			'unsigned' => true,
 		]);
-		$table->addColumn('opened_at', Types::BIGINT, [
-			'notnull' => true,
-			'length' => 20,
-			'unsigned' => true,
-		]);
 		$table->setPrimaryKey(['id']);
-		$table->addIndex(['user_id', 'opened_at'], 'rec_opened_user_idx');
-		$table->addIndex(['opened_at'], 'rec_opened_time_idx');
+		$table->addIndex(['user_id', 'file_id'], 'rec_opened_user_file_idx');
 
 		return $schema;
 	}

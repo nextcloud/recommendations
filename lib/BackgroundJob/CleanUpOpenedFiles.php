@@ -12,6 +12,7 @@ namespace OCA\Recommendations\BackgroundJob;
 use OCA\Recommendations\Db\OpenedFileMapper;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\TimedJob;
+use OCP\Snowflake\ISnowflakeGenerator;
 
 /**
  * Forget what was opened long ago: it says little about what the user
@@ -23,6 +24,7 @@ class CleanUpOpenedFiles extends TimedJob {
 	public function __construct(
 		ITimeFactory $time,
 		private readonly OpenedFileMapper $mapper,
+		private readonly ISnowflakeGenerator $snowflakeGenerator,
 	) {
 		parent::__construct($time);
 
@@ -32,6 +34,6 @@ class CleanUpOpenedFiles extends TimedJob {
 
 	#[\Override]
 	protected function run($argument): void {
-		$this->mapper->deleteOlderThan($this->time->getTime() - self::RETENTION);
+		$this->mapper->deleteBefore($this->snowflakeGenerator->minForTimeId($this->time->getTime() - self::RETENTION));
 	}
 }

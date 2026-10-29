@@ -17,6 +17,8 @@ use OCP\Files\Folder;
 use OCP\Files\IRootFolder;
 use OCP\Files\IUserFolder;
 use OCP\IUser;
+use OCP\Snowflake\ISnowflakeDecoder;
+use OCP\Snowflake\Snowflake;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -40,7 +42,13 @@ class RecentlyOpenedFilesSourceTest extends TestCase {
 		$rootFolder = $this->createMock(IRootFolder::class);
 		$rootFolder->method('getUserFolder')->with('alice')->willReturn($this->userFolder);
 
-		$this->source = new RecentlyOpenedFilesSource($this->mapper, $rootFolder);
+		// The test ids are the timestamps they were opened at
+		$decoder = $this->createMock(ISnowflakeDecoder::class);
+		$decoder->method('decode')->willReturnCallback(
+			fn (string $id): Snowflake => new Snowflake(0, 0, false, 0, 0, new \DateTimeImmutable('@' . $id)),
+		);
+
+		$this->source = new RecentlyOpenedFilesSource($this->mapper, $rootFolder, $decoder);
 	}
 
 	private function file(string $parentPath): File&MockObject {
@@ -53,7 +61,7 @@ class RecentlyOpenedFilesSourceTest extends TestCase {
 
 	public function testRecommendsOpenedFiles(): void {
 		$file = $this->file('/alice/files/Documents');
-		$this->mapper->method('findRecent')->with('alice', 2, 0)->willReturn([['fileId' => 42, 'openedAt' => 1000]]);
+		$this->mapper->method('findRecent')->with('alice', 2, 0)->willReturn([['fileId' => 42, 'lastId' => '1000']]);
 		$this->userFolder->method('getFirstNodeById')->with(42)->willReturn($file);
 
 		$this->assertEquals(
@@ -66,8 +74,8 @@ class RecentlyOpenedFilesSourceTest extends TestCase {
 	public function testSkipsFilesNoLongerThere(): void {
 		$file = $this->file('/alice/files');
 		$this->mapper->method('findRecent')->willReturnMap([
-			['alice', 2, 0, [['fileId' => 1, 'openedAt' => 300], ['fileId' => 2, 'openedAt' => 200]]],
-			['alice', 2, 2, [['fileId' => 3, 'openedAt' => 100]]],
+			['alice', 2, 0, [['fileId' => 1, 'lastId' => '300'], ['fileId' => 2, 'lastId' => '200']]],
+			['alice', 2, 2, [['fileId' => 3, 'lastId' => '100']]],
 		]);
 		$this->userFolder->method('getFirstNodeById')->willReturnMap([
 			[1, null],
