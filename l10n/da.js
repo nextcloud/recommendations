@@ -9,6 +9,8 @@ OC.L10N.register(
     "Show recommendations" : "Vis anbefalinger",
     "Last updated {timeAgo}" : "Sidst opdateret {timeAgo}",
     "Shared with you {timeAgo}" : "Delt med dig {timeAgo}",
+    "Opened {timeAgo}" : "Åbnet {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "I dine favoritter, opdateret {timeAgo}",
     "Last commented on {timeAgo}" : "Sidst kommenteret {timeAgo}",
     "Path name {path}" : "Stinavn {path}"
 },
