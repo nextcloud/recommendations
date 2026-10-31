@@ -9,6 +9,8 @@ OC.L10N.register(
     "Show recommendations" : "Afișează recomandările",
     "Last updated {timeAgo}" : "Actualizat ultima dată {timeAgo}",
     "Shared with you {timeAgo}" : "Partajat cu tine {timeAgo}",
+    "Opened {timeAgo}" : "Deschis {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "Printre favoritele tale, actualizat {timeAgo}",
     "Last commented on {timeAgo}" : "Ultimul comentariu {timeAgo}",
     "Path name {path}" : "Calea {path}"
 },
