@@ -9,6 +9,8 @@ OC.L10N.register(
     "Show recommendations" : "Visa rekommendationer",
     "Last updated {timeAgo}" : "Senast uppdaterad {timeAgo}",
     "Shared with you {timeAgo}" : "Delades med dig {timeAgo}",
+    "Opened {timeAgo}" : "Öppnades {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "I dina favoriter, uppdaterad {timeAgo}",
     "Last commented on {timeAgo}" : "Kommenterades senast {timeAgo}",
     "Path name {path}" : "Sökväg {path}"
 },
