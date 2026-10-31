@@ -9,6 +9,8 @@ OC.L10N.register(
     "Show recommendations" : "Zobraziť odporúčania",
     "Last updated {timeAgo}" : "Posledná aktualizácia {timeAgo}",
     "Shared with you {timeAgo}" : "Zdieľané s vami {timeAgo}",
+    "Opened {timeAgo}" : "Otvorené {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "Vo vašich obľúbených, aktualizované {timeAgo}",
     "Last commented on {timeAgo}" : "Naposledy komentované {timeAgo}",
     "Path name {path}" : "Názov cesty {path}"
 },

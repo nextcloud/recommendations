@@ -9,6 +9,8 @@ OC.L10N.register(
     "Show recommendations" : "Показывать рекомендации",
     "Last updated {timeAgo}" : "Последнее обновление: {timeAgo}",
     "Shared with you {timeAgo}" : "Поделились с вами {timeAgo}",
+    "Opened {timeAgo}" : "Открыто {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "В избранном, обновлено {timeAgo}",
     "Last commented on {timeAgo}" : "Последний комментарий {timeAgo}",
     "Path name {path}" : "Путь {path}"
 },

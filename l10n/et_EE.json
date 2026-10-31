@@ -2,11 +2,13 @@
     "Recommended files" : "Soovitatud failid",
     "Recommendations" : "Soovitused",
     "Shows recommended files" : "Näitab soovitatud faile",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Näitab soovitatud faile, hiljutiste tegevustega failidele ja kaustadele kiireks ligipääsuks",
+    "Shows recommended files for quick access of files and folders with recent activity" : "Näitab soovitatud faile, et võimaldada kiiret juurdepääsu viimati kasutatud failidele ja kaustadele",
     "No recommendations yet" : "Soovitusi veel ei ole",
     "Show recommendations" : "Näita soovitusi",
     "Last updated {timeAgo}" : "Viimati uuendatud {timeAgo}",
     "Shared with you {timeAgo}" : "Sinuga jagatud {timeAgo}",
+    "Opened {timeAgo}" : "Avatud {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "Sinu lemmikutes, uuendatud {timeAgo}",
     "Last commented on {timeAgo}" : "Viimati kommenteeritud {timeAgo}",
     "Path name {path}" : "Asukoha nimi {path}"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

@@ -9,6 +9,8 @@ OC.L10N.register(
     "Show recommendations" : "Empfehlungen anzeigen",
     "Last updated {timeAgo}" : "Zuletzt aktualisiert {timeAgo}",
     "Shared with you {timeAgo}" : "Mit Ihnen geteilt {timeAgo}",
+    "Opened {timeAgo}" : "Geöffnet {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "In Ihren Favoriten, aktualisiert {timeAgo}",
     "Last commented on {timeAgo}" : "Zuletzt kommentiert am {timeAgo}",
     "Path name {path}" : "Pfadname {path}"
 },
