@@ -9,6 +9,8 @@ OC.L10N.register(
     "Show recommendations" : "Taispeáin moltaí",
     "Last updated {timeAgo}" : "Nuashonraithe is déanaí {timeAgo}",
     "Shared with you {timeAgo}" : "Roinnte leat {timeAgo}",
+    "Opened {timeAgo}" : "Osclaíodh {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "I do chuid ceanáin, nuashonraithe {timeAgo}",
     "Last commented on {timeAgo}" : "Ar deireadh trácht ar {timeAgo}",
     "Path name {path}" : "Ainm conair {path}"
 },
