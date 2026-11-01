@@ -7,6 +7,8 @@
     "Show recommendations" : "Taispeáin moltaí",
     "Last updated {timeAgo}" : "Nuashonraithe is déanaí {timeAgo}",
     "Shared with you {timeAgo}" : "Roinnte leat {timeAgo}",
+    "Opened {timeAgo}" : "Osclaíodh {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "I do chuid ceanáin, nuashonraithe {timeAgo}",
     "Last commented on {timeAgo}" : "Ar deireadh trácht ar {timeAgo}",
     "Path name {path}" : "Ainm conair {path}"
 },"pluralForm" :"nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);"

@@ -7,6 +7,8 @@
     "Show recommendations" : "顯示推薦",
     "Last updated {timeAgo}" : "最後更新於 {timeAgo}",
     "Shared with you {timeAgo}" : "與您分享於 {timeAgo}",
+    "Opened {timeAgo}" : "於 {timeAgo} 開啟",
+    "In your favorites, updated {timeAgo}" : "在您的收藏中，已更新 {timeAgo}",
     "Last commented on {timeAgo}" : "上次留言於 {timeAgo}",
     "Path name {path}" : "途徑名稱 {path}"
 },"pluralForm" :"nplurals=1; plural=0;"
