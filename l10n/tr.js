@@ -9,6 +9,8 @@ OC.L10N.register(
     "Show recommendations" : "Önerilenleri görüntüle",
     "Last updated {timeAgo}" : "Son güncellenme {timeAgo}",
     "Shared with you {timeAgo}" : "Sizinle paylaşılma {timeAgo}",
+    "Opened {timeAgo}" : "Son açılma: {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "Sık kullanılanlarınızda, güncellenme: {timeAgo}",
     "Last commented on {timeAgo}" : "Son yorum {timeAgo}",
     "Path name {path}" : "Yol adı {path}"
 },

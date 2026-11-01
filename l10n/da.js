@@ -3,8 +3,8 @@ OC.L10N.register(
     {
     "Recommended files" : "Anbefalede filer",
     "Recommendations" : "Anbefalinger",
-    "Shows recommended files" : "Vis anbefalede filer",
-    "Shows recommended files for quick access of files and folders with recent activity" : "Vis anbefalede filer for hurtig adgang til filer og mapper med nylig aktivitet",
+    "Shows recommended files" : "Viser anbefalede filer",
+    "Shows recommended files for quick access of files and folders with recent activity" : "Viser anbefalede filer for hurtig adgang til filer og mapper med nylig aktivitet",
     "No recommendations yet" : "Ingen anbefalinger endnu",
     "Show recommendations" : "Vis anbefalinger",
     "Last updated {timeAgo}" : "Sidst opdateret {timeAgo}",
