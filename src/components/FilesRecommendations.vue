@@ -37,10 +37,13 @@ const { enabled, loading, recommendedFiles } = storeToRefs(useRecommendationsSto
 
 <style scoped>
 #recommendations {
-	padding: 28px 30px 0 50px;
-	margin-bottom: 20px;
+	/* Center the thumbnail on the file list icon, so the text aligns with the file names */
+	--recommendations-icon-offset: calc((32px - var(--icon-preview-size, 24px)) / 2);
+	padding-block: 0;
+	margin-top: var(--default-grid-baseline, 4px);
+	padding-inline: calc(var(--row-height, 44px) - var(--recommendations-icon-offset) - 5px) var(--row-height, 44px);
 	display: flex;
-	height: 86px;
+	max-height: 58px;
 	overflow: hidden;
 	flex-wrap: wrap;
 	min-width: 0;
@@ -57,7 +60,7 @@ const { enabled, loading, recommendedFiles } = storeToRefs(useRecommendationsSto
 @media only screen and (max-width: 1200px) {
 	#recommendations {
 		height: initial;
-		max-height: 189px;
+		max-height: 161px;
 	}
 	.recommendation-item {
 		flex-basis: 50%;

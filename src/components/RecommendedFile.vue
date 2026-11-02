@@ -201,7 +201,8 @@ function navigate() {
 	}
 
 	.thumbnail {
-		margin-inline-end: 9px;
+		/* Align the text with the file names, which have an inline padding for their focus outline */
+		margin-inline-end: calc(var(--checkbox-padding, 10px) - (32px - var(--icon-preview-size, 24px)) / 2 + 2 * var(--default-grid-baseline, 4px));
 		width: 32px;
 		height: 32px;
 		background-size: contain;
