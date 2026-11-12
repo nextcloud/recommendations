@@ -15,12 +15,15 @@ use OCA\Recommendations\Service\FrequentlyOpenedFilesSource;
 use OCA\Recommendations\Service\IRecommendation;
 use OCA\Recommendations\Service\RecentlyEditedFilesSource;
 use OCA\Recommendations\Service\RecentlyOpenedFilesSource;
+use OCA\Recommendations\Service\RecentlySharedFilesSource;
 use OCA\Recommendations\Service\RecommendationScorer;
 use OCA\Recommendations\Service\RecommendedFile;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\Files\File;
 use OCP\IAppConfig;
 use OCP\IUser;
+use OCP\Snowflake\ISnowflakeDecoder;
+use OCP\Snowflake\Snowflake;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -48,13 +51,26 @@ class RecommendationScorerTest extends TestCase {
 		$this->user = $this->createMock(IUser::class);
 		$this->user->method('getUID')->willReturn('alice');
 
-		$this->scorer = new RecommendationScorer($this->mapper, $appConfig, $timeFactory);
+		// The test ids are the timestamps they were opened at
+		$decoder = $this->createMock(ISnowflakeDecoder::class);
+		$decoder->method('decode')->willReturnCallback(
+			fn (string $id): Snowflake => new Snowflake(0, 0, false, 0, 0, new \DateTimeImmutable('@' . $id)),
+		);
+
+		$this->scorer = new RecommendationScorer($this->mapper, $appConfig, $timeFactory, $decoder);
 	}
 
 	private function recommendation(int $fileId, string $reason, int $age): RecommendedFile {
 		$file = $this->createMock(File::class);
 		$file->method('getId')->willReturn($fileId);
 		return new RecommendedFile('/', $file, self::NOW - $age, $reason);
+	}
+
+	/**
+	 * @return array{opens: int, lastId: string}
+	 */
+	private function opens(int $count, int $age): array {
+		return ['opens' => $count, 'lastId' => (string)(self::NOW - $age)];
 	}
 
 	/**
@@ -97,7 +113,7 @@ class RecommendationScorerTest extends TestCase {
 	}
 
 	public function testOftenOpenedRanksHigher(): void {
-		$this->mapper->method('countOpens')->with('alice', [1, 2])->willReturn([1 => 1, 2 => 20]);
+		$this->mapper->method('countOpens')->with('alice', [1, 2])->willReturn([1 => $this->opens(1, 0), 2 => $this->opens(20, 0)]);
 
 		$ranked = $this->scorer->rank($this->user, [
 			$this->recommendation(1, RecentlyOpenedFilesSource::REASON, 0),
@@ -110,7 +126,7 @@ class RecommendationScorerTest extends TestCase {
 
 	// Opened often weeks ago: its frequency is what brings it up
 	public function testShowsFrequentlyOpenedWhenThatWeighsTheMost(): void {
-		$this->mapper->method('countOpens')->willReturn([1 => 20]);
+		$this->mapper->method('countOpens')->willReturn([1 => $this->opens(20, 4 * self::WEEK)]);
 
 		$ranked = $this->scorer->rank($this->user, [
 			$this->recommendation(1, RecentlyOpenedFilesSource::REASON, 4 * self::WEEK),
@@ -118,6 +134,20 @@ class RecommendationScorerTest extends TestCase {
 		]);
 
 		$this->assertSame(['1 frequently-opened'], $this->summary($ranked));
+	}
+
+	// Opened 4 times a month ago: 0.2 * log 5 / log 21 * 0.5^(28/30) ~ 0.06, below shared today: 0.1
+	public function testFrequencyFadesWithTheLastOpen(): void {
+		$this->mapper->method('countOpens')->willReturn([1 => $this->opens(20, 0), 2 => $this->opens(4, 4 * self::WEEK)]);
+
+		$ranked = $this->scorer->rank($this->user, [
+			$this->recommendation(1, RecentlyOpenedFilesSource::REASON, 0),
+			$this->recommendation(1, FrequentlyOpenedFilesSource::REASON, 0),
+			$this->recommendation(2, FrequentlyOpenedFilesSource::REASON, 4 * self::WEEK),
+			$this->recommendation(3, RecentlySharedFilesSource::REASON, 0),
+		]);
+
+		$this->assertSame(['1 recently-opened', '3 recently-shared', '2 frequently-opened'], $this->summary($ranked));
 	}
 
 	public function testWeightsCanBeTuned(): void {
