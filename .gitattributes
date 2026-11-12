@@ -1,2 +1,4 @@
 /js/*.js binary
 /js/*.js.map binary
+/AGENTS.md export-ignore
+/CLAUDE.md export-ignore

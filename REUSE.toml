@@ -6,6 +6,12 @@ SPDX-PackageSupplier = "Nextcloud <info@nextcloud.com>"
 SPDX-PackageDownloadLocation = "https://github.com/nextcloud/recommendations"
 
 [[annotations]]
+path = "CLAUDE.md"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Nextcloud GmbH and Nextcloud contributors"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
 path = [".gitattributes", ".github/CODEOWNERS", "package-lock.json", "package.json", "composer.json", "composer.lock", "**/composer.json", "**/composer.lock", ".l10nignore", "cypress/tsconfig.json", "vendor-bin/**/composer.json", "vendor-bin/**/composer.lock", ".tx/config", "tsconfig.json", "js/vendor.LICENSE.txt", "krankerl.toml", ".npmignore", ".eslintrc.json", ".tx/backport"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "none"
