@@ -19,6 +19,9 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
 class OpenedFileMapper extends Repository {
 	public const string entityClass = OpenedFile::class;
 
+	/** Opened once is not opened often */
+	public const int MIN_FREQUENT_OPENS = 2;
+
 	public function add(string $userId, int $fileId): void {
 		$openedFile = new OpenedFile();
 		$openedFile->userId = $userId;
@@ -56,7 +59,8 @@ class OpenedFileMapper extends Repository {
 	}
 
 	/**
-	 * The files a user opened, the most often opened first, once each
+	 * The files a user opened at least MIN_FREQUENT_OPENS times, the most
+	 * often opened first, once each
 	 *
 	 * @return list<array{fileId: int, lastId: string}> with the id of the last time each was opened
 	 */
@@ -68,6 +72,7 @@ class OpenedFileMapper extends Repository {
 			->from($this->getTableName())
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)))
 			->groupBy('file_id')
+			->having($qb->expr()->gte($qb->func()->count('id'), $qb->createNamedParameter(self::MIN_FREQUENT_OPENS, IQueryBuilder::PARAM_INT)))
 			->orderBy('opens', 'DESC')
 			->addOrderBy('last_id', 'DESC')
 			->setMaxResults($limit)

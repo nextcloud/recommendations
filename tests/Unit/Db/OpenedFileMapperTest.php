@@ -60,13 +60,53 @@ class OpenedFileMapperTest extends TestCase {
 		$this->assertSame([2], $this->recentFileIds(self::USER, 1, 1));
 	}
 
-	public function testFindFrequentListsTheMostOpenedFirst(): void {
-		$this->mapper->add(self::USER, 1);
-		$this->mapper->add(self::USER, 2);
-		$this->mapper->add(self::USER, 2);
-		$this->mapper->add(self::USER, 3);
+	/**
+	 * @return list<int>
+	 */
+	private function frequentFileIds(string $userId, int $limit = 10, int $offset = 0): array {
+		return array_column($this->mapper->findFrequent($userId, $limit, $offset), 'fileId');
+	}
 
-		$this->assertSame([2, 3, 1], array_column($this->mapper->findFrequent(self::USER, 10), 'fileId'));
+	/**
+	 * @param list<int> $fileIds
+	 */
+	private function open(string $userId, array $fileIds): void {
+		foreach ($fileIds as $fileId) {
+			$this->mapper->add($userId, $fileId);
+		}
+	}
+
+	public function testFindFrequentListsTheMostOpenedFirst(): void {
+		$this->open(self::USER, [1, 1, 2, 2, 2, 3, 3, 3, 3]);
+
+		$this->assertSame([3, 2, 1], $this->frequentFileIds(self::USER));
+	}
+
+	// Opened once is not opened often
+	public function testFindFrequentSkipsFilesOpenedOnce(): void {
+		$this->open(self::USER, [1, 2, 2]);
+
+		$this->assertSame([2], $this->frequentFileIds(self::USER));
+	}
+
+	public function testFindFrequentBreaksTiesWithTheLastOpen(): void {
+		$this->open(self::USER, [1, 2, 2, 1]);
+
+		$this->assertSame([1, 2], $this->frequentFileIds(self::USER));
+	}
+
+	public function testFindFrequentPages(): void {
+		$this->open(self::USER, [1, 1, 2, 2, 2, 3, 3, 3, 3]);
+
+		$this->assertSame([2], $this->frequentFileIds(self::USER, 1, 1));
+	}
+
+	public function testFindFrequentOnlyCountsTheUsersOpens(): void {
+		$this->open(self::USER, [1, 1]);
+		$this->open(self::OTHER_USER, [1, 2, 2, 2]);
+
+		$this->assertSame([1], $this->frequentFileIds(self::USER));
+		$this->assertSame([2], $this->frequentFileIds(self::OTHER_USER));
 	}
 
 	public function testCountOpens(): void {
