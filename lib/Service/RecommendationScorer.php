@@ -107,7 +107,8 @@ class RecommendationScorer {
 
 	private function weight(string $reason): float {
 		$key = 'weight_' . str_replace('-', '_', $reason);
-		return $this->appConfig->getValueFloat(Application::APP_ID, $key, self::DEFAULT_WEIGHTS[$reason] ?? 0.0);
+		// A negative weight would push a reason's files below unrelated ones
+		return max(0.0, $this->appConfig->getValueFloat(Application::APP_ID, $key, self::DEFAULT_WEIGHTS[$reason] ?? 0.0));
 	}
 
 	private function decay(int $age, int $halfLife = self::HALF_LIFE): float {

@@ -150,6 +150,29 @@ class RecommendationScorerTest extends TestCase {
 		$this->assertSame(['1 recently-opened', '3 recently-shared', '2 frequently-opened'], $this->summary($ranked));
 	}
 
+	// Opened often, but its opens were cleaned up since the source listed it
+	public function testKeepsFrequentlyOpenedFilesWithoutOpens(): void {
+		$ranked = $this->scorer->rank($this->user, [
+			$this->recommendation(1, RecentlyEditedFilesSource::REASON, 0),
+			$this->recommendation(2, FrequentlyOpenedFilesSource::REASON, 0),
+		]);
+
+		$this->assertSame(['1 recently-edited', '2 frequently-opened'], $this->summary($ranked));
+	}
+
+	// A negative weight counts as none, so the file still ranks by its other reasons
+	public function testNegativeWeightsCountAsZero(): void {
+		$this->config['weight_favorite'] = -1.0;
+
+		$ranked = $this->scorer->rank($this->user, [
+			$this->recommendation(1, FavoriteFilesSource::REASON, 0),
+			$this->recommendation(1, RecentlyEditedFilesSource::REASON, 2 * self::WEEK),
+			$this->recommendation(2, RecentlyEditedFilesSource::REASON, 3 * self::WEEK),
+		]);
+
+		$this->assertSame(['1 recently-edited', '2 recently-edited'], $this->summary($ranked));
+	}
+
 	public function testWeightsCanBeTuned(): void {
 		$this->config['weight_favorite'] = 0.0;
 
