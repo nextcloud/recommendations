@@ -10,7 +10,9 @@
 /.php-cs-fixer.cache
 /.php-cs-fixer.dist.php
 /.tx
+/AGENTS.md
 /build-js
+/CLAUDE.md
 /composer.*
 /eslint.config.mjs
 /krankerl.toml
