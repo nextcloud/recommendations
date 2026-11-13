@@ -8,6 +8,21 @@
 
 The app is in incubation stage, so it’s time for you to [get involved! 👩‍💻](https://github.com/nextcloud/recommendations#development-setup)
 
+## How files are ranked
+
+Each source suggests up to 7 files, and every reason a file is suggested for adds its weight to the file's score. That weight is halved for every week the reason is old. How often the user opened a file adds the frequently opened weight, scaled against their most opened file and halved for every 30 days since its last open. A file needs at least 2 opens to count as frequently opened, and opens are kept for 30 days.
+
+| Reason | App config key | Default |
+|---|---|---|
+| Recently opened | `weight_recently_opened` | 0.3 |
+| Frequently opened | `weight_frequently_opened` | 0.2 |
+| Favorite | `weight_favorite` | 0.2 |
+| Recently edited | `weight_recently_edited` | 0.1 |
+| Recently shared | `weight_recently_shared` | 0.1 |
+| Recently commented | `weight_recently_commented` | 0.1 |
+
+Change a weight with `occ config:app:set recommendations weight_favorite --value 0.3 --type float`. A weight of 0 makes a reason count for nothing in the ranking, and negative values count as 0.
+
 ## Development setup
 
 1. ☁ Clone the app into the `apps` folder of your Nextcloud: `git clone https://github.com/nextcloud/recommendations.git`

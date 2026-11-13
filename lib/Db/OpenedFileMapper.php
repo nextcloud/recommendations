@@ -19,6 +19,9 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
 class OpenedFileMapper extends Repository {
 	public const string entityClass = OpenedFile::class;
 
+	/** Opened once is not opened often */
+	public const int MIN_FREQUENT_OPENS = 2;
+
 	public function add(string $userId, int $fileId): void {
 		$openedFile = new OpenedFile();
 		$openedFile->userId = $userId;
@@ -53,6 +56,70 @@ class OpenedFileMapper extends Repository {
 		$result->closeCursor();
 
 		return $recent;
+	}
+
+	/**
+	 * The files a user opened at least MIN_FREQUENT_OPENS times, the most
+	 * often opened first, once each
+	 *
+	 * @return list<array{fileId: int, lastId: string}> with the id of the last time each was opened
+	 */
+	public function findFrequent(string $userId, int $limit, int $offset = 0): array {
+		$qb = $this->connection->getQueryBuilder();
+		$qb->select('file_id')
+			->selectAlias($qb->func()->max('id'), 'last_id')
+			->selectAlias($qb->func()->count('id'), 'opens')
+			->from($this->getTableName())
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)))
+			->groupBy('file_id')
+			->having($qb->expr()->gte($qb->func()->count('id'), $qb->createNamedParameter(self::MIN_FREQUENT_OPENS, IQueryBuilder::PARAM_INT)))
+			->orderBy('opens', 'DESC')
+			->addOrderBy('last_id', 'DESC')
+			->setMaxResults($limit)
+			->setFirstResult($offset);
+
+		$result = $qb->executeQuery();
+		$frequent = [];
+		while ($row = $result->fetchAssociative()) {
+			$frequent[] = [
+				'fileId' => (int)$row['file_id'],
+				'lastId' => (string)$row['last_id'],
+			];
+		}
+		$result->closeCursor();
+
+		return $frequent;
+	}
+
+	/**
+	 * How many times a user opened each of these files, and when last
+	 *
+	 * @param list<int> $fileIds
+	 * @return array<int, array{opens: int, lastId: string}> by file id, only for files opened at all
+	 */
+	public function countOpens(string $userId, array $fileIds): array {
+		$counts = [];
+		foreach (array_chunk($fileIds, IQueryBuilder::MAX_IN_PARAMETERS) as $chunk) {
+			$qb = $this->connection->getQueryBuilder();
+			$qb->select('file_id')
+				->selectAlias($qb->func()->count('id'), 'opens')
+				->selectAlias($qb->func()->max('id'), 'last_id')
+				->from($this->getTableName())
+				->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)))
+				->andWhere($qb->expr()->in('file_id', $qb->createNamedParameter($chunk, IQueryBuilder::PARAM_INT_ARRAY)))
+				->groupBy('file_id');
+
+			$result = $qb->executeQuery();
+			while ($row = $result->fetchAssociative()) {
+				$counts[(int)$row['file_id']] = [
+					'opens' => (int)$row['opens'],
+					'lastId' => (string)$row['last_id'],
+				];
+			}
+			$result->closeCursor();
+		}
+
+		return $counts;
 	}
 
 	/**
