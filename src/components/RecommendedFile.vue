@@ -118,6 +118,9 @@ const description = computed(() => {
 	if (props.reason === 'recently-edited') {
 		return t('recommendations', 'Last updated {timeAgo}', { timeAgo: formattedTime.value })
 	}
+	if (props.reason === 'recently-uploaded') {
+		return t('recommendations', 'Uploaded {timeAgo}', { timeAgo: formattedTime.value })
+	}
 	if (props.reason === 'recently-shared') {
 		return t('recommendations', 'Shared with you {timeAgo}', { timeAgo: formattedTime.value })
 	}

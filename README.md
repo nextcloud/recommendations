@@ -18,6 +18,7 @@ Each source suggests up to 7 files, and every reason a file is suggested for add
 | Frequently opened | `weight_frequently_opened` | 0.2 |
 | Favorite | `weight_favorite` | 0.2 |
 | Recently edited | `weight_recently_edited` | 0.1 |
+| Recently uploaded | `weight_recently_uploaded` | 0.1 |
 | Recently shared | `weight_recently_shared` | 0.1 |
 | Recently commented | `weight_recently_commented` | 0.1 |
 
