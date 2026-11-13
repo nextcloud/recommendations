@@ -75,7 +75,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 6.1.0
 	- license: MIT
 - vite
-	- version: 7.3.7
+	- version: 7.3.8
 	- license: MIT
 - vue-router
 	- version: 5.4.0
