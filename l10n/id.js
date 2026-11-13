@@ -9,6 +9,8 @@ OC.L10N.register(
     "Show recommendations" : "Tampilkan rekomendasi",
     "Last updated {timeAgo}" : "Terakhir diperbarui {timeAgo}",
     "Shared with you {timeAgo}" : "Dibagikan kepada Anda {timeAgo}",
+    "Opened {timeAgo}" : "Dibuka {timeAgo}",
+    "In your favorites, updated {timeAgo}" : "Dalam favorit Anda, diperbarui {timeAgo}",
     "Last commented on {timeAgo}" : "Terakhir dikomentari pada {timeAgo}",
     "Path name {path}" : "Nama path {path}"
 },
