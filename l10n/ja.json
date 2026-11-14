@@ -7,6 +7,8 @@
     "Show recommendations" : "おすすめを表示",
     "Last updated {timeAgo}" : "最終更新 {timeAgo}",
     "Shared with you {timeAgo}" : "あなたと共有 {timeAgo}",
+    "Opened {timeAgo}" : "{timeAgo}にオープンしました",
+    "In your favorites, updated {timeAgo}" : "お気に入りリストで、{timeAgo}前に更新されました",
     "Last commented on {timeAgo}" : "{timeAgo}に最新コメント",
     "Path name {path}" : "パス名 {path}"
 },"pluralForm" :"nplurals=1; plural=0;"
