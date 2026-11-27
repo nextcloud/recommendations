@@ -30,7 +30,7 @@
 		"cs:check": "php-cs-fixer fix --dry-run --diff",
 		"cs:fix": "php-cs-fixer fix",
 		"test:unit": "vendor/bin/phpunit --configuration phpunit.xml.dist",
-		"psalm": "psalm --threads=$(nproc) --no-cache",
+		"psalm": "psalm --no-cache",
 		"openapi": "generate-spec"
 	},
 	"autoload": {
